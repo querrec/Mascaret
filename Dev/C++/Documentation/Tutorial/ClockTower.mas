@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Application>
+	
+	<Environment url="ClockTower.xml" />
+	<ApplicationParameters>
+		<!-- HTTP Config-->
+		<Plugins PluginsDir="./ClockPlugin">
+			<Plugin Name="ClockPlugin"/>
+			<Plugin Name="SpaceMouseMascaret"/>
+		</Plugins>
+	</ApplicationParameters>
+	<Interactions>
+		<SendSignal name="AddHour" peripheric="mouse" button="button1" pressed="true" target="designated"/>
+		<CallOperation classifier="ClockTower::ClockTower::Environment::Clock" name="addOneMinute" peripheric="mouse" button="button3" pressed="true" target="designated"/>
+		<CallOperation classifier="ClockTower::ClockTower::Environment::Clock" name="updateHands" peripheric="mouse" button="button3" pressed="false" target="designated"/>
+	</Interactions>
+	<Peripherics>
+		<Peripheric name="keyboard">
+			<ButtonAxis name="updown">
+				<Button peripheric="keyboard" button="Up" pressed="true" type="set-value" value="1"/>
+				<Button peripheric="keyboard" button="Down" pressed="true" type="set-value" value="-1"/>
+				<Button peripheric="keyboard" button="Up" pressed="false" type="set-value" value="0"/>
+				<Button peripheric="keyboard" button="Down" pressed="false" type="set-value" value="0"/>
+				<Button peripheric="keyboard" button="+" pressed="true" type="increase-value" value="1"/>
+				<Button peripheric="keyboard" button="-" pressed="true" type="increase-value" value="-1"/>
+			</ButtonAxis>
+			<ButtonAxis name="leftright">
+				<Button peripheric="keyboard" button="Left" pressed="true" type="set-value" value="1"/>
+				<Button peripheric="keyboard" button="Right" pressed="true" type="set-value" value="-1"/>
+				<Button peripheric="keyboard" button="Left" pressed="false" type="set-value" value="0"/>
+				<Button peripheric="keyboard" button="Right" pressed="false" type="set-value" value="0"/>
+			</ButtonAxis>
+		</Peripheric>
+	</Peripherics>
+
+	<Navigation type="camera" mode="human">
+		<TX peripheric="spaceMouse" axis="tz" speed="0.01"/>
+		<TY peripheric="spaceMouse" axis="tx" speed="-0.01"/>
+		<!--TZ peripheric="spaceMouse" axis="ty" speed="0.01"/-->
+
+		<TX peripheric="keyboard" axis="updown" speed="1.5"/>
+		<TY peripheric="keyboard" axis="leftright" speed="1.5"/>
+		<Yaw peripheric="spaceMouse" axis="ry" speed="0.005"/>
+		<Pitch peripheric="spaceMouse" axis="rx" speed="-0.005"/>
+		<Yaw peripheric="mouse" axis="x" speed="0.05"/>
+		<Pitch peripheric="mouse" axis="y" speed="-0.05"/>
+	</Navigation>
+	<Scene name = "scene">
+		<Decors>
+			<Light name="Lamp" directional="false">
+				<Position x="4.076245307922363" y="1.0054539442062378" z="5.903861999511719"/>
+				<Orientation roll="0.6503279805183411" pitch="0.055217113345861435" yaw="1.8663908243179321"/>
+			</Light>
+		</Decors>
+	</Scene>
+
+	<Renderer near="0.1" far="1000" fieldOfView="45">
+		<Window x="0" y="0" width="700" height="1000" capture-mouse="true" />
+		<!--Stereo /-->
+		<Scene name="scene" viewpoint="Camera" />
+	</Renderer>
+</Application>

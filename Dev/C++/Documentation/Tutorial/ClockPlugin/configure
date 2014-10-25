@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+#--------------------------------------------------------
+
+import sys ; sys.path.insert(0,'../../../Mascaret')
+import TransProgConfig
+import os
+import subprocess
+
+#-------- Create the construction tool ------------------
+
+tool=TransProgConfig.Tool(False)
+
+#-------- Check condition to compile --------------------
+tool.settings['LIBS']+=['Mascaret']
+tool.settings['INCDIRS']+=['../../../Mascaret/include']
+
+if tool.sysName() == 'Windows':
+  tool.settings['INCDIRS']+=['C:/gnuwin32/include/libxml2']
+  tool.settings['INCDIRS']+=['C:/Program Files/boost/boost_1_43']
+  tool.settings['INCDIRS']+=['C:/gnuwin32/include']
+else:
+  tool.settings['INCDIRS']+=['/usr/include/libxml2']
+  tool.settings['INCDIRS']+=['/usr/include/boost']
+
+
+#-------- setting libs dirs (all needed library must be installed) -----------------------
+tool.settings['LIBDIRS']+=['../../../Mascaret']
+
+if tool.sysName() == 'Windows':
+  tool.settings['LIBDIRS']+=['C:/Program Files/boost/boost_1_43/lib']
+  tool.settings['LIBDIRS']+=['C:/gnuwin32/lib']
+
+
+
+#-------- setting libs to link (all needed library must be installed) -----------------------
+if tool.sysName() == 'Windows':
+  tool.settings['LIBS']+=['libxml2']
+else:
+  tool.settings['LIBS']+=['xml2']
+
+
+#-------- File list ----------
+fileList=[
+	"ClockBehaviors.cpp"
+	]
+
+vehaSettings=tool.copySettings()
+tool.Library('ClockPlugin',fileList,
+		settings=vehaSettings)
+
+#-------- build ClockPlugin executable -----------
+tool.run()
+
+

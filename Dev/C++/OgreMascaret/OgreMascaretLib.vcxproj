@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5fc5a82e-dfc7-11e0-aad6-0009dd50902f}</ProjectGuid>
+    <ProjectName>OgreMascaretLib</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_HAS_CPP0X=0;_OGRE_MASCARET_LIB;_SECURE_SCL=0;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);.;include;..\Mascaret\include;C:\Users\querrec\Developpements\Tools\libxml2-2.4.12-1-lib\include\libxml2;C:\Program Files\boost\boost_1_43;C:\gnuwin32\include;C:\Users\querrec\Developpements\Tools\OgreSDK_vc10_v1-7-2\include\OGRE;C:\Users\querrec\Developpements\Tools\OgreSDK_vc10_v1-7-2\include\OIS</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);.;..\Mascaret;C:\Users\querrec\Developpements\Tools\libxml2-2.4.12-1-lib\lib;C:\Program Files\boost\boost_1_43\lib;C:\Users\querrec\Developpements\Tools\OgreSDK_vc10_v1-7-2\lib\debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;OgreMain_d.lib;OIS_d.lib;Mascaret.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_HAS_CPP0X=0;_OGRE_MASCARET_LIB;_SECURE_SCL=0;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);.;include;include;..\Mascaret\include;C:\gnuwin32\include\libxml2;C:\Program Files\boost\boost_1_43;C:\gnuwin32\include;C:\Work\OgreSDK_vc10_v1-7-2\include\OGRE;C:\Work\OgreSDK_vc10_v1-7-2\include\OIS;</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);.;..\Mascaret;C:\gnuwin32\lib;C:\Program Files\boost\boost_1_43\lib;C:\Work\OgreSDK_vc10_v1-7-2\lib\debug;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;OgreMain_d.lib;OIS_d.lib;Mascaret.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Assistance\OgreColor.cpp" />
+    <ClCompile Include="src\VRPlateform\OgreAnimationSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgreAnimationSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreCamera.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgreCamera.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreLight.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgreLight.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreScene.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgreScene.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreMascaretApplication.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgreMascaretApplication.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgrePointSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgrePointSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreShapeSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgreShapeSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreSoundSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgreSoundSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreWindow3D.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgreWindow3D.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreEntityObject.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\OgreEntityObject.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Animation\OgreAnimation.cpp">
+      <ObjectFileName>$(IntDir)src\Animation\OgreAnimation.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\OgreMouse.cpp">
+      <ObjectFileName>$(IntDir)src\Interaction\OgreMouse.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\OgreCursor.cpp">
+      <ObjectFileName>$(IntDir)src\Interaction\OgreCursor.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\OgreKeyboard.cpp">
+      <ObjectFileName>$(IntDir)src\Interaction\OgreKeyboard.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\OgreVRComponentFactory.cpp">
+      <ObjectFileName>$(IntDir)src\OgreVRComponentFactory.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Assistance\OgreColor.h" />
+    <ClInclude Include="include\VRPlateform\OgreAnimationSpecification.h" />
+    <ClInclude Include="include\VRPlateform\OgreMascaretApplication.h" />
+    <ClInclude Include="include\VRPlateform\OgreCamera.h" />
+    <ClInclude Include="include\VRPlateform\OgrePointSpecification.h" />
+    <ClInclude Include="include\VRPlateform\OgreWindow3D.h" />
+    <ClInclude Include="include\VRPlateform\OgreScene.h" />
+    <ClInclude Include="include\VRPlateform\OgreLight.h" />
+    <ClInclude Include="include\OgreVRComponentFactory.h" />
+    <ClInclude Include="include\VRPlateform\OgreShapeSpecification.h" />
+    <ClInclude Include="include\VRPlateform\OgreSoundSpecification.h" />
+    <ClInclude Include="include\Interaction\OgreMouse.h" />
+    <ClInclude Include="include\Interaction\OgreKeyboard.h" />
+    <ClInclude Include="include\Interaction\OgreCursor.h" />
+    <ClInclude Include="include\VRPlateform\OgreEntityObject.h" />
+    <ClInclude Include="include\Animation\OgreAnimation.h" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

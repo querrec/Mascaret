@@ -1,0 +1,65 @@
+#!/bin/sh
+## CERV/ENIB - AnimLib
+##----------------------------------------------------------------------------
+## file        : AnimLib/configure
+## description : script to build the AnimLib library
+## author(s)   : E. Cazeaux (http://www.cerv.fr/~cazeaux)
+##----------------------------------------------------------------------------
+
+##------- Global settings ----------------------------------------------------
+
+INCDIR=../../include
+SRCDIR=.
+WRKDIR=../../
+LIBDIR="${WRKDIR}/lib"
+
+ARCONFIG="`PATH=\"${LIBDIR}:${PATH}\" which arevi-config`"
+if [ ! -x "${ARCONFIG}" ] ; then
+  echo "Cannot find arevi-config !"
+  exit 1
+fi
+
+AREVILIBDIR="`${ARCONFIG} --install`/lib"
+
+
+COREINC="${INCDIR}"
+CORESRC="${SRCDIR}"
+
+CCFLAGS="`${ARCONFIG} --cflags` -I${INCDIR}"
+LDFLAGS="`${ARCONFIG} --ldflags`"
+
+#---- source files ----
+
+CORE_FILES="${CORESRC}/keyFrameTrack.cpp \
+            ${CORESRC}/keyFrameTrackSwitch.cpp \
+            ${CORESRC}/arKeyFrameTrack.cpp \
+            ${CORESRC}/arTrackPosition.cpp \
+            ${CORESRC}/arTrackOrientation.cpp \
+            ${CORESRC}/arTrackBase3D.cpp \
+            ${CORESRC}/arTrackTranslation.cpp \
+            ${CORESRC}/arTrackRotation.cpp \
+            ${CORESRC}/arTrackSpiral.cpp \
+            ${CORESRC}/arTrackMaterial3D.cpp \
+            ${CORESRC}/arTrackTexture.cpp \
+            ${CORESRC}/arTrackScale.cpp \
+            ${CORESRC}/utils.cpp"
+ 
+##------- Library settings ---------------------------------------------------
+
+DYNLIB_TARGET="AnimLib"
+
+AnimLib_FULLNAME="${LIBDIR}/`${ARCONFIG} --libformat AnimLib`"
+AnimLib_CLASSES="${AREVILIBDIR}/register-classes ${CORESRC}/animLibClasses.cpp \
+                AnimLib registerAnimLibClasses"
+AnimLib_FILES="${CORE_FILES}"
+
+##----------------------------------------------------------------------------
+
+# Generate `makefile' according to the above settings
+set AREVILIBDIR LIBDIR SRCDIR INCDIR
+. ${AREVILIBDIR}/build-makefile > makefile
+
+##------- Inserted in makefile -----------------------------------------------
+# Specific targets can be resolved before/after `all' or `clean' are called
+
+##----------------------------------------------------------------------------

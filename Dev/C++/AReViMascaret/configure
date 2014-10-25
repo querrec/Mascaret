@@ -1,0 +1,184 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+#--------------------------------------------------------
+
+import sys ; sys.path.insert(0,'../Mascaret')
+import MascaretConfig
+import os
+import subprocess
+
+#-------- Create the construction tool ------------------
+
+tool=MascaretConfig.Tool(False)
+
+#-------- Check condition to compile --------------------
+cmd=tool.findExecutable("arevi-config")
+
+if cmd == None:
+  print "AReVi is not installed on this machine. Compilation is not possible"
+  exit(-1)
+
+p=subprocess.Popen([cmd]+['--install'],
+                       stdout=subprocess.PIPE)
+AREVI_INSTALL_DIR=p.communicate()[0].split('\n')[0].strip()
+tool.settings['LIBS']+=['AReVi']
+tool.settings['INCDIRS']+=[AREVI_INSTALL_DIR+'/include']
+if tool.sysName() == "Windows":
+  tool.settings['INCDIRS']+=[AREVI_INSTALL_DIR+'/include/AReVi/Utils/Win32FlexWorkaround']
+tool.settings['LIBDIRS']+=[AREVI_INSTALL_DIR+'/lib']
+
+# check installed libslibboost_system.so
+p=subprocess.Popen([cmd]+['--installed-libs'],
+                         stdout=subprocess.PIPE)
+areviLibs=p.communicate()[0].split()
+
+if areviLibs.count('AReViNS') == 0:
+  print "AReViNS is not installed on this machine. Compilation is not possible"
+  exit(-1)
+tool.settings['LIBS']+=['AReViNS']
+
+if areviLibs.count('AReViHLib2') == 0:
+  print "hLib is not installed on this machine. Compilation is not possible"
+  exit(-1)
+tool.settings['LIBS']+=['AReViHLib2']
+
+if areviLibs.count('AnimLib') == 0:
+  print "AnimLib is not installed on this machine. Compilation is not possible"
+  exit(-1)
+tool.settings['LIBS']+=['AnimLib']
+
+if areviLibs.count('arWidget') == 0:
+  print "ArWidget is not installed on this machine. Compilation is not possible"
+  exit(-1)
+tool.settings['LIBS']+=['arWidget']
+
+#if tool.testBoolOption("gtk"):
+#  tool.addLibWithPKGConfig("gtk+-3.0")
+#  tool.settings['DEFINES']['USE_GTK']=None;
+
+#--------- import needed AReVi modules ------------------
+sys.path.insert(0,os.path.normpath(AREVI_INSTALL_DIR+'/lib'))
+import register_classes
+
+#-------- setting c flags (debug) -----------------------
+if tool.sysName() == 'Windows':
+  tool.settings['CCFLAGS']+=["/TP"]
+  tool.settings['DBGFLAGS']+=['/MDd']
+  tool.settings['DBGFLAGS']+=['/D_SECURE_SCL=0']
+  tool.settings['OPTFLAGS']+=['/MD']
+  tool.settings['DEFINES']['_BIND_TO_CURRENT_CRT_VERSION']=1
+  #tool.settings['DEFINES']['_HAS_CPP0X']=0;
+  tool.settings['DEFINES']['_AREVI_WANTS_SECURE_SCL']=0;
+  tool.settings['DEFINES']['_SCL_SECURE_NO_WARNINGS']=None
+  tool.settings['CCFLAGS']+=["/wd4251"]
+  tool.settings['CCFLAGS']+=["/wd4275"]
+  tool.settings['CCFLAGS']+=["/wd4800"]
+  tool.settings['CCFLAGS']+=["/wd4804"]
+#-------- setting include dirs (all needed library must be installed) -----------------------
+tool.settings['INCDIRS']+=['./include/']
+tool.settings['INCDIRS']+=['../Mascaret/include/']
+
+
+if tool.sysName() == 'Windows':
+  tool.settings['INCDIRS']+=['C:/gnuwin32/include/libxml2']
+  tool.settings['INCDIRS']+=['C:/Program Files/boost/boost_1_43']
+  tool.settings['INCDIRS']+=['C:/gnuwin32/include']
+else:
+  tool.settings['INCDIRS']+=['/usr/include/libxml2']
+  tool.settings['INCDIRS']+=['/usr/include/boost']
+
+
+#-------- setting libs dirs (all needed library must be installed) -----------------------
+tool.settings['LIBDIRS']+=['./lib']
+tool.settings['LIBDIRS']+=['../Mascaret']
+tool.settings['LIBDIRS']+=['/usr/lib']
+
+if tool.sysName() == 'Windows':
+  tool.settings['LIBDIRS']+=['C:/Program Files/boost/boost_1_43/lib']
+  tool.settings['LIBDIRS']+=['C:/gnuwin32/lib']
+
+
+
+#-------- setting libs to link (all needed library must be installed) -----------------------
+tool.settings['LIBS']+=['Mascaret']
+
+if tool.sysName() == 'Windows':
+  tool.settings['LIBS']+=['libxml2']
+else:
+  tool.settings['LIBS']+=['xml2']
+  tool.settings['LIBS']+=['boost_system']
+
+#-------- File list ----------
+fileList=[
+	#"src/areviMascaret.cpp",
+	#"src/AReViNavigation.cpp",
+	#"src/areviScene.cpp",
+	#"src/AReViInterface3D.cpp",
+	#"src/areviMascaretDisServer.cpp",
+	#"src/areviMascaretClient.cpp",
+	#"src/nsCtrlObjAReVi.cpp",
+	#"src/nsEventObjAReVi.cpp",
+	#"src/nsEventEndConnection.cpp",
+	#"src/ObjAReVi.cpp",
+	#"src/ObjAReViHelp.cpp",
+	#"src/AReViAnimation.cpp",
+	#"src/ObjAnimation.cpp",
+	#"src/HLibAnimation.cpp"
+	"src/VRPlateform/AReViAnimationSpecification.cpp",
+	"src/VRPlateform/AReViCamera.cpp",
+	"src/VRPlateform/AReViLight.cpp",
+	"src/VRPlateform/AReViScene.cpp",
+	"src/VRPlateform/AReViMascaretApplication.cpp",
+	"src/VRPlateform/AReViPointSpecification.cpp",
+	"src/VRPlateform/AReViShapeSpecification.cpp",
+	"src/VRPlateform/AReViSoundSpecification.cpp",
+	"src/VRPlateform/AReViWindow3D.cpp",
+	"src/VRPlateform/AReViEntityObject.cpp",
+	"src/VRPlateform/AReViOperationWidget.cpp",
+	"src/VRPlateform/AReViSignalWidget.cpp",
+        "src/Animation/AReViAnimation.cpp",
+	"src/Animation/HLibAnimation.cpp",
+	"src/Animation/ObjectAnimation.cpp",
+	"src/Interaction/AReViMouse.cpp",
+	"src/Interaction/AReViCursor.cpp",
+	"src/Interaction/AReViKeyboard.cpp",
+	"src/Network/AReViMascaretClient.cpp",
+	"src/Network/AReViMascaretServer.cpp",
+	"src/Network/nsEventEndConnection.cpp",
+	"src/AReViVRComponentFactory.cpp",
+	"src/Assistance/AReViColor.cpp",
+	"src/Assistance/CairoTextManager.cpp",
+	"src/Assistance/AReViOSDDisplay.cpp",
+	"src/Assistance/AReViBalloon.cpp",
+	"src/Assistance/AReViImage.cpp"
+	#"src/VRPlateform/AReViVocalPlayerWidget.cpp",
+	#"src/VRPlateform/AReViTutor.cpp"
+	]
+#-------- generate register classes function --------
+register_classes.registerClasses("_AReViMascaretClasses.cpp","AReViMascaret","registerAReViMascaretClasses",fileList)
+fileList+=["_AReViMascaretClasses.cpp"]
+
+#-------- build AReViMascaretLib -----------
+vehaSettings=tool.copySettings()
+  #------ Define _AREVI_MASCARET_LIB to manage dllImport/dllExport on windows (not needed on linux but done to be coherent)
+if tool.sysName() != 'Windows':
+  vehaSettings['CCFLAGS']+=['-D_AREVI_MASCARET_LIB']
+else:
+  vehaSettings['CCFLAGS']+=['/D_AREVI_MASCARET_LIB']
+
+tool.Library('AReViMascaretLib',fileList,
+		settings=vehaSettings)
+
+#-------- build AReViMascaret executable -----------
+programSettings=tool.copySettings()
+programSettings['LIBS']+=['AReViMascaretLib']
+tool.Program('areviMascaret',[ "src/main.cpp" ],settings=programSettings)
+
+if tool.testBoolOption('vsproj'):
+  import ProjectBuilder
+  projBuilder=ProjectBuilder.ProjectBuilderTool(tool)
+  projBuilder.run()
+else:
+  tool.run()
+
+

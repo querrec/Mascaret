@@ -1,0 +1,16 @@
+
+if self.sysName()=='Windows':
+  install_prefix='C:\\Program Files'
+else:
+  install_prefix='/usr/local'
+
+debug=True
+
+quiet=False
+gtk=True
+
+graphviz=True
+
+import os
+if 'USE_MINGW' in os.environ:
+  use_mingw=True

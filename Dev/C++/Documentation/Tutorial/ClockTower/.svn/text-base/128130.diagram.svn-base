@@ -1,0 +1,33 @@
+format 74
+
+pseudostatecanvas 128002 pseudostate_ref 128002 // initial
+   xyz 109 138 2000
+end
+statecanvas 128130 state_ref 128130 // Work
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  xyzwh 192 114 2000 139 69
+end
+statecanvas 128258 state_ref 128258 // AddHour
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  xyzwh 434 115 2000 135 69
+end
+transitioncanvas 128386 transition_ref 128002 // <transition>
+  
+  from ref 128002 z 2001 to ref 128130
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 128514 transition_ref 128130 // <transition>
+  decenter_begin 333
+  decenter_end 243
+  
+  from ref 128130 z 2001 label "AddHour" xyz 357.5 119 3000 to ref 128258
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 128642 transition_ref 128258 // <transition>
+  decenter_begin 755
+  decenter_end 607
+  
+  from ref 128258 z 2001 to ref 128130
+  write_horizontally default show_definition default drawing_language default
+end
+end

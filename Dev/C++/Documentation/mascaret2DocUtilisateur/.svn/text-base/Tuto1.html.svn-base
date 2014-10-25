@@ -1,0 +1,349 @@
+<html lang="fr">
+<head>
+<title>Tuto1 - Documentation utilisateur de mascaret 2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Documentation utilisateur de mascaret 2">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Annexe1.html#Annexe1" title="Annexe1">
+<link rel="next" href="Index2.html#Index2" title="Index2">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+Un embryon de documentation utilisateur pour mascaret 2.
+Copyright ??? License ??-->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Tuto1"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Index2.html#Index2">Index2</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Annexe1.html#Annexe1">Annexe1</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">5 Tutorial de création d'une application Mascaret</h2>
+
+<p>Dans ce tutorial, nous allons créer un petit environnement Mascaret très simple. Il s'agit simplement d'une horloge type Big Ben sur laquelle il sera possible d'effectuer quelques opérations très simple (ajouter une heure ou une minute).
+
+<h3 class="section">5.1 Création du modèle</h3>
+
+<h4 class="subsection">5.1.1 Préparation du projet</h4>
+
+     <ol type=1 start=1>
+<li>Lancer BOUML et créer un nouveau projet appelé ClockTower. 
+<li>A la racine du projet, faite bouton droit, New Profile. Appelez le Mascaret. 
+<li>Sur ce profile, faite un click droit, New class/stereotype view. Appelez le Mascaret aussi. 
+<li>Enfin sur ce dernière élément, faites click droit, New stereotype. Appelez le Entity. 
+<li>Double cliquer sur ce stéréotype. Dans l'onglet Stereotype, recherche le <code>element kind</code> Class et cliquer sur la colonne applicable pour autoriser ce stéréotype sur les classes. 
+<div align="center"><img src="../bouml_stereotype.png" alt="bouml_stereotype.png"></div>
+     </ol>
+Ici, nous n'aurons besoin que de ce stéréotype. Si vous avez besoin d'un autre stéréotype Mascaret (Role, Team, ..., see <a href="Creation-application.html#Creation-application">Le modèle</a>)
+     <ol type=1 start=6>
+<li>Faites click droit sur la racine du projet et créer un nouveau package. Appelez le Environment. 
+<li>Faites click droit sur ce package et créer un class view. Appelez le ClockTower. 
+<li>Créer y maintenant un class diagram. 
+<li>Double cliquer sur ce dernier
+        </ol>
+Vous devez obtenir quelquechose qui ressemble à ceci:
+<div align="center"><img src="../bouml_preparation.png" alt="bouml_preparation.png"></div>
+
+<h4 class="subsection">5.1.2 Création du modèle statique</h4>
+
+<p>Nous allons maintenant décrire ce qui va constituer notre environnement. A savoir, une tour avec une horloge.
+     <ol type=1 start=10>
+<li>Ajouter une classe sur le diagramme (l'icône <img src="bouml_icon_class.png" alt="bouml_icon_class.png">) et appelez la <code>ClockTower</code>
+<li>Créer en une 2ème appelée <code>Clock</code>
+<li>Créer en une 3ème appelée <code>Hand</code> (une aiguille)
+<li>Une <code>ClockTower</code> contient une <code>Clock</code>. Pour exprimer ceci, faite une association entre <code>ClockTower</code> et <code>Clock</code> (icône <img src="bouml_icon_link.png" alt="bouml_icon_link.png">)
+<li>Double clicker sur ce lien et donnez lui le nom clock avec une multiplicité de 1.
+        </ol>
+<div align="center"><img src="../bouml_edit_association.png" alt="bouml_edit_association.png"></div>
+
+     <ol type=1 start=15>
+<li>Une <code>Clock</code> contient 2 <code>Hand</code>. Pour exprimer ceci, faite 2 associations entre <code>Clock</code> et <code>Hand</code>. Nommez la première hourHand (la petite aiguille) et l'autre minuteHand (la grande aiguille). 
+<li>Dans l'arborescence de gauche, faites un bouton droit sur la classe <code>Clock</code> pour ajouter un attribut. Appelez le <code>currentHour</code>. 
+<li>Double clickez sur cette attribut. Donnez lui le type <code>int</code> et la valeur par défaut "0"
+     </ol>
+<div align="center"><img src="../bouml_edit_association.png" alt="bouml_edit_association.png"></div>
+
+     <ol type=1 start=18>
+<li>De même, créer un attribut <code>currentMinute</code>. 
+<li>Créer une méthode dans la classe <code>Clock</code> en faisant bouton droit, New operation. Appelez la <code>updateHands</code> (elle ne prend pas de paramètre, il faut juste renseigner son nom). 
+<li>De même, créez une méthode <code>addOneHour</code>, une autre <code>addOneMinute</code> et encore une autre <code>Clock</code> (un constructeur, non verront après pourquoi).
+     </ol>
+Vous devez obtenir ceci:
+<div align="center"><img src="../diagram_static_clock.png" alt="diagram_static_clock.png"></div>
+<p>Nous avons donc décrit la partie statique des entités qui vont peupler notre environnement. Nous pourrons donc, dans notre environnement, instancier une (ou plusieurs) <code>ClockTower</code> qui contiendra les éléments contenu dans le modèle. Les attributs <code>currentHour</code> et <code>currentMinute</code> de la classe <code>Clock</code> vont permettre de "stocker" l'heure que l'horloge va afficher. La méthode <code>updateHands</code> va permettre de mettre à jour la position des aiguilles en fonction de cette heure courante. Les méthode <code>addOneHour</code> et <code>addOneMinute</code> vont permettre d'augmenter de 1 les valeurs respective des attributs <code>currentHour</code> et <code>currentMinute</code>.
+
+<h4 class="subsection">5.1.3 Création du modèle dynamique</h4>
+
+<p>Nous allons maintenant décire le comportement dynamique de cette horloge.
+     <ol type=1 start=21>
+<li>Créer une machine à état dans le class view ClockTower (bouton droit, New state machine). Appelez la ClockStateMachine. 
+<li>Double clickez sur cette machine à état et dans le combobox Specification, choisir la méthode <code>Clock()</code>. En faite, il s'agit d'associer cette machine à état à la classe <code>Clock</code> de manière à ce qu'une instance de cette machine à état soit exécuter après l'instanciation d'une <code>Clock</code>. Il est possible d'associer de cette manière plusieurs machine à état à une classe. Il faut toutefois noté qu'il s'agit ici d'un contournement de BOUML qui ne permet pas de déclarer directement une machine à état dans une classe. 
+<li>Sur cette machine à état, créer un diagramme (New state diagram) et double cliquer dessus pour l'ouvrir. 
+<li>Ajouter un état initial au diagramme (icône <img src="../bouml_icon_initial.png" alt="bouml_icon_initial.png">)
+<li>Ajouter un état Work et un état AddHour (icône <img src="../bouml_icon_state.png" alt="bouml_icon_state.png">)
+<li>Ajouter une transition de l'état initial à l'état Work, une de l'état Work à l'état AddHour et une de l'état AddHour à l'état Work. 
+<li>Double clicker sur la transition de l'état Work à l'état AddHour. 
+<li>Dans l'onglet OCL, dans la partie trigger, saisissez le nom de signal <code>AddHour</code>.
+        </ol>
+Vous devez obtenir ceci:
+<div align="center"><img src="../diagram_statemachine_clock.png" alt="diagram_statemachine_clock.png"></div>
+<p>Nous venons de définir ici un comportement très simple de l'horloge. Lorsqu'elle recevra le signal <code>AddHour</code>, elle passera de l'état <code>Work</code> à l'état <code>AddHour</code> et executera la méthode <code>addOneHour</code> avant de revenir à l'état Work et de réexecuter la méthode <code>updateHands</code>. Nous verrons par la suite comment implémenter ces méthodes et comment envoyé un signal à une instance.
+
+   <p>La création du modèle est terminée. Il ne reste plus qu'à exporter le modèle en XMI. Pour cela, faites un click droit à la racine du projet, Tool &gt; Generate XMI 2.1. Choisissez le nom et l'emplacement du fichier à exporter.
+
+<h3 class="section">5.2 Instanciation de l'environnement</h3>
+
+<p>Le but de cette partie est d'instancier un environnement correspodant au modèle. Nous allons pour cela utiliser le logiciel Blender et l'addon Mascaret pour Blender. L'installation de l'addon est décrite dans ce document (see <a href="Creation-application.html#Creation-application">L'editeur d'environnement Blender</a>)
+     <ol type=1 start=1>
+<li>Ouvrir Blender
+<li>Dans la fenêtre de propriétés de Blender, dans l'onglet World, section VEHA Model, appuyez sur le bouton Select XMI et choissez le fichier XMI précédemment exporté.
+        </ol>
+<div align="center"><img src="../editeur_blender_select_xmi.png" alt="editeur_blender_select_xmi.png"></div>
+<p>Le but de se document n'étant pas de former à la modélisation 3D, nous représenterons la tour par un parrallélépipède, l'horloge par un cylindre et les aiguilles par 2 parallélépipèdes.
+     <ol type=1 start=3>
+<li>Faites un click droit sur le cube déjà présent, appuyez sur s, puis z, puis saisissez [5 enter]. 
+<li>Pour faire remonté la tour sur l'axe z de manière à ce que le sol soit le plan z=0, faite g, puis z, puis [5 enter]. 
+<li>Nous avons effectué une mise à l'échelle (avec le raccourci s) pour créer cette tour. Mascaret ne gère pas la mise à l'échelle. Il faut donc appliqué cette mise à l'échelle au mesh. Pour cela, dans le menu objet (menu de la vue 3D), faites Apply &gt; Scale.
+        </ol>
+<div align="center"><img src="../blender_apply_scale.png" alt="blender_apply_scale.png"></div>
+<p>De manière générale, il faut vérifier qu'aucun objet de votre scène n'a une échelle différente de (1,1,1). On peut voir cette échelle dans les propriétés de l'objet (sur la droite de l'image ci-dessus).
+     <ol type=1 start=7>
+<li>Dans les propriétés de l'objet, renommez l'objet en ClockTower (à la place de Cube). 
+<li>Ajouter un cylindre en faisant Add (du menu principal) &gt; Mesh &gt; Cylinder. 
+<li>Le cylindre qui apparait est en partie masqué par la tour. Pour basculer entre la vue scene à la vue contextuelle de la selection, vous pouvez appuyer sur la touche "/" du pavé numérique. Vous pouvez aussi centrer la vue sur la selection avec la touche "." du pavé numérique. 
+<li>Pour orienté correctement le cylindre, faites r, y, et saisissez [90 enter]
+<li>Le cylindre est un peu trop grand. Ajustez-le en faisant une mise à l'echelle sur l'axe y : s, y, [0.8 enter] puis s, z, [0.8 enter]. 
+<li>Appliquez l'échelle au mesh. 
+<li>Faites dépasser légèrement le cylindre de la tour : g, x, [0.1 enter]
+<li>Monter le cylindre en haut de la tour : g, z, [9 enter]. 
+<li>Renommer l'objet en Clock (à la place de Cylinder).
+        </ol>
+<div align="center"><img src="../blender_clock_tower.png" alt="blender_clock_tower.png"></div>
+     <ol type=1 start=16>
+<li>Ajouter un cube (Add &gt; Mesh &gt; Cube). 
+<li>Appuyer sur la touche "/" du pavé numérique pour visualisez ce cube seul. 
+<li>Mise à l'echelle sur y et z: s, y, [0.05 enter], s, z, [0.4 enter]
+<li>Appliquer la mise à l'echelle au mesh
+<li>Il nous faut maintenant modifier le centre de l'aiguille car dans la simulation, les rotations de l'objet sont exprimées par rapport à lui. Nous voulons que les aiguilles tourne par rapport au centre de l'horloge, c'est à dire le bas de l'aiguille. Pour cela, monter l'aiguille de 0.35 en z (g, z, [0.35 enter]) et faites Object &gt; Apply &gt; Location. 
+<li>Appuyer sur la touche "/" du pavé numérique pour voir toute la scene. 
+<li>Dans la section Relation des propriétés de l'objet, définir le parent de l'aiguille à Clock
+<li>Avancer l'aiguille: gx 0.1
+<li>Renommer l'objet en BigHand (à la place de cube). 
+<li>Nous allons maintenant repeté les mêmes étapes pour réaliser la petite aiguille:
+Ajouter un cube
+<li>Mise à l'echelle sur y et z: s, x, [0.07 enter], s, z, [0.25 enter]
+<li>Appliquer la mise à l'echelle au mesh
+<li>g, z, [0.2 enter] et faites Object &gt; Apply &gt; Location. 
+<li>Définir le parent de l'aiguille à Clock
+<li>Avancer l'aiguille: gx 0.15
+<li>Ajouter un materiaux au divers objet afin de changer leur couleurs.
+     </ol>
+Vous devez normalement obtenir quelquechose comme ceci:
+<div align="center"><img src="../blender_model_end.png" alt="blender_model_end.png"></div>
+<p>Il ne reste plus à ce stade qu'à definir le type de chaque objet graphique.
+     <ol type=1 start=32>
+<li>Selectionner la tour. Dans les propriétés de l'objet, dans la section VEHA Model, définir l'attribut class à <code>ClockTower</code>. 
+<li>Selectionner l'horloge. Dans les propriétés de l'objet, dans la section VEHA Model, définir l'attribut class à <code>Clock</code>. 
+<li>Selectionner une aiguille. Dans les propriétés de l'objet, dans la section VEHA Model, définir l'attribut class à <code>Hand</code> et faites de même avec l'autre. 
+<li>Dans les propriétés de l'objet, dans la section VEHA Model, tout en bas, clicker sur le bouton Update references. 
+<li>Selectionner l'horloge. Dans les propriétés de l'objet, dans la section VEHA Model, définir l'attribut hourHand à <code>LittleHand</code>. Définir l'attribut minuteHand à <code>BigHand</code>. 
+<li>Selectionner la tour. Dans les propriétés de l'objet, dans la section VEHA Model, définir l'attribut clock à <code>Clock</code>.
+        </ol>
+L'environnement est maintenant fini. Vous pouvez maintenant éventuellement ajouter des décors, texturer les objets, placer et orienté des caméra qui consituront les points de vue de la scene... 
+Tous les objets qui n'ont pas de classe définis seront considérés comme du décors mais seront bien présent dans la simulation.
+
+   <p>Pour exporter la scene, faites File &gt; Export &gt; Export VEHA Environment et choisissez le fichier d'export. Des fichiers au format x3d sont généré à coté du fichier d'export. Pour qu'il puissent être lu par AReViMascaret, il faut exécuter la feuille de style X3dToVrml97.xslt fournit avec l'editeur d'environnement Blender. Par exemple, sous linux:<br>
+<code>for i in $(ls *.x3d); do xsltproc X3dToVrml97.xslt $i&gt;${i%%.*}.wrl ; done</code>
+
+<h3 class="section">5.3 Ecriture du plugin</h3>
+
+<p>Le plugin va nous permettre d'implémenter les comportements opaques (les méthodes de la classe <code>Clock</code>) et d'initialiser l'heure courante de l'horloge à l'heure du système.
+
+<h4 class="subsection">5.3.1 Initialisation de la simulation</h4>
+
+<p>Nous allons utilisé un des évènements de Mascaret: La fonction <code>MASCARET_MODEL_LOADED</code>. Nous allons récupérer l'heure du système et mettre à jour les attributs <code>currentHour</code> et <code>currentMinute</code>.
+<pre class="smallformat"><pre class="verbatim">#include "VEHA/Behavior/Common/BehaviorExecution.h"
+#include "VEHA/Behavior/Common/Behavior.h"
+#include "VEHA/Entity/Entity.h"
+#include "VEHA/Entity/RotationVector.h"
+#include "VEHA/Kernel/LiteralInteger.h"
+
+#include "MascaretApplication.h"
+
+#include &lt;sys/time.h>
+using namespace VEHA;
+
+
+extern "C"
+VEHA_PLUGIN void MASCARET_MODEL_LOADED()
+{
+	// Get system time
+	time_t now;
+	struct tm* tm;
+	now = time(0);
+	tm = localtime(&amp;now);
+
+	// Get the clock
+	shared_ptr&lt;InstanceSpecification> clock=MascaretApplication::getInstance()->getEnvironment()->getInstance("Clock");
+	// Set currentHour and currentMinute properties with system time
+	clock->getProperty("currentHour")->addValue(LiteralInteger(tm->tm_hour));
+	clock->getProperty("currentMinute")->addValue(LiteralInteger(tm->tm_min));
+
+	// We could launch the updateHands operation but it's not necessary (will be launch by state machine)
+	//InstanceSpecification::OperationCallParameters params;
+	//clock->executeOperation("updateHands",params);
+}
+</pre>
+</pre>
+   <h4 class="subsection">5.3.2 Implémentation des comportements opaques</h4>
+
+<pre class="smallformat"><pre class="verbatim">class Clock_updateHands : public BehaviorExecution
+{
+public:
+	Clock_updateHands(shared_ptr&lt;Behavior> specif, shared_ptr&lt;InstanceSpecification> host, const Parameters&amp; p)
+	: BehaviorExecution(specif, host, p)
+	{
+		// Get currentHour and currentMinute slots
+		_currentHour=getHost()->getProperty("currentHour");
+		_currentMinute=getHost()->getProperty("currentMinute");
+		// Get hands from slots
+		_hourHand=shared_dynamic_cast&lt;Entity>((shared_ptr&lt;InstanceSpecification>)*getHost()->getProperty("hourHand")->getValue());
+		_minHand=shared_dynamic_cast&lt;Entity>((shared_ptr&lt;InstanceSpecification>)*getHost()->getProperty("minuteHand")->getValue());
+	}
+	virtual ~Clock_updateHands()
+	{
+	}
+
+	double execute()
+	{
+		// Get currentHour and currentMinute values from slots
+		int hour=*_currentHour->getValue() % 12;
+		int min=*_currentMinute->getValue();
+		// Compute hands angles
+		double hourAngle=-hour/12.0*2*M_PI;
+		double minAngle=-min/60.0*2*M_PI;
+		// Set hands angles
+		_hourHand->setLocalRotation(RotationVector(1,0,0,hourAngle));
+		_minHand->setLocalRotation(RotationVector(1,0,0,minAngle));
+		return 0;
+	}
+	shared_ptr&lt;Slot> _currentHour;
+	shared_ptr&lt;Slot> _currentMinute;
+	shared_ptr&lt;Entity> _hourHand;
+	shared_ptr&lt;Entity> _minHand;
+};
+
+extern "C"
+VEHA_PLUGIN BehaviorExecution* Clock_updateHands_init(shared_ptr&lt;Behavior> specif, shared_ptr&lt;InstanceSpecification> host, const Parameters&amp; p)
+{
+	return new Clock_updateHands(specif, host,p);
+}
+</pre>
+</pre>
+<h3 class="section">5.4 Configuration de la simulation</h3>
+
+<h4 class="subsection">5.4.1 Référencer le modèle, l'environnement et les plugins</h4>
+
+<pre class="smallformat"><pre class="verbatim">&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;Application>
+	&lt;Model url="ClockTower.xmi" xmi2="true"/>
+	&lt;Environment url="ClockTower.xml" />
+	&lt;ApplicationParameters>
+		&lt;!-- HTTP Config-->
+		&lt;Plugins PluginsDir="./ClockPlugin">
+			&lt;Plugin Name="ClockPlugin"/>
+			&lt;Plugin Name="SpaceMouseMascaret"/>
+		&lt;/Plugins>
+	&lt;/ApplicationParameters>
+&lt;/Application>
+</pre>
+</pre>
+<h4 class="subsection">5.4.2 Définir les paramètres de rendu</h4>
+
+<pre class="smallformat"><pre class="verbatim">&lt;Scene name = "scene">
+	&lt;Decors>
+		&lt;Light name="Lamp" directional="false">
+			&lt;Position x="4.076245307922363" y="1.0054539442062378" z="5.903861999511719"/>
+			&lt;Orientation roll="0.6503279805183411" pitch="0.055217113345861435" yaw="1.8663908243179321"/>
+		&lt;/Light>
+	&lt;/Decors>
+&lt;/Scene>
+&lt;Renderer near="0.1" far="1000" fieldOfView="45">
+	&lt;Window x="0" y="0" width="700" height="1000" capture-mouse="true" />
+	&lt;!--Stereo /-->
+	&lt;Scene name="scene" viewpoint="Camera" />
+&lt;/Renderer>
+</pre>
+</pre>
+   <p>Nous pouvons maintenant lancer la simulation:<br>
+<code>areviMascaret ClockTower.mas</code>
+<div align="center"><img src="../rendu_final.png" alt="rendu_final.png"></div>
+
+<h4 class="subsection">5.4.3 Ajouter de l'interaction</h4>
+
+<pre class="smallformat"><pre class="verbatim">&lt;Interactions>
+	&lt;SendSignal name="AddHour" peripheric="mouse" button="button1" pressed="true" target="designated"/>
+	&lt;CallOperation classifier="ClockTower::ClockTower::Environment::Clock" name="addOneMinute" peripheric="mouse" button="button3" pressed="true" target="designated"/>
+	&lt;CallOperation classifier="ClockTower::ClockTower::Environment::Clock" name="updateHands" peripheric="mouse" button="button3" pressed="false" target="designated"/>
+&lt;/Interactions>
+</pre>
+</pre>
+<h4 class="subsection">5.4.4 Ajouter la navigation</h4>
+
+<pre class="smallformat"><pre class="verbatim">&lt;Navigation type="camera" mode="human">
+	&lt;TX peripheric="spaceMouse" axis="tz" speed="0.01"/>
+	&lt;TY peripheric="spaceMouse" axis="tx" speed="-0.01"/>
+	&lt;!--TZ peripheric="spaceMouse" axis="ty" speed="0.01"/-->
+	&lt;Yaw peripheric="spaceMouse" axis="ry" speed="0.005"/>
+	&lt;Pitch peripheric="spaceMouse" axis="rx" speed="-0.005"/>
+&lt;/Navigation>
+</pre>
+</pre>
+<pre class="smallformat"><pre class="verbatim">&lt;Peripherics>
+	&lt;Peripheric name="keyboard">
+		&lt;ButtonAxis name="updown">
+			&lt;Button peripheric="keyboard" button="Up" pressed="true" type="set-value" value="1"/>
+			&lt;Button peripheric="keyboard" button="Down" pressed="true" type="set-value" value="-1"/>
+			&lt;Button peripheric="keyboard" button="Up" pressed="false" type="set-value" value="0"/>
+			&lt;Button peripheric="keyboard" button="Down" pressed="false" type="set-value" value="0"/>
+			&lt;Button peripheric="keyboard" button="+" pressed="true" type="increase-value" value="1"/>
+			&lt;Button peripheric="keyboard" button="-" pressed="true" type="increase-value" value="-1"/>
+		&lt;/ButtonAxis>
+		&lt;ButtonAxis name="leftright">
+			&lt;Button peripheric="keyboard" button="Left" pressed="true" type="set-value" value="1"/>
+			&lt;Button peripheric="keyboard" button="Right" pressed="true" type="set-value" value="-1"/>
+			&lt;Button peripheric="keyboard" button="Left" pressed="false" type="set-value" value="0"/>
+			&lt;Button peripheric="keyboard" button="Right" pressed="false" type="set-value" value="0"/>
+		&lt;/ButtonAxis>
+	&lt;/Peripheric>
+&lt;/Peripherics>
+&lt;Navigation type="camera" mode="human">
+	&lt;TX peripheric="spaceMouse" axis="tz" speed="0.01"/>
+	&lt;TY peripheric="spaceMouse" axis="tx" speed="-0.01"/>
+	&lt;TX peripheric="keyboard" axis="updown" speed="1.5"/>
+	&lt;TY peripheric="keyboard" axis="leftright" speed="1.5"/>
+	&lt;Yaw peripheric="spaceMouse" axis="ry" speed="0.005"/>
+	&lt;Pitch peripheric="spaceMouse" axis="rx" speed="-0.005"/>
+	&lt;Yaw peripheric="mouse" axis="x" speed="0.05"/>
+	&lt;Pitch peripheric="mouse" axis="y" speed="-0.05"/>
+&lt;/Navigation>
+</pre>
+</pre>
+   </body></html>
+

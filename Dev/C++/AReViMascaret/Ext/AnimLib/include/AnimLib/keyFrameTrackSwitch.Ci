@@ -1,0 +1,234 @@
+//----------------------------------------------------------------------------
+// @(#) ENIB/LI2 (c) - AnimLib
+//----------------------------------------------------------------------------
+// package     : AnimLib
+// file        : keyFrame.h => declaration of a single keyFrame
+// description : Class describing a keyFrameTrack, a keyFrameTrackReal, keyFrameTrackReal3
+// author(s)   : CAZEAUX Eric
+// mail        : cazeaux@enib.fr
+//----------------------------------------------------------------------------
+// last update : 13/12/2005
+//----------------------------------------------------------------------------
+
+
+// Included from "keyFrameTrackSwitch.h"
+
+namespace AnimLib {
+
+//----------------------------------------------------------------------------
+// CLASS       : KeyFrameTrackSwitch
+//----------------------------------------------------------------------------
+
+template <class T> inline
+KeyFrameTrackSwitch<T>::KeyFrameTrackSwitch(void) 
+    : KeyFrameTrack(),
+      _keyFrames()
+{
+// Nothing to be done here!
+}
+
+template <class T> inline
+KeyFrameTrackSwitch<T>::~KeyFrameTrackSwitch(void)
+{
+// Nothing to be done here!
+}
+
+
+//--------------------------- Evaluate a point -------------------------------
+
+// Compute a key frame at time t in [0,duration]
+template <class T> inline
+bool // success
+KeyFrameTrackSwitch<T>::computeFrame(double t, T &keyFrameOut)
+{
+if (_needRebuildTrack)
+  {
+  _needRebuildTrack=false;
+  }
+  
+// cerr << __FUNCTION__ << ":: t = " << t <<  endl;
+if (!_needRebuildTrack)
+  {
+  unsigned first, last;
+  KeyFrameIterator it=_keyFrames.end();it--; // Get the last key position
+  last=it->first;
+  first=_keyFrames.begin()->first;
+  
+  if (_duration>0.0 && last>first)
+    {
+   return(computePosition((unsigned)(first+((t/_duration)*(last-first))),keyFrameOut));
+    }
+  else // Duration is null, return last position
+    {
+    KeyFrameIterator it=_keyFrames.end();
+    it--; // Get the last key position
+    keyFrameOut=it->second;
+    return(true);
+    }
+  }
+return(false);
+}
+
+// Compute a key frame at position pos in [firstPost,lastPos]
+template <class T> inline
+bool // success
+KeyFrameTrackSwitch<T>::computePosition(unsigned position, T &keyFrameOut)
+{
+// cerr << __FUNCTION__ << ":: position = " << position <<  endl;
+
+if (_needRebuildTrack)
+  {
+  _needRebuildTrack=false;
+  }
+  
+KeyFrameIterator it;
+
+it=_keyFrames.find(position);
+if (it!=_keyFrames.end())
+  {
+  keyFrameOut=it->second; // special case
+  return(true);
+  }
+else if (!_needRebuildTrack && _keyFrames.size())
+  {
+  KeyFrameIterator currentIt;
+  
+  it=_keyFrames.begin();
+  
+  if (position<it->first) // Invalid range
+    return(false);
+    
+  currentIt=it;
+  
+  while(it!=_keyFrames.end())
+    {
+    if (it->first>position)
+      {
+      keyFrameOut=currentIt->second;
+      return(true);
+      }
+    currentIt=it;
+    it++;
+    }
+  }
+return(false);
+}
+
+
+//--------------------------- Inspect variable -------------------------------
+  
+// Inspect list of keyFrames
+template <class T> inline
+const StlMap<unsigned, T > &
+KeyFrameTrackSwitch<T>::getKeyFrames(void) const
+{
+return(_keyFrames);
+}
+
+//--------------------------- KeyFrames manip -------------------------------
+  
+// Add Key Frame
+template <class T> inline
+void
+KeyFrameTrackSwitch<T>::setKeyFrame(unsigned position, const T &key)
+{
+_keyFrames[position]=key;
+_needRebuild();
+}
+
+//! Get Key Frame
+template <class T>
+bool // success
+KeyFrameTrackSwitch<T>::getKeyFrame(unsigned position, T &keyOut) const
+{
+KeyFrameConstIterator it=_keyFrames.find(position);
+if (it==_keyFrames.end())
+  {  
+  return(false);
+  }
+else
+  {
+  keyOut=it->second;
+  return(true);
+  }
+}
+
+// Add Key Frame
+template <class T>
+bool // success
+KeyFrameTrackSwitch<T>::removeKeyFrame(unsigned position)
+{
+KeyFrameIterator it=_keyFrames.find(position);
+if (it==_keyFrames.end())
+  {
+  return(false);
+  }
+else
+  {
+  _keyFrames.erase(it);
+  _needRebuild();
+  return(true);
+  }
+}
+
+// Add Key Frame
+template <class T>
+void
+KeyFrameTrackSwitch<T>::clearKeyFrames(void)
+{
+_keyFrames.clear();
+_needRebuild();
+}
+
+
+// Nb Key Frames
+template <class T> // virtual
+unsigned
+KeyFrameTrackSwitch<T>::getNbKeyFrames(void) const
+{
+return(_keyFrames.size());
+}
+
+// Get key Frames positions
+template <class T> // virtual
+void
+KeyFrameTrackSwitch<T>::getKeysPositions(StlVector<unsigned> &keysPositionOut) const
+{
+keysPositionOut.clear();
+keysPositionOut.reserve(_keyFrames.size());
+
+for (KeyFrameConstIterator it=_keyFrames.begin();it!=_keyFrames.end();it++)
+  {
+  keysPositionOut.push_back(it->first);
+  }
+}
+
+// Abstract methods to remove and add key frames
+template <class T> // virtual
+bool // success
+KeyFrameTrackSwitch<T>::addKeyFrame(unsigned position)
+{
+if (_keyFrames.find(position)==_keyFrames.end())
+  {
+  _keyFrames[position]=T();
+  _needRebuild();
+  return(true);
+  }
+else
+  return(false);
+}
+ 
+  
+//--------------------------- Force rebuild ---------------------------------
+
+template <class T> // virtual
+bool //success
+KeyFrameTrackSwitch<T>::rebuild(void)
+{
+_needRebuildTrack=false;
+return(!_needRebuildTrack);
+}
+  
+} // end of namespace AnimLib
+
+// EOF

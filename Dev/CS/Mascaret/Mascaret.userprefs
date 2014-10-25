@@ -1,0 +1,20 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" ctype="Workspace" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Mascaret/VEHA/Behavior/Common/BehaviorExecution.cs" ctype="Workbench">
+    <Files>
+      <File FileName="Mascaret/VEHA/Behavior/Common/BehaviorScheduler.cs" Line="1" Column="1" />
+      <File FileName="Mascaret/VEHA/Behavior/Time/TimeExpression.cs" Line="1" Column="1" />
+      <File FileName="Mascaret/VEHA/Behavior/Common/BehaviorExecution.cs" Line="97" Column="3" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Mascaret" expanded="True" selected="True" />
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

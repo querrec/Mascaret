@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2922675B-99B8-4F4C-8E45-2125E0D29229}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Mascaret</RootNamespace>
+    <AssemblyName>Mascaret</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\TestAnt\antlr-dotnet-csharpruntime-3.5.0.2\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BEHAVE\ACLMessage.cs" />
+    <Compile Include="BEHAVE\ActionListenerBehavior.cs" />
+    <Compile Include="BEHAVE\Agent.cs" />
+    <Compile Include="BEHAVE\AgentBehavior.cs" />
+    <Compile Include="BEHAVE\AgentBehaviorExecution.cs" />
+    <Compile Include="BEHAVE\AgentClass.cs" />
+    <Compile Include="BEHAVE\AgentPlateform.cs" />
+    <Compile Include="BEHAVE\AID.cs" />
+    <Compile Include="BEHAVE\AssemblyInfo.cs" />
+    <Compile Include="BEHAVE\CallProcedureAction.cs" />
+    <Compile Include="BEHAVE\CallProcedureBehaviorExecution.cs" />
+    <Compile Include="BEHAVE\CyclicBehaviorExecution.cs" />
+    <Compile Include="BEHAVE\ExternalCommunicationManager.cs" />
+    <Compile Include="BEHAVE\FipaSLLexer.cs" />
+    <Compile Include="BEHAVE\FipaSLParser.cs" />
+    <Compile Include="BEHAVE\HttpCommunicationManager.cs" />
+    <Compile Include="BEHAVE\KnowledgeBase.cs" />
+    <Compile Include="BEHAVE\Mailbox.cs" />
+    <Compile Include="BEHAVE\OneShotBehaviorExecution.cs" />
+    <Compile Include="BEHAVE\OrganisationalEntity.cs" />
+    <Compile Include="BEHAVE\OrganisationalStructure.cs" />
+    <Compile Include="BEHAVE\ProceduralBehavior.cs" />
+    <Compile Include="BEHAVE\Procedure.cs" />
+    <Compile Include="BEHAVE\ProcedureExecution.cs" />
+    <Compile Include="BEHAVE\Ressource.cs" />
+    <Compile Include="BEHAVE\RessourceAssignement.cs" />
+    <Compile Include="BEHAVE\Role.cs" />
+    <Compile Include="BEHAVE\RoleAssignement.cs" />
+    <Compile Include="BEHAVE\RoleClass.cs" />
+    <Compile Include="BEHAVE\SimpleBehaviorExecution.cs" />
+    <Compile Include="BEHAVE\SimpleCommunicationBehavior.cs" />
+    <Compile Include="HAVE\Body.cs" />
+    <Compile Include="HAVE\BodyClass.cs" />
+    <Compile Include="HAVE\EmbodiedAgent.cs" />
+    <Compile Include="HAVE\VirtualHuman.cs" />
+    <Compile Include="HAVE\VirtualHumanClass.cs" />
+    <Compile Include="IEHA\Button.cs" />
+    <Compile Include="IEHA\ButtonActionInfo.cs" />
+    <Compile Include="IEHA\Interaction.cs" />
+    <Compile Include="SysML\Block.cs" />
+    <Compile Include="Tools\Loaders\InstanceLoader.cs" />
+    <Compile Include="Tools\Loaders\ModelLoader2.cs" />
+    <Compile Include="Tools\NetWork\HttpConnection.cs" />
+    <Compile Include="Tools\NetWork\HttpConnectionFactory.cs" />
+    <Compile Include="Tools\NetWork\HttpRequest.cs" />
+    <Compile Include="Tools\NetWork\HttpResponse.cs" />
+    <Compile Include="Tools\NetWork\HttpServer.cs" />
+    <Compile Include="Tools\NetWork\HttpServlet.cs" />
+    <Compile Include="Tools\NetWork\TcpConnection.cs" />
+    <Compile Include="Tools\NetWork\TcpConnectionFactory.cs" />
+    <Compile Include="Tools\NetWork\TcpServer.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageAgentServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageAgentsServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageClassServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageEntityServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageHeadServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageIndexServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageInstancesServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageLaunchProcedureServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageModelServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageOrganisationalEntityServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageOrganisationalStructureServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageOrganisationsServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageProcedureServlet.cs" />
+    <Compile Include="Tools\NetWork\Servlets\ManageSpeakServlet.cs" />
+    <Compile Include="VEHA\Kernel\BehavioralFeature.cs" />
+    <Compile Include="VEHA\Kernel\Class.cs" />
+    <Compile Include="VEHA\Kernel\Classifier.cs" />
+    <Compile Include="VEHA\Kernel\Comment.cs" />
+    <Compile Include="VEHA\Kernel\Constraint.cs" />
+    <Compile Include="VEHA\Kernel\Context.cs" />
+    <Compile Include="VEHA\Kernel\DomainSpecification.cs" />
+    <Compile Include="VEHA\Kernel\Element.cs" />
+    <Compile Include="VEHA\Kernel\Environment.cs" />
+    <Compile Include="VEHA\Kernel\Expression.cs" />
+    <Compile Include="VEHA\Kernel\Feature.cs" />
+    <Compile Include="VEHA\Kernel\InstanceSpecification.cs" />
+    <Compile Include="VEHA\Kernel\InstanceValue.cs" />
+    <Compile Include="VEHA\Kernel\LiteralBoolean.cs" />
+    <Compile Include="VEHA\Kernel\LiteralInteger.cs" />
+    <Compile Include="VEHA\Kernel\LiteralReal.cs" />
+    <Compile Include="VEHA\Kernel\LiteralSpecification.cs" />
+    <Compile Include="VEHA\Kernel\LiteralString.cs" />
+    <Compile Include="VEHA\Kernel\MascaretPrimitiveType.cs" />
+    <Compile Include="VEHA\Kernel\Model.cs" />
+    <Compile Include="VEHA\Kernel\OpaqueExpression.cs" />
+    <Compile Include="VEHA\Kernel\Operation.cs" />
+    <Compile Include="VEHA\Kernel\Package.cs" />
+    <Compile Include="VEHA\Kernel\Parameter.cs" />
+    <Compile Include="VEHA\Kernel\Property.cs" />
+    <Compile Include="VEHA\Kernel\Slot.cs" />
+    <Compile Include="VEHA\Kernel\SlotDerived.cs" />
+    <Compile Include="VEHA\Kernel\ValueSpecification.cs" />
+    <Compile Include="VEHA\Entity\AnimationProperty.cs" />
+    <Compile Include="VEHA\Entity\AnimationSpecification.cs" />
+    <Compile Include="VEHA\Entity\Entity.cs" />
+    <Compile Include="VEHA\Entity\EntityClass.cs" />
+    <Compile Include="VEHA\Entity\GeometryProperty.cs" />
+    <Compile Include="VEHA\Entity\GeometrySpecification.cs" />
+    <Compile Include="VEHA\Entity\PathProperty.cs" />
+    <Compile Include="VEHA\Entity\PathSpecification.cs" />
+    <Compile Include="VEHA\Entity\PointProperty.cs" />
+    <Compile Include="VEHA\Entity\PointSpecification.cs" />
+    <Compile Include="VEHA\Entity\PrimitiveGeometry.cs" />
+    <Compile Include="VEHA\Entity\RotationVector.cs" />
+    <Compile Include="VEHA\Entity\ShapeGeometry.cs" />
+    <Compile Include="VEHA\Entity\ShapeProperty.cs" />
+    <Compile Include="VEHA\Entity\ShapeSpecification.cs" />
+    <Compile Include="VEHA\Entity\SoundProperty.cs" />
+    <Compile Include="VEHA\Entity\SoundSpecification.cs" />
+    <Compile Include="VEHA\Entity\SpecificGeometry.cs" />
+    <Compile Include="VEHA\Entity\TopologicalProperty.cs" />
+    <Compile Include="VEHA\Entity\TopologicalSpecification.cs" />
+    <Compile Include="VEHA\Entity\VirtualRealitySpecification.cs" />
+    <Compile Include="VEHA\Entity\Zone.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ActionNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\Activity.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ActivityBehaviorExecution.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ActivityEdge.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ActivityExecution.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ActivityFinalNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ActivityNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ActivityParameterNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ActivityPartition.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ControlFlow.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ControlNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\FinalNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\FlowFinalNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ForkNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\InitialNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\JoinNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\LoopNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\MergeNode.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ObjectFlow.cs" />
+    <Compile Include="VEHA\Behavior\Activity\ObjectNode.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\Action.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\CallBehaviorAction.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\CallOperationAction.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\CallOperationBehaviorExecution.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\InputPin.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\OutputPin.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\Pin.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\SendSignalAction.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\SendSignalBehaviorExecution.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\SendSignalTarget.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\ValuePin.cs" />
+    <Compile Include="VEHA\Behavior\Common\ActivityBehaviorExecutionHelper.cs" />
+    <Compile Include="VEHA\Behavior\Common\Behavior.cs" />
+    <Compile Include="VEHA\Behavior\Common\BehaviorExecution.cs" />
+    <Compile Include="VEHA\Behavior\Common\BehaviorScheduler.cs" />
+    <Compile Include="VEHA\Behavior\Common\EventOccurrence.cs" />
+    <Compile Include="VEHA\Behavior\Common\MascaretEvent.cs" />
+    <Compile Include="VEHA\Behavior\Common\MascaretEventOccurence.cs" />
+    <Compile Include="VEHA\Behavior\Common\OpaqueBehavior.cs" />
+    <Compile Include="VEHA\Behavior\Common\Parameters.cs" />
+    <Compile Include="VEHA\Behavior\Common\Signal.cs" />
+    <Compile Include="VEHA\Behavior\Common\Trigger.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\CallEvent.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\ChangeEvent.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\CompositeState.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\FinalState.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\Guard.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\PseudoState.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\Region.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\SignalEvent.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\State.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\StateController.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\StateMachine.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\StateMachineBehaviorExecution.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\TimeEvent.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\Transition.cs" />
+    <Compile Include="VEHA\Behavior\StateMachine\Vertex.cs" />
+    <Compile Include="VEHA\Behavior\Time\TimeExpression.cs" />
+    <Compile Include="TTS\cereproc.cs" />
+    <Compile Include="TTS\cereproc_priv.cs" />
+    <Compile Include="VEHA\Entity\Vector3.cs" />
+    <Compile Include="VEHA\Entity\Color.cs" />
+    <Compile Include="MascaretApplication.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="BEHAVE\" />
+    <Folder Include="HAVE\" />
+    <Folder Include="IEHA\" />
+    <Folder Include="SysML\" />
+    <Folder Include="Tools\" />
+    <Folder Include="Tools\Loaders\" />
+    <Folder Include="Tools\NetWork\" />
+    <Folder Include="Tools\NetWork\Servlets\" />
+    <Folder Include="VEHA\" />
+    <Folder Include="VEHA\Behavior\" />
+    <Folder Include="VEHA\Entity\" />
+    <Folder Include="VEHA\Kernel\" />
+    <Folder Include="VEHA\Behavior\Activity\" />
+    <Folder Include="VEHA\Behavior\BasicActions\" />
+    <Folder Include="VEHA\Behavior\Common\" />
+    <Folder Include="VEHA\Behavior\StateMachine\" />
+    <Folder Include="VEHA\Behavior\Time\" />
+    <Folder Include="TTS\" />
+  </ItemGroup>
+</Project>

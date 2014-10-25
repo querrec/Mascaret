@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mascaret", "Mascaret.vcxproj", "{4C1A490F-DFC4-11E0-BD93-0009DD50902F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OgreMascaretLib", "..\OgreMascaret\OgreMascaretLib.vcxproj", "{5FC5A82E-DFC7-11E0-AAD6-0009DD50902F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ogreMascaret", "..\OgreMascaret\ogreMascaret.vcxproj", "{5FCAFF5E-DFC7-11E0-869F-0009DD50902F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpaceMouseMascaret", "..\Plugins\SpaceMouse\spaceMouseMascaret.vcxproj", "{4C1A490F-DFC4-11E0-BD93-0009DD50902E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C1A490F-DFC4-11E0-BD93-0009DD50902F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4C1A490F-DFC4-11E0-BD93-0009DD50902F}.Debug|Win32.Build.0 = Debug|Win32
+		{4C1A490F-DFC4-11E0-BD93-0009DD50902F}.Release|Win32.ActiveCfg = Release|Win32
+		{4C1A490F-DFC4-11E0-BD93-0009DD50902F}.Release|Win32.Build.0 = Release|Win32
+		{5FC5A82E-DFC7-11E0-AAD6-0009DD50902F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5FC5A82E-DFC7-11E0-AAD6-0009DD50902F}.Debug|Win32.Build.0 = Debug|Win32
+		{5FC5A82E-DFC7-11E0-AAD6-0009DD50902F}.Release|Win32.ActiveCfg = Release|Win32
+		{5FC5A82E-DFC7-11E0-AAD6-0009DD50902F}.Release|Win32.Build.0 = Release|Win32
+		{5FCAFF5E-DFC7-11E0-869F-0009DD50902F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5FCAFF5E-DFC7-11E0-869F-0009DD50902F}.Debug|Win32.Build.0 = Debug|Win32
+		{5FCAFF5E-DFC7-11E0-869F-0009DD50902F}.Release|Win32.ActiveCfg = Release|Win32
+		{5FCAFF5E-DFC7-11E0-869F-0009DD50902F}.Release|Win32.Build.0 = Release|Win32
+		{4C1A490F-DFC4-11E0-BD93-0009DD50902E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4C1A490F-DFC4-11E0-BD93-0009DD50902E}.Debug|Win32.Build.0 = Debug|Win32
+		{4C1A490F-DFC4-11E0-BD93-0009DD50902E}.Release|Win32.ActiveCfg = Release|Win32
+		{4C1A490F-DFC4-11E0-BD93-0009DD50902E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

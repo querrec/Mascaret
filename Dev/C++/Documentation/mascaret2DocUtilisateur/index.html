@@ -1,0 +1,169 @@
+<html lang="fr">
+<head>
+<title>Documentation utilisateur de mascaret 2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Documentation utilisateur de mascaret 2">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="#Top">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+Un embryon de documentation utilisateur pour mascaret 2.
+Copyright ??? License ??-->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<h1 class="settitle">Documentation utilisateur de mascaret 2</h1>
+<div class="contents">
+<h2>Table of Contents</h2>
+<ul>
+<li><a name="toc_Top" href="index.html#Top">Documentation utilisateur mascaret2</a>
+<li><a name="toc_Introduction" href="Introduction.html#Introduction">1 Introduction</a>
+<ul>
+<li><a href="Introduction.html#Introduction">1.1 But du document</a>
+<li><a href="Introduction.html#Introduction">1.2 Qu'est-ce que Mascaret ?</a>
+<li><a href="Introduction.html#Introduction">1.3 Les plateformes</a>
+<ul>
+<li><a href="Introduction.html#Introduction">1.3.1 AReViMascaret</a>
+<li><a href="Introduction.html#Introduction">1.3.2 OgreMascaret</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_Installation" href="Installation.html#Installation">2 Installation</a>
+<ul>
+<li><a href="Installation.html#Installation">2.1 Structure, dépendances</a>
+<li><a href="Installation.html#Installation">2.2 Code source de <code>mascaret2</code></a>
+<li><a href="Installation.html#Installation">2.3 Dépendances et compilation de <code>Mascaret</code> sous Linux</a>
+<li><a href="Installation.html#Installation">2.4 Dépendances et compilation d'<code>AReViMascaret</code> sous Linux</a>
+<li><a href="Installation.html#Installation">2.5 Dépendances et compilation de <code>OgreMascaret</code> sous Linux</a>
+<li><a href="Installation.html#Installation">2.6 Dépendances et compilation de <code>Mascaret</code> sous Windows</a>
+<li><a href="Installation.html#Installation">2.7 Dépendances et compilation de <code>AReViMascaret</code> sous Windows</a>
+<li><a href="Installation.html#Installation">2.8 Dépendances et compilation de <code>AReViMascaret</code> sous Windows</a>
+</li></ul>
+<li><a name="toc_Creation-application" href="Creation-application.html#Creation-application">3 Les applications Mascaret</a>
+<ul>
+<li><a href="Creation-application.html#Creation-application">3.1 Structure d'une application</a>
+<li><a href="Creation-application.html#Creation-application">3.2 Le modèle</a>
+<ul>
+<li><a href="Creation-application.html#Creation-application">3.2.1 Les outils de modélisation UML</a>
+<li><a href="Creation-application.html#Creation-application">3.2.2 Le profile Mascaret</a>
+<li><a href="Creation-application.html#Creation-application">3.2.3 Le méta-modèle de Mascaret</a>
+<li><a href="Creation-application.html#Creation-application">3.2.4 Le langage OCL</a>
+<li><a href="Creation-application.html#Creation-application">3.2.5 Exemple de modèle</a>
+</li></ul>
+<li><a href="Creation-application.html#Creation-application">3.3 L'environnement</a>
+<ul>
+<li><a href="Creation-application.html#Creation-application">3.3.1 Structure des fichiers de description de l'environnement</a>
+<ul>
+<li><a href="Creation-application.html#Creation-application">3.3.1.1 Description des entités</a>
+<li><a href="Creation-application.html#Creation-application">3.3.1.2 Description des zones</a>
+<li><a href="Creation-application.html#Creation-application">3.3.1.3 Description humain virtuels</a>
+<li><a href="Creation-application.html#Creation-application">3.3.1.4 Description de points de vue</a>
+<li><a href="Creation-application.html#Creation-application">3.3.1.5 Description de points orientés</a>
+<li><a href="Creation-application.html#Creation-application">3.3.1.6 Description des organisations</a>
+</li></ul>
+<li><a href="Creation-application.html#Creation-application">3.3.2 L'éditeur d'environnement Blender</a>
+<ul>
+<li><a href="Creation-application.html#Creation-application">3.3.2.1 Installation</a>
+<li><a href="Creation-application.html#Creation-application">3.3.2.2 Utilisation</a>
+</li></ul>
+<li><a href="Creation-application.html#Creation-application">3.3.3 L'editeur d'environnement 3DS Max</a>
+<li><a href="Creation-application.html#Creation-application">3.3.4 Exemple d'environnement</a>
+</li></ul>
+<li><a href="Creation-application.html#Creation-application">3.4 Les plugins</a>
+<ul>
+<li><a href="Creation-application.html#Creation-application">3.4.1 Les évènements</a>
+<li><a href="Creation-application.html#Creation-application">3.4.2 Les comportements opaques</a>
+<li><a href="Creation-application.html#Creation-application">3.4.3 Les comportements d'agents</a>
+<li><a href="Creation-application.html#Creation-application">3.4.4 Les base de connaissances (déconseillé)</a>
+<li><a href="Creation-application.html#Creation-application">3.4.5 Les plugins standards</a>
+<ul>
+<li><a href="Creation-application.html#Creation-application">3.4.5.1 SpaceMouse</a>
+<li><a href="Creation-application.html#Creation-application">3.4.5.2 TouchScreen</a>
+<li><a href="Creation-application.html#Creation-application">3.4.5.3 VirtualHumanBehaviors</a>
+</li></ul>
+</li></ul>
+<li><a href="Creation-application.html#Creation-application">3.5 La configuration de la simulation</a>
+<ul>
+<li><a href="Creation-application.html#Creation-application">3.5.1 Structure de base</a>
+<ul>
+<li><a href="Creation-application.html#Creation-application">3.5.1.1 Le serveur HTTP</a>
+<li><a href="Creation-application.html#Creation-application">3.5.1.2 Les déclarations de plugins</a>
+</li></ul>
+<li><a href="Creation-application.html#Creation-application">3.5.2 Enrichissement de péripheriques</a>
+<li><a href="Creation-application.html#Creation-application">3.5.3 Les interactions</a>
+<li><a href="Creation-application.html#Creation-application">3.5.4 La navigation</a>
+<li><a href="Creation-application.html#Creation-application">3.5.5 La scene</a>
+<li><a href="Creation-application.html#Creation-application">3.5.6 La fenêtre de rendu</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_Annexe1" href="Annexe1.html#Annexe1">4 Annexe 1: Exemple de fichier environnement complet</a>
+<li><a name="toc_Tuto1" href="Tuto1.html#Tuto1">5 Tutorial de création d'une application Mascaret</a>
+<ul>
+<li><a href="Tuto1.html#Tuto1">5.1 Création du modèle</a>
+<ul>
+<li><a href="Tuto1.html#Tuto1">5.1.1 Préparation du projet</a>
+<li><a href="Tuto1.html#Tuto1">5.1.2 Création du modèle statique</a>
+<li><a href="Tuto1.html#Tuto1">5.1.3 Création du modèle dynamique</a>
+</li></ul>
+<li><a href="Tuto1.html#Tuto1">5.2 Instanciation de l'environnement</a>
+<li><a href="Tuto1.html#Tuto1">5.3 Ecriture du plugin</a>
+<ul>
+<li><a href="Tuto1.html#Tuto1">5.3.1 Initialisation de la simulation</a>
+<li><a href="Tuto1.html#Tuto1">5.3.2 Implémentation des comportements opaques</a>
+</li></ul>
+<li><a href="Tuto1.html#Tuto1">5.4 Configuration de la simulation</a>
+<ul>
+<li><a href="Tuto1.html#Tuto1">5.4.1 Référencer le modèle, l'environnement et les plugins</a>
+<li><a href="Tuto1.html#Tuto1">5.4.2 Définir les paramètres de rendu</a>
+<li><a href="Tuto1.html#Tuto1">5.4.3 Ajouter de l'interaction</a>
+<li><a href="Tuto1.html#Tuto1">5.4.4 Ajouter la navigation</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_Index2" href="Index2.html#Index2">Index</a>
+</li></ul>
+</div>
+
+
+
+<div class="node">
+<a name="Top"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Introduction.html#Introduction">Introduction</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="../index.html#dir">(dir)</a>
+<hr>
+</div>
+
+<h2 class="unnumbered">Documentation utilisateur mascaret2</h2>
+
+<p>Un embryon de documentation utilisateur pour mascaret 2.
+
+   <p>Dernière mise à jour 31 août 2011.
+
+<ul class="menu">
+<li><a accesskey="1" href="Introduction.html#Introduction">Introduction</a>: 			Public visé et portée du document
+<li><a accesskey="2" href="Installation.html#Installation">Installation</a>: 			Téléchargements et compilations
+<li><a accesskey="3" href="Creation-application.html#Creation-application">Creation application</a>: 		Etapes nécessaires à la réalisation d'une application Mascaret
+<li><a accesskey="4" href="Annexe1.html#Annexe1">Annexe1</a>: 				Exemple de fichier Environnement
+<li><a accesskey="5" href="Tuto1.html#Tuto1">Tuto1</a>: 				Tutorial complet de création d'une application Mascaret
+<li><a accesskey="6" href="Index2.html#Index2">Index2</a>
+</ul>
+
+   </body></html>
+
+<!--
+
+Local Variables:
+coding: utf-8
+End:
+
+-->

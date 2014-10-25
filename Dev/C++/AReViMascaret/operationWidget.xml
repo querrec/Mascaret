@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Widgets>
+
+  <!--
+     List of operations
+     one operation is a button
+    -->
+  <Widget
+     ID="operationsWindow"
+     class="AwArray"
+     tooltip="OperationsWindow"
+     mode="vert"
+     space="10"
+     visible="FALSE">
+    <Appearance stock="Bkg128x128" bkgR="0.5" bkgB="1" bkgG="0.5"/>
+    <Widget 
+       ID="classLabelOp"
+       class="AwLabel"
+       justify="left"
+       sensible="FALSE"
+       expand="TRUE">
+    </Widget>
+        
+    <Widget
+       ID="operationsArray"
+       class="AwArray"
+       mode="vert"
+       sensible="FALSE"
+       expand="TRUE">
+      <Appearance stock="Bkg128x128"/>
+      <Widget 
+	 class="AwLabel"
+	 justify="left"
+	 sensible="FALSE"
+	 expand="TRUE">
+      <Text>Operations :</Text>
+      </Widget>
+    </Widget>
+    
+    <Widget
+       class="AwArray"
+       mode="horiz"
+       sensible="FALSE"
+       expand="TRUE">
+      <Appearance stock="Bkg128x128"/>
+      <Widget
+	 ID="cancelOpButton"
+	 class="AwButton"
+	 tooltip="Cancel"
+	 labelPosition="bottom">
+	<Label><Text>Cancel</Text></Label>
+      </Widget>      
+
+    </Widget>
+
+  </Widget>
+
+  <!--
+     List of parameters
+     one parameter is an entry (primitive type
+     or a spiner (InstanceSpecification)
+    -->
+  <Widget
+     ID="parametersWindow"
+     class="AwArray"
+     tooltip="ParametersWindow"
+     mode="vert"
+     space="10"
+     visible="FALSE">
+    <Appearance stock="Bkg128x128" bkgR="0.5" bkgB="1" bkgG="0.5"/>
+    <Widget
+       ID="classLabelPara"
+       class="AwLabel"
+       justify="left"
+       sensible="FALSE"
+       expand="TRUE">
+    </Widget>
+    <Widget
+       ID="parametersArray"
+       class="AwArray"
+       mode="vert"
+       sensible="FALSE"
+       expand="TRUE">
+      <Appearance stock="Bkg128x128"/>
+      <Widget 
+	 class="AwLabel"
+	 justify="left"
+	 sensible="FALSE"
+	 expand="TRUE">
+      <Text>Parameters :</Text>
+      </Widget>
+    </Widget>
+
+    <Widget
+       class="AwArray"
+       mode="horiz"
+       sensible="FALSE"
+       expand="TRUE">
+      <Appearance stock="Bkg128x128"/>
+
+      <Widget
+	 ID="executeButton"
+	 class="AwButton"
+	 tooltip="Execute"
+	 labelPosition="bottom">
+	<Label><Text>Execute</Text></Label>
+      </Widget>
+
+      <Widget
+	 ID="cancelParaButton"
+	 class="AwButton"
+	 tooltip="Cancel"
+	 labelPosition="bottom">
+	<Label><Text>Cancel</Text></Label>
+      </Widget>
+
+    </Widget>
+
+  </Widget>
+
+</Widgets>

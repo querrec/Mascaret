@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+
+
+[Serializable]
+public abstract class ValueSpecification 
+{
+	 
+	private Classifier type=null;
+	public Classifier Type
+	{
+	   get{return type;}
+	   set{type = value ;}
+	}
+
+	public string CLASSTYPE;
+
+	public ValueSpecification(Classifier type)
+	{
+		this.type = type;
+		CLASSTYPE = "ValueSpecification";
+	}
+	
+	public abstract ValueSpecification clone();
+	
+	public bool getIntValue(int val)
+	{
+		return false;
+	}
+	
+	public bool getDoubleValue(int val)
+	{
+		return false;
+	}
+	
+	public bool getStringValue(int val)
+	{
+		return false;
+	}
+	
+	public bool getBoolValue(int val)
+	{
+		return false;
+	}
+	
+	public string getTypeName()
+	{
+		if(type!=null)
+			return type.name;
+		else
+			return "undef";
+	}
+	
+	public virtual string getStringFromValue()
+	{
+		return "";
+	}
+	
+	public InstanceSpecification valueSpecificationToInstanceSpecification()
+	{
+		InstanceSpecification curInstanceSpec = new InstanceSpecification("",(Class)type);
+		return curInstanceSpec;
+	}
+}
+

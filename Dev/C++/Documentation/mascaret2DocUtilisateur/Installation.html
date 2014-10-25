@@ -1,0 +1,167 @@
+<html lang="fr">
+<head>
+<title>Installation - Documentation utilisateur de mascaret 2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Documentation utilisateur de mascaret 2">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Introduction.html#Introduction" title="Introduction">
+<link rel="next" href="Creation-application.html#Creation-application" title="Creation application">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+Un embryon de documentation utilisateur pour mascaret 2.
+Copyright ??? License ??-->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Installation"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Creation-application.html#Creation-application">Creation application</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Introduction.html#Introduction">Introduction</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">2 Installation</h2>
+
+<p><a name="index-installation-1"></a>En l'état (31 août 2011), l'installation de <code>Mascaret 2</code> nécessite
+les connaissances suivantes: créer
+des répertoires, lancer des commandes dans un <code>shell</code>,
+recopier des fichiers, utiliser le gestionnaire de paquets (par exemple
+<code>synaptic</code>) sous <code>Ubuntu</code> ou <code>Windows</code>.
+
+<h3 class="section">2.1 Structure, dépendances</h3>
+
+<p><a name="index-structure-et-d_00c3_00a9pendances-de-_0040code_007bMascaret-2_007d-2"></a>
+La bibliothèque <code>Mascaret</code> est la partie commune à toutes les implémentations
+de <code>mascaret2</code>, et dépend de
+la <code>boost</code>, de <code>libxml2</code>. Une fois cette partie compilée nous obtiendrons le fichier <code>libMascaret.so</code> ou (<code>Mascaret.dll et Mascaretr.lib</code> sous Windows).
+
+   <p><code>AReViMascaret</code> dépend, comme son nom l'indique d'<code>ARéVi</code>, mais
+aussi d'<code>hlib2</code> et d'<code>animlib</code>.
+
+   <p>Prévoyez donc un peu de temps pour installer tout cela. La suite
+de ce chapitre va vous donner des explications étape par étape. 
+Les noms des paquets <code>Ubuntu</code> correspondant aux dépendances sont donnés
+quand ils existent.
+
+<h3 class="section">2.2 Code source de <code>mascaret2</code></h3>
+
+<p><a name="index-t_00c3_00a9l_00c3_00a9chargement-du-code-source-de-_0040code_007bmascaret2_007d-3"></a>Il est conseillé de commencer par créer un répertoire de travail qui
+contiendra le sous répertoire <code>mascaret2</code> a coté de sous répertoires
+pour certaines des dépendances.
+
+   <p><a name="index-g_t_0040code_007bMascaret-2_007d-4"></a>Nous allons d'abord télécharger l'ensemble de <code>Mascaret 2</code>. Le code source est disponible sur le site <a href="http://svn.cerv.fr/trac/mascaret2">http://svn.cerv.fr/trac/mascaret2</a>. 
+Le téléchargement se fait via l'outil <code>svn</code>. 
+Si vous utilisez un <code>shell</code>, créez dans votre répertoire de travail
+un sous-répertoire <code>mascaret2</code> et déplacez vous y. 
+La commande à lancer pour télécharger est précisée sur le site
+de <code>mascaret2</code>. Il vous faut un nom d'utilisateur et un mot de passe
+pour être autorisé à télécharger.
+
+   <p>Une fois le téléchargement fini, vous devez obtenir l'arborescence suivante:
+<pre class="verbatim">mascaret2
+|-- C++
+|   |-- AReViMascaret
+|   |-- Datas
+|   |-- HTTPServerBaseDir
+|   |-- IrrlichtMascaret
+|   |-- OgreMascaret
+|   |-- Mascaret
+|   `-- WrapperBoostPy
+|-- Ext
+|-- GeneratedModelDoc
+|     ...
+|-- Model
+|     ...
+|-- Publication
+|     ... 
+|-- Python
+|     ...
+`-- Tools
+      ...
+</pre>
+
+   <p>Les répertoires qui vont nous intéresser particulièrement sont
+<code>mascaret2/C++/Mascaret</code>, <code>mascaret2/C++/AReViMascaret</code> et <code>mascaret2/C++/OgreMascaret</code>. 
+Il est donc possible de ne récupérer que le répertoire C++. 
+Les commande serait alors: <code>svn co --username=[login] --no-auth-cache http://svn.cerv.fr/svn/mascaret2/trunk/C++/</code>. 
+Nous allons commencer par la compilation de <code>Mascaret</code>, puisqu'<code>AReViMascaret</code> en dépend.
+
+<h3 class="section">2.3 Dépendances et compilation de <code>Mascaret</code> sous Linux</h3>
+
+<p><code>Mascaret</code> dépend de la <code>boost</code> et de <code>libxml2</code>. 
+Il y a de grandes chances pour que <code>libxml2</code> soit déjà installée. 
+Vous pouvez avoir besoin du paquet <code>libxml2-dev</code>.
+
+   <p>Pour le compiler vous allez avoir besoin de <code>g++</code> qui n'est pas installé
+par défaut sur <code>Ubuntu</code>. Installez le paquet <code>g++</code> si nécessaire. 
+La compilation se fait via un script python générant un makefile puis par l'outil <code>make</code>. Ce procédé est le même pour l'ensemble des projets.
+
+   <p><a name="index-g_t_0040code_007bboost_007d-5"></a>Les portions de la <code>boost</code> utilisées correspondent aux paquets:
+<code>libboost-filesystem-dev libboost-python-dev libboost-dev libboost-test-dev libboost-signals-dev</code>. Si vous n'avez pas accès aux paquets, le site
+de la <code>boost</code> est <a href="http://www.boost.org">http://www.boost.org</a>.
+
+   <p>Maintenant que les dépendances sont intallées, placez vous dans le répertoire <code>mascaret2/C++/Mascaret</code> et lancez la commande
+<code>./configure</code>. Si tout se passe bien un fichier <code>makefile</code> est
+généré. Vous pouvez alors lancer la commande <code>make</code>. Pensez à utiliser
+l'option <code>-j</code> si vous avez un processeur multi-core (<code>make -j3</code> pour un core duo et ainsi de suite). A la fin de la compilation vous obtenez la
+bibliothèque <code>libMascaret.so</code>.
+
+<h3 class="section">2.4 Dépendances et compilation d'<code>AReViMascaret</code> sous Linux</h3>
+
+<p>En plus de <code>Mascaret</code>, <code>AReViMascaret</code> dépend d'<code>ARéVi</code> de <code>hLib2</code> et d'<code>AnimLib</code>.
+
+   <p><a name="index-g_t_0040code_007bAR_00c3_00a9Vi_007d-6"></a><code>ARéVi</code> est disponible sur le site <a href="http://svn.cerv.fr/trac/AReVi/">http://svn.cerv.fr/trac/AReVi/</a>. Une documentation d'installation y est fournit pour son installation. 
+Il vous faudra récupérer pour le moment la branche principale d'<code>ARéVi</code>.
+
+   <p><code>hlib2</code> est une bibliothèque d'animation d'humanoïde pour <code>ARéVi</code>,
+<a name="index-g_t_0040code_007bhLib2_007d-7"></a>elle est disponible à partir du site <a href="http://svn.cerv.fr/trac/hLib">http://svn.cerv.fr/trac/hLib</a>. La
+récupération des sources se fait comme indiqué sur le site, avec <code>svn</code>. 
+Vous n'avez cependant pas besoin d'un compte et d'un mot de passe, <code>guest</code>
+suffit ici. 
+Son installation se fait comme ARéVi avec l'aide de l'outil <code>scons</code>. 
+Les commandes sont
+<code>scons</code> pour compiler. 
+<code>scons install</code> pour installer.
+
+   <p><code>AnimLib</code> est une bibliothèque d'animation de solides à partir de NURBS
+pour ARéVi. Le projet est disponible à l'adresse <a href="http://svn.cerv.fr/trac/AnimLib">http://svn.cerv.fr/trac/AnimLib</a>. 
+Comme pour <code>ARéVi</code> et <code>hLib</code>, il se compile et s'installe à l'aide de <code>scons</code>
+
+   <p>Nous pouvons maintenant passer à la compilation d'<code>AReViMascaret</code>. 
+Pour compiler, placez vous dans le répertoire <code>mascaret2/C++/AReViMascaret</code> et lancez les commandes
+<code>./configure</code> pour générer le makefile. 
+<code>make</code> pour compiler
+
+<h3 class="section">2.5 Dépendances et compilation de <code>OgreMascaret</code> sous Linux</h3>
+
+<p><code>OgreMascaret</code> dépends de la bibliothèque 3D <code>Ogre</code> en version 1.7.2 minimum. Le projet Ogre3D est disponible à l'adresse <a href="http://www.ogre3d.org/">http://www.ogre3d.org/</a>. 
+Les packets disponibles sur Ubuntu sont trop anciens. Il vous faut donc télécharger les sources, les compiler et les installer. La documentation est fournit dans l'archive téléchargée.
+
+<h3 class="section">2.6 Dépendances et compilation de <code>Mascaret</code> sous Windows</h3>
+
+<p>TODO
+
+<h3 class="section">2.7 Dépendances et compilation de <code>AReViMascaret</code> sous Windows</h3>
+
+<p>TODO
+
+<h3 class="section">2.8 Dépendances et compilation de <code>AReViMascaret</code> sous Windows</h3>
+
+<p>TODO
+
+   </body></html>
+

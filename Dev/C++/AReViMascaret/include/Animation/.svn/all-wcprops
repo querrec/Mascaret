@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/mascaret2/!svn/ver/922/branches/sysml/Dev/C++/AReViMascaret/include/Animation
+END
+HLibAnimation.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mascaret2/!svn/ver/922/branches/sysml/Dev/C++/AReViMascaret/include/Animation/HLibAnimation.h
+END
+AReViAnimation.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/mascaret2/!svn/ver/922/branches/sysml/Dev/C++/AReViMascaret/include/Animation/AReViAnimation.h
+END
+ObjectAnimation.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/mascaret2/!svn/ver/922/branches/sysml/Dev/C++/AReViMascaret/include/Animation/ObjectAnimation.h
+END

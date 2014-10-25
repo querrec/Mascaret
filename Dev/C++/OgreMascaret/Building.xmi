@@ -1,0 +1,193 @@
+<?xml version =  '1.0' encoding = 'ISO-8859-1' ?>
+
+<!DOCTYPE XMI SYSTEM 'uml14.dtd' [
+<!ELEMENT Objing.extended (XMI.reference) >
+<!ELEMENT ObjingClass.IsMain EMPTY>
+<!ATTLIST ObjingClass.IsMain xmi.value (true|false) #REQUIRED>
+<!ELEMENT ObjingClass (
+    ObjingClass.IsMain,
+    Objing.extended)>
+<!ATTLIST ObjingClass
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingAssociationEnd.IsAbstract EMPTY>
+<!ATTLIST ObjingAssociationEnd.IsAbstract xmi.value (true|false) #REQUIRED>
+<!ELEMENT ObjingAssociationEnd (
+    ObjingAssociationEnd.IsAbstract,
+    Objing.extended)>
+<!ATTLIST ObjingAssociationEnd
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingAttribute.IsDerived EMPTY>
+<!ATTLIST ObjingAttribute.IsDerived xmi.value (true|false) #REQUIRED>
+<!ELEMENT ObjingAttribute.TypeConstraint (#PCDATA)*>
+<!ELEMENT ObjingAttribute.IsAbstract EMPTY>
+<!ATTLIST ObjingAttribute.IsAbstract xmi.value (true|false) #REQUIRED>
+<!ELEMENT ObjingAttribute (
+    ObjingAttribute.IsDerived,
+    ObjingAttribute.IsAbstract,
+    ObjingAttribute.TypeConstraint? ,
+    Objing.extended) >
+<!ATTLIST ObjingAttribute
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingOperation.Redefines (XMI.reference)>
+<!ELEMENT ObjingOperation (
+    ObjingOperation.Redefines?,
+    Objing.extended)>
+<!ATTLIST ObjingOperation
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingParameter.Multiplicity (#PCDATA) >
+<!ELEMENT ObjingParameter.TypeConstraint (#PCDATA)* >
+<!ELEMENT ObjingParameter (
+    ObjingParameter.Multiplicity,
+    ObjingParameter.TypeConstraint?,
+    Objing.extended)>
+<!ATTLIST ObjingParameter
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingPseudoState (
+    ObjingPseudoState.kind,
+    Objing.extended)>
+<!ATTLIST ObjingPseudoState xmi.id ID #IMPLIED>
+<!ELEMENT ObjingPseudoState.kind EMPTY>
+<!ATTLIST ObjingPseudoState.kind
+    xmi.value (sending | receipt) #REQUIRED
+>
+
+<!ELEMENT ObjingEvent (
+    EventComposedStateMachine,
+    Objing.extended)>
+<!ATTLIST ObjingEvent xmi.id ID #IMPLIED>
+<!ELEMENT EventComposedStateMachine (StateMachineRef)>
+<!ELEMENT StateMachineRef EMPTY>
+<!ATTLIST StateMachineRef xmi.idref IDREF #IMPLIED
+>
+]>
+<XMI xmi.version = '1.1' xmlns:UML='//org.omg/UML/1.4'>
+    <XMI.header>
+        <XMI.documentation>
+            <XMI.exporter>Objecteering/UML XMI Module</XMI.exporter>
+            <XMI.exporterVersion>2.1</XMI.exporterVersion>
+        </XMI.documentation>
+    </XMI.header>
+    <XMI.content>
+        <UML:Package xmi.id = 'a1437341152-6'>
+            <UML:ModelElement.name>Environement</UML:ModelElement.name>
+            <UML:ModelElement.visibility xmi.value = 'public'/>
+            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+            <UML:Namespace.ownedElement>
+                <UML:Class xmi.id = 'a1437341152-9'>
+                    <UML:ModelElement.name>Building</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                    <UML:Class.isActive xmi.value = 'false'/>
+                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                        <XMI.reference xmi.idref= 'a1437341152-9_ext'/>    <!-- Programmateur -->
+                    </XMI.extension>
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype xmi.idref = 'a1437341328-5' />     <!-- Entity -->
+                    </UML:ModelElement.stereotype>
+                    <UML:Namespace.ownedElement>
+                    </UML:Namespace.ownedElement>	<!-- End Class Programmateur's ownedElement -->
+                </UML:Class>
+                <UML:Class xmi.id = 'a1437341152-10'>
+                    <UML:ModelElement.name>Room</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                    <UML:Class.isActive xmi.value = 'false'/>
+                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                        <XMI.reference xmi.idref= 'a1437341152-10_ext'/>    <!-- Ecran -->
+                    </XMI.extension>
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype xmi.idref = 'a1437341328-5' />     <!-- Entity -->
+                    </UML:ModelElement.stereotype>
+                    <UML:Namespace.ownedElement>
+                    </UML:Namespace.ownedElement>	<!-- End Class Ecran's ownedElement -->
+                </UML:Class>
+                <UML:Class xmi.id = 'a1437341152-11'>
+                    <UML:ModelElement.name>Furniture</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                    <UML:Class.isActive xmi.value = 'false'/>
+                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                        <XMI.reference xmi.idref= 'a1437341152-11_ext'/>    <!-- Afficheur -->
+                    </XMI.extension>
+                    <UML:ModelElement.stereotype>
+                        <UML:Stereotype xmi.idref = 'a1437341328-5' />     <!-- Entity -->
+                    </UML:ModelElement.stereotype>
+                    <UML:Namespace.ownedElement>
+                    </UML:Namespace.ownedElement>	<!-- End Class Afficheur's ownedElement -->
+                </UML:Class>
+                <!-- Stereotypes -->
+                <UML:Stereotype xmi.id = 'a1437341328-5'>
+                    <UML:ModelElement.name>Entity</UML:ModelElement.name>
+                    <UML:Stereotype.icon></UML:Stereotype.icon>
+                    <UML:Stereotype.baseClass>Class</UML:Stereotype.baseClass>
+                </UML:Stereotype>
+                <UML:Stereotype xmi.id = 'a1437341328-153'>
+                    <UML:ModelElement.name>NonInterupt</UML:ModelElement.name>
+                    <UML:Stereotype.icon></UML:Stereotype.icon>
+                    <UML:Stereotype.baseClass>StateVertex</UML:Stereotype.baseClass>
+                </UML:Stereotype>
+                <!-- Predefined types -->
+                <UML:DataType xmi.id = 'a4-13'>
+                    <UML:ModelElement.name>string</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-7'>
+                    <UML:ModelElement.name>char</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-9'>
+                    <UML:ModelElement.name>integer</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-11'>
+                    <UML:ModelElement.name>real</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-5'>
+                    <UML:ModelElement.name>boolean</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-15'>
+                    <UML:ModelElement.name>undefined</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+            </UML:Namespace.ownedElement>	<!-- End Package Environement's ownedElement -->
+        </UML:Package>
+    </XMI.content>
+</XMI>

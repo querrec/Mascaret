@@ -1,0 +1,563 @@
+<html lang="fr">
+<head>
+<title>Configuration - Documentation utilisateur de mascaret 2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Documentation utilisateur de mascaret 2">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Plugins-standards.html#Plugins-standards" title="Plugins standards">
+<link rel="next" href="Index2.html#Index2" title="Index2">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+Un embryon de documentation utilisateur pour mascaret 2.
+Copyright ??? quelle license ??-->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Configuration"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Index2.html#Index2">Index2</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Plugins-standards.html#Plugins-standards">Plugins standards</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">5 Configuration</h2>
+
+<p><a name="index-configuration-13"></a>
+Le fichier de configuration d'une simulation <code>mascaret2</code> est
+au format <code>xml</code>. Cette documentation se limite à
+la forme générale, à la partie liée aux interactions avec le modèle et enfin
+au paramétrage de la navigation dans l'environnement 3D.
+
+<h3 class="section">5.1 Forme générale du fichier de configuration</h3>
+
+<p>La simulation est décrite à l'intérieur d'une balise <code>&lt;Application&gt;</code>,
+et ressemble à ceci:
+<a name="index-squelette-de-fichier-de-configuration-14"></a>
+<pre class="example">     &lt;?xml version= '1.0' encoding='ISO-8859-1' ?&gt;
+     &lt;Application&gt;
+       &lt;Model url="./test.xmi" /&gt;
+       &lt;Environment url="./test_env.xml" /&gt;
+       &lt;Actors url="./test_act2.xml" /&gt;
+       &lt;Organisations url="./test_org.xml" /&gt;
+     
+       &lt;ApplicationParameters&gt; ... &lt;/ApplicationParameters&gt;
+     
+       &lt;Profile&gt;
+         &lt;Interactions&gt; ...  &lt;/Interactions&gt;
+         &lt;Picking wiimote="true" /&gt;
+         &lt;Navigation&gt;
+            &lt;Mouse&gt; ...  &lt;/Mouse&gt;
+            &lt;Keyboard&gt; ...  &lt;/Keyboard&gt;
+            &lt;SpaceMouse&gt; ...  &lt;/SpaceMouse&gt;
+            &lt;Wiimote&gt; ...  &lt;/Wiimote&gt;
+         &lt;/Navigation&gt;
+       &lt;/Profile&gt;
+     
+       &lt;Renderer&gt; ...  &lt;/Renderer&gt;
+       &lt;Scene&gt; ...  &lt;/Scene&gt;
+     
+     &lt;/Application&gt;
+</pre>
+   <p>Nous allons détailler les balises:
+     <ul>
+<li><code>&lt;Profile&gt;</code> pour décrire l'interaction entre l'utilisateur,
+le modèle et les divers devices d'entrée (souris, clavier,
+wiimote, space mouse);
+<li><code>&lt;Renderer&gt;</code> taille et paramètres de la fenêtre de rendu;
+<li><code>&lt;Scene&gt;</code> description de points de vue. 
+</ul>
+   Cest trois balises ainsi que leur sous-balises sont en règle générale
+optionnelles.
+
+<h3 class="section">5.2 Balise <code>Profile</code></h3>
+
+<p><a name="index-g_t_0040code_007b_003cProfile_003e_007d-15"></a>Le <code>&lt;Profile&gt;</code> va décrirer la manière pour l'utilisateur
+d'interagir avec le modèle (via <code>&lt;Interactions&gt;</code>),
+la possibilité de désigner des objets avec la wiimote (via <code>&lt;Picking&gt;</code>)
+ et la manière de naviguer dans l'environnement 3D (via <code>&lt;Navigation&gt;</code>).
+
+<h4 class="subsection">5.2.1 Balise <code>Interactions</code></h4>
+
+<p><a name="index-g_t_0040code_007b_003cInteractions_003e_007d-16"></a>Elle sert à associer des signaux
+à des touches du clavier, de la souris, de la wiimote ou de la
+space mouse. Ces signaux sont envoyés à l'objet ou entité
+désignés par la souris (ou par la wiimote) au moment de l'action
+sur une touche. 
+On trouve donc quatre sections optionnelles dans <code>&lt;Interactions&gt;</code>,
+une pour chaque deivce:
+<a name="index-g_t_0040code_007b_003cMouse_003e_007d-dans-_0040code_007b_003cInteractions_003e_007d-17"></a><a name="index-g_t_0040code_007b_003cKeyboard_003e_007d-dans-_0040code_007b_003cInteractions_003e_007d-18"></a><a name="index-g_t_0040code_007b_003cWiimote_003e_007d-dans-_0040code_007b_003cInteractions_003e_007d-19"></a><a name="index-g_t_0040code_007b_003cSpaceMouse_003e_007d-dans-_0040code_007b_003cInteractions_003e_007d-20"></a><a name="index-g_t_0040code_007b_003cKey_003e_007d-dans-_0040code_007b_003cInteractions_003e_002f_003cMouse_003e_007d-21"></a><a name="index-g_t_0040code_007b_003cKey_003e_007d-dans-_0040code_007b_003cInteractions_003e_002f_003cKeyboard_003e_007d-22"></a><a name="index-g_t_0040code_007b_003cKey_003e_007d-dans-_0040code_007b_003cInteractions_003e_002f_003cSpaceMouse_003e_007d-23"></a><a name="index-g_t_0040code_007b_003cKey_003e_007d-dans-_0040code_007b_003cInteractions_003e_002f_003cWiimote_003e_007d-24"></a>
+<pre class="example">     ...
+     &lt;Profile&gt;
+       &lt;Interactions&gt;
+          &lt;Keyboard&gt;
+             &lt;Key name="1" signal="Ouvrir" pressed="release" /&gt;
+             &lt;Key name="b" signal="Fermer" pressed="release" /&gt;
+             &lt;Key name="c" signal="FooBar" broadcast="true"  /&gt;
+          &lt;/Keyboard&gt;
+          &lt;Mouse&gt;
+             &lt;Key name="1" signal="Ouvrir" pressed="release" /&gt;
+             &lt;Key name="3" signal="Fermer" pressed="press" /&gt;
+          &lt;/Mouse&gt;
+          &lt;Wiimote&gt;
+            ...
+          &lt;/Wiimote&gt;
+          &lt;SpaceMouse&gt;
+            ...
+          &lt;/SpaceMouse&gt;
+       &lt;/Interactions&gt;
+        ...
+     &lt;/Profile&gt;
+</pre>
+   <p>Le contenu des balises <code>&lt;Keyboard&gt;</code>, <code>&lt;Mouse&gt;</code>, <code>&lt;Wiimote&gt;</code>
+et <code>&lt;SpaceMouse&gt;</code> a la même forme: une
+suite d'associations touche vers signal. Pour cela la balise <code>&lt;Key&gt;</code>
+est utilisée. Elle contient les attributs suivants:
+     <ul>
+<li><code>name</code>, le nom de la touche (chiffres pour la souris). Ce sont les noms
+donnés aux touches par ARéVi, cet attribut est nécessaire;
+<li><code>signal</code>, le nom du signal émis, cet attribut est nécessaire;
+<li><code>pressed</code>, à quel moment (appui, relâchement ou les deux) le signal est
+émis. Les valeurs valides sont "<code>press</code>","<code>release</code>"
+et "<code>both</code>" (both est la valeur par défaut). 
+<li><code>broadcast</code>, booléen qui indique si le signal est émis à l'ensemble
+des entités, par défaut à faux. 
+</ul>
+   La réaction de la simulation à ces appuis de touches dépend
+du modèle embarqué et de l'objet désigné.
+
+<h4 class="subsection">5.2.2 Balise <code>Picking</code></h4>
+
+<p><a name="index-g_t_0040code_007b_003cPicking_003e_007d-25"></a>Le <code>&lt;Picking&gt;</code> sert juste à activer la possibilité de désigner
+un objet avec la wiimote.
+
+   <p>Il aura typiquement la forme suivante:
+<pre class="example">     &lt;Profile&gt;
+       ...
+       &lt;Picking wiimote="true"/&gt;
+       ...
+     &lt;/Profile&gt;
+</pre>
+   <p>Quand <code>&lt;Picking&gt;</code> est omis ou qu'il est présent avec
+un attribut <code>wiimote</code> à <code>false</code>, seule la désignation
+d'objets avec la souris est active. Quand les deux sont actifs,
+le choix de l'objet désigné se fait ainsi:
+     <ul>
+<li>Utiliser de préférence le picking wiimote, à condition qu'il soit valide (le curseur 3D sphérique apparaît en blanc), et celà même s'il désigne le vide;
+<li>Eventuellement utiliser le picking souris, uniquement quand le
+picking wiimote est invalide (le curseur 3D sphérique n'est pas présent
+ou apparaît en gris). 
+</ul>
+
+   <p>Dans son comportement par défaut, quand le picking wiimote est activé,
+la wiimote va simuler le clic souris. La touche "b" (gachette) va
+envoyer les mêmes signaux qu'un clic gauche et la touche "a" va envoyer
+les mêmes signaux qu'un clic droit. Ce comportement par défaut est
+reconfigurable, pour le moment en changeant les actions de navigation
+de la wiimote dans la balise <code>&lt;Navigation&gt;</code>.
+
+   <p><strong>Attention :</strong> la séparation entre <code>&lt;Picking&gt;</code>
+et <code>&lt;Navigation&gt;</code> n'est pas satisfaisante, certaines actions
+de configuration de <code>&lt;Navigation&gt;</code> vont avoir une influence sur le
+<code>&lt;Picking&gt;</code>, voir plus bas.
+
+<h4 class="subsection">5.2.3 Balise <code>Navigation</code></h4>
+
+<p><a name="index-g_t_0040code_007b_003cNavigation_003e_007d-26"></a>La <code>&lt;Navigation&gt;</code> va contenir une section par device, et décrire
+la manière d'utiliser la souris, le clavier, la wiimote ou la space mouse pour
+modifier le point de vue de dans la fenêtre de rendu.
+
+   <p>Pour la souris et le clavier, la configuration est limitée au déclenchement
+d'actions de navigation et de configuration de la navigation. 
+Les valeurs possibles sont:
+     <ul>
+<li>Quel que soit le device:
+          <ul>
+<li><code>nextViewpoint</code>
+<li><code>formerViewpoint</code>
+<li><code>simulateMouseLeftClickPressed</code>
+<li><code>simulateMouseLeftClickUnpressed</code>
+<li><code>simulateMouseRightClickPressed</code>
+<li><code>simulateMouseRightClickUnpressed</code>
+</ul>
+     <li>vers le device <code>spaceMouse</code>:
+          <ul>
+<li><code>higherSpeed</code>
+<li><code>lowerSpeed</code>
+<li><code>switch2DMotion</code>
+<li><code>switchRotationMotion</code>
+<li><code>switchTranslationMotion</code>
+</ul>
+     <li>vers le device <code>wiimote</code>:
+          <ul>
+<li><code>higherSpeed</code>
+<li><code>lowerSpeed</code>
+<li><code>switchNavigationActive</code>
+<li><code>switchPickingActive</code>
+</ul>
+     </ul>
+
+<h5 class="subsubsection">5.2.3.1 Balises <code>Key</code> dans <code>Mouse</code> et <code>Keyboard</code> de <code>Navigation</code></h5>
+
+<p><a name="index-g_t_0040code_007b_003cKey_003e_007d-dans-_0040code_007b_003cNavigation_003e_002f_003cMouse_003e_007d-27"></a><a name="index-g_t_0040code_007b_003cKey_003e_007d-dans-_0040code_007b_003cNavigation_003e_002f_003cKeyboard_003e_007d-28"></a>Voici un example de configuration qui va permettre de régler la vitesse
+de la navigation avec la wiimote à l'aide des touches <code>/</code> et
+<code>*</code>, de changer de point de vue à l'aide des touches <code>+</code> et
+<code>-</code> et de passer au point de vue suivant avec la touche du milieu
+de la souris.
+
+<pre class="example">      ...
+     &lt;Navigation&gt;
+        &lt;Mouse&gt;
+           &lt;Key name="2" action="nextViewpoint" /&gt;
+        &lt;/Mouse&gt;
+        &lt;Keyboard&gt;
+           &lt;Key name="+" action="nextViewpoint" /&gt;
+           &lt;Key name="-" action="formerViewpoint" /&gt;
+           &lt;Key name="/" action="lowerSpeed" device="wiimote" /&gt;
+           &lt;Key name="*" action="higherSpeed" device="wiimote" /&gt;
+        &lt;/Keyboard&gt;
+          ...
+     &lt;/Navigation&gt;
+       ...
+</pre>
+   <p>Nous retrouvons une variation de la balise <code>&lt;Key&gt;</code> adaptée aux device. 
+Ainsi les attributs sont cette fois:
+     <ul>
+<li><code>name</code>, le nom de la touche, cet attribut est nécessaire;
+<li><code>action</code>, le nom de l'action
+(<code>NextViewpoint</code>, <code>switch2DMotion</code> etc),
+cet attribut est nécessaire;
+<li><code>device</code>, le nom du device cible,
+les valeurs peuvent être <code>spaceMouse</code> ou <code>wiimote</code>;
+<li><code>pressed</code>, le moment de délenchement de l'action, les valeurs
+sont  <code>press</code> ou <code>release</code> (la valeur par défaut est <code>release</code>). 
+</ul>
+
+<h5 class="subsubsection">5.2.3.2 Balise <code>Key</code> dans <code>SpaceMouse</code> et <code>Wiimote</code> de <code>Navigation</code></h5>
+
+<p><a name="index-g_t_0040code_007b_003cKey_003e_007d-dans-_0040code_007b_003cNavigation_003e_002f_003cSpaceMouse_003e_007d-29"></a><a name="index-g_t_0040code_007b_003cKey_003e_007d-dans-_0040code_007b_003cNavigation_003e_002f_003cWiimote_003e_007d-30"></a>Pour les devices wiimote et space mouse, nous allons retrouver cet
+attribut <code>&lt;Key&gt;</code> avec la règle de <code>device</code> cible suivante:
+     <ul>
+<li>Si un attribut <code>device</code> est précisé, envoi vers ce device;
+<li>Sinon, pas d'attribut <code>device</code>:
+          <ul>
+<li>le device courant est utilisé s'il sait répondre à cette action;
+<li>sinon l'action est envoyée sans device
+(cas du changement de points de vue). 
+</ul>
+     </ul>
+
+   <p>Voici un example de configuration de space mouse et wiimote:
+<pre class="example">     &lt;Navigation&gt;
+       ...
+       &lt;SpaceMouse translationSpeed="0.1" rotationSpeed="0.02"&gt;
+         &lt;Rotation roll="true" pitch="true" yaw="true"/&gt;
+         &lt;Translation x="true" y="true" z="true"/&gt;
+         &lt;Key name="2D" action="" /&gt;
+         &lt;Key name="*" action="switch2DMotion" /&gt;
+       &lt;/SpaceMouse&gt;
+       &lt;Wiimote speedFactor="2.0" mode="FLY" &gt;
+         &lt;Key name="+" action="nextViewpoint" /&gt;
+         &lt;Key name="-" action="formerViewpoint" /&gt;
+         &lt;Key name="1" device="spaceMouse" action="lowerSpeed" /&gt;
+       &lt;/Wiimote&gt;
+     &lt;/Navigation&gt;
+</pre>
+   <p>Cet exemple permet de constater que'il y a plus de balises
+que ce que nous avons décrit pour le moment. En effet la space mouse et
+la wiimote ont d'autres possibilités de configuration sur lesquelles nous allons
+revenir par la suite.
+
+   <p>Nous pouvons également remarquer un exemple de déconfiguration
+d'une action par défaut de la space mouse. Les touches par défaut de la
+space mouse sont relative à un <code>SpaceExplorer</code> (<code>2D</code>), mais nous
+reconfigurons ensuite pour une touche de <code>spaceMouse</code> (<code>*</code>). 
+Cet exemple illustre les limites de l'association
+touche vers action : une seule action par touche et par device, et il
+existe des touches par défaut.
+
+   <p>Nous voyons également dans cet exemple la configuration de la wiimote
+pour changer de point de vue, ce qui semble cohérent, mais aussi
+pour diminuer la vitesse de déplacement de la space mouse par appui
+de la touche 1 de la wiimote. C'est assez bizarre d'un point de vue
+ergonomique, mais illustre bien la fonction de configuration d'une
+action par une touche de n'importe quel device.
+
+<h5 class="subsubsection">5.2.3.3 Attributs et balises de la <code>SpaceMouse</code> de <code>Navigation</code></h5>
+
+<p><a name="index-g_t_0040code_007b_003cSpaceMouse_003e_007d-dans-_0040code_007b_003cNavigation_003e_007d-31"></a>La balise <code>&lt;SpaceMouse&gt;</code> possède ici les attributs suivants:
+     <ul>
+<li><code>translationSpeed</code> subit ensuite l'influence des actions <code>lowerSpeed</code> et <code>higherSpeed</code>;
+<li><code>rotationSpeed</code> invariante pendant la simulation. 
+</ul>
+
+   <p>Elle peut contenir les sous balises suivantes:
+     <ul>
+<li><code>&lt;Rotation&gt;</code> pour préciser les axes de rotation actifs,
+avec les attributs booléens <code>roll</code>, <code>pitch</code>
+et <code>yaw</code>. Ils sont par défauts
+tous à <code>true</code>. 
+<li><code>&lt;Translation&gt;</code> pour préciser les axes de translations actifs,
+avec les attributs booléens <code>x</code>, <code>y</code> et <code>z</code>. Ils sont
+également tous à <code>true</code> par défaut. 
+</ul>
+
+   <p>Pour les sous balises <code>&lt;Key&gt;</code> les noms de touches possibles sont,
+pour un space explorer: "1", "2", "t", "l", "r", "f", "esc",
+"alt", "shift", "ctrl", "fit", "panel", "+", "-" et "2D". 
+Pour une space mouse : "1", "2", "3", "4", "5", "6", "7", "8", "*",
+"left" et "right". 
+Notez que les 11 premiers boutons d'un space explorer vont déclencher
+ceux d'une space mouse et réciproquement.
+
+   <p>Les réactions aux touches par défaut sont réglées pour un space
+explorer et sont:
+     <ul>
+<li>"+" vers "higherSpeed"
+<li>"-" vers "lowerSpeed"
+<li>"2D" vers "switch2DMotion"
+<li>"r" vers "switchRotationMotion"
+<li>"t" vers "switchTranslationMotion"
+</ul>
+   Pour déconfigurer une action, il suffit de préciser un nom d'action vide, comme
+dans l'exemple précédent.
+
+<h5 class="subsubsection">5.2.3.4 Attributs de la <code>Wiimote</code> de <code>Navigation</code></h5>
+
+<p><a name="index-g_t_0040code_007b_003cWiimote_003e_007d-dans-_0040code_007b_003cNavigation_003e_007d-32"></a>La wiimote possède les attributs suivants:
+     <ul>
+<li><code>speedFactor</code>, valeur par défaut 1.0
+<li><code>mode</code>, valeur valides <code>FLY</code> ou <code>WALK</code>, défaut <code>FLY</code>
+<li><code>macAddress</code>, quand elle est précisée permet de s'adresser
+à une wiimote en particulier. Le format est <code>AA:BB:CC:DD</code>. 
+</ul>
+
+   <p>Pour les sous balises <code>&lt;Key&gt;</code> les touches d'une wiimotes sont:
+"up", "down", "left", "right", "a", "b", "-", "+", "home", "1" et "2" sur
+la wiimote propement dite et  "c","z" sur le nunchuk.
+
+   <p>L'interacteur de déplacement de la wiimote utilise les
+touches "c" et "z", mais ne permet pas leur reprogramation. 
+Ses mouvements sont donnés uniquement par le nunchuk:
+     <ul>
+<li>si acune touche appuyée, comportement par défaut:
+          <ul>
+<li>avant/arrière du stick, translation avant/arrière;
+<li>gauche/droite du sitck, rotation gauche/droite (ou <code>yaw</code>);
+<li>pencher le nunchuk vers la gauche ou la droite, mouvement
+de <code>roll</code>;
+<li>pencher le nunchuk vers l'avant ou l'arrière, mouvement
+de <code>pitch</code>;
+</ul>
+     <li>si la touche "z" est appuyée, mode translation:
+          <ul>
+<li>avant/arrière du stick devient translation haut/bas;
+<li>gauche/droite du stick devient translation gauche/droite;
+<li>pas d'autre modification;
+</ul>
+     <li>si la touche "c" est appuyée, mode rotation:
+          <ul>
+<li>avant/arrière du stick devient <code>pitch</code>;
+<li>pas d'autre modification par rapport au comportement par défaut. 
+</ul>
+     </ul>
+
+<h3 class="section">5.3 Balise <code>Renderer</code></h3>
+
+<p><a name="index-g_t_0040code_007b_003cRenderer_003e_007d-33"></a>Outre les paramètres de rendu proprement dit, la balise <code>&lt;Renderer&gt;</code>
+permet de préciser la taille et la position de la fenêtre, les paramètres
+de stéréo et le positionnement initial dans la scêne. 
+Pour celà elle possède des attributs pour les paramètres de base
+et les sous balises <code>&lt;Window&gt;</code>, <code>&lt;Stereo&gt;</code> et <code>&lt;Scene&gt;</code>
+pour le reste.
+
+   <p>Les attributs sont:
+     <ul>
+<li><code>near</code>, le  "near clipping", valeur par défaut <code>1.0</code>;
+<li><code>far</code>, le "far clipping", valeur par défaut <code>1000.0</code>;
+<li><code>fieldOfView</code>, l'amplitude du champ visuel, valeur par défaut <code>45.0</code> (degrés);
+</ul>
+
+   <p><a name="index-g_t_0040code_007b_003cStereo_003e_007d-dans-_0040code_007b_003cRenderer_003e_007d-34"></a>La sous balise <code>&lt;Stereo&gt;</code> permet d'activer le rendu stéréoscopique (passif). 
+Elle possède les attributs suivants:
+     <ul>
+<li><code>eyeSpearation</code>, valeur par défaut <code>0.06</code>, cela correspond à
+une interprétation en mètre de l'unité et à la distance moyenne approximative
+entre les deux yeux chez l'humain;
+<li><code>viewDistance</code>, valeur par défaut <code>2.0</code>, toujours en partant
+de l'idée que l'unité le mètre. 
+</ul>
+
+   <p><a name="index-g_t_0040code_007b_003cWindow_003e_007d-dans-_0040code_007b_003cRenderer_003e_007d-35"></a>La sous balise <code>&lt;Window&gt;</code> possède les attributs:
+     <ul>
+<li><code>fullscreen</code>, booléen, valeur par défaut <code>false</code>, permet
+de passer en plein écran;
+<li><code>decoration</code>, booléen, valeur par défaut <code>true</code>, affichage
+du bandeau en haut de la fenêtre;
+<li><code>x</code> et <code>y</code>, valeurs par défaut <code>0</code> et <code>0</code>,
+position du coin supérieur gauche de la fenêtre, exprimées en pixels;
+<li><code>width</code> et <code>height</code>, valeurs par défaut <code>800</code>
+ et <code>600</code>, largeur  et hauteur de la fenêtre, en pixels. 
+</ul>
+
+   <p><a name="index-g_t_0040code_007b_003cScene_003e_007d-dans-_0040code_007b_003cRenderer_003e_007d-36"></a>La sous balise <code>&lt;Scene&gt;</code> possède les attributs:
+     <ul>
+<li><code>name</code>, le nom de la scêne à utiliser;
+<li><code>viewpoint</code>, le nom du point de vue de cette scêne à utiliser
+lors du lancement de l'application. 
+</ul>
+
+   <p>L'exemple suivant configure le <code>&lt;Renderer&gt;</code> dans une
+fenêtre, mais garde les valeurs pour la stéréoscopie
+et le plein écran en commentaire:
+<pre class="example">      ...
+      &lt;Renderer near="1.0" far="1000.0" fieldOfView="45"&gt;
+        &lt;!--Stereo viewDistance="5.0" eyeSeparation="0.06" /--&gt;
+        &lt;!--Window fullscreen="true" decoration="false" /--&gt;
+        &lt;Window x="300" y="100" width="1500" height="1000" /&gt;
+        &lt;Scene name="testScene" viewpoint="vueSurLaCabine" /&gt;
+      &lt;/Renderer&gt;
+      ...
+</pre>
+   <h3 class="section">5.4 Balise <code>Scene</code></h3>
+
+<p><a name="index-g_t_0040code_007b_003cScene_003e_007d-37"></a>La configuration de la scène se limite à un nom et une liste de points
+de vue nommés. Les noms de points de vue peuvent être
+utilisés dans la balise <code>&lt;Renderer&gt;</code> pour
+le point de vue initial. L'ordre de déclaration des points de vue
+correspond à l'ordre de changement de point de vue pour <code>nextViewpoint</code>
+et <code>formerViewpoint</code>.
+
+   <p>La <code>&lt;Scene&gt;</code> possède l'attribut <code>name</code>, dont la valeur
+par défaut est la chaine de caractrères vide.
+
+   <p>Elle contient des sous balises <code>&lt;Viewpoint&gt;</code> sont constituées par:
+     <ul>
+<li>l'attribut <code>name</code>, nom du point de vue, par défaut chaine vide;
+<li>la balise <code>&lt;Position&gt;</code> avec comme attributs <code>x</code>, <code>y</code>,
+<code>z</code>, exprimés
+en réels (valeur par défaut <code>0.0</code>);
+<li>la balise <code>&lt;Orientation&gt;</code> avec comme attributs
+<code>roll</code>, <code>pitch</code>, <code>yaw</code>, réels dont l'unité est le degré
+(valeurs par  <code>0.0</code>). 
+</ul>
+
+   <p>Voici un exemple de <code>&lt;Scene&gt;</code>  avec un point de vue partiellement
+décrit, ce qui est tout à fait valide, et un autre
+qui précise tout les champs:
+<pre class="example">       ...
+       &lt;Scene name="testScene"&gt;
+         &lt;Viewpoint name="z10"&gt;
+            &lt;Position z="10.0" /&gt;
+         &lt;/Viewpoint&gt;
+         &lt;Viewpoint name="setAllFields"&gt;
+            &lt;Position x="10.0" y="20.0" z="30.0" /&gt;
+            &lt;Orientation roll="0.5" pitch="1.0" yaw="1.57" /&gt;
+         &lt;/Viewpoint&gt;
+       &lt;/Scene&gt;
+       ...
+</pre>
+   <h2 class="appendix">Appendix A Exemple de fichier de configuration complet</h2>
+
+<p><a name="index-Exemple-de-fichier-de-configuration-complet-38"></a>
+<pre class="example">     &lt;?xml version= '1.0' encoding='ISO-8859-1' ?&gt;
+     
+     &lt;Application&gt;
+     
+       &lt;Model url="./test.xmi" /&gt;
+     &lt;!--  &lt;Model url="./testMascaretBouml.xmi" xmi2="true"/&gt; --&gt;
+       &lt;Environment url="./test_env.xml" /&gt;
+       &lt;Actors url="./test_act2.xml" /&gt;
+       &lt;Organisations url="./test_org.xml" /&gt;
+     
+       &lt;ApplicationParameters&gt;
+          &lt;HTTP httpPort="8084" /&gt;
+          &lt;User name = "LocalUser" /&gt;
+          &lt;Plugins PluginsDir="./"&gt;
+             &lt;Plugin Name = "./plugins.so"/&gt;
+           &lt;/Plugins&gt;
+       &lt;/ApplicationParameters&gt;
+     
+       &lt;Profile&gt;
+         &lt;Interactions&gt;
+            &lt;Keyboard&gt;
+               &lt;Key name="1" signal="Ouvrir" pressed="release" /&gt;
+               &lt;Key name="2" signal="Fermer" pressed="release" /&gt;
+            &lt;/Keyboard&gt;
+            &lt;Mouse&gt;
+               &lt;Key name="1" signal="Ouvrir" pressed="release" /&gt;
+               &lt;Key name="3" signal="Fermer" pressed="press" /&gt;
+            &lt;/Mouse&gt;
+         &lt;/Interactions&gt;
+         &lt;Picking wiimote="true" /&gt;
+         &lt;Navigation&gt;
+            &lt;Mouse&gt;
+               &lt;Key name="2" action="nextViewpoint" /&gt;
+            &lt;/Mouse&gt;
+            &lt;Keyboard&gt;
+               &lt;Key name="+" action="nextViewpoint" /&gt;
+               &lt;Key name="-" action="formerViewpoint" /&gt;
+               &lt;Key name="/" action="lowerSpeed" device="wiimote" /&gt;
+               &lt;Key name="*" action="higherSpeed" device="wiimote" /&gt;
+            &lt;/Keyboard&gt;
+            &lt;SpaceMouse translationSpeed="0.1" rotationSpeed="0.02"&gt;
+               &lt;Rotation roll="true" pitch="true" yaw="true"/&gt;
+               &lt;Translation x="true" y="true" z="true"/&gt;
+               &lt;Key name="r" action="" /&gt;
+               &lt;Key name="t" action="" /&gt;
+               &lt;Key name="2D" action="" /&gt;
+               &lt;Key name="1" action="lowerSpeed" /&gt;
+               &lt;Key name="2" action="higherSpeed" /&gt;
+               &lt;Key name="*" action="switch2DMotion" /&gt;
+             &lt;/SpaceMouse&gt;
+             &lt;Wiimote speedFactor="2.0" mode="FLY" &gt;
+               &lt;Key name="+" action="nextViewpoint" /&gt;
+               &lt;Key name="-" action="formerViewpoint" /&gt;
+               &lt;Key name="left" action="higherSpeed" /&gt;
+               &lt;Key name="right" action="lowerSpeed" /&gt;
+               &lt;Key name="1" device="spaceMouse" action="lowerSpeed" /&gt;
+               &lt;Key name="2" device="spaceMouse" action="higherSpeed" /&gt;
+             &lt;/Wiimote&gt;
+         &lt;/Navigation&gt;
+       &lt;/Profile&gt;
+     
+       &lt;Renderer near="1.0" far="1000.0" fieldOfView="45"&gt;
+         &lt;!--Stereo viewDistance="5.0" eyeSeparation="0.06" /--&gt;
+         &lt;!--Window fullscreen="true" decoration="false" /--&gt;
+         &lt;Window x="300" y="100" width="1500" height="1000" /&gt;
+         &lt;Scene name="testScene" viewpoint="vueSurLaCabine" /&gt;
+       &lt;/Renderer&gt;
+     
+       &lt;Scene name="testScene"&gt;
+         &lt;Viewpoint name="zero" /&gt;
+         &lt;Viewpoint name="z10"&gt;
+            &lt;Position x="0.0" y="0.0" z="10.0" /&gt;
+         &lt;/Viewpoint&gt;
+         &lt;Viewpoint name="vueSurLaCabine"&gt;
+            &lt;Position x="150.0" y="0.0" z="10.0" /&gt;
+            &lt;Orientation pitch="0.707" /&gt;
+         &lt;/Viewpoint&gt;
+         &lt;Viewpoint name="setAllFields"&gt;
+            &lt;Position x="10.0" y="20.0" z="30.0" /&gt;
+            &lt;Orientation roll="0.5" pitch="1.0" yaw="1.57" /&gt;
+         &lt;/Viewpoint&gt;
+       &lt;/Scene&gt;
+     
+     &lt;/Application&gt;
+     
+</pre>
+   </body></html>
+

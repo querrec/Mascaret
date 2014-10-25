@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\VRPlateform\OgreAnimationSpecification.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreCamera.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreLight.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreScene.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreMascaretApplication.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgrePointSpecification.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreShapeSpecification.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreSoundSpecification.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreWindow3D.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\OgreEntityObject.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\OgreAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\OgreMouse.cpp">
+      <Filter>Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\OgreCursor.cpp">
+      <Filter>Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\OgreKeyboard.cpp">
+      <Filter>Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OgreVRComponentFactory.cpp" />
+    <ClCompile Include="src\Assistance\OgreColor.cpp">
+      <Filter>Assistance</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\VRPlateform\OgreAnimationSpecification.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\OgreMascaretApplication.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\OgreCamera.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\OgrePointSpecification.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\OgreWindow3D.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\OgreScene.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\OgreLight.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\OgreShapeSpecification.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\OgreSoundSpecification.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interaction\OgreMouse.h">
+      <Filter>Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interaction\OgreKeyboard.h">
+      <Filter>Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interaction\OgreCursor.h">
+      <Filter>Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\OgreEntityObject.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Animation\OgreAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OgreVRComponentFactory.h" />
+    <ClInclude Include="include\Assistance\OgreColor.h">
+      <Filter>Assistance</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="VRPlateform">
+      <UniqueIdentifier>{865aeb53-1a88-4be0-b908-c717a1002ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{c290d562-df60-4367-847e-eb042ed9429a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interaction">
+      <UniqueIdentifier>{b9c8ccfd-66b9-404b-b68f-ac545fa6bbdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assistance">
+      <UniqueIdentifier>{12b90664-256a-44c8-91fc-df044f3592ce}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,25 @@
+
+	template <class T>
+	SubClassValueSpecification<T >::SubClassValueSpecification(const T & val):_value(val)
+	{ CLASSTYPE="Litteral";
+	}
+
+	template<class T>
+	string SubClassValueSpecification<T>::getStringFromValue()
+	{
+		return   boost::lexical_cast<std::string>(_value);
+	}
+	template <class T>
+	bool SubClassValueSpecification<T>::setValueFromString(const string& value)
+		{
+			try
+			{
+				_value= boost::lexical_cast<T>(value);
+				return true;
+			}
+			catch(boost::bad_lexical_cast &)
+			{
+				return false;
+			}
+		}
+

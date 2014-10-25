@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:Mascaret="http:///schemas/Mascaret/1">
+	<xmi:Documentation exporter="Bouml" exporterVersion="1.13"/>
+	<uml:Model xmi:type="uml:Model" xmi:id="themodel" name="ClockTower">
+		<profileApplication xmi:type="uml:ProfileApplication" xmi:id="BOUML_PRFA_0x1f482_22">
+			<appliedProfile xmi:idref="BOUML_0x1f482_22"/>
+		</profileApplication>
+		<packagedElement xmi:type="uml:Package" xmi:id="BOUML_0x81_22" name ="ClockTower">
+			<packagedElement xmi:type="uml:Profile" xmi:id="BOUML_0x1f482_22" name ="Mascaret">
+				<packagedElement xmi:type="uml:Stereotype" name="Entity" xmi:id="BOUML_0x1f582_4" visibility="public">
+				</packagedElement>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Package" xmi:id="BOUML_0x1f402_22" name ="Environment">
+				<packagedElement xmi:type="uml:Class" name="ClockTower" xmi:id="BOUML_0x1f402_4" visibility="package">
+					<ownedAttribute xmi:type="uml:Property" name="clock" xmi:id="BOUML_0x1f402_0" visibility="private" association="BOUML_ASSOC_0x1f402_0" aggregation="none">
+						<type xmi:type="uml:Class" xmi:idref="BOUML_0x1f482_4"/>
+						<lowerValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_L_0x1f402_0" value="1"/>
+						<upperValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_U_0x1f402_0" value="1"/>
+					</ownedAttribute>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Class" name="Clock" xmi:id="BOUML_0x1f482_4" visibility="package">
+					<ownedAttribute xmi:type="uml:Property" name="currentHour" xmi:id="BOUML_0x1f402_1" visibility="public">
+						<type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.1/uml.xml#Integer"/>
+						<lowerValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_L_0x1f402_1" value="1"/>
+						<upperValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_U_0x1f402_1" value="1"/>
+						<defaultValue xmi:type="uml:LiteralString" xmi:id="BOUML_VALUE_0x1f402_1" value="0"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" name="currentMinute" xmi:id="BOUML_0x1f482_1" visibility="private">
+						<type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.1/uml.xml#Integer"/>
+						<lowerValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_L_0x1f482_1" value="1"/>
+						<upperValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_U_0x1f482_1" value="1"/>
+						<defaultValue xmi:type="uml:LiteralString" xmi:id="BOUML_VALUE_0x1f482_1" value="0"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" name="" xmi:id="BOUML_0x1f482_0" visibility="private" association="BOUML_ASSOC_0x1f402_0" aggregation="none">
+						<type xmi:type="uml:Class" xmi:idref="BOUML_0x1f402_4"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" name="hourHand" xmi:id="BOUML_0x1f502_0" visibility="private" association="BOUML_ASSOC_0x1f502_0" aggregation="none">
+						<type xmi:type="uml:Class" xmi:idref="BOUML_0x1f502_4"/>
+						<lowerValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_L_0x1f502_0" value="1"/>
+						<upperValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_U_0x1f502_0" value="1"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" name="minuteHand" xmi:id="BOUML_0x1f602_0" visibility="private" association="BOUML_ASSOC_0x1f602_0" aggregation="none">
+						<type xmi:type="uml:Class" xmi:idref="BOUML_0x1f502_4"/>
+						<lowerValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_L_0x1f602_0" value="1"/>
+						<upperValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_U_0x1f602_0" value="1"/>
+					</ownedAttribute>
+					<ownedOperation xmi:type="uml:Operation" name="updateHands" xmi:id="BOUML_0x1f402_2" visibility="public" isAbstract="false">
+					</ownedOperation>
+					<ownedOperation xmi:type="uml:Operation" name="addOneHour" xmi:id="BOUML_0x1f482_2" visibility="public" isAbstract="false">
+					</ownedOperation>
+					<ownedOperation xmi:type="uml:Operation" name="addOneMinute" xmi:id="BOUML_0x1f502_2" visibility="public" isAbstract="false">
+					</ownedOperation>
+					<ownedOperation xmi:type="uml:Operation" name="Clock" xmi:id="BOUML_0x1f582_2" visibility="public" isAbstract="false">
+					</ownedOperation>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Class" name="Hand" xmi:id="BOUML_0x1f502_4" visibility="package">
+					<ownedAttribute xmi:type="uml:Property" name="" xmi:id="BOUML_0x1f582_0" visibility="private" association="BOUML_ASSOC_0x1f502_0" aggregation="none">
+						<type xmi:type="uml:Class" xmi:idref="BOUML_0x1f482_4"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" name="" xmi:id="BOUML_0x1f682_0" visibility="private" association="BOUML_ASSOC_0x1f602_0" aggregation="none">
+						<type xmi:type="uml:Class" xmi:idref="BOUML_0x1f482_4"/>
+					</ownedAttribute>
+				</packagedElement>
+				<packagedElement xmi:type="uml:StateMachine" xmi:id="BOUML_0x1f402_23" name="ClockStateMachine" specification="BOUML_0x1f582_2">
+					<region xmi:type="uml:Region" xmi:id="BOUML_IMPLICIT_REGION_0x1f402_23" name="Bouml_Implicit_Region">
+						<subvertex xmi:type="uml:Pseudostate" xmi:id="BOUML_0x1f402_28" kind="initial">
+							<outgoing xmi:idref="BOUML_0x1f402_24"/>
+						</subvertex>
+						<subvertex xmi:type="uml:State" xmi:id="BOUML_0x1f482_23" name="Work">
+							<doActivity xmi:type="uml:Activity" xmi:id="BOUML_DOACTIVITY_0x1f482_23">
+								<body>updateHands</body>
+							</doActivity>
+							<incoming xmi:idref="BOUML_0x1f402_24"/>
+							<incoming xmi:idref="BOUML_0x1f502_24"/>
+							<region xmi:type="uml:Region" xmi:id="BOUML_IMPLICIT_REGION_0x1f482_23" name="Bouml_Implicit_Region">
+								<outgoing xmi:idref="BOUML_0x1f482_24"/>
+							</region>
+						</subvertex>
+						<subvertex xmi:type="uml:State" xmi:id="BOUML_0x1f502_23" name="AddHour">
+							<doActivity xmi:type="uml:Activity" xmi:id="BOUML_DOACTIVITY_0x1f502_23">
+								<body>addOneHour</body>
+							</doActivity>
+							<incoming xmi:idref="BOUML_0x1f482_24"/>
+							<region xmi:type="uml:Region" xmi:id="BOUML_IMPLICIT_REGION_0x1f502_23" name="Bouml_Implicit_Region">
+								<outgoing xmi:idref="BOUML_0x1f502_24"/>
+							</region>
+						</subvertex>
+					</region>
+					<transition xmi:type="uml:Transition" xmi:id="BOUML_0x1f402_24" source="BOUML_0x1f402_28" target="BOUML_0x1f482_23">
+					</transition>
+					<transition xmi:type="uml:Transition" xmi:id="BOUML_0x1f482_24" source="BOUML_0x1f482_23" target="BOUML_0x1f502_23">
+						<trigger xmi:type="uml:Trigger" xmi:id="BOUML_TRIGGER_0x1f482_24" name="AddHour"/>
+					</transition>
+					<transition xmi:type="uml:Transition" xmi:id="BOUML_0x1f502_24" source="BOUML_0x1f502_23" target="BOUML_0x1f482_23">
+					</transition>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Association" xmi:id="BOUML_ASSOC_0x1f402_0" visibility="private">
+					<memberEnd xmi:idref="BOUML_0x1f402_0"/>
+					<memberEnd xmi:idref="BOUML_0x1f482_0"/>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Association" xmi:id="BOUML_ASSOC_0x1f502_0" visibility="private">
+					<memberEnd xmi:idref="BOUML_0x1f502_0"/>
+					<memberEnd xmi:idref="BOUML_0x1f582_0"/>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Association" xmi:id="BOUML_ASSOC_0x1f602_0" visibility="private">
+					<memberEnd xmi:idref="BOUML_0x1f602_0"/>
+					<memberEnd xmi:idref="BOUML_0x1f682_0"/>
+				</packagedElement>
+			</packagedElement>
+		</packagedElement>
+	</uml:Model>
+	<Mascaret:Entity xmi:id="BOUML_STELT_0x1f402_4" base_Element="BOUML_0x1f402_4"/>
+	<Mascaret:Entity xmi:id="BOUML_STELT_0x1f482_4" base_Element="BOUML_0x1f482_4"/>
+	<Mascaret:Entity xmi:id="BOUML_STELT_0x1f502_4" base_Element="BOUML_0x1f502_4"/>
+</xmi:XMI>

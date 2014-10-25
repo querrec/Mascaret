@@ -1,0 +1,1794 @@
+<?xml version =  '1.0' encoding = 'ISO-8859-1' ?>
+
+<!DOCTYPE XMI SYSTEM 'uml14.dtd' [
+<!ELEMENT Objing.extended (XMI.reference) >
+<!ELEMENT ObjingClass.IsMain EMPTY>
+<!ATTLIST ObjingClass.IsMain xmi.value (true|false) #REQUIRED>
+<!ELEMENT ObjingClass (
+    ObjingClass.IsMain,
+    Objing.extended)>
+<!ATTLIST ObjingClass
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingAssociationEnd.IsAbstract EMPTY>
+<!ATTLIST ObjingAssociationEnd.IsAbstract xmi.value (true|false) #REQUIRED>
+<!ELEMENT ObjingAssociationEnd (
+    ObjingAssociationEnd.IsAbstract,
+    Objing.extended)>
+<!ATTLIST ObjingAssociationEnd
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingAttribute.IsDerived EMPTY>
+<!ATTLIST ObjingAttribute.IsDerived xmi.value (true|false) #REQUIRED>
+<!ELEMENT ObjingAttribute.TypeConstraint (#PCDATA)*>
+<!ELEMENT ObjingAttribute.IsAbstract EMPTY>
+<!ATTLIST ObjingAttribute.IsAbstract xmi.value (true|false) #REQUIRED>
+<!ELEMENT ObjingAttribute (
+    ObjingAttribute.IsDerived,
+    ObjingAttribute.IsAbstract,
+    ObjingAttribute.TypeConstraint? ,
+    Objing.extended) >
+<!ATTLIST ObjingAttribute
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingOperation.Redefines (XMI.reference)>
+<!ELEMENT ObjingOperation (
+    ObjingOperation.Redefines?,
+    Objing.extended)>
+<!ATTLIST ObjingOperation
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingParameter.Multiplicity (#PCDATA) >
+<!ELEMENT ObjingParameter.TypeConstraint (#PCDATA)* >
+<!ELEMENT ObjingParameter (
+    ObjingParameter.Multiplicity,
+    ObjingParameter.TypeConstraint?,
+    Objing.extended)>
+<!ATTLIST ObjingParameter
+    xmi.id ID #IMPLIED
+    xmi.idref IDREF #IMPLIED>
+
+<!ELEMENT ObjingPseudoState (
+    ObjingPseudoState.kind,
+    Objing.extended)>
+<!ATTLIST ObjingPseudoState xmi.id ID #IMPLIED>
+<!ELEMENT ObjingPseudoState.kind EMPTY>
+<!ATTLIST ObjingPseudoState.kind
+    xmi.value (sending | receipt) #REQUIRED
+>
+
+<!ELEMENT ObjingEvent (
+    EventComposedStateMachine,
+    Objing.extended)>
+<!ATTLIST ObjingEvent xmi.id ID #IMPLIED>
+<!ELEMENT EventComposedStateMachine (StateMachineRef)>
+<!ELEMENT StateMachineRef EMPTY>
+<!ATTLIST StateMachineRef xmi.idref IDREF #IMPLIED
+>
+]>
+<XMI xmi.version = '1.1' xmlns:UML='//org.omg/UML/1.4'>
+    <XMI.header>
+        <XMI.documentation>
+            <XMI.exporter>Objecteering/UML XMI Module</XMI.exporter>
+            <XMI.exporterVersion>2.1</XMI.exporterVersion>
+        </XMI.documentation>
+    </XMI.header>
+    <XMI.content>
+        <UML:Model xmi.id = 'a1437340736-7'>
+            <UML:ModelElement.name>testPorteAvion</UML:ModelElement.name>
+            <UML:ModelElement.visibility xmi.value = 'public'/>
+            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+            <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = 'a1437340736-189'>
+                    <UML:TaggedValue.type>
+                        <UML:TagDefinition>
+                            <UML:TagDefinition.tagType>summary</UML:TagDefinition.tagType>
+                        </UML:TagDefinition>
+                    </UML:TaggedValue.type>
+                    <UML:TaggedValue.dataValue>Une application de Test de Mascaret</UML:TaggedValue.dataValue>
+                </UML:TaggedValue>
+                <UML:TaggedValue xmi.id = 'a1437340736-191'>
+                    <UML:TaggedValue.type>
+                        <UML:TagDefinition>
+                            <UML:TagDefinition.tagType>documentation</UML:TagDefinition.tagType>
+                        </UML:TagDefinition>
+                    </UML:TaggedValue.type>
+                    <UML:TaggedValue.dataValue>Cette application permet de realiser des tests des fonctionnalites de MASCARET.</UML:TaggedValue.dataValue>
+                </UML:TaggedValue>
+            </UML:ModelElement.taggedValue>
+            <UML:Namespace.ownedElement>
+                <UML:Package xmi.id = 'a1437340736-12'>
+                    <UML:ModelElement.name>Environnement</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                    <UML:Namespace.ownedElement>
+                        <UML:Class xmi.id = 'a1437340736-13'>
+                            <UML:ModelElement.name>PorteAvion</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:Class.isActive xmi.value = 'false'/>
+                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                <XMI.reference xmi.idref= 'a1437340736-13_ext'/>    <!-- PorteAvion -->
+                            </XMI.extension>
+                            <UML:Namespace.ownedElement>
+                            </UML:Namespace.ownedElement>	<!-- End Class PorteAvion's ownedElement -->
+                        </UML:Class>
+                        <UML:Class xmi.id = 'a1437340736-14'>
+                            <UML:ModelElement.name>Pont</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:Class.isActive xmi.value = 'false'/>
+                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                <XMI.reference xmi.idref= 'a1437340736-14_ext'/>    <!-- Pont -->
+                            </XMI.extension>
+                            <UML:Namespace.ownedElement>
+                            </UML:Namespace.ownedElement>	<!-- End Class Pont's ownedElement -->
+                        </UML:Class>
+                        <UML:Class xmi.id = 'a1437340736-15'>
+                            <UML:ModelElement.name>Deflecteur</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:Class.isActive xmi.value = 'false'/>
+                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                <XMI.reference xmi.idref= 'a1437340736-15_ext'/>    <!-- Deflecteur -->
+                            </XMI.extension>
+                            <UML:Namespace.ownedElement>
+                                <UML:SignalEvent xmi.id = 'a1437340736-16'>
+                                    <UML:ModelElement.name>Fermer</UML:ModelElement.name>
+                                    <UML:SignalEvent.signal>
+                                        <UML:Signal xmi.idref = 'a1437340736-39' />     <!-- Fermer -->
+                                    </UML:SignalEvent.signal>
+                                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                        <XMI.reference xmi.idref= 'a1437340736-16_ext'/>    <!-- Fermer -->
+                                    </XMI.extension>
+                                </UML:SignalEvent>
+                                <UML:SignalEvent xmi.id = 'a1437340736-17'>
+                                    <UML:ModelElement.name>Ouvrir</UML:ModelElement.name>
+                                    <UML:SignalEvent.signal>
+                                        <UML:Signal xmi.idref = 'a1437340736-40' />     <!-- Ouvrir -->
+                                    </UML:SignalEvent.signal>
+                                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                        <XMI.reference xmi.idref= 'a1437340736-17_ext'/>    <!-- Ouvrir -->
+                                    </XMI.extension>
+                                </UML:SignalEvent>
+                                <UML:CallEvent xmi.id = 'a1437340736-18'>
+                                    <UML:ModelElement.name>Fermer</UML:ModelElement.name>
+                                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                        <XMI.reference xmi.idref= 'a1437340736-18_ext'/>    <!-- Fermer -->
+                                    </XMI.extension>
+                                    <UML:CallEvent.operation>
+                                        <UML:Operation xmi.idref = 'a1437340736-20' />     <!-- Fermer -->
+                                    </UML:CallEvent.operation>
+                                </UML:CallEvent>
+                            </UML:Namespace.ownedElement>	<!-- End Class Deflecteur's ownedElement -->
+                            <UML:Classifier.feature>
+                                <UML:Operation xmi.id = 'a1437340736-19'>
+                                    <UML:ModelElement.name>Ouvrir</UML:ModelElement.name>
+                                    <UML:BehavioralFeature.isQuery xmi.value = 'false' />
+                                    <UML:Operation.concurrency xmi.value = 'concurrent' />
+                                    <UML:Operation.isLeaf xmi.value = 'false' />
+                                    <UML:Operation.isAbstract xmi.value = 'false'/>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:BehavioralFeature.parameter>
+                                    </UML:BehavioralFeature.parameter>
+                                </UML:Operation>
+                                <UML:Operation xmi.id = 'a1437340736-20'>
+                                    <UML:ModelElement.name>Fermer</UML:ModelElement.name>
+                                    <UML:BehavioralFeature.isQuery xmi.value = 'false' />
+                                    <UML:Operation.concurrency xmi.value = 'concurrent' />
+                                    <UML:Operation.isLeaf xmi.value = 'false' />
+                                    <UML:Operation.isAbstract xmi.value = 'false'/>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:BehavioralFeature.parameter>
+                                    </UML:BehavioralFeature.parameter>
+                                </UML:Operation>
+                                <UML:Operation xmi.id = 'a1437340736-21'>
+                                    <UML:ModelElement.name>Test</UML:ModelElement.name>
+                                    <UML:BehavioralFeature.isQuery xmi.value = 'false' />
+                                    <UML:Operation.concurrency xmi.value = 'concurrent' />
+                                    <UML:Operation.isLeaf xmi.value = 'false' />
+                                    <UML:Operation.isAbstract xmi.value = 'false'/>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:BehavioralFeature.parameter>
+                                        <UML:Parameter xmi.id = 'a1437340736-22'>
+                                            <UML:ModelElement.name>entier</UML:ModelElement.name>
+                                            <UML:Parameter.defaultValue>
+                                                <UML:Expression>
+                                                    <UML:Expression.language></UML:Expression.language>
+                                                    <UML:Expression.body></UML:Expression.body>
+                                                </UML:Expression>
+                                            </UML:Parameter.defaultValue>
+                                            <UML:Parameter.kind xmi.value = 'in' />
+                                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                                <XMI.reference xmi.idref= 'a1437340736-22_ext'/>    <!-- entier -->
+                                            </XMI.extension>
+                                            <UML:Parameter.type>
+                                                <UML:Classifier xmi.idref = 'a4-9' />     <!-- integer -->
+                                            </UML:Parameter.type>
+                                        </UML:Parameter>
+                                        <UML:Parameter xmi.id = 'a1437340736-24'>
+                                            <UML:ModelElement.name>cabine</UML:ModelElement.name>
+                                            <UML:Parameter.defaultValue>
+                                                <UML:Expression>
+                                                    <UML:Expression.language></UML:Expression.language>
+                                                    <UML:Expression.body></UML:Expression.body>
+                                                </UML:Expression>
+                                            </UML:Parameter.defaultValue>
+                                            <UML:Parameter.kind xmi.value = 'in' />
+                                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                                <XMI.reference xmi.idref= 'a1437340736-24_ext'/>    <!-- cabine -->
+                                            </XMI.extension>
+                                            <UML:Parameter.type>
+                                                <UML:Classifier xmi.idref = 'a1437340736-26' />     <!-- CabineCatapulte -->
+                                            </UML:Parameter.type>
+                                        </UML:Parameter>
+                                    </UML:BehavioralFeature.parameter>
+                                </UML:Operation>
+                            </UML:Classifier.feature>
+                        </UML:Class>
+                        <UML:Class xmi.id = 'a1437340736-26'>
+                            <UML:ModelElement.name>CabineCatapulte</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:Class.isActive xmi.value = 'false'/>
+                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                <XMI.reference xmi.idref= 'a1437340736-26_ext'/>    <!-- CabineCatapulte -->
+                            </XMI.extension>
+                            <UML:Namespace.ownedElement>
+                                <UML:SignalEvent xmi.id = 'a1437340736-27'>
+                                    <UML:ModelElement.name>Ouvrir</UML:ModelElement.name>
+                                    <UML:SignalEvent.signal>
+                                        <UML:Signal xmi.idref = 'a1437340736-40' />     <!-- Ouvrir -->
+                                    </UML:SignalEvent.signal>
+                                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                        <XMI.reference xmi.idref= 'a1437340736-27_ext'/>    <!-- Ouvrir -->
+                                    </XMI.extension>
+                                </UML:SignalEvent>
+                                <UML:SignalEvent xmi.id = 'a1437340736-28'>
+                                    <UML:ModelElement.name>Fermer</UML:ModelElement.name>
+                                    <UML:SignalEvent.signal>
+                                        <UML:Signal xmi.idref = 'a1437340736-39' />     <!-- Fermer -->
+                                    </UML:SignalEvent.signal>
+                                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                        <XMI.reference xmi.idref= 'a1437340736-28_ext'/>    <!-- Fermer -->
+                                    </XMI.extension>
+                                </UML:SignalEvent>
+                            </UML:Namespace.ownedElement>	<!-- End Class CabineCatapulte's ownedElement -->
+                            <UML:Classifier.feature>
+                                <UML:Attribute xmi.id = 'a1437340736-29'>
+                                    <UML:ModelElement.name>vitesse</UML:ModelElement.name>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:StructuralFeature.multiplicity >
+                                        <UML:Multiplicity>
+                                            <UML:Multiplicity.range>
+                                                <UML:MultiplicityRange>
+                                                    <UML:MultiplicityRange.lower>1</UML:MultiplicityRange.lower>
+                                                    <UML:MultiplicityRange.upper>1</UML:MultiplicityRange.upper>
+                                                </UML:MultiplicityRange>
+                                            </UML:Multiplicity.range>
+                                        </UML:Multiplicity>
+                                    </UML:StructuralFeature.multiplicity >
+                                    <UML:StructuralFeature.changeability xmi.value = 'frozen'/>
+                                    <UML:StructuralFeature.targetScope xmi.value = 'instance'/>
+                                    <UML:Attribute.initialValue>
+                                        <UML:Expression>
+                                            <UML:Expression.language></UML:Expression.language>
+                                            <UML:Expression.body>0.2</UML:Expression.body>
+                                        </UML:Expression>
+                                    </UML:Attribute.initialValue>
+                                    <UML:StructuralFeature.type>
+                                        <UML:Classifier xmi.idref = 'a4-11' />     <!-- real -->
+                                    </UML:StructuralFeature.type>
+                                </UML:Attribute>
+                                <UML:Attribute xmi.id = 'a1437340736-31'>
+                                    <UML:ModelElement.name>hauteur</UML:ModelElement.name>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:StructuralFeature.multiplicity >
+                                        <UML:Multiplicity>
+                                            <UML:Multiplicity.range>
+                                                <UML:MultiplicityRange>
+                                                    <UML:MultiplicityRange.lower>1</UML:MultiplicityRange.lower>
+                                                    <UML:MultiplicityRange.upper>1</UML:MultiplicityRange.upper>
+                                                </UML:MultiplicityRange>
+                                            </UML:Multiplicity.range>
+                                        </UML:Multiplicity>
+                                    </UML:StructuralFeature.multiplicity >
+                                    <UML:StructuralFeature.changeability xmi.value = 'frozen'/>
+                                    <UML:StructuralFeature.targetScope xmi.value = 'instance'/>
+                                    <UML:Attribute.initialValue>
+                                        <UML:Expression>
+                                            <UML:Expression.language></UML:Expression.language>
+                                            <UML:Expression.body>0.55</UML:Expression.body>
+                                        </UML:Expression>
+                                    </UML:Attribute.initialValue>
+                                    <UML:StructuralFeature.type>
+                                        <UML:Classifier xmi.idref = 'a4-11' />     <!-- real -->
+                                    </UML:StructuralFeature.type>
+                                </UML:Attribute>
+                                <UML:Attribute xmi.id = 'a1437340736-33'>
+                                    <UML:ModelElement.name>hauteurMin</UML:ModelElement.name>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:StructuralFeature.multiplicity >
+                                        <UML:Multiplicity>
+                                            <UML:Multiplicity.range>
+                                                <UML:MultiplicityRange>
+                                                    <UML:MultiplicityRange.lower>1</UML:MultiplicityRange.lower>
+                                                    <UML:MultiplicityRange.upper>1</UML:MultiplicityRange.upper>
+                                                </UML:MultiplicityRange>
+                                            </UML:Multiplicity.range>
+                                        </UML:Multiplicity>
+                                    </UML:StructuralFeature.multiplicity >
+                                    <UML:StructuralFeature.changeability xmi.value = 'frozen'/>
+                                    <UML:StructuralFeature.targetScope xmi.value = 'instance'/>
+                                    <UML:Attribute.initialValue>
+                                        <UML:Expression>
+                                            <UML:Expression.language></UML:Expression.language>
+                                            <UML:Expression.body>0.55</UML:Expression.body>
+                                        </UML:Expression>
+                                    </UML:Attribute.initialValue>
+                                    <UML:StructuralFeature.type>
+                                        <UML:Classifier xmi.idref = 'a4-11' />     <!-- real -->
+                                    </UML:StructuralFeature.type>
+                                </UML:Attribute>
+                                <UML:Attribute xmi.id = 'a1437340736-35'>
+                                    <UML:ModelElement.name>hauteurMax</UML:ModelElement.name>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:StructuralFeature.multiplicity >
+                                        <UML:Multiplicity>
+                                            <UML:Multiplicity.range>
+                                                <UML:MultiplicityRange>
+                                                    <UML:MultiplicityRange.lower>1</UML:MultiplicityRange.lower>
+                                                    <UML:MultiplicityRange.upper>1</UML:MultiplicityRange.upper>
+                                                </UML:MultiplicityRange>
+                                            </UML:Multiplicity.range>
+                                        </UML:Multiplicity>
+                                    </UML:StructuralFeature.multiplicity >
+                                    <UML:StructuralFeature.changeability xmi.value = 'frozen'/>
+                                    <UML:StructuralFeature.targetScope xmi.value = 'instance'/>
+                                    <UML:Attribute.initialValue>
+                                        <UML:Expression>
+                                            <UML:Expression.language></UML:Expression.language>
+                                            <UML:Expression.body>2</UML:Expression.body>
+                                        </UML:Expression>
+                                    </UML:Attribute.initialValue>
+                                    <UML:StructuralFeature.type>
+                                        <UML:Classifier xmi.idref = 'a4-11' />     <!-- real -->
+                                    </UML:StructuralFeature.type>
+                                </UML:Attribute>
+                                <UML:Operation xmi.id = 'a1437340736-37'>
+                                    <UML:ModelElement.name>Ouvrir</UML:ModelElement.name>
+                                    <UML:BehavioralFeature.isQuery xmi.value = 'false' />
+                                    <UML:Operation.concurrency xmi.value = 'concurrent' />
+                                    <UML:Operation.isLeaf xmi.value = 'false' />
+                                    <UML:Operation.isAbstract xmi.value = 'false'/>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:BehavioralFeature.parameter>
+                                    </UML:BehavioralFeature.parameter>
+                                </UML:Operation>
+                                <UML:Operation xmi.id = 'a1437340736-38'>
+                                    <UML:ModelElement.name>Fermer</UML:ModelElement.name>
+                                    <UML:BehavioralFeature.isQuery xmi.value = 'false' />
+                                    <UML:Operation.concurrency xmi.value = 'concurrent' />
+                                    <UML:Operation.isLeaf xmi.value = 'false' />
+                                    <UML:Operation.isAbstract xmi.value = 'false'/>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:BehavioralFeature.parameter>
+                                    </UML:BehavioralFeature.parameter>
+                                </UML:Operation>
+                                <UML:Operation xmi.id = 'a1437340736-232'>
+                                    <UML:ModelElement.name>setPosition</UML:ModelElement.name>
+                                    <UML:BehavioralFeature.isQuery xmi.value = 'false' />
+                                    <UML:Operation.concurrency xmi.value = 'concurrent' />
+                                    <UML:Operation.isLeaf xmi.value = 'false' />
+                                    <UML:Operation.isAbstract xmi.value = 'false'/>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:ModelElement.taggedValue>
+                                        <UML:TaggedValue xmi.id = 'a1437340736-237'>
+                                            <UML:TaggedValue.type>
+                                                <UML:TagDefinition>
+                                                    <UML:TagDefinition.tagType>C++</UML:TagDefinition.tagType>
+                                                </UML:TagDefinition>
+                                            </UML:TaggedValue.type>
+                                            <UML:TaggedValue.dataValue>Base3D b;
+cerr&lt;&lt;&quot;debut&quot;&lt;&lt;endl;
+cerr&lt;&lt;&quot;...&quot;&lt;&lt;parameters.at("x")&lt;&lt;endl;
+ValueSpecification * iw =( parameters.at("x") ).get();
+double w=*iw;
+cerr&lt;&lt;&quot;w:&quot;&lt;&lt;w&lt;&lt;endl;
+b.x=*parameters.at("x");
+b.y=*parameters.at("y");
+b.z=*parameters.at("z");
+cerr&lt;&lt;&quot;Set to position :&quot;&lt;&lt;b.x
+&lt;&lt;&quot;,&quot;&lt;&lt;b.y&lt;&lt;&quot;,&quot;&lt;&lt;b.z&lt;&lt;endl;
+dynamic_cast&lt;Entity*&gt;(_host.get())-&gt;setPosition(b);</UML:TaggedValue.dataValue>
+                                        </UML:TaggedValue>
+                                    </UML:ModelElement.taggedValue>
+                                    <UML:BehavioralFeature.parameter>
+                                        <UML:Parameter xmi.id = 'a1437340736-234'>
+                                            <UML:ModelElement.name>x</UML:ModelElement.name>
+                                            <UML:Parameter.defaultValue>
+                                                <UML:Expression>
+                                                    <UML:Expression.language></UML:Expression.language>
+                                                    <UML:Expression.body></UML:Expression.body>
+                                                </UML:Expression>
+                                            </UML:Parameter.defaultValue>
+                                            <UML:Parameter.kind xmi.value = 'in' />
+                                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                                <XMI.reference xmi.idref= 'a1437340736-234_ext'/>    <!-- x -->
+                                            </XMI.extension>
+                                            <UML:Parameter.type>
+                                                <UML:Classifier xmi.idref = 'a4-11' />     <!-- real -->
+                                            </UML:Parameter.type>
+                                        </UML:Parameter>
+                                        <UML:Parameter xmi.id = 'a1437340736-235'>
+                                            <UML:ModelElement.name>y</UML:ModelElement.name>
+                                            <UML:Parameter.defaultValue>
+                                                <UML:Expression>
+                                                    <UML:Expression.language></UML:Expression.language>
+                                                    <UML:Expression.body></UML:Expression.body>
+                                                </UML:Expression>
+                                            </UML:Parameter.defaultValue>
+                                            <UML:Parameter.kind xmi.value = 'in' />
+                                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                                <XMI.reference xmi.idref= 'a1437340736-235_ext'/>    <!-- y -->
+                                            </XMI.extension>
+                                            <UML:Parameter.type>
+                                                <UML:Classifier xmi.idref = 'a4-11' />     <!-- real -->
+                                            </UML:Parameter.type>
+                                        </UML:Parameter>
+                                        <UML:Parameter xmi.id = 'a1437340736-236'>
+                                            <UML:ModelElement.name>z</UML:ModelElement.name>
+                                            <UML:Parameter.defaultValue>
+                                                <UML:Expression>
+                                                    <UML:Expression.language></UML:Expression.language>
+                                                    <UML:Expression.body></UML:Expression.body>
+                                                </UML:Expression>
+                                            </UML:Parameter.defaultValue>
+                                            <UML:Parameter.kind xmi.value = 'in' />
+                                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                                <XMI.reference xmi.idref= 'a1437340736-236_ext'/>    <!-- z -->
+                                            </XMI.extension>
+                                            <UML:Parameter.type>
+                                                <UML:Classifier xmi.idref = 'a4-11' />     <!-- real -->
+                                            </UML:Parameter.type>
+                                        </UML:Parameter>
+                                    </UML:BehavioralFeature.parameter>
+                                </UML:Operation>
+                                <UML:Operation xmi.id = 'a1437340736-233'>
+                                    <UML:ModelElement.name>debugValues</UML:ModelElement.name>
+                                    <UML:BehavioralFeature.isQuery xmi.value = 'false' />
+                                    <UML:Operation.concurrency xmi.value = 'concurrent' />
+                                    <UML:Operation.isLeaf xmi.value = 'false' />
+                                    <UML:Operation.isAbstract xmi.value = 'false'/>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:Feature.ownerScope xmi.value = 'instance'/>
+                                    <UML:ModelElement.taggedValue>
+                                        <UML:TaggedValue xmi.id = 'a1437340736-238'>
+                                            <UML:TaggedValue.type>
+                                                <UML:TagDefinition>
+                                                    <UML:TagDefinition.tagType>C++</UML:TagDefinition.tagType>
+                                                </UML:TagDefinition>
+                                            </UML:TaggedValue.type>
+                                            <UML:TaggedValue.dataValue>/*vector&lt;Slot*&gt; attr=_host-&gt;get_slot();
+cout&lt;&lt;&quot;HOST:&quot;&lt;&lt;host-&gt;get_name()&lt;&lt;endl;
+
+for (size_t i=attr.size();i--;)
+{
+	cout&lt;&lt;&quot;-&quot;&lt;&lt;attr[i]-&gt;get_definingProperty()-&gt;get_name()&lt;&lt;&quot;(&quot;&lt;&lt;attr[i]-&gt;get_value_at(0)-&gt;get_type()-&gt;get_name()&lt;&lt;&quot;)&quot;&lt;&lt;endl;
+}*/</UML:TaggedValue.dataValue>
+                                        </UML:TaggedValue>
+                                    </UML:ModelElement.taggedValue>
+                                    <UML:BehavioralFeature.parameter>
+                                    </UML:BehavioralFeature.parameter>
+                                </UML:Operation>
+                            </UML:Classifier.feature>
+                        </UML:Class>
+                        <UML:Signal xmi.id = 'a1437340736-39'>
+                            <UML:ModelElement.name>Fermer</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:Namespace.ownedElement>
+                            </UML:Namespace.ownedElement>	<!-- End Signal Fermer's ownedElement -->
+                        </UML:Signal>
+                        <UML:Signal xmi.id = 'a1437340736-40'>
+                            <UML:ModelElement.name>Ouvrir</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:Namespace.ownedElement>
+                            </UML:Namespace.ownedElement>	<!-- End Signal Ouvrir's ownedElement -->
+                        </UML:Signal>
+                        <UML:Association xmi.id = 'a1437340736-41'>
+                            <UML:ModelElement.name>undefined</UML:ModelElement.name>
+                            <UML:Association.connection>
+                                <UML:AssociationEnd xmi.id = 'a1437340736-42'>
+                                    <UML:ModelElement.name>cabine</UML:ModelElement.name>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:AssociationEnd.isNavigable xmi.value = 'true'/>
+                                    <UML:AssociationEnd.ordering xmi.value = 'unordered'/>
+                                    <UML:AssociationEnd.aggregation xmi.value = 'none'/>
+                                    <UML:AssociationEnd.targetScope xmi.value = 'instance'/>
+                                    <UML:AssociationEnd.multiplicity>
+                                        <UML:Multiplicity>
+                                            <UML:Multiplicity.range>
+                                                <UML:MultiplicityRange>
+                                                    <UML:MultiplicityRange.lower>1</UML:MultiplicityRange.lower>
+                                                    <UML:MultiplicityRange.upper>1</UML:MultiplicityRange.upper>
+                                                </UML:MultiplicityRange>
+                                            </UML:Multiplicity.range>
+                                        </UML:Multiplicity>
+                                    </UML:AssociationEnd.multiplicity>
+                                    <UML:AssociationEnd.changeability xmi.value = 'changeable'/>
+                                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                        <XMI.reference xmi.idref= 'a1437340736-42_ext'/>    <!-- cabine -->
+                                    </XMI.extension>
+                                    <UML:AssociationEnd.participant>
+                                        <UML:Classifier xmi.idref = 'a1437340736-26' />     <!-- CabineCatapulte -->
+                                    </UML:AssociationEnd.participant>
+                                </UML:AssociationEnd>
+                                <UML:AssociationEnd xmi.id = 'a1437340736-43'>
+                                    <UML:ModelElement.name>undefined</UML:ModelElement.name>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:AssociationEnd.isNavigable xmi.value = 'false'/>
+                                    <UML:AssociationEnd.ordering xmi.value = 'unordered'/>
+                                    <UML:AssociationEnd.aggregation xmi.value = 'none'/>
+                                    <UML:AssociationEnd.targetScope xmi.value = 'instance'/>
+                                    <UML:AssociationEnd.multiplicity>
+                                        <UML:Multiplicity>
+                                            <UML:Multiplicity.range>
+                                                <UML:MultiplicityRange>
+                                                    <UML:MultiplicityRange.lower>0</UML:MultiplicityRange.lower>
+                                                    <UML:MultiplicityRange.upper>-1</UML:MultiplicityRange.upper>
+                                                </UML:MultiplicityRange>
+                                            </UML:Multiplicity.range>
+                                        </UML:Multiplicity>
+                                    </UML:AssociationEnd.multiplicity>
+                                    <UML:AssociationEnd.changeability xmi.value = 'changeable'/>
+                                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                        <XMI.reference xmi.idref= 'a1437340736-43_ext'/>    <!-- undefined -->
+                                    </XMI.extension>
+                                    <UML:AssociationEnd.participant>
+                                        <UML:Classifier xmi.idref = 'a1437340736-15' />     <!-- Deflecteur -->
+                                    </UML:AssociationEnd.participant>
+                                </UML:AssociationEnd>
+                            </UML:Association.connection>
+                        </UML:Association>
+                    </UML:Namespace.ownedElement>	<!-- End Package Environnement's ownedElement -->
+                </UML:Package>
+                <UML:Package xmi.id = 'a1437340736-44'>
+                    <UML:ModelElement.name>Agent</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                    <UML:Namespace.ownedElement>
+                        <UML:Class xmi.id = 'a1437340736-45'>
+                            <UML:ModelElement.name>Personnage</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:Class.isActive xmi.value = 'false'/>
+                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                <XMI.reference xmi.idref= 'a1437340736-45_ext'/>    <!-- Personnage -->
+                            </XMI.extension>
+                            <UML:Namespace.ownedElement>
+                            </UML:Namespace.ownedElement>	<!-- End Class Personnage's ownedElement -->
+                        </UML:Class>
+                    </UML:Namespace.ownedElement>	<!-- End Package Agent's ownedElement -->
+                </UML:Package>
+                <UML:Package xmi.id = 'a1437340736-46'>
+                    <UML:ModelElement.name>Organisations</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                    <UML:ModelElement.clientDependency>
+                            <UML:Dependency xmi.idref = 'a1437340736-228'/>     <!--  -->
+                            <UML:Dependency xmi.idref = 'a1437340736-229'/>     <!--  -->
+                    </UML:ModelElement.clientDependency>
+                    <UML:Namespace.ownedElement>
+                        <UML:Package xmi.id = 'a1437340736-47'>
+                            <UML:ModelElement.name>Equipe1</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:ModelElement.clientDependency>
+                                    <UML:Dependency xmi.idref = 'a1437340736-230'/>     <!--  -->
+                                    <UML:Dependency xmi.idref = 'a1437340736-231'/>     <!--  -->
+                            </UML:ModelElement.clientDependency>
+                            <UML:Namespace.ownedElement>
+                            </UML:Namespace.ownedElement>	<!-- End Package Equipe1's ownedElement -->
+                        </UML:Package>
+                    </UML:Namespace.ownedElement>	<!-- End Package Organisations's ownedElement -->
+                </UML:Package>
+                <UML:Package xmi.id = 'a1437340736-48'>
+                    <UML:ModelElement.name>Test</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                    <UML:Namespace.ownedElement>
+                        <UML:Class xmi.id = 'a1437340736-49'>
+                            <UML:ModelElement.name>Class</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:Class.isActive xmi.value = 'false'/>
+                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                <XMI.reference xmi.idref= 'a1437340736-49_ext'/>    <!-- Class -->
+                            </XMI.extension>
+                            <UML:Namespace.ownedElement>
+                            </UML:Namespace.ownedElement>	<!-- End Class Class's ownedElement -->
+                            <UML:Classifier.feature>
+                            </UML:Classifier.feature>
+                        </UML:Class>
+                        <UML:Class xmi.id = 'a1437340736-50'>
+                            <UML:ModelElement.name>Class1</UML:ModelElement.name>
+                            <UML:ModelElement.visibility xmi.value = 'public'/>
+                            <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                            <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                            <UML:Class.isActive xmi.value = 'false'/>
+                            <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                <XMI.reference xmi.idref= 'a1437340736-50_ext'/>    <!-- Class1 -->
+                            </XMI.extension>
+                            <UML:GeneralizableElement.generalization>
+                                <UML:Generalization xmi.idref = 'a1437340736-51'/>
+                            </UML:GeneralizableElement.generalization>
+                            <UML:Namespace.ownedElement>
+                                <UML:Generalization xmi.id = 'a1437340736-51'>
+                                    <UML:ModelElement.name>Generalization</UML:ModelElement.name>
+                                    <UML:Generalization.child>
+                                        <UML:GeneralizableElement xmi.idref = 'a1437340736-50' />
+                                    </UML:Generalization.child>
+                                    <UML:Generalization.parent>
+                                        <UML:GeneralizableElement xmi.idref = 'a1437340736-49' />
+                                    </UML:Generalization.parent>
+                                </UML:Generalization>
+                            </UML:Namespace.ownedElement>	<!-- End Class Class1's ownedElement -->
+                            <UML:Classifier.feature>
+                            </UML:Classifier.feature>
+                        </UML:Class>
+                        <UML:Association xmi.id = 'a1437340736-52'>
+                            <UML:ModelElement.name>TestAsso</UML:ModelElement.name>
+                            <UML:Association.connection>
+                                <UML:AssociationEnd xmi.id = 'a1437340736-53'>
+                                    <UML:ModelElement.name>roleDeClass</UML:ModelElement.name>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:AssociationEnd.isNavigable xmi.value = 'true'/>
+                                    <UML:AssociationEnd.ordering xmi.value = 'unordered'/>
+                                    <UML:AssociationEnd.aggregation xmi.value = 'none'/>
+                                    <UML:AssociationEnd.targetScope xmi.value = 'instance'/>
+                                    <UML:AssociationEnd.multiplicity>
+                                        <UML:Multiplicity>
+                                            <UML:Multiplicity.range>
+                                                <UML:MultiplicityRange>
+                                                    <UML:MultiplicityRange.lower>1</UML:MultiplicityRange.lower>
+                                                    <UML:MultiplicityRange.upper>1</UML:MultiplicityRange.upper>
+                                                </UML:MultiplicityRange>
+                                            </UML:Multiplicity.range>
+                                        </UML:Multiplicity>
+                                    </UML:AssociationEnd.multiplicity>
+                                    <UML:AssociationEnd.changeability xmi.value = 'changeable'/>
+                                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                        <XMI.reference xmi.idref= 'a1437340736-53_ext'/>    <!-- roleDeClass -->
+                                    </XMI.extension>
+                                    <UML:AssociationEnd.participant>
+                                        <UML:Classifier xmi.idref = 'a1437340736-49' />     <!-- Class -->
+                                    </UML:AssociationEnd.participant>
+                                </UML:AssociationEnd>
+                                <UML:AssociationEnd xmi.id = 'a1437340736-54'>
+                                    <UML:ModelElement.name>roledeClass1</UML:ModelElement.name>
+                                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                                    <UML:AssociationEnd.isNavigable xmi.value = 'false'/>
+                                    <UML:AssociationEnd.ordering xmi.value = 'unordered'/>
+                                    <UML:AssociationEnd.aggregation xmi.value = 'none'/>
+                                    <UML:AssociationEnd.targetScope xmi.value = 'instance'/>
+                                    <UML:AssociationEnd.multiplicity>
+                                        <UML:Multiplicity>
+                                            <UML:Multiplicity.range>
+                                                <UML:MultiplicityRange>
+                                                    <UML:MultiplicityRange.lower>0</UML:MultiplicityRange.lower>
+                                                    <UML:MultiplicityRange.upper>-1</UML:MultiplicityRange.upper>
+                                                </UML:MultiplicityRange>
+                                            </UML:Multiplicity.range>
+                                        </UML:Multiplicity>
+                                    </UML:AssociationEnd.multiplicity>
+                                    <UML:AssociationEnd.changeability xmi.value = 'changeable'/>
+                                    <XMI.extension xmi.extender = 'Objecteering43' xmi.extenderID = 'Objing' >
+                                        <XMI.reference xmi.idref= 'a1437340736-54_ext'/>    <!-- roledeClass1 -->
+                                    </XMI.extension>
+                                    <UML:AssociationEnd.participant>
+                                        <UML:Classifier xmi.idref = 'a1437340736-50' />     <!-- Class1 -->
+                                    </UML:AssociationEnd.participant>
+                                </UML:AssociationEnd>
+                            </UML:Association.connection>
+                        </UML:Association>
+                    </UML:Namespace.ownedElement>	<!-- End Package Test's ownedElement -->
+                </UML:Package>
+            </UML:Namespace.ownedElement>	<!-- End Package testPorteAvion's ownedElement -->
+            <UML:Namespace.ownedElement>
+                <UML:Dependency xmi.id = 'a1437340736-228'>
+                    <UML:Dependency.client>
+                        <UML:ModelElement xmi.idref = 'a1437340736-46' />     <!-- Organisations -->
+                    </UML:Dependency.client>
+                    <UML:Dependency.supplier>
+                        <UML:ModelElement xmi.idref = 'a1437340736-44' />     <!-- Agent -->
+                    </UML:Dependency.supplier>
+                </UML:Dependency>
+                <UML:Dependency xmi.id = 'a1437340736-229'>
+                    <UML:Dependency.client>
+                        <UML:ModelElement xmi.idref = 'a1437340736-46' />     <!-- Organisations -->
+                    </UML:Dependency.client>
+                    <UML:Dependency.supplier>
+                        <UML:ModelElement xmi.idref = 'a1437340736-12' />     <!-- Environnement -->
+                    </UML:Dependency.supplier>
+                </UML:Dependency>
+                <UML:Dependency xmi.id = 'a1437340736-230'>
+                    <UML:Dependency.client>
+                        <UML:ModelElement xmi.idref = 'a1437340736-47' />     <!-- Equipe1 -->
+                    </UML:Dependency.client>
+                    <UML:Dependency.supplier>
+                        <UML:ModelElement xmi.idref = 'a1437340736-44' />     <!-- Agent -->
+                    </UML:Dependency.supplier>
+                </UML:Dependency>
+                <UML:Dependency xmi.id = 'a1437340736-231'>
+                    <UML:Dependency.client>
+                        <UML:ModelElement xmi.idref = 'a1437340736-47' />     <!-- Equipe1 -->
+                    </UML:Dependency.client>
+                    <UML:Dependency.supplier>
+                        <UML:ModelElement xmi.idref = 'a1437340736-12' />     <!-- Environnement -->
+                    </UML:Dependency.supplier>
+                </UML:Dependency>
+                <!-- StateMachine -->
+                <UML:StateMachine xmi.id = 'a1437340736-59'>
+                    <UML:ModelElement.name>StateMachine</UML:ModelElement.name>
+                    <UML:StateMachine.context>
+                        <UML:ModelElement xmi.idref = 'a1437340736-15' />     <!-- Deflecteur -->
+                    </UML:StateMachine.context>
+                    <!-- TopState of the StateMachine -->
+                    <UML:StateMachine.top>
+                        <UML:CompositeState xmi.id = 'a1437340736-60'>
+                            <UML:ModelElement.name>StateMachine</UML:ModelElement.name>
+                            <UML:CompositeState.isConcurrent xmi.value = 'false'/>
+                            <UML:CompositeState.subvertex>
+                                <UML:SimpleState xmi.id = 'a1437340736-61'>
+                                    <UML:ModelElement.name>Ouvert</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-60' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-68' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-72' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-71' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                </UML:SimpleState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:SimpleState xmi.id = 'a1437340736-62'>
+                                    <UML:ModelElement.name>SeFerme</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-60' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-69' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-68' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                    <UML:State.doActivity>
+                                        <UML:CallAction xmi.id = 'a1437340736-201_action'>
+                                            <UML:CallAction.operation>
+                                                <UML:Operation xmi.idref = 'a1437340736-20' />     <!-- Fermer -->
+                                            </UML:CallAction.operation>
+                                        </UML:CallAction>
+                                    </UML:State.doActivity>
+                                </UML:SimpleState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:SimpleState xmi.id = 'a1437340736-64'>
+                                    <UML:ModelElement.name>Ferme</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-60' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-70' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-69' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                </UML:SimpleState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:SimpleState xmi.id = 'a1437340736-65'>
+                                    <UML:ModelElement.name>SOuvrir</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-60' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-71' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-70' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                    <UML:State.doActivity>
+                                        <UML:CallAction xmi.id = 'a1437340736-202_action'>
+                                            <UML:CallAction.operation>
+                                                <UML:Operation xmi.idref = 'a1437340736-19' />     <!-- Ouvrir -->
+                                            </UML:CallAction.operation>
+                                        </UML:CallAction>
+                                    </UML:State.doActivity>
+                                </UML:SimpleState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:Pseudostate xmi.id = 'a1437340736-67'>
+                                    <UML:ModelElement.name>Initial</UML:ModelElement.name>
+                                    <UML:Pseudostate.kind  xmi.value = 'initial'/>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-60' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-72' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                </UML:Pseudostate>
+                            </UML:CompositeState.subvertex>
+                        </UML:CompositeState>
+                    </UML:StateMachine.top>
+                    <!-- Transitions of the StateMachine -->
+                    <UML:StateMachine.transitions>
+                        <UML:Transition xmi.id = 'a1437340736-68'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.trigger>
+                                <UML:Event xmi.idref = 'a1437340736-16' />     <!-- Fermer -->
+                            </UML:Transition.trigger>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-61' />     <!-- Ouvert -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-62' />     <!-- SeFerme -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-69'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.trigger>
+                                <UML:Event xmi.idref = 'a1437340736-18' />     <!-- Fermer -->
+                            </UML:Transition.trigger>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-62' />     <!-- SeFerme -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-64' />     <!-- Ferme -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-70'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.trigger>
+                                <UML:Event xmi.idref = 'a1437340736-17' />     <!-- Ouvrir -->
+                            </UML:Transition.trigger>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-64' />     <!-- Ferme -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-65' />     <!-- SOuvrir -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-71'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-65' />     <!-- SOuvrir -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-61' />     <!-- Ouvert -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-72'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-67' />     <!-- Initial -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-61' />     <!-- Ouvert -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                    </UML:StateMachine.transitions>
+                </UML:StateMachine>
+                <UML:StateMachine xmi.id = 'a1437340736-73'>
+                    <UML:ModelElement.name>StateMachine</UML:ModelElement.name>
+                    <UML:StateMachine.context>
+                        <UML:ModelElement xmi.idref = 'a1437340736-26' />     <!-- CabineCatapulte -->
+                    </UML:StateMachine.context>
+                    <!-- TopState of the StateMachine -->
+                    <UML:StateMachine.top>
+                        <UML:CompositeState xmi.id = 'a1437340736-74'>
+                            <UML:ModelElement.name>StateMachine</UML:ModelElement.name>
+                            <UML:CompositeState.isConcurrent xmi.value = 'false'/>
+                            <UML:CompositeState.subvertex>
+                                <UML:SimpleState xmi.id = 'a1437340736-75'>
+                                    <UML:ModelElement.name>Fermee</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-74' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-82' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-86' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-85' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                </UML:SimpleState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:SimpleState xmi.id = 'a1437340736-76'>
+                                    <UML:ModelElement.name>SOuvre</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-74' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-83' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-82' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                    <UML:State.doActivity>
+                                        <UML:CallAction xmi.id = 'a1437340736-203_action'>
+                                            <UML:CallAction.operation>
+                                                <UML:Operation xmi.idref = 'a1437340736-37' />     <!-- Ouvrir -->
+                                            </UML:CallAction.operation>
+                                        </UML:CallAction>
+                                    </UML:State.doActivity>
+                                </UML:SimpleState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:SimpleState xmi.id = 'a1437340736-78'>
+                                    <UML:ModelElement.name>Ouverte</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-74' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-84' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-83' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                </UML:SimpleState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:SimpleState xmi.id = 'a1437340736-79'>
+                                    <UML:ModelElement.name>SeFerme</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-74' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-85' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-84' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                    <UML:State.doActivity>
+                                        <UML:CallAction xmi.id = 'a1437340736-204_action'>
+                                            <UML:CallAction.operation>
+                                                <UML:Operation xmi.idref = 'a1437340736-38' />     <!-- Fermer -->
+                                            </UML:CallAction.operation>
+                                        </UML:CallAction>
+                                    </UML:State.doActivity>
+                                </UML:SimpleState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:Pseudostate xmi.id = 'a1437340736-81'>
+                                    <UML:ModelElement.name>Initial</UML:ModelElement.name>
+                                    <UML:Pseudostate.kind  xmi.value = 'initial'/>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-74' />     <!-- StateMachine -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-86' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                </UML:Pseudostate>
+                            </UML:CompositeState.subvertex>
+                        </UML:CompositeState>
+                    </UML:StateMachine.top>
+                    <!-- Transitions of the StateMachine -->
+                    <UML:StateMachine.transitions>
+                        <UML:Transition xmi.id = 'a1437340736-82'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.trigger>
+                                <UML:Event xmi.idref = 'a1437340736-27' />     <!-- Ouvrir -->
+                            </UML:Transition.trigger>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-75' />     <!-- Fermee -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-76' />     <!-- SOuvre -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-83'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-76' />     <!-- SOuvre -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-78' />     <!-- Ouverte -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-84'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.trigger>
+                                <UML:Event xmi.idref = 'a1437340736-28' />     <!-- Fermer -->
+                            </UML:Transition.trigger>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-78' />     <!-- Ouverte -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-79' />     <!-- SeFerme -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-85'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-79' />     <!-- SeFerme -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-75' />     <!-- Fermee -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-86'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-81' />     <!-- Initial -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-75' />     <!-- Fermee -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                    </UML:StateMachine.transitions>
+                </UML:StateMachine>
+                <!-- ActivityGraph -->
+                <UML:ActivityGraph xmi.id = 'a1437340736-87'>
+                    <UML:ModelElement.name>ActivityGraph</UML:ModelElement.name>
+                    <UML:StateMachine.context>
+                        <UML:ModelElement xmi.idref = 'a1437340736-19' />     <!-- Ouvrir -->
+                    </UML:StateMachine.context>
+                    <!-- TopState of the StateMachine -->
+                    <UML:StateMachine.top>
+                        <UML:SubactivityState xmi.id = 'a1437340736-88' >
+                            <UML:ModelElement.name>ActivityGraph</UML:ModelElement.name>
+                            <UML:CompositeState.isConcurrent xmi.value = 'false'/>
+                            <UML:CompositeState.subvertex>
+                                <UML:ActionState xmi.id = 'a1437340736-89' >
+                                    <UML:ModelElement.name>AnimOuvrir</UML:ModelElement.name>
+                                    <UML:ActionState.isDynamic xmi.value='false'/>
+                                    <UML:ModelElement.taggedValue>
+                                        <UML:TaggedValue xmi.id = 'a1437340736-206'>
+                                            <UML:TaggedValue.type>
+                                                <UML:TagDefinition>
+                                                    <UML:TagDefinition.tagType>To Do (unused)</UML:TagDefinition.tagType>
+                                                </UML:TagDefinition>
+                                            </UML:TaggedValue.type>
+                                            <UML:TaggedValue.dataValue>playAnimation Ouvrir;</UML:TaggedValue.dataValue>
+                                        </UML:TaggedValue>
+                                    </UML:ModelElement.taggedValue>
+                                    <UML:State.internalTransition>
+                                        <UML:Transition xmi.id = 'a1437340736-207'>
+                                            <UML:ModelElement.name></UML:ModelElement.name>
+                                        </UML:Transition>
+                                    </UML:State.internalTransition>
+                                </UML:ActionState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:Pseudostate xmi.id = 'a1437340736-93'>
+                                    <UML:ModelElement.name>Initial</UML:ModelElement.name>
+                                    <UML:Pseudostate.kind  xmi.value = 'initial'/>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-88' />     <!-- ActivityGraph -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-94' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                </UML:Pseudostate>
+                            </UML:CompositeState.subvertex>
+                        </UML:SubactivityState>
+                    </UML:StateMachine.top>
+                    <!-- Transitions of the StateMachine -->
+                    <UML:StateMachine.transitions>
+                        <UML:Transition xmi.id = 'a1437340736-94'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-93' />     <!-- Initial -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-89' />     <!-- AnimOuvrir -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                    </UML:StateMachine.transitions>
+                    <UML:ActivityGraph.partition>
+                        <UML:Partition xmi.id = 'a1437340736-95'>
+                            <UML:ModelElement.name>this</UML:ModelElement.name>
+                            <UML:Partition.contents>
+                                <UML:ModelElement xmi.idref = 'a1437340736-89' />     <!-- AnimOuvrir -->
+                            </UML:Partition.contents>
+                        </UML:Partition>
+                    </UML:ActivityGraph.partition>
+                </UML:ActivityGraph>
+                <UML:ActivityGraph xmi.id = 'a1437340736-96'>
+                    <UML:ModelElement.name>ActivityGraph</UML:ModelElement.name>
+                    <UML:StateMachine.context>
+                        <UML:ModelElement xmi.idref = 'a1437340736-20' />     <!-- Fermer -->
+                    </UML:StateMachine.context>
+                    <!-- TopState of the StateMachine -->
+                    <UML:StateMachine.top>
+                        <UML:SubactivityState xmi.id = 'a1437340736-97' >
+                            <UML:ModelElement.name>ActivityGraph</UML:ModelElement.name>
+                            <UML:CompositeState.isConcurrent xmi.value = 'false'/>
+                            <UML:CompositeState.subvertex>
+                                <UML:ActionState xmi.id = 'a1437340736-98' >
+                                    <UML:ModelElement.name>AnimFermer</UML:ModelElement.name>
+                                    <UML:ActionState.isDynamic xmi.value='false'/>
+                                    <UML:ModelElement.taggedValue>
+                                        <UML:TaggedValue xmi.id = 'a1437340736-209'>
+                                            <UML:TaggedValue.type>
+                                                <UML:TagDefinition>
+                                                    <UML:TagDefinition.tagType>To Do (unused)</UML:TagDefinition.tagType>
+                                                </UML:TagDefinition>
+                                            </UML:TaggedValue.type>
+                                            <UML:TaggedValue.dataValue>playAnimation Fermer;</UML:TaggedValue.dataValue>
+                                        </UML:TaggedValue>
+                                    </UML:ModelElement.taggedValue>
+                                    <UML:State.internalTransition>
+                                        <UML:Transition xmi.id = 'a1437340736-210'>
+                                            <UML:ModelElement.name></UML:ModelElement.name>
+                                        </UML:Transition>
+                                    </UML:State.internalTransition>
+                                </UML:ActionState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:Pseudostate xmi.id = 'a1437340736-102'>
+                                    <UML:ModelElement.name>Initial</UML:ModelElement.name>
+                                    <UML:Pseudostate.kind  xmi.value = 'initial'/>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-97' />     <!-- ActivityGraph -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-103' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                </UML:Pseudostate>
+                            </UML:CompositeState.subvertex>
+                        </UML:SubactivityState>
+                    </UML:StateMachine.top>
+                    <!-- Transitions of the StateMachine -->
+                    <UML:StateMachine.transitions>
+                        <UML:Transition xmi.id = 'a1437340736-103'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-102' />     <!-- Initial -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-98' />     <!-- AnimFermer -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                    </UML:StateMachine.transitions>
+                    <UML:ActivityGraph.partition>
+                        <UML:Partition xmi.id = 'a1437340736-104'>
+                            <UML:ModelElement.name>this</UML:ModelElement.name>
+                            <UML:Partition.contents>
+                                <UML:ModelElement xmi.idref = 'a1437340736-98' />     <!-- AnimFermer -->
+                            </UML:Partition.contents>
+                        </UML:Partition>
+                    </UML:ActivityGraph.partition>
+                </UML:ActivityGraph>
+                <UML:ActivityGraph xmi.id = 'a1437340736-105'>
+                    <UML:ModelElement.name>ActivityGraph</UML:ModelElement.name>
+                    <UML:StateMachine.context>
+                        <UML:ModelElement xmi.idref = 'a1437340736-21' />     <!-- Test -->
+                    </UML:StateMachine.context>
+                    <!-- TopState of the StateMachine -->
+                    <UML:StateMachine.top>
+                        <UML:SubactivityState xmi.id = 'a1437340736-106' >
+                            <UML:ModelElement.name>ActivityGraph</UML:ModelElement.name>
+                            <UML:CompositeState.isConcurrent xmi.value = 'false'/>
+                            <UML:CompositeState.subvertex>
+                                <UML:ActionState xmi.id = 'a1437340736-107' >
+                                    <UML:ModelElement.name>^Ouvrir</UML:ModelElement.name>
+                                    <UML:ActionState.isDynamic xmi.value='false'/>
+                                    <UML:State.internalTransition>
+                                        <UML:Transition xmi.id = 'a1437340736-211'>
+                                            <UML:ModelElement.name></UML:ModelElement.name>
+                                        </UML:Transition>
+                                    </UML:State.internalTransition>
+                                </UML:ActionState>
+                                <UML:ObjectFlowState xmi.id = 'a1437340736-111' >
+                                    <UML:ModelElement.name>cabine</UML:ModelElement.name>
+                                    <UML:ObjectFlowState.isSynch xmi.value='false'/>
+                                    <UML:ObjectFlowState.type>
+                                        <UML:Classifier xmi.idref = 'a1437340736-26' />     <!-- CabineCatapulte -->
+                                    </UML:ObjectFlowState.type>
+                                </UML:ObjectFlowState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:Pseudostate xmi.id = 'a1437340736-112'>
+                                    <UML:ModelElement.name>Initial</UML:ModelElement.name>
+                                    <UML:Pseudostate.kind  xmi.value = 'initial'/>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-106' />     <!-- ActivityGraph -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-116' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                </UML:Pseudostate>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:FinalState xmi.id = 'a1437340736-113'>
+                                    <UML:ModelElement.name>Final</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-106' />     <!-- ActivityGraph -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-115' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                </UML:FinalState>
+                            </UML:CompositeState.subvertex>
+                        </UML:SubactivityState>
+                    </UML:StateMachine.top>
+                    <!-- Transitions of the StateMachine -->
+                    <UML:StateMachine.transitions>
+                        <UML:Transition xmi.id = 'a1437340736-114'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-107' />     <!-- ^Ouvrir -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-111' />     <!-- cabine -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-115'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-107' />     <!-- ^Ouvrir -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-113' />     <!-- Final -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-116'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-112' />     <!-- Initial -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-107' />     <!-- ^Ouvrir -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                    </UML:StateMachine.transitions>
+                    <UML:ActivityGraph.partition>
+                        <UML:Partition xmi.id = 'a1437340736-117'>
+                            <UML:ModelElement.name>this</UML:ModelElement.name>
+                            <UML:Partition.contents>
+                                <UML:ModelElement xmi.idref = 'a1437340736-107' />     <!-- ^Ouvrir -->
+                                <UML:ModelElement xmi.idref = 'a1437340736-111' />     <!-- cabine -->
+                            </UML:Partition.contents>
+                        </UML:Partition>
+                    </UML:ActivityGraph.partition>
+                </UML:ActivityGraph>
+                <UML:ActivityGraph xmi.id = 'a1437340736-118'>
+                    <UML:ModelElement.name>Procedure1</UML:ModelElement.name>
+                    <UML:StateMachine.context>
+                        <UML:ModelElement xmi.idref = 'a1437340736-47' />     <!-- Equipe1 -->
+                    </UML:StateMachine.context>
+                    <!-- TopState of the StateMachine -->
+                    <UML:StateMachine.top>
+                        <UML:SubactivityState xmi.id = 'a1437340736-119' >
+                            <UML:ModelElement.name>Procedure1</UML:ModelElement.name>
+                            <UML:CompositeState.isConcurrent xmi.value = 'false'/>
+                            <UML:CompositeState.subvertex>
+                                <UML:ActionState xmi.id = 'a1437340736-120' >
+                                    <UML:ModelElement.name>LeverDrapeau</UML:ModelElement.name>
+                                    <UML:ActionState.isDynamic xmi.value='false'/>
+                                    <UML:ModelElement.taggedValue>
+                                        <UML:TaggedValue xmi.id = 'a1437340736-213'>
+                                            <UML:TaggedValue.type>
+                                                <UML:TagDefinition>
+                                                    <UML:TagDefinition.tagType>To Do (unused)</UML:TagDefinition.tagType>
+                                                </UML:TagDefinition>
+                                            </UML:TaggedValue.type>
+                                            <UML:TaggedValue.dataValue>playAnimation leverDrapeauVert;</UML:TaggedValue.dataValue>
+                                        </UML:TaggedValue>
+                                    </UML:ModelElement.taggedValue>
+                                    <UML:State.internalTransition>
+                                        <UML:Transition xmi.id = 'a1437340736-214'>
+                                            <UML:ModelElement.name></UML:ModelElement.name>
+                                        </UML:Transition>
+                                    </UML:State.internalTransition>
+                                </UML:ActionState>
+                                <UML:ActionState xmi.id = 'a1437340736-124' >
+                                    <UML:ModelElement.name>^Fermer</UML:ModelElement.name>
+                                    <UML:ActionState.isDynamic xmi.value='false'/>
+                                    <UML:ModelElement.taggedValue>
+                                        <UML:TaggedValue xmi.id = 'a1437340736-216'>
+                                            <UML:TaggedValue.type>
+                                                <UML:TagDefinition>
+                                                    <UML:TagDefinition.tagType>documentation</UML:TagDefinition.tagType>
+                                                </UML:TagDefinition>
+                                            </UML:TaggedValue.type>
+                                            <UML:TaggedValue.dataValue>FermerDeflecteur</UML:TaggedValue.dataValue>
+                                        </UML:TaggedValue>
+                                    </UML:ModelElement.taggedValue>
+                                    <UML:State.internalTransition>
+                                        <UML:Transition xmi.id = 'a1437340736-217'>
+                                            <UML:ModelElement.name></UML:ModelElement.name>
+                                        </UML:Transition>
+                                    </UML:State.internalTransition>
+                                </UML:ActionState>
+                                <UML:ActionState xmi.id = 'a1437340736-130' >
+                                    <UML:ModelElement.name>BaisserDrapeau</UML:ModelElement.name>
+                                    <UML:ActionState.isDynamic xmi.value='false'/>
+                                    <UML:ModelElement.taggedValue>
+                                        <UML:TaggedValue xmi.id = 'a1437340736-219'>
+                                            <UML:TaggedValue.type>
+                                                <UML:TagDefinition>
+                                                    <UML:TagDefinition.tagType>To Do (unused)</UML:TagDefinition.tagType>
+                                                </UML:TagDefinition>
+                                            </UML:TaggedValue.type>
+                                            <UML:TaggedValue.dataValue>playAnimation baisserDrapeauVert;</UML:TaggedValue.dataValue>
+                                        </UML:TaggedValue>
+                                    </UML:ModelElement.taggedValue>
+                                    <UML:State.internalTransition>
+                                        <UML:Transition xmi.id = 'a1437340736-220'>
+                                            <UML:ModelElement.name></UML:ModelElement.name>
+                                        </UML:Transition>
+                                    </UML:State.internalTransition>
+                                </UML:ActionState>
+                                <UML:ActionState xmi.id = 'a1437340736-134' >
+                                    <UML:ModelElement.name>Attendre</UML:ModelElement.name>
+                                    <UML:ActionState.isDynamic xmi.value='false'/>
+                                    <UML:ModelElement.taggedValue>
+                                        <UML:TaggedValue xmi.id = 'a1437340736-222'>
+                                            <UML:TaggedValue.type>
+                                                <UML:TagDefinition>
+                                                    <UML:TagDefinition.tagType>To Do (unused)</UML:TagDefinition.tagType>
+                                                </UML:TagDefinition>
+                                            </UML:TaggedValue.type>
+                                            <UML:TaggedValue.dataValue>time 20;</UML:TaggedValue.dataValue>
+                                        </UML:TaggedValue>
+                                    </UML:ModelElement.taggedValue>
+                                    <UML:State.internalTransition>
+                                        <UML:Transition xmi.id = 'a1437340736-223'>
+                                            <UML:ModelElement.name></UML:ModelElement.name>
+                                        </UML:Transition>
+                                    </UML:State.internalTransition>
+                                </UML:ActionState>
+                                <UML:ActionState xmi.id = 'a1437340736-138' >
+                                    <UML:ModelElement.name>^Ouvrir</UML:ModelElement.name>
+                                    <UML:ActionState.isDynamic xmi.value='false'/>
+                                    <UML:State.internalTransition>
+                                        <UML:Transition xmi.id = 'a1437340736-224'>
+                                            <UML:ModelElement.name></UML:ModelElement.name>
+                                        </UML:Transition>
+                                    </UML:State.internalTransition>
+                                </UML:ActionState>
+                                <UML:ObjectFlowState xmi.id = 'a1437340736-142' >
+                                    <UML:ModelElement.name>deflecteur</UML:ModelElement.name>
+                                    <UML:ObjectFlowState.isSynch xmi.value='false'/>
+                                    <UML:ObjectFlowState.type>
+                                        <UML:Classifier xmi.idref = 'a1437340736-15' />     <!-- Deflecteur -->
+                                    </UML:ObjectFlowState.type>
+                                </UML:ObjectFlowState>
+                                <UML:ObjectFlowState xmi.id = 'a1437340736-143' >
+                                    <UML:ModelElement.name>cabine</UML:ModelElement.name>
+                                    <UML:ObjectFlowState.isSynch xmi.value='false'/>
+                                    <UML:ObjectFlowState.type>
+                                        <UML:Classifier xmi.idref = 'a1437340736-26' />     <!-- CabineCatapulte -->
+                                    </UML:ObjectFlowState.type>
+                                </UML:ObjectFlowState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:Pseudostate xmi.id = 'a1437340736-144'>
+                                    <UML:ModelElement.name>Initial</UML:ModelElement.name>
+                                    <UML:Pseudostate.kind  xmi.value = 'initial'/>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-119' />     <!-- Procedure1 -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-154' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                </UML:Pseudostate>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:FinalState xmi.id = 'a1437340736-145'>
+                                    <UML:ModelElement.name>Final</UML:ModelElement.name>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-119' />     <!-- Procedure1 -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-153' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                </UML:FinalState>
+                            </UML:CompositeState.subvertex>
+                            <UML:CompositeState.subvertex>
+                                <UML:Pseudostate xmi.id = 'a1437340736-146'>
+                                    <UML:ModelElement.name>Branch</UML:ModelElement.name>
+                                    <UML:Pseudostate.kind  xmi.value = 'choice'/>
+                                    <UML:StateVertex.container>
+                                        <UML:CompositeState xmi.idref = 'a1437340736-119' />     <!-- Procedure1 -->
+                                    </UML:StateVertex.container>
+                                    <UML:StateVertex.outgoing>
+                                        <UML:Transition xmi.idref = 'a1437340736-155' />     <!--  -->
+                                    </UML:StateVertex.outgoing>
+                                    <UML:StateVertex.incoming>
+                                        <UML:Transition xmi.idref = 'a1437340736-149' />     <!--  -->
+                                    </UML:StateVertex.incoming>
+                                </UML:Pseudostate>
+                            </UML:CompositeState.subvertex>
+                        </UML:SubactivityState>
+                    </UML:StateMachine.top>
+                    <!-- Transitions of the StateMachine -->
+                    <UML:StateMachine.transitions>
+                        <UML:Transition xmi.id = 'a1437340736-147'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-120' />     <!-- LeverDrapeau -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-124' />     <!-- ^Fermer -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-148'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-124' />     <!-- ^Fermer -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-142' />     <!-- deflecteur -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-149'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-124' />     <!-- ^Fermer -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-146' />     <!-- Branch -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-150'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-130' />     <!-- BaisserDrapeau -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-138' />     <!-- ^Ouvrir -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-151'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-134' />     <!-- Attendre -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-120' />     <!-- LeverDrapeau -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-152'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-138' />     <!-- ^Ouvrir -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-142' />     <!-- deflecteur -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-153'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-138' />     <!-- ^Ouvrir -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-145' />     <!-- Final -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-154'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-144' />     <!-- Initial -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-134' />     <!-- Attendre -->
+                            </UML:Transition.target>
+                        </UML:Transition>
+                        <UML:Transition xmi.id = 'a1437340736-155'>
+                            <UML:ModelElement.name></UML:ModelElement.name>
+                            <UML:Transition.source>
+                                <UML:StateVertex xmi.idref = 'a1437340736-146' />     <!-- Branch -->
+                            </UML:Transition.source>
+                            <UML:Transition.target>
+                                <UML:StateVertex xmi.idref = 'a1437340736-130' />     <!-- BaisserDrapeau -->
+                            </UML:Transition.target>
+                            <UML:Transition.guard>
+                                <UML:Guard>
+                                    <UML:Guard.expression>
+                                        <UML:BooleanExpression xmi.id = 'a1437340736-156_guard'>
+                                            <UML:Expression.body>deflecteur-&gt;oclInState(Ferme)</UML:Expression.body>
+                                        </UML:BooleanExpression>
+                                    </UML:Guard.expression>
+                                </UML:Guard>
+                            </UML:Transition.guard>
+                        </UML:Transition>
+                    </UML:StateMachine.transitions>
+                    <UML:ActivityGraph.partition>
+                        <UML:Partition xmi.id = 'a1437340736-158'>
+                            <UML:ModelElement.name>Officier</UML:ModelElement.name>
+                            <UML:Partition.contents>
+                                <UML:ModelElement xmi.idref = 'a1437340736-120' />     <!-- LeverDrapeau -->
+                                <UML:ModelElement xmi.idref = 'a1437340736-130' />     <!-- BaisserDrapeau -->
+                                <UML:ModelElement xmi.idref = 'a1437340736-134' />     <!-- Attendre -->
+                            </UML:Partition.contents>
+                        </UML:Partition>
+                        <UML:Partition xmi.id = 'a1437340736-159'>
+                            <UML:ModelElement.name>IA</UML:ModelElement.name>
+                            <UML:Partition.contents>
+                                <UML:ModelElement xmi.idref = 'a1437340736-124' />     <!-- ^Fermer -->
+                                <UML:ModelElement xmi.idref = 'a1437340736-143' />     <!-- cabine -->
+                                <UML:ModelElement xmi.idref = 'a1437340736-142' />     <!-- deflecteur -->
+                                <UML:ModelElement xmi.idref = 'a1437340736-138' />     <!-- ^Ouvrir -->
+                            </UML:Partition.contents>
+                        </UML:Partition>
+                    </UML:ActivityGraph.partition>
+                </UML:ActivityGraph>
+                <!-- Predefined types -->
+                <UML:DataType xmi.id = 'a4-13'>
+                    <UML:ModelElement.name>string</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-7'>
+                    <UML:ModelElement.name>char</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-9'>
+                    <UML:ModelElement.name>integer</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-11'>
+                    <UML:ModelElement.name>real</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-5'>
+                    <UML:ModelElement.name>boolean</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+                <UML:DataType xmi.id = 'a4-15'>
+                    <UML:ModelElement.name>undefined</UML:ModelElement.name>
+                    <UML:ModelElement.visibility xmi.value = 'public'/>
+                    <UML:GeneralizableElement.isRoot xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isLeaf xmi.value = 'false'/>
+                    <UML:GeneralizableElement.isAbstract xmi.value = 'false'/>
+                </UML:DataType>
+            </UML:Namespace.ownedElement>	<!-- End Package testPorteAvion's ownedElement -->
+        </UML:Model>
+    </XMI.content>
+    <XMI.extensions xmi.extender='Objing' >
+        <ObjingClass xmi.id = 'a1437340736-13_ext'>	<!-- ext PorteAvion -->
+            <ObjingClass.IsMain xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-13' />	<!-- PorteAvion -->
+            </Objing.extended>
+        </ObjingClass>
+        <ObjingClass xmi.id = 'a1437340736-14_ext'>	<!-- ext Pont -->
+            <ObjingClass.IsMain xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-14' />	<!-- Pont -->
+            </Objing.extended>
+        </ObjingClass>
+        <ObjingClass xmi.id = 'a1437340736-15_ext'>	<!-- ext Deflecteur -->
+            <ObjingClass.IsMain xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-15' />	<!-- Deflecteur -->
+            </Objing.extended>
+        </ObjingClass>
+        <ObjingEvent xmi.id = 'a1437340736-16_ext'>	<!-- ext Fermer -->
+            <EventComposedStateMachine>
+                <StateMachineRef xmi.idref = 'a1437340736-59' />     <!-- StateMachine -->
+            </EventComposedStateMachine>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-16' />	<!-- Fermer -->
+            </Objing.extended>
+        </ObjingEvent>
+        <ObjingEvent xmi.id = 'a1437340736-17_ext'>	<!-- ext Ouvrir -->
+            <EventComposedStateMachine>
+                <StateMachineRef xmi.idref = 'a1437340736-59' />     <!-- StateMachine -->
+            </EventComposedStateMachine>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-17' />	<!-- Ouvrir -->
+            </Objing.extended>
+        </ObjingEvent>
+        <ObjingEvent xmi.id = 'a1437340736-18_ext'>	<!-- ext Fermer -->
+            <EventComposedStateMachine>
+                <StateMachineRef xmi.idref = 'a1437340736-59' />     <!-- StateMachine -->
+            </EventComposedStateMachine>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-18' />	<!-- Fermer -->
+            </Objing.extended>
+        </ObjingEvent>
+        <ObjingParameter xmi.id = 'a1437340736-22_ext'>	<!-- ext entier -->
+            <ObjingParameter.Multiplicity >1</ObjingParameter.Multiplicity >
+            <ObjingParameter.TypeConstraint ></ObjingParameter.TypeConstraint>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-22' />	<!-- entier -->
+            </Objing.extended>
+        </ObjingParameter>
+        <ObjingParameter xmi.id = 'a1437340736-24_ext'>	<!-- ext cabine -->
+            <ObjingParameter.Multiplicity >1</ObjingParameter.Multiplicity >
+            <ObjingParameter.TypeConstraint ></ObjingParameter.TypeConstraint>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-24' />	<!-- cabine -->
+            </Objing.extended>
+        </ObjingParameter>
+        <ObjingClass xmi.id = 'a1437340736-26_ext'>	<!-- ext CabineCatapulte -->
+            <ObjingClass.IsMain xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-26' />	<!-- CabineCatapulte -->
+            </Objing.extended>
+        </ObjingClass>
+        <ObjingEvent xmi.id = 'a1437340736-27_ext'>	<!-- ext Ouvrir -->
+            <EventComposedStateMachine>
+                <StateMachineRef xmi.idref = 'a1437340736-73' />     <!-- StateMachine -->
+            </EventComposedStateMachine>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-27' />	<!-- Ouvrir -->
+            </Objing.extended>
+        </ObjingEvent>
+        <ObjingEvent xmi.id = 'a1437340736-28_ext'>	<!-- ext Fermer -->
+            <EventComposedStateMachine>
+                <StateMachineRef xmi.idref = 'a1437340736-73' />     <!-- StateMachine -->
+            </EventComposedStateMachine>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-28' />	<!-- Fermer -->
+            </Objing.extended>
+        </ObjingEvent>
+        <ObjingAttribute xmi.id = 'a1437340736-29_ext'>	<!-- ext vitesse -->
+            <ObjingAttribute.IsDerived xmi.value = 'false'/>
+            <ObjingAttribute.IsAbstract xmi.value = 'false'/>
+            <ObjingAttribute.TypeConstraint ></ObjingAttribute.TypeConstraint>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-29' />	<!-- vitesse -->
+            </Objing.extended>
+        </ObjingAttribute>
+        <ObjingAttribute xmi.id = 'a1437340736-31_ext'>	<!-- ext hauteur -->
+            <ObjingAttribute.IsDerived xmi.value = 'false'/>
+            <ObjingAttribute.IsAbstract xmi.value = 'false'/>
+            <ObjingAttribute.TypeConstraint ></ObjingAttribute.TypeConstraint>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-31' />	<!-- hauteur -->
+            </Objing.extended>
+        </ObjingAttribute>
+        <ObjingAttribute xmi.id = 'a1437340736-33_ext'>	<!-- ext hauteurMin -->
+            <ObjingAttribute.IsDerived xmi.value = 'false'/>
+            <ObjingAttribute.IsAbstract xmi.value = 'false'/>
+            <ObjingAttribute.TypeConstraint ></ObjingAttribute.TypeConstraint>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-33' />	<!-- hauteurMin -->
+            </Objing.extended>
+        </ObjingAttribute>
+        <ObjingAttribute xmi.id = 'a1437340736-35_ext'>	<!-- ext hauteurMax -->
+            <ObjingAttribute.IsDerived xmi.value = 'false'/>
+            <ObjingAttribute.IsAbstract xmi.value = 'false'/>
+            <ObjingAttribute.TypeConstraint ></ObjingAttribute.TypeConstraint>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-35' />	<!-- hauteurMax -->
+            </Objing.extended>
+        </ObjingAttribute>
+        <ObjingParameter xmi.id = 'a1437340736-234_ext'>	<!-- ext x -->
+            <ObjingParameter.Multiplicity >1</ObjingParameter.Multiplicity >
+            <ObjingParameter.TypeConstraint ></ObjingParameter.TypeConstraint>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-234' />	<!-- x -->
+            </Objing.extended>
+        </ObjingParameter>
+        <ObjingParameter xmi.id = 'a1437340736-235_ext'>	<!-- ext y -->
+            <ObjingParameter.Multiplicity >1</ObjingParameter.Multiplicity >
+            <ObjingParameter.TypeConstraint ></ObjingParameter.TypeConstraint>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-235' />	<!-- y -->
+            </Objing.extended>
+        </ObjingParameter>
+        <ObjingParameter xmi.id = 'a1437340736-236_ext'>	<!-- ext z -->
+            <ObjingParameter.Multiplicity >1</ObjingParameter.Multiplicity >
+            <ObjingParameter.TypeConstraint ></ObjingParameter.TypeConstraint>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-236' />	<!-- z -->
+            </Objing.extended>
+        </ObjingParameter>
+        <ObjingAssociationEnd xmi.id = 'a1437340736-42_ext'>	<!-- ext cabine -->
+            <ObjingAssociationEnd.IsAbstract xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-42' />	<!-- cabine -->
+            </Objing.extended>
+        </ObjingAssociationEnd>
+        <ObjingAssociationEnd xmi.id = 'a1437340736-43_ext'>	<!-- ext undefined -->
+            <ObjingAssociationEnd.IsAbstract xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-43' />	<!-- undefined -->
+            </Objing.extended>
+        </ObjingAssociationEnd>
+        <ObjingClass xmi.id = 'a1437340736-45_ext'>	<!-- ext Personnage -->
+            <ObjingClass.IsMain xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-45' />	<!-- Personnage -->
+            </Objing.extended>
+        </ObjingClass>
+        <ObjingClass xmi.id = 'a1437340736-49_ext'>	<!-- ext Class -->
+            <ObjingClass.IsMain xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-49' />	<!-- Class -->
+            </Objing.extended>
+        </ObjingClass>
+        <ObjingClass xmi.id = 'a1437340736-50_ext'>	<!-- ext Class1 -->
+            <ObjingClass.IsMain xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-50' />	<!-- Class1 -->
+            </Objing.extended>
+        </ObjingClass>
+        <ObjingAssociationEnd xmi.id = 'a1437340736-53_ext'>	<!-- ext roleDeClass -->
+            <ObjingAssociationEnd.IsAbstract xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-53' />	<!-- roleDeClass -->
+            </Objing.extended>
+        </ObjingAssociationEnd>
+        <ObjingAssociationEnd xmi.id = 'a1437340736-54_ext'>	<!-- ext roledeClass1 -->
+            <ObjingAssociationEnd.IsAbstract xmi.value = 'false'/>
+            <Objing.extended>
+                <XMI.reference xmi.idref = 'a1437340736-54' />	<!-- roledeClass1 -->
+            </Objing.extended>
+        </ObjingAssociationEnd>
+    </XMI.extensions>
+</XMI>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<Application>
+  
+  <Environment url="cervOgre.xml" />
+
+  <ApplicationParameters>
+     <HTTP RessourceDir="./HTTPServerBaseDir/" />
+     <!--User name = "LocalUser" /-->
+
+     <Plugins PluginsDir="./">
+        <Plugin Name = "SpaceMouseMascaret"/>
+     </Plugins> 
+
+  </ApplicationParameters>
+
+
+  <Renderer near="0.4" far="2400" fieldOfView="45">
+    <Window x="0" y="0" width="800" height="600" decoration="false"/>
+    <Scene name="scene" viewpoint="initAV" />
+  </Renderer>
+
+<Navigation type="camera" mode="human">
+   <TX peripheric="spaceMouse" axis="tz" speed="0.01"/>
+   <TX peripheric="mouse" axis="x" speed="0.01"/>
+   <TY peripheric="spaceMouse" axis="tx" speed="-0.01"/>
+   <TY peripheric="mouse" axis="y" speed="0.01"/>
+   <TZ peripheric="spaceMouse" axis="ty" speed="-0.01"/>
+   <Yaw peripheric="spaceMouse" axis="ry" speed="0.005"/>
+   <Pitch peripheric="spaceMouse" axis="rx" speed="-0.005"/>
+</Navigation>
+
+<Interactions>
+	<SendSignal name="Appuye" peripheric="mouse" button="button1" pressed="true" target="designated"/>
+	<SendSignal name="Relache" peripheric="mouse" button="button1" pressed="false" target="designated"/>
+</Interactions>
+
+ <Profile>
+    <Interactions>
+       <Keyboard>
+          <Key name="f" signal="Ferme" pressed="release" />
+          <Key name="o" signal="Ouvre" pressed="release" />
+          <Key name="n" signal="next" pressed="press"/>
+          <Key name="p" signal="previous" pressed="press"/>
+       </Keyboard>
+
+       <Mouse>
+          <Key name="1" signal="Ouvrir" pressed="release" />
+          <Key name="3" signal="Fermer" pressed="press" />
+       </Mouse>
+    </Interactions>
+
+    <Navigation>
+       <Keyboard>
+          <Key name="+" action="nextViewpoint" />
+          <Key name="-" action="formerViewpoint" />
+          <Key name="/" action="lowerSpeed" device="spacemouse" />
+          <Key name="*" action="higherSpeed" device="spacemouse" />
+       </Keyboard>
+
+       <SpaceMouse translationSpeed="0.04" rotationSpeed="0.002">
+          <Rotation roll="true" pitch="true" yaw="true"/>
+          <Translation x="true" y="true" z="true"/>
+          <Key name="1" action="lowerSpeed" />
+          <Key name="2" action="higherSpeed" />
+          <Key name="*" action="switch2DMotion" />
+        </SpaceMouse>
+    </Navigation>
+  </Profile>
+
+  <Scene name = "scene">
+<Decors>
+
+			
+			<!-- Test Julien -->			
+			<Light directional="true">
+				<Position x="0" y="-350.0" z="226.0"/>
+				<Orientation roll="0.0" pitch="+0.5" yaw="0.0"/>
+				<Color r="1" g="1" b="1"/>      
+			</Light>
+			<Light directional="false">
+				<Position x="0" y="350.0" z="50.0"/>
+				<Orientation roll="0.0" pitch="+0.5" yaw="3.14"/>
+				<Color r="0.2" g="0.2" b="0.2"/>      
+			</Light>
+			<Light directional="true" layer="back">
+				<Position x="0" y="-350.0" z="226.0"/>
+				<Orientation roll="0.0" pitch="+0.5" yaw="0.0"/>
+				<Color r="1" g="1" b="1"/>      
+			</Light>
+			<Light directional="false" layer="back">
+				<Position x="0" y="350.0" z="50.0"/>
+				<Orientation roll="0.0" pitch="+0.5" yaw="3.14"/>
+				<Color r="0.2" g="0.2" b="0.2"/>      
+			</Light>
+			
+			<Fog>
+				<Properties degree="1" density="2.5"/>
+				<Color r="0.8" g="0.8" b="0.8"/>      
+			</Fog>
+		</Decors> 
+  </Scene>
+
+
+
+</Application>

@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\VRPlateform\AReViAnimationSpecification.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViCamera.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViLight.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViScene.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViMascaretApplication.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViPointSpecification.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViShapeSpecification.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViSoundSpecification.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViWindow3D.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViEntityObject.cpp">
+      <Filter>VRPlateform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\AReViAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\HLibAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\ObjectAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\AReViMouse.cpp">
+      <Filter>Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\AReViCursor.cpp">
+      <Filter>Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\AReViKeyboard.cpp">
+      <Filter>Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Network\AReViMascaretClient.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Network\AReViMascaretServer.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Network\nsEventEndConnection.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AReViVRComponentFactory.cpp" />
+    <ClCompile Include="_AReViMascaretClasses.cpp" />
+    <ClCompile Include="src\Assistance\AReViBalloon.cpp">
+      <Filter>Assistance</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Assistance\AReViColor.cpp">
+      <Filter>Assistance</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Assistance\AReViImage.cpp">
+      <Filter>Assistance</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Assistance\AReViOSDDisplay.cpp">
+      <Filter>Assistance</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Assistance\CairoTextManager.cpp">
+      <Filter>Assistance</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\VRPlateform\AReViAnimationSpecification.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Animation\HLibAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Animation\ObjectAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\AReViCamera.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\AReViWindow3D.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\AReViScene.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\AReViLight.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\AReViSoundSpecification.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\AReViMascaretApplication.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Network\AReViMascaretClient.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Network\AReViMascaretServer.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interaction\AReViMouse.h">
+      <Filter>Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\AReViPointSpecification.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\AReViShapeSpecification.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VRPlateform\AReViEntityObject.h">
+      <Filter>VRPlateform</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Animation\AReViAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interaction\AReViCursor.h">
+      <Filter>Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interaction\AReViKeyboard.h">
+      <Filter>Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Network\nsEventEndConnection.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AReViVRComponentFactory.h" />
+    <ClInclude Include="include\Assistance\AReViBalloon.h">
+      <Filter>Assistance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assistance\AReViColor.h">
+      <Filter>Assistance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assistance\AReViImage.h">
+      <Filter>Assistance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assistance\AReViOSDDisplay.h">
+      <Filter>Assistance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assistance\CairoTextManager.h">
+      <Filter>Assistance</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="VRPlateform">
+      <UniqueIdentifier>{d2780457-0f8e-4076-9680-156fdbbba98d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{baaf084c-99c8-46ee-b29a-651172388987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interaction">
+      <UniqueIdentifier>{e1036ec8-9111-4aa9-ab8d-71a5aa473e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{ef5a1e3a-f2d0-458a-bf32-4e1dffa3f178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assistance">
+      <UniqueIdentifier>{5479951f-db69-4a4f-966e-31a0d28bcd9b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

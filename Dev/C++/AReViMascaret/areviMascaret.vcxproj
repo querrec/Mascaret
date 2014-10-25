@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4a7b0bde-71db-11e1-9790-bc305bd335c5}</ProjectGuid>
+    <ProjectName>areviMascaret</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_AREVI_WANTS_SECURE_SCL=0;_SCL_SECURE_NO_WARNINGS;_SECURE_SCL=0;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\querrec\Developpements\hLib\include;C:\Users\querrec\Developpements\ArWidget\include;C:\Users\querrec\Developpements\animlib\include;%(AdditionalIncludeDirectories);.;c:\Users\querrec\Developpements\AReVi\include;c:\Users\querrec\Developpements\AReVi\include\AReVi\Utils\Win32FlexWorkaround;include;C:\Users\querrec\Developpements\mascaret2\branches\sysml\Dev\C++\Mascaret\include;C:\gnuwin32\include\libxml2;C:\Program Files\boost\boost_1_43;C:\gnuwin32\include</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\querrec\Developpements\mascaret2\branches\sysml\Dev\C++\AReViMascaret;C:\Users\querrec\Developpements\hLib\lib;C:\Users\querrec\Developpements\ArWidget\lib;C:\Users\querrec\Developpements\animlib\lib;C:\Users\querrec\Developpements\Tools\libxml2-2.4.12-1-lib\lib;%(AdditionalLibraryDirectories);.;c:\Users\querrec\Developpements\AReVi\lib;lib;C:\Users\querrec\Developpements\mascaret2\branches\sysml\Dev\C++\Mascaret;C:\Program Files\boost\boost_1_43\lib;C:\gnuwin32\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);AReVi_d.lib;AReViNS_d.lib;libxml2.lib;AReViMascaretLib.lib;AnimLib_d.lib;arWidget_d.lib;AReViHLib2_d.lib;Mascaret.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_AREVI_WANTS_SECURE_SCL=0;_SCL_SECURE_NO_WARNINGS;_SECURE_SCL=0;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);.;c:\Users\querrec\Developpements\AReVi\include;c:\Users\querrec\Developpements\AReVi\include\AReVi\Utils\Win32FlexWorkaround;include;..\Mascaret\include;C:\gnuwin32\include\libxml2;C:\Program Files\boost\boost_1_43;C:\gnuwin32\include;</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);.;c:\Users\querrec\Developpements\AReVi\lib;lib;..\Mascaret;C:\Program Files\boost\boost_1_43\lib;C:\gnuwin32\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);AReVi.lib;AReViNS_d.lib;libxml2.lib;AReViMascaretLib.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <ObjectFileName>$(IntDir)src\main.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\VRPlateform\AReViMascaretApplication.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

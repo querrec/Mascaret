@@ -1,0 +1,473 @@
+//----------------------------------------------------------------------------
+// @(#) ENIB/LI2 (c) - AnimLib
+//----------------------------------------------------------------------------
+// package     : AnimLib
+// file        : keyFrame.h => declaration of a single keyFrame
+// description : Class describing a keyFrameTrack, a keyFrameTrackReal, keyFrameTrackReal3
+// author(s)   : CAZEAUX Eric
+// mail        : cazeaux@enib.fr
+//----------------------------------------------------------------------------
+// last update : 30/11/2005
+//----------------------------------------------------------------------------
+
+
+// Included from "keyFrameTrack.h"
+
+namespace AnimLib {
+
+//----------------------------------------------------------------------------
+// CLASS       : KeyFrameTrackNurbs
+//----------------------------------------------------------------------------
+
+template <class T, int N> inline
+KeyFrameTrackNurbs<T,N>::KeyFrameTrackNurbs(void) 
+    : KeyFrameTrack(),
+      _keyFrames(), 
+      _curve()
+{
+// Nothing to be done here!
+}
+
+template <class T, int N> inline
+KeyFrameTrackNurbs<T,N>::~KeyFrameTrackNurbs(void)
+{
+// Nothing to be done here!
+}
+
+
+//--------------------------- Evaluate a point -------------------------------
+
+// Compute a key frame at time t in [0,duration]
+template <class T, int N> inline
+bool // success
+KeyFrameTrackNurbs<T,N>::computeFrame(double t, AReVi::VectorN<T,N> &keyFrameOut)
+{
+if (_needRebuildTrack)
+  {
+  _needRebuildTrack=!_rebuildTrackInterpolator();
+  }
+  
+if (!_needRebuildTrack)
+  {
+  if (_duration>0.0)
+    {
+    if (t<=_duration && t>=0.0)
+      {
+      _curve.computePoint(t/_duration,keyFrameOut);
+      return(true);
+      }
+    else
+      {
+      return(false);
+      }
+    }
+  else // Duration is null, return last position
+    {
+    KeyFrameIterator it=_keyFrames.end();
+    it--; // Get the last key position
+    keyFrameOut=it->second.position;
+    return(true);
+    }
+  }
+return(false);
+}
+
+
+// Compute a key frame at position pos in [firstPost,lastPos]
+template <class T, int N> inline
+bool // success
+KeyFrameTrackNurbs<T,N>::computePosition(unsigned position, AReVi::VectorN<T,N> &keyFrameOut)
+{
+if (_needRebuildTrack)
+  {
+  _needRebuildTrack=!_rebuildTrackInterpolator();
+  }
+  
+KeyFrameIterator it;
+
+it=_keyFrames.find(position);
+if (it!=_keyFrames.end())
+  {
+  keyFrameOut=it->second.position; // special case
+  return(true);
+  }
+else if (!_needRebuildTrack && _keyFrames.size()>=2)
+  {
+  unsigned first, last;
+  it=_keyFrames.end();it--; // Get the last key position
+  last=it->first;
+  first=_keyFrames.begin()->first;
+  
+  if (last>first && position>=first &&  position<=last) // last!=first
+    {
+    _curve.computePoint((position-first)/((double)(last-first)),keyFrameOut);
+    return(true);
+    }
+  }
+return(false);
+}
+
+// Compute a frame at time t in [0,duration], specialized for T
+template <class T, int N> //virtual
+bool // success 
+KeyFrameTrackNurbs<T,N>::computeFrame(double t, StlVector<T> &frameOut)
+{
+AReVi::VectorN<T,N> frame;
+if (computeFrame(t,frame))
+  {
+  frameOut.resize(N);
+  for (unsigned i=N;i--;)
+    frameOut[i]=frame[i];
+    
+  return(true);
+  }
+else
+  {
+  return(false);
+  }
+}
+  
+// Compute a key frame at position pos in [firstPost,lastPos], specialized for T
+template <class T, int N> //virtual
+bool // success
+KeyFrameTrackNurbs<T,N>::computePosition(unsigned  position, StlVector<T> &frameOut)
+{
+AReVi::VectorN<T,N> frame;
+if (computePosition(position,frame))
+  {
+  frameOut.resize(N);
+  for (unsigned i=N;i--;)
+    frameOut[i]=frame[i];
+    
+  return(true);
+  }
+else
+  {
+  return(false);
+  }
+}
+
+
+//--------------------------- Inspect variable -------------------------------
+  
+// Inspect list of keyFrames
+template <class T, int N> inline
+const StlMap<unsigned, AReVi::VectorN<T,N> > &
+KeyFrameTrackNurbs<T,N>::getKeyFrames(void) const
+{
+return(_keyFrames);
+}
+
+//--------------------------- KeyFrames manip -------------------------------
+  
+// Add Key Frame
+template <class T, int N> inline
+void
+KeyFrameTrackNurbs<T,N>::setKeyFrame(unsigned position, const AReVi::VectorN<T,N> &key)
+{
+if (_keyFrames.find(position)==_keyFrames.end())
+  {
+  for(unsigned i=N;i--;)
+    _keyFrames[position].deriv[i]=(T)0;
+    
+  _keyFrames[position].useDeriv=false;
+  }
+  
+_keyFrames[position].position=key;
+_needRebuild();
+}
+
+//! Get Key Frame
+template <class T, int N>
+bool // success
+KeyFrameTrackNurbs<T,N>::getKeyFrame(unsigned position, AReVi::VectorN<T,N> &keyOut) const
+{
+KeyFrameConstIterator it=_keyFrames.find(position);
+if (it==_keyFrames.end())
+  {  
+  return(false);
+  }
+else
+  {
+  keyOut=it->second.position;
+  return(true);
+  }
+}
+
+// Add Key Frame
+template <class T, int N>
+bool // success
+KeyFrameTrackNurbs<T,N>::removeKeyFrame(unsigned position)
+{
+KeyFrameIterator it=_keyFrames.find(position);
+if (it==_keyFrames.end())
+  {
+  return(false);
+  }
+else
+  {
+  _keyFrames.erase(it);
+  _needRebuild();
+  return(true);
+  }
+}
+
+// Add Key Frame
+template <class T, int N>
+void
+KeyFrameTrackNurbs<T,N>::clearKeyFrames(void)
+{
+_keyFrames.clear();
+_needRebuild();
+}
+
+
+// Nb Key Frames
+template <class T, int N> // virtual
+unsigned
+KeyFrameTrackNurbs<T,N>::getNbKeyFrames(void) const
+{
+return(_keyFrames.size());
+}
+
+// Get key Frames positions
+template <class T, int N> // virtual
+void
+KeyFrameTrackNurbs<T,N>::getKeysPositions(StlVector<unsigned> &keysPositionOut) const
+{
+keysPositionOut.clear();
+keysPositionOut.reserve(_keyFrames.size());
+
+for (KeyFrameConstIterator it=_keyFrames.begin();it!=_keyFrames.end();it++)
+  {
+  keysPositionOut.push_back(it->first);
+  }
+}
+
+// Abstract methods to remove and add key frames
+template <class T, int N> // virtual
+bool // success
+KeyFrameTrackNurbs<T,N>::addKeyFrame(unsigned position)
+{
+if (_keyFrames.find(position)==_keyFrames.end())
+  {
+  _keyFrames[position]=KeyFrame();
+  for(unsigned i=N;i--;)
+    {
+    _keyFrames[position].position[i]=(T)0;
+    _keyFrames[position].deriv[i]=(T)0;
+    }
+  _keyFrames[position].useDeriv=false;
+  _needRebuild();
+  return(true);
+  }
+else
+  return(false);
+}
+  
+//--------------------------- Curve inspector -------------------------------
+  
+template <class T, int N> inline
+const AReVi::ArNurbs::CurveN<T,N> &
+KeyFrameTrackNurbs<T,N>::getCurve(void) const
+{
+return(_curve);
+}
+
+//--------------------------- Control interpolation --------------------------
+
+ 
+// Add/Set Key Frame derivative
+template <class T, int N> inline
+void
+KeyFrameTrackNurbs<T,N>::setKeyFrameDeriv(unsigned position, const AReVi::VectorN<T,N> &deriv, bool active)
+{
+if (_keyFrames.find(position)==_keyFrames.end())
+  {
+  for(unsigned i=N;i--;)
+    _keyFrames[position].position[i]=(T)0;
+  }
+  
+_keyFrames[position].deriv=deriv;
+_keyFrames[position].useDeriv=active;
+_needRebuild();
+}
+
+// Get Key Frame derivative
+template <class T, int N>
+bool // success
+KeyFrameTrackNurbs<T,N>::getKeyFrameDeriv(unsigned position, AReVi::VectorN<T,N> &derivOut, bool &activeOut) const
+{
+KeyFrameConstIterator it=_keyFrames.find(position);
+if (it==_keyFrames.end())
+  {  
+  return(false);
+  }
+else
+  {
+  derivOut=it->second.deriv;
+  activeOut=it->second.useDeriv;
+  return(true);
+  }
+}
+  
+//--------------------------- Force rebuild ---------------------------------
+
+template <class T, int N> // virtual
+bool //success
+KeyFrameTrackNurbs<T,N>::rebuild(void)
+{
+_needRebuildTrack=!_rebuildTrackInterpolator();
+return(!_needRebuildTrack);
+}
+  
+//------------------------- Forbiden operations ------------------------------  
+
+template <class T, int N> inline
+bool
+KeyFrameTrackNurbs<T,N>::_rebuildTrackInterpolator(void)
+{
+if (_keyFrames.size()<2)
+  return(false);
+  
+KeyFrameIterator it;
+KeyFrameIterator it_end=_keyFrames.end();
+
+it=it_end; 
+it--; // Get the last key position
+
+if (_keyFrames.size()<2 || !it->first) // Check that interpolation can be made
+  return(false);
+  
+double ratio=1.0/it->first;
+StlVector<AReVi::VectorN<T,N> > points;
+StlVector<std::pair<VectorN<T,N> , bool> > derivs;
+StlVector<T> ub;
+
+
+it=_keyFrames.begin();
+
+
+
+while(it!=it_end)
+  {
+  points.push_back(it->second.position);
+  ub.push_back((T)(it->first*ratio));
+  derivs.push_back(pair<VectorN<T,N> , bool>(it->second.deriv,it->second.useDeriv));
+  it++;
+  }
+  
+if (_degree<=1)
+  return(AReVi::ArNurbs::globalInterpolationN(points,ub, _degree,_curve));
+else
+  {
+  return(AReVi::ArNurbs::globalInterpolationDerivN(points,ub, _degree, derivs, _curve));
+  }
+}
+
+// Save/Load to XML
+template <class T, int N>
+void
+KeyFrameTrackNurbs<T,N>::_writeXML(ArRef<XmlNode> node) const
+{
+KeyFrameTrack::_writeXML(node);
+
+node->setPropertyInteger("dimension",N);
+
+KeyFrameConstIterator it=_keyFrames.begin(), it_end=_keyFrames.end();
+while(it!=it_end)
+  {
+  ArRef<XmlNode> keyFrame=node->addChild("KeyFrame");
+  keyFrame->setPropertyInteger("frame",it->first);
+  keyFrame->setPropertyBoolean("useDeriv",it->second.useDeriv);
+  
+  if (it->second.useDeriv)
+    {
+    for (unsigned i=0;i<N;i++)
+      {
+      keyFrame->setPropertyReal("v"+uintToStr(i),it->second.position[i]);
+      keyFrame->setPropertyReal("dv"+uintToStr(i),it->second.deriv[i]);
+      }
+    }
+  else
+    {
+    for (unsigned i=0;i<N;i++)
+      {
+      keyFrame->setPropertyReal("v"+uintToStr(i),it->second.position[i]);
+      }
+    }
+  it++;
+  }
+}
+
+
+template <class T, int N>
+bool
+KeyFrameTrackNurbs<T,N>::_readXML(ArRef<XmlNode> node)
+{
+if (!KeyFrameTrack::_readXML(node))
+  return(false);
+
+int dim;
+if (!node->getPropertyInteger("dimension",dim))
+  {
+  cerr << "Missing dimensions specification" << endl;
+  return(false);
+  }
+if (dim!=N)
+  {
+  cerr << "Bad track dimension " << dim << "!=" << N << endl;
+  return(false);
+  }
+  
+_keyFrames.clear();
+
+ArRef<XmlNode> keyFrame=node->getFirstChild();   
+while(keyFrame)
+  {
+  if (keyFrame->getName()=="KeyFrame")
+    {
+    int frame;
+    if (!keyFrame->getPropertyInteger("frame",frame))
+      {
+      cerr << "Invalid keyFrame misssing frame info"<< endl;
+      return(false);
+      }
+    KeyFrame key;
+    if (!keyFrame->getPropertyBoolean("useDeriv",key.useDeriv))
+      key.useDeriv=false; // default
+    
+    for (unsigned i=0;i<N;i++)
+      {
+      double value;
+      if (!keyFrame->getPropertyReal("v"+uintToStr(i),value))
+        {
+        cerr << "Error reading v" << i << " value" << endl;
+        return(false);
+        }
+      key.position[i]=(T)value;
+      
+      if (key.useDeriv)
+        {
+        if (!keyFrame->getPropertyReal("dv"+uintToStr(i),value))
+          {
+          cerr << "Error reading dv" << i << " value" << endl;
+          return(false);
+          }
+        key.deriv[i]=(T)value;
+        }
+      else
+        key.deriv[i]=(T)0;
+      }
+      
+    _keyFrames[frame]=key;
+    }
+  keyFrame=keyFrame->getNext();
+  }
+_needRebuild();
+return(true);
+}    
+
+} // end of namespace AnimLib
+
+// EOF

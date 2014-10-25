@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5fcaff5e-dfc7-11e0-869f-0009dd50902f}</ProjectGuid>
+    <ProjectName>ogreMascaret</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_HAS_CPP0X=0;_SECURE_SCL=0;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);.;include;..\Mascaret\include;C:\Users\querrec\Developpements\Tools\libxml2-2.4.12-1-lib\include\libxml2;C:\Program Files\boost\boost_1_43;C:\gnuwin32\include;C:\Users\querrec\Developpements\Tools\OgreSDK_vc10_v1-7-2\include\OGRE;C:\Users\querrec\Developpements\Tools\OgreSDK_vc10_v1-7-2\include\OIS</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);.;..\Mascaret;C:\Users\querrec\Developpements\Tools\libxml2-2.4.12-1-lib\lib;C:\Program Files\boost\boost_1_43\lib;C:\Users\querrec\Developpements\Tools\OgreSDK_vc10_v1-7-2\lib\debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;OgreMain_d.lib;OIS_d.lib;Mascaret.lib;OgreMascaretLib.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_HAS_CPP0X=0;_SECURE_SCL=0;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);.;include;include;..\Mascaret\include;C:\gnuwin32\include\libxml2;C:\Program Files\boost\boost_1_43;C:\gnuwin32\include;C:\Work\OgreSDK_vc10_v1-7-2\include\OGRE;C:\Work\OgreSDK_vc10_v1-7-2\include\OIS;</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);.;..\Mascaret;C:\gnuwin32\lib;C:\Program Files\boost\boost_1_43\lib;C:\Work\OgreSDK_vc10_v1-7-2\lib\debug;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;OgreMain_d.lib;OIS_d.lib;Mascaret.lib;OgreMascaretLib.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <ObjectFileName>$(IntDir)src\main.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\VRPlateform\OgreMascaretApplication.h" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

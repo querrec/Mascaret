@@ -1,0 +1,79 @@
+#---------- Get AReVi path then arBuildUtils
+#           first try arevi_path=foobar argument 
+areviPath = ARGUMENTS.get('arevi_path','')
+#           else try via arevi-config script
+if areviPath=='':
+  from subprocess import Popen,PIPE
+  try:
+    areviPath = Popen(
+      ["arevi-config","--install"],stdout=PIPE).communicate()[0].strip()
+  except OSError, e: 
+    print "no arevi_path argument neither arevi-config script found !",e
+    Exit(-1)
+#           arBuildUtils.py lies in AReVi_something/lib
+import sys
+sys.path.append(areviPath+"/lib")
+from arBuildUtils import *
+
+#---------- Executable settings ----------------------------------------------
+
+#--------- creates an AReVi env
+env = getDefaultEnvClone(getDebugArgument(True))
+# my version of AReVi (2009m12d04) does not add AReVi to rpath
+# the trunk version does
+env.AppendUnique(RPATH=['$ARDIR/lib'])
+env.AppendUnique(LIBPATH=[areviPath+'/lib'])
+env.AppendUnique(RPATH=areviPath+'/lib')
+
+#------    
+gnuWin32Path=None
+if env['PLATFORM'] == "win32":
+  gnuWin32Path = getWindowsRegistry(['SOFTWARE','GnuWin32','InstallPath'])
+  if gnuWin32Path:
+    print " => Found gnuWin32:",gnuWin32Path
+    env.Append(CPPPATH=[gnuWin32Path+"\\include"])
+    env.Append(LIBPATH=gnuWin32Path+"\\lib")
+
+#------
+flexAndBison = which('flex') != None and which('bison') != None
+if flexAndBison:
+  print "Flex and Bison found"
+  if env['PLATFORM']=='win32':
+    print "Using a false iostream.h in AReVi/Utils/Win32FlexWorkaround"
+    env.Append(CPPPATH=['$ARDIR/include/AReVi/Utils/Win32FlexWorkaround'])
+  print "=> AReVi lib dependencies ok"
+  print
+#--------- checks and appends mandatory external libs
+
+
+env.AppendUnique(CPPPATH=["include"])
+env.AppendUnique(CPPFLAGS=["-D_ANIMLIB_LIB"])
+
+
+#-------- debug infos
+print "LIBPATH",env['LIBPATH']
+print "RPATH",env['RPATH']
+print "LIBS",env['LIBPATH']
+print "CPPPATH",env['CPPPATH']
+#--------- program compilation
+arSharedLibrary( env=env,
+           name="AnimLib",
+           srcList= [
+			"src/AnimLib/arKeyFrameTrack.cpp",
+			"src/AnimLib/arKineticLink.cpp",
+			"src/AnimLib/arTrackBase3D.cpp",
+			"src/AnimLib/arTrackMaterial3D.cpp",
+			"src/AnimLib/arTrackMixer.cpp",
+			"src/AnimLib/arTrackOrientation.cpp",
+			"src/AnimLib/arTrackPosition.cpp",
+			"src/AnimLib/arTrackRotation.cpp",
+			"src/AnimLib/arTrackScale.cpp",
+			"src/AnimLib/arTrackSpiral.cpp",
+			"src/AnimLib/arTrackTexture.cpp",
+			"src/AnimLib/arTrackTranslation.cpp",
+			"src/AnimLib/keyFrameTrack.cpp",
+			"src/AnimLib/keyFrameTrackSwitch.cpp",
+			"src/AnimLib/utils.cpp" ],
+			namespace="AnimLib",
+           registerFunctionName="registerAnimLibClasses" )
+

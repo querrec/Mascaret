@@ -1,0 +1,15 @@
+window_sizes 1918 1050 270 1642 851 120
+diagrams
+  active  classdiagram_ref 128002 // ClockTower
+    1313 680 100 4 0 0
+  statediagram_ref 128130 // Clock
+    1313 680 100 4 0 0
+end
+show_stereotypes
+selected state_ref 128002 // ClockStateMachine
+open
+  classview_ref 128130 // Mascaret
+  class_ref 128130 // Clock
+  state_ref 128002 // ClockStateMachine
+end
+end

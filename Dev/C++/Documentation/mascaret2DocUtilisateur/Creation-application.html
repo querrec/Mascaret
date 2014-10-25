@@ -1,0 +1,654 @@
+<html lang="fr">
+<head>
+<title>Creation application - Documentation utilisateur de mascaret 2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Documentation utilisateur de mascaret 2">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Installation.html#Installation" title="Installation">
+<link rel="next" href="Annexe1.html#Annexe1" title="Annexe1">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+Un embryon de documentation utilisateur pour mascaret 2.
+Copyright ??? License ??-->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Creation-application"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Annexe1.html#Annexe1">Annexe1</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Installation.html#Installation">Installation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">3 Les applications Mascaret</h2>
+
+<h3 class="section">3.1 Structure d'une application</h3>
+
+<p>Une application Mascaret est composée de:
+     <ul>
+<li>Un modèle UML exporté au format XMI (1.4/2.0/2.1)
+<li>La description d'un environnement instanciant le précédent modèle dans un format spécifique à Mascaret (fichier(s) XML). 
+<li>Un fichier configurant la Navigation, les interactions et le rendu (fichier XML)
+</ul>
+
+<h3 class="section">3.2 Le modèle</h3>
+
+<p>Le modèle permet de décrire les types d'objets/personnes qui vont évoluer dans la simulation. Il va permettre par exemple de décrire la composition d'un porte-avion,
+d'un avion, d'un camion de pompier ou même d'une prise électrique programmable ainsi que les rôles des divers acteurs de la simulation.
+
+<h4 class="subsection">3.2.1 Les outils de modélisation UML</h4>
+
+<p>Les modèles UML utilisés par Mascaret peuvent être réalisés par n'importe quel modeleur UML pouvant exporter dans un format XMI supporté par Mascaret (1.4/2.0/2.1). 
+Les modeleurs avec lesquels des applications Mascaret ont été réalisées sont :
+     <ul>
+<li>BOUML: Un modeleur UML open source très complet
+<li>Objecteering: Un modeleur propriétaire assurant la cohérence du modèle
+<li>Modelio: Le successeur d'objecteering dont la version gratuite supporte l'export en XMI
+</ul>
+
+<h4 class="subsection">3.2.2 Le profile Mascaret</h4>
+
+<p>Un profil UML Mascaret est disponible pour objecteering. 
+Pour les autres modeleurs, il convient d'ajouter au modèle les types de base suivants:
+     <ul>
+<li><code>integer</code> représentant un entier naturel
+<li><code>real</code> représentant un nombre réel
+<li><code>string</code> représentant une chaine de caractère
+<li><code>boolean</code> représentant une valeur booléenne (vrai ou fausse)
+<li><code>vector</code> représentant un vecteur de réel à 3 dimensions
+<li><code>rotation</code> représentant une orientation dans l'espace définit par un vecteur à 3 dimensions et un angle
+<li><code>point</code> représentant un point orienté dans l'espace
+<li><code>path</code> représentant une suite ordonnée de points orientés dans l'espace
+<li><code>color</code> représentant une couleur
+<li><code>shape</code> représentant une représentation 3d
+<li><code>animation</code> représentant un animation
+<li><code>sound</code> représentant un son. 
+</ul>
+
+   <p>Il n'est toutefois pas nécessaire de spécifier tous ces type de base. Seuls ceux utilisés dans le modèle sont bien entendu obligatoires.
+
+   <p>De même, les stéréotypes suivants sont nécessaires:
+     <ul>
+<li><code>Entity</code> applicable sur une classe. Les classes de ce stéréotype sont des entités. 
+Elles possèdent implicitement une position dans l'espace et une propriété <code>shape</code> de type <code>shape</code> (voir ci-dessus). 
+Elles peuvent de plus avoir une entité parent et des entités enfants. 
+<li><code>Agent</code> applicable sur une classe (pas utilisé pour le moment). Les classes de ce stéréotype sont des agents. 
+Ils peuvent posséder des comportements d'agent. 
+<li><code>VirtualHuman</code> applicable sur une classe. Les classes de ce stéréotype sont à la fois des entités et des agents. 
+<li><code>RoleClass</code> applicable sur une classe. Les classes de ce stéréotype représente un rôle au sein d'une équipe. 
+<li><code>Team</code> applicable sur un package. Les packages de ce stéréotype sont des équipes. Ces packages contiennent généralement des classes stéréotypées <code>RoleClass</code> et des activités stéréotypées <code>Procedure</code>
+<li><code>Procedure</code> applicable sur un diagramme d'activité. Les activités de ce stéréotype sont des procédures devant être réalisés par les équipes. 
+<li><code>NonInterupt</code> applicable sur un état de machine à état. Les états de ce stéréotype sont non interuptibles. 
+C'est à dire que les actions réalisées sur leur <code>do</code> doivent être réalisées jusqu'au bout même si une transition devient valide pour quitter cet état. 
+</ul>
+
+<h4 class="subsection">3.2.3 Le méta-modèle de Mascaret</h4>
+
+<p>Mascaret implémente un métamodèle proche du métamodèle UML 2. Cependant, quelques différences existent. 
+Un modèle est constitué d'un unique package racine.
+
+   <p>Un package peut contenir:
+     <ul>
+<li>des packages
+<li>des classes
+<li>des signaux
+</ul>
+
+   <p>Une classe peut contenir:
+     <ul>
+<li>une unique classe mère
+<li>des propriétés (property dans UML2) pouvant être des attributs (type de base) et des associations. Les différents types d'associations comme compositions, agrégations sont considérés comme des associations simples. 
+<li>des méthodes
+<li>des machine à états
+</ul>
+
+   <p>Une méthode est composée de:
+     <ul>
+<li>paramètres
+<li>un type de retour
+<li>une éventuelle activité fournissant son implémentation
+</ul>
+
+   <p>Une machine à état est composée de:
+     <ul>
+<li>états possédant éventuellement un comportement lors de l'entrée, un lors de la sortie et un lorsque l'état est actif. 
+<li>des transitions pouvant contenir un trigger (un signal validant la transition)
+</ul>
+   Les Region, History et SuperState du modèle UML2 ne sont pas gérées par Mascaret.
+
+   <p>Une activité est composée de:
+     <ul>
+<li>Action pouvant être du type CallOperation et SendSignal
+<li>des transitions pouvant contenir une condition en OCL (voir ci dessous)
+</ul>
+
+<h4 class="subsection">3.2.4 Le langage OCL</h4>
+
+<p>Les transitions des activités peuvent posséder une condition. Ces conditions sont exprimées dans le langage OCL. 
+TODO
+
+<h4 class="subsection">3.2.5 Exemple de modèle</h4>
+
+<div align="center"><img src="../model_class_prise.png" alt="model_class_prise.png"></div>
+   <p>Cette image présente la partie statique du modèle d'une prise électrique programmable. Cette prise possède 8 boutons et plusieurs programmes plus un courant.
+
+<div align="center"><img src="../activity_prise.png" alt="activity_prise.png"></div>
+   <p>Le comportement de cette prise programmable est décrit par la machine à état ci-dessus. Cette machine à état étant déclarée dans la classe <code>Programmateur</code>, toute instance de Programmateur dans l'environnement exécutera dès sa création une instance de cette machine à état. La machine à état commencera par activé l'état <code>Init</code> et donc par appeler la méthode <code>afficheHeure</code>. Bien que ce ne soit pas visible sur le diagramme, les transitions sont liées à des triggers. C'est à dire qu'elles deviennent valides lorque l'entité reçoit un signal correspondant au trigger. Par exemple, la transition allant de l'état <code>Init</code> vers l'état <code>ReglageHeure</code> est valide lorsque que l'instance du Programmateur reçoit le signal <code>boutonHorlogeAppuye</code>.
+
+<div align="center"><img src="../activity_bouton.png" alt="activity_bouton.png"></div>
+   <p>La machine à état ci-dessus présente le comportement d'un des boutons. La transition de <code>Relache</code> vers <code>Appuye</code> attend le signal <code>Appuye</code>. La transition de <code>Appuye</code> vers <code>Relache</code> attend le signal <code>Relache</code>. On constate que les opérations réalisées dans les 2 états ne sont pas interruptibles. C'est à dire que lorsque l'on est dans l'état <code>Relache</code> par exemple, la méthode <code>Relacher</code> doit être terminée pour que l'envoi d'un signal <code>Appuye</code> entraine le changement d'état.
+
+<div align="center"><img src="../activity_bouton2.png" alt="activity_bouton2.png"></div>
+   <p>Le diagramme d'activité ci-dessus décrit le comportement de la méthode <code>Appuyer</code> d'un des boutons. Elle consiste à envoyer un signal "boutonXXXAppuye" (le signal dépend du type de bouton) la cible programmateur (il s'agit ici d'un attribut de la classe du bouton mais cela aurait pu être un argument de la méthode) puis à executer la méthode <code>press</code> de la classe mère <code>Bouton</code>. Les méthodes <code>Relacher</code> des boutons sont implémentées de la même façon (signal <code>boutonXXXRelache</code> au lieu de <code>boutonXXXAppuye</code> et <code>release</code> au lieu de <code>press</code>).
+
+   <p>Ainsi, avec l'ensemble des diagrammes spécifiés dans le modèle, on peut déduire le comportement d'une prise programmable:
+     <ol type=1 start=1>
+<li>Lors de l'appuie sur un bouton (par exemple le bouton  Horloge), le signal appuie sera envoyé au bouton Horloge. Ce comportement sera expliqué plus tard (voir §Les interactions)
+<li>La machine à état du bouton Horloge reçoit le signal et active l'état <code>Appuye</code> lançant la méthode <code>Appuyer</code> de la classe du bouton (ici <code>BoutonHorloge</code>). 
+<li>L'activité implémentant la méthode <code>Appuyer</code> de la classe <code>BoutonHorloge</code> s'exécute en envoyant le signal <code>boutonHorlogeAppuye</code> au programmateur et en lançant la méthode <code>press</code> de la classe <code>Bouton</code> (comportement opaque, voir Les comportements opaques). 
+<li>Le programmateur reçoit le signal <code>boutonHorlogeAppuye</code> et active l'état <code>ReglageHeure</code> lançant la méthode <code>afficheHeure</code>.
+        </ol>
+Ensuite, une fois dans cette état, l'appui sur le bouton heure par exemple déclenche une suite d'action sur le même principe finissant par activer l'état <code>Augmente1Heure</code> lançant la méthode <code>augmenterHeure</code> (comportement opaque) augmentant concrètement l'heure courante du programmateur de 1 heure. La transition entre <code>Augmente1Heure</code> et <code>ReglageHeure</code> ne possédant pas de trigger, l'état <code>ReglageHeure</code> est tout de suite réactivé relançant la méthode <code>afficheHeure</code>
+
+<h3 class="section">3.3 L'environnement</h3>
+
+<p>L'environnement est une instanciation du modèle. Il s'agit d'un ensemble d'instance des classes définit dans le modèle.
+
+<h4 class="subsection">3.3.1 Structure des fichiers de description de l'environnement</h4>
+
+<p>Le fichier environnement est un fichier XML contenant la description de l'ensemble des instances. Son format est propriétaire. La racine du fichier environnement est une zone comprenant l'ensemble des entités de l'environnement. 
+Il est préférable qu'un environnement référence sont modèle (pour l'instant (31 août 2011), cela ne sert à rien puisque la déclaration du modèle est réaliser dans le fichier de configuration mais ce comportement devrait changer). 
+Un fichier environnement est donc structuré ainsi:
+
+<pre class="verbatim">&lt;?xml version="1.0"?>
+&lt;Area>
+	&lt;Model url="./model.xmi"/>
+	&lt;!-- Contenu de l'environnement -->
+&lt;/Area>
+</pre>
+
+<h5 class="subsubsection">3.3.1.1 Description des entités</h5>
+
+<p>Une entité se décrit à l'aide d'une balise <code>Entity</code>. Une entité peut contenir une description de sa position dans l'espace via des balises <code>Position</code> et <code>Orientation</code>. Elle peut de plus contenir des représentations graphique via les balises <code>Shape</code> ainsi des valeurs pour ces attributs via les balises <code>Attribute</code>. Enfin, on peut renseigner des animations grâce à la balise <code>Animation</code> et des sons grâce à la balise <code>Sound</code>. 
+Par exemple, on pourra décrire une prise programmable comme ceci:
+
+<pre class="verbatim">&lt;Entity name="Prise" class="Programmateur">
+	&lt;Position x="0" y="0" z="0" />
+	&lt;Orientation roll="0" pitch="0" yaw="0" />
+	&lt;!--Il est aussi possible de définir l'orientation ainsi: /-->
+	&lt;!--Orientation x="1" y="0" z="0" angle="3.1415" /-->
+	&lt;Shape url="VRMLS/Prise.wrl"/> &lt;!-- Si l'attribut name n'est pas renseigné, on prend l'attribut "shape" définit automatiquement dans une entité -->
+	&lt;Entity name="p01" class="Programme">
+		&lt;Attribute name="numero" value="1" />
+		&lt;Attribute name="on" value="true" />
+	&lt;/Entity>
+	&lt;Entity name="p02" class="Programme">
+		&lt;Attribute name="numero" value="1" />
+		&lt;Attribute name="on" value="false" />
+	&lt;/Entity>
+	&lt;!-- Autres programmes -->
+	&lt;Attribute name="boutonHeure" value="BoutonHeure"/>
+	&lt;Attribute name="boutonMinute" value="BoutonMinute"/>
+	&lt;!-- Affectations des autres boutons -->
+	&lt;Attribute name="programmes" value="p01" />
+	&lt;Attribute name="programmes" value="p02" />
+	&lt;-- Autres instances de programmes -->
+&lt;/Entity>
+</pre>
+On remarquera ici les balises <code>Entity</code> déclarant les entités filles "p01" et "p02". Ces entités n'ont pas de représentations graphique (balise <code>Shape</code>) mais si elles en avait une, les positions et orientations serait décrites dans le repère de l'entité parent. De plus, les entités filles sont "attachées" à leur entité parente. Si l'entité parente se déplace, les entités filles se déplacent de la même façon.
+
+<h5 class="subsubsection">3.3.1.2 Description des zones</h5>
+
+<p>Une zones est plus ou moins similaire à une entité. Elle me fait que référencer les entités quelle contient. Elles se déclare grâce à la balise <code>Area</code>.
+
+<h5 class="subsubsection">3.3.1.3 Description humain virtuels</h5>
+
+<p>Les humains virtuels se déclare grâce à la balise <code>VirtualHuman</code>
+Les humains virtuels possèdent les mêmes attributs que les entités avec en plus:
+les comportements d'agent grâce à la balise <code>Behavior</code>
+les base de connaissance grâce à la balise <code>KnowledgeBase</code> (Cette balise est déconseillée)
+Pour une description des comportements d'agents, voir Les comportements d'agents
+Par exemple:
+<pre class="verbatim">&lt;VirtualHuman name="Paul" class="Professeur">
+	&lt;Position x="10.27" y="5.32" z="0" />
+	&lt;Orientation roll="0" pitch="0" yaw="0" />
+	&lt;Shape url="Professeur.wrl"/>
+	&lt;Attribute name="firstname" value="Paul"/>
+	&lt;Attribute name="subject" value="physique"/>
+	&lt;Behavior name="SimpleCommunicationBehavior" />
+	&lt;Behavior name="SuperviseLearner" />
+&lt;/VirtualHuman>
+</pre>
+
+<h5 class="subsubsection">3.3.1.4 Description de points de vue</h5>
+
+<p>Il est possible de définir des points de vue grâce à la balise <code>Viewpoint</code>. Les points de vues sont simplements des points orientés dans l'espace où la caméra peut se déplacer. Ils doivent contenir les balises <code>Position</code> et <code>Orientation</code>.$*
+Par exemple:
+<pre class="verbatim">&lt;Viewpoint name="Camera">
+	&lt;Position x="0" y="0.17" z="0.8" />
+	&lt;Orientation roll="-0.979" pitch="1.57" yaw="0.584" />
+&lt;/Viewpoint>
+</pre>
+
+<h5 class="subsubsection">3.3.1.5 Description de points orientés</h5>
+
+<p>Il est possible de définir des points orientés à la balise <code>Topological</code>. Les points orientés peuvent servir à de nombreuses applications comme la description de chemin dans l'environnement, la définition de points de préhension d'un objet... Ils doivent contenir les balises <code>Position</code> et <code>Orientation</code>.$*
+Par exemple:
+<pre class="verbatim">&lt;Topological name="MonPoint">
+	&lt;Position x="0" y="0.17" z="0.8" />
+	&lt;Orientation roll="-0.979" pitch="1.57" yaw="0.584" />
+&lt;/Topological>
+</pre>
+
+<h5 class="subsubsection">3.3.1.6 Description des organisations</h5>
+
+<p>TODO
+
+<h4 class="subsection">3.3.2 L'éditeur d'environnement Blender</h4>
+
+<div align="center"><img src="../editeur_blender.png" alt="editeur_blender.png"></div>
+   <p>Le répertoire Plugins de Mascaret contient un répertoire BlenderEditor contenant un plugin pour Blender permettant l'édition d'un environnement Mascaret.
+
+<h5 class="subsubsection">3.3.2.1 Installation</h5>
+
+<p>Pour installer ce plugin, il faut créer un lien symbolique ou copier le répertoire <code>veha_blender_editor</code> dans le répertoire <code>blender/2.5x/scripts/addons</code>. 
+Il existe quelques problème sur les scripts d'import/export de fichiers vrml dans blender 2.58 et 2.59 (dernière version en date à ce jour). 
+Les scripts corrigés sont fournit dans le répertoire BlenderEditor et sont à copier dans le répertoire <code>blender/2.5x/scripts/addons/io_scene_x3d</code>. 
+Il faut ensuite l'activer en allant dans le menu "File &gt; User preferences", onglet Add-Ons et en cochant "Import-Export: VEHA Importer/Exporter". 
+Vous pouvez ensuite cliquer sur "Save As default" pour que le plugin soit toujours activer.
+
+<h5 class="subsubsection">3.3.2.2 Utilisation</h5>
+
+<div align="center"><img src="../editeur_blender_select_xmi.png" alt="editeur_blender_select_xmi.png"></div>
+   <p>Pour que le plugin soit utile, il faut chager un modèle. Pour cela, allez dans l'onglet World de la fenêtre des propriétés (une icone avec une terre). 
+Tout en bas, une section VEHA Model vous propose de choisir un fichier XMI.
+
+   <p>Une fois le modèle charger, il est possible de réaliser un import d'un environnement existant. Pour cela, allez dans le menu "File &gt; Import &gt; Import VEHA Environment". 
+Une boîte de dialogue de choix de fichier vous permet de choisir le fichier à importer. Des options d'import sont disponibles sur la gauche:
+     <ul>
+<li>Redo VRML rotation: Les exporters VRML applique une rotation de -PI/2 a tous l'environnement. L'importer supprime cette rotation. Mais dans AReVi, le fichier est lu tel quel. L'exporter VEHA compense donc cette rotation. Mais si l'environnement à importer n'a pas été réaliser avec l'exporteur VEHA, si l'importeur VRML supprime cette rotation, la scene n'est plus cohérente... Cette option permet de refaire la rotation VRML supprimer par l'importeur. 
+<li>Build vertex groups: Chaque fichier VRML sera considérer après import comme un seul et unique objet Blender (on fait un join sur tous les objets importer du VRML). Cette option permet de créer un vertex group par objet importer dans un VRML (l'import sera plus long). 
+<li>Temporary Layer: Le script d'import à besoin de disposer d'un calque blender vide. Cette option permet de choisir le calque temporaire à utiliser (de 0 à 19). 
+</ul>
+
+   <p>L'export se réalise en allant dans le menu "File &gt; Export &gt; Export VEHA Environment". La boîte de dialogue de choix de fichier présente une option sur la gauche: Export Type. Cette option permet de choisir un export En VRML (pour la plateform AReVi ou en Ogre. Pour l'export Ogre, vous devez disposer du plugin Blender2Ogre (<a href="http://code.google.com/p/blender2ogre/">http://code.google.com/p/blender2ogre/</a>). Cependant, ce plugin evolue souvent. 
+Depuis la version 0.5, il n'est plus possible d'exporter dans un système de coordonné différent de celui de Ogre.
+
+<div align="center"><img src="../editeur_blender_edit_object.png" alt="editeur_blender_edit_object.png"></div>
+   <p>Pour éditer une entité de l'environnement, il faut aller dans l'onglet object de la fenêtre de propriété de blender. Une section VEHA Model permet d'editer la classe de l'objet selectionné ainsi que de renseigner l'ensemble de ses propriétés. Un bouton "Update References" permet de mettre à jour les listes de références vers d'autres objet.
+
+<h4 class="subsection">3.3.3 L'editeur d'environnement 3DS Max</h4>
+
+<p>Le répertoire Plugin de Mascaret comporte un répertoire 3dsEditor contenant un plugin 3DS Max pour editer un environnement Mascaret. 
+Ce plugin est en cours de développement et est pour l'instant loin d'être vraiment utilisable en l'état. 
+TODO
+
+<h4 class="subsection">3.3.4 Exemple d'environnement</h4>
+
+<p>Un exemple complet de la description de l'environnement d'une prise électrique programmable se trouve en Annexe (see <a href="Annexe1.html#Annexe1">Annexe 1</a>)
+
+<h3 class="section">3.4 Les plugins</h3>
+
+<h4 class="subsection">3.4.1 Les évènements</h4>
+
+<p>Les évènements Mascaret sont des fonctions <code>extern "C"</code> pouvant être présentent dans chaque plugin. Ces fonctions sont:
+     <ul>
+<li>MASCARET_INIT: Cette fonction est appelée à l'ouverture du plugin. Ni le modèle, ni l'environnement ne sont alors chargés. Elle peut par exemple servir à initialiser une bibliothèque. 
+<li>MASCARET_MODEL_LOADED: Cette fonction est appelée lorsque le modèle et l'environnement sont chargé. Elle peut par exemple servir à modifier l'environnement au début de la simulation. 
+<li>MASCARET_STEP: Cette fonction est appelée à chaque pas de temps de la simulation. Elle peut par exemple permettre la mise à jour des données d'un périphérique ou lancé un comportement spécifique indépendant de Mascaret. 
+<li>MASCARET_DESTROYING: Cette fonction est appelée à la fin de la simulation. Elle permet généralement de nettoyés les ressources utilisées dans le plugin. 
+</ul>
+
+<h4 class="subsection">3.4.2 Les comportements opaques</h4>
+
+<p>Dans le modèle, lorsqu'une méthode déclarée pour une classe ne possède pas d'implémentation par une activité, cette méthode doit être implémenté par un comportement opaque. 
+Il s'agit en fait d'implémenter une classe abstraite de Mascaret: <code>BehaviorExecution</code>. 
+Cette classe possèdent une méthode virtuel pur <code>double execute()</code> à surdéfinir. 
+La valeur de retour de la méthode <code>execute</code> correspond au temps en second au bout duquel la méthode doit être rappelée. 
+Un retour de 0 correspond à la fin de l'execution de la méthode. 
+Enfin, Mascaret pour instancier ce comportement va chercher une fonction:<br>
+<code>extern "C" BehaviorExecution* NomDeLaClasse_NomDeLaMethode_init(shared_ptr&lt;Behavior&gt; specif,shared_ptr&lt;InstanceSpecification&gt; host, const Parameters&amp; p);</code>.
+
+   <p>Les paramètres de cette fonction correspondent au paramètres du constructeur de la classe <code>BehaviorExecution</code>. 
+Le paramètre <code>specif</code> contiendra la méthode dans le méta-modèle Mascaret. 
+Le paramètre <code>host</code> contiendra l'instance de la classe. 
+Le paramètre <code>p</code> contiendra les paramètres d'appel de la méthode. 
+Pour implémenter un comportement, on utilise la bibliothèque Mascaret et/ou les bibliothèque AReViMascaret et OgreMascaret. Si l'une de ces 2 dernières bibliothèques est utilisée, le plugin ne sera utilisable que sur la plateforme correspondante. Une documentation de ces bibliothèque peut être générée avec doxygen (<a href="http://www.stack.nl/~dimitri/doxygen/">http://www.stack.nl/~dimitri/doxygen/</a>). 
+Voici un exemple de code d'un comportement opaque:
+<pre class="smallformat"><pre class="verbatim">#include "VEHA/Behavior/Common/BehaviorExecution.h"
+#include "VEHA/Behavior/Common/Behavior.h"
+#include "VEHA/Entity/Entity.h"
+using namespace VEHA;
+
+class Bouton_press : public BehaviorExecution
+{
+public:
+	Bouton_press(shared_ptr&lt;Behavior> specif,
+			shared_ptr&lt;InstanceSpecification> host,
+			const Parameters&amp; p)
+	: BehaviorExecution(specif, host, p)
+	{
+	}
+	virtual ~Bouton_press()
+	{
+	}
+	double execute()
+	{
+		VEHA::Vector3 b = (shared_dynamic_cast&lt;VEHA::Entity>(getHost()))->getLocalPosition();
+		b.z -= 0.007;
+		(shared_dynamic_cast&lt;VEHA::Entity>(getHost()))->setLocalPosition(b);
+		return 0;
+	}
+};
+VEHA_PLUGIN BehaviorExecution* Bouton_press_init(shared_ptr&lt;Behavior> specif,
+						shared_ptr&lt;InstanceSpecification> host,
+						const Parameters&amp; p)
+{
+	return new Bouton_press(specif, host,p);
+}
+</pre>
+</pre>
+   <h4 class="subsection">3.4.3 Les comportements d'agents</h4>
+
+<p>Pour implémenter un comportement d'agent, il faut dérivé d'une de ces classes:
+     <ul>
+<li><code>SimpleBehaviorExecution</code>: exécute la méthode à surdéfinir <code>void action()</code> à interval régulier (attribut interval) tant que la méthode à surdéfinir <code>bool done()</code> renvoit <code>true</code>. 
+<li><code>CyclicBehaviorExecution</code>: exécute la méthode à surdéfinir <code>void action()</code> de façon cyclique tant que l'interval n'est pas null. 
+<li><code>OneShotBehaviorExecution</code>: exécute la méthode à surdéfinir <code>void action()</code> une seule fois seulement. 
+</ul>
+
+<h4 class="subsection">3.4.4 Les base de connaissances (déconseillé)</h4>
+
+<p>TODO
+
+<h4 class="subsection">3.4.5 Les plugins standards</h4>
+
+<p>Le répertoire Plugin dans Mascaret contient des plugins fournit en standard et pouvant être utilisé dans n'importe quelle simulation.
+
+<h5 class="subsubsection">3.4.5.1 SpaceMouse</h5>
+
+<p>Ce plugin permet d'utiliser une souris 3D (de marque 3D connexion). Elle déclare dans la liste des péripheriques de l'application un péripherique "spaceMouse" contenant:
+TODO
+
+<h5 class="subsubsection">3.4.5.2 TouchScreen</h5>
+
+<p>Ce plugin permet d'utiliser un écran tactile (de marque ??). Elle déclare dans la liste des péripheriques de l'application un péripherique "touchScreen" contenant:
+TODO
+
+<h5 class="subsubsection">3.4.5.3 VirtualHumanBehaviors</h5>
+
+<p>TODO
+
+<h3 class="section">3.5 La configuration de la simulation</h3>
+
+<p>La configuration de la simulation se fait dans un fichier xml. C'est le fichier d'entrée de l'application. 
+En effet, lorsqu'on lance une simulation avec ogreMascaret ou areviMascaret, c'est ce fichier que l'on passe en paramètre. 
+Par convention, nous nommons ce fichier avec l'extension ".mas" afin de le differencier des autres fichiers de la simulation.
+
+<h4 class="subsection">3.5.1 Structure de base</h4>
+
+<p>Ce fichier doit donc référencer le modèle, l'environnnement, les acteurs, les organisations et doit contenir les éléments configuration de la simulation. 
+La balise racine de ce fichier est une balise <code>Application</code>. 
+Ces balises filles sont:
+     <ul>
+<li><code>Model</code>: l'attribut url de cette balise définit le chemin relatif a ce fichier vers le fichier model (.xmi)
+<li><code>Environment</code>: l'attribut url de cette balise définit le chemin relatif a ce fichier vers le fichier environnement
+<li><code>Actors</code>: l'attribut url de cette balise définit le chemin relatif a ce fichier vers le fichier acteurs
+<li><code>Organisations</code>: l'attribut url de cette balise définit le chemin relatif a ce fichier vers le fichier organisations
+<li><code>Navigation</code>: définissant les paramètres de navigation
+<li><code>Interactions</code>: définissant les interactions
+<li><code>Scene</code>: définissant les paramètres de la scène (skybox, lumières, ...) 
+<li><code>Renderer</code>: définissant les paramètres de la fenêtre de rendu
+</ul>
+
+<pre class="smallformat"><pre class="verbatim">&lt;?xml version="1.0"?>
+&lt;Application>
+	&lt;Model url="./programmateur.xmi" />
+	&lt;Environment url="./Prise.xml" />
+	&lt;Actors url="./acteurs.xml" />
+	&lt;Organisations url="./organisation.xml" />
+  
+	&lt;ApplicationParameters>
+		&lt;!-- HTTP Config--> 
+		&lt;!-- Plugin Config -->
+	&lt;/ApplicationParameters>
+	&lt;!-- Config Navigation -->
+	&lt;!-- Config Interactions -->
+	&lt;!-- Config Scene -->
+	&lt;!-- Config Renderer -->
+&lt;/Application>
+</pre>
+</pre>
+   <h5 class="subsubsection">3.5.1.1 Le serveur HTTP</h5>
+
+<p>La configuration du serveur HTTP se situe dans la balise <code>ApplicationParameters</code>. Elle se réalise par une balise <code>HTTP</code> contenant:
+     <ul>
+<li>l'attribut <code>RessourceDir</code> définissant le chemin relatif par rapport au fichier .mas du répertoire contenant les ressources statiques du serveur HTTP. 
+<li>l'attribut <code>httpPort</code> définissant le port du serveur HTTP. 
+</ul>
+
+   <p>Exemple:
+<pre class="smallformat"><pre class="verbatim">&lt;ApplicationParameters>
+	&lt;HTTP RessourceDir="HTTPServerBaseDir/" httpPort="9080" /> 
+	&lt;!-- Plugin Config -->
+&lt;/ApplicationParameters>
+</pre>
+</pre>
+   <h5 class="subsubsection">3.5.1.2 Les déclarations de plugins</h5>
+
+<p>La configuration des plugins se situe dans la balise <code>ApplicationParameters</code>. Elle se réalise par une balise <code>Plugins</code> contenant:
+     <ul>
+<li>l'attribut <code>PluginsDir</code> définissant le chemin relatif par rapport au fichier .mas du répertoire contenant les plugins. 
+<li>de balises <code>Plugin</code> contenant un attribut <code>Name</code> définissant le nom de la bibliothèque du plugin (par exemple, si le nom est "plugin", l'application cherchera dans le répertoire de plugin un fichier "libplugin.so" sous Linux et "plugin.dll" sous Windows. 
+</ul>
+
+   <p>Exemple:
+<pre class="smallformat"><pre class="verbatim">&lt;ApplicationParameters>
+	&lt;!-- HTTP Config-->
+	&lt;Plugins PluginsDir="./Dev/">
+		&lt;Plugin Name="monPlugin"/>
+	&lt;/Plugins>
+&lt;/ApplicationParameters>
+</pre>
+</pre>
+   <h4 class="subsection">3.5.2 Enrichissement de péripheriques</h4>
+
+<p>Dans Mascaret, un périphérique est un dispositif d'interaction homme machine composé de boutons et d'axes. Un bouton représente une valeur booléenne (le bouton est pressé ou non) et un axe représente une valeur réelle (stick analogique, capteur de position ou autres). 
+Mascaret permet de definir des péripheriques virtuels composé d'axes ou d'enrichir des périphériques existants avec des axes. Ces axes peuvent effectivement être vu comme plusieurs boutons. Ces ajouts pourront ensuite être utiliser dans la configuration de la navigation. Cette configuration se réalise grâce à une balise <code>Peripherics</code> contenant des balises <code>Peripheric</code>. 
+Ces balises <code>Peripheric</code> contiennent:
+     <ul>
+<li>l'attribut <code>name</code> définissant le nom du nouveau périphérique ou du périphérique à enrichir. 
+<li>de balises <code>ButtonAxis</code> permettant de définir des axes virtuels
+</ul>
+   Ces balises <code>ButtonAxis</code> contiennent:
+     <ul>
+<li>l'attribut <code>name</code> définissant le nom de l'axe. 
+<li>de balises <code>Button</code> définissant les boutons réels à utiliser pour cet axe. 
+</ul>
+   Ces balises <code>ButtonAxis</code> contiennent:
+     <ul>
+<li>l'attribut <code>peripheric</code> définissant le péripherique contenant le bouton. 
+<li>l'attribut <code>button</code> définissant le nom du bouton à utiliser. 
+<li>l'attribut <code>type</code> définissant le type d'action réalisé par le bouton. Deux types sont possibles: increase-value ou set-value. 
+<li>l'attribut <code>pressed</code> définissant si la modification de la valeur de l'axe est réalisée lorsque le bouton est pressé ou lorsqu'il est relaché. 
+<li>l'attribut <code>value</code> définissant la valeur à utiliser (soit pour augmenter la valeur de l'axe, soit pour la définir selon le <code>type</code>). Cette valeur peut être négative. 
+</ul>
+
+   <p>Exemple (cette configuration permet de définir des axes haut-bas et gauche droite sur le clavier):
+<pre class="smallformat"><pre class="verbatim">&lt;Peripherics>
+	&lt;Peripheric name="keyboard">
+		&lt;ButtonAxis name="updown">
+			&lt;Button peripheric="keyboard"
+				button="Up"
+				pressed="true"
+				type="set-value"
+				value="1"/>
+			&lt;Button peripheric="keyboard"
+				button="Down"
+				pressed="true"
+				type="set-value"
+				value="-1"/>
+			&lt;Button peripheric="keyboard"
+				button="Up"
+				pressed="false"
+				type="set-value"
+				value="0"/>
+			&lt;Button peripheric="keyboard"
+				button="Down"
+				pressed="false"
+				type="set-value"
+				value="0"/>
+			&lt;Button peripheric="keyboard"
+				button="+"
+				pressed="true"
+				type="increase-value"
+				value="1"/>
+			&lt;Button peripheric="keyboard"
+				button="-"
+				pressed="true"
+				type="increase-value"
+				value="-1"/>
+		&lt;/ButtonAxis>
+		&lt;ButtonAxis name="leftright">
+			&lt;Button peripheric="keyboard"
+				button="Left"
+				pressed="true"
+				type="set-value"
+				value="1"/>
+			&lt;Button peripheric="keyboard"
+				button="Right"
+				pressed="true"
+				type="set-value"
+				value="-1"/>
+			&lt;Button peripheric="keyboard"
+				button="Left"
+				pressed="false"
+				type="set-value"
+				value="0"/>
+			&lt;Button peripheric="keyboard"
+				button="Right"
+				pressed="false"
+				type="set-value"
+				value="0"/>
+		&lt;/ButtonAxis>
+	&lt;/Peripheric>
+&lt;/Peripherics>
+</pre>
+</pre>
+   <h4 class="subsection">3.5.3 Les interactions</h4>
+
+<p>Les interactions permettent d'interagir avec les entités de l'environnement. Elles se déclare grâce à la balise <code>Interactions</code>. 
+Les interactions possible peuvent être des types suivants:
+     <ul>
+<li>SendSignal: envoie d'un signal à une ou plusieurs entités
+<li>CallOperation: appel une méthode d'une entité
+<li>ChangeViewPoint: change le point de vue
+<li>PlayAnimation: lance une animation
+<li>StopAnimation: arrête une animation
+</ul>
+   La liste de ces types peut être amené à être enrichit. En effet, il devrait être possible à terme de réaliser n'importe quel <code>BasicAction</code> définit dans Mascaret (voir documentation Mascaret). 
+Pour chacun de ces type, la configuration est réalisé par une balise du nom du type possédant les attributs suivants:
+     <ul>
+<li>name: définit le nom du signal à envoyé, de l'opération à lancer, du point de vue à définir, de l'animation à jouer ou arrêter. 
+<li>target: la cible de l'action. Peut être <code>broadcast</code> pour toutes les entités, <code>designated</code> pour l'entité désigné par le curseur ou le nom d'une entité. 
+<li>peripheric: le nom du périphérique contenant le bouton à utiliser
+<li>button: le nom du bouton à utiliser
+<li>cursor: le curseur permettant la designation (si target="designated"). La valeur par défaut est "system" désignant le curseur souris du système. 
+<li>pressed: si l'action doit être lancé lorsque le bouton est appuyé ou relaché (true ou false). 
+<li>maxdist: la distance maximale pour laquel l'action est possible (valeur réel positive). La valeur par défaut est infini. 
+<li>classifier (CallOperation uniquement): le nom de la classe des entités sur lequels l'opération doit être lancée. 
+</ul>
+
+   <p>Exemple:
+<pre class="smallformat"><pre class="verbatim">&lt;Interactions>
+	&lt;SendSignal name="Use" peripheric="mouse" button="button1" pressed="true" target="designated" maxdist="15"/>
+	&lt;CallOperation classifier="Gaspar::Agent::Personnel" name="parler" peripheric="mouse" button="button1" pressed="true" target="designated" maxdist="7"/>
+	&lt;ChangeViewPoint name="nomDuViewpoint" direction="" peripheric="keyboard" button="+" pressed="true" target="myAgent" maxdist="7"/>
+	&lt;PlayAnimation name="walk" peripheric="mouse" button="button2" pressed="true" target="designated" maxdist="15"/>
+	&lt;StopAnimation name="walk" peripheric="mouse" button="button3" pressed="true" target="designated" maxdist="15"/>
+&lt;/Interactions>
+</pre>
+</pre>
+   <h4 class="subsection">3.5.4 La navigation</h4>
+
+<p>La navigation représente la manière de se déplacer dans l'environnement. Elle est définit par la balise <code>Navigation</code> contenant:
+     <ul>
+<li>mode: définit le mode de navigation (<code>free</code> ou <code>human</code>). Le mode <code>human</code> permet de ne pas tenir compte de l'angle d'élévation pour les translations (on ne monte pas dans les cieux lorsque l'on avance avec la tête levée)
+<li>la balise <code>TX</code>: la translation en x
+<li>la balise <code>TY</code>: la translation en y
+<li>la balise <code>TZ</code>: la translation en z
+<li>la balise <code>Roll</code>: la rotation sur l'axe des x
+<li>la balise <code>Pitch</code>: la rotation sur l'axe des y
+<li>la balise <code>Yaw</code>: la rotation sur l'axe des z
+</ul>
+   Les axes de la navigation sont définit par les attributs <code>peripheric</code>, <code>axis</code> et <code>speed</code> représentant respectivement le périphérique comportant l'axe, le nom de l'axe et la vitesse en fonction de la valeur de l'axe.<br>
+Exemple:
+<pre class="smallformat"><pre class="verbatim">&lt;Navigation mode="human">
+	&lt;TX peripheric="spaceMouse" axis="tz" speed="0.01"/>
+	&lt;TY peripheric="spaceMouse" axis="tx" speed="-0.01"/>
+
+	&lt;TX peripheric="keyboard" axis="updown" speed="1.5"/>
+	&lt;TY peripheric="keyboard" axis="leftright" speed="1.5"/>
+	&lt;Yaw peripheric="spaceMouse" axis="ry" speed="0.005"/>
+	&lt;Pitch peripheric="spaceMouse" axis="rx" speed="-0.005"/>
+	&lt;Yaw peripheric="mouse" axis="x" speed="0.05"/>
+	&lt;Pitch peripheric="mouse" axis="y" speed="-0.05"/>
+&lt;/Navigation>
+</pre>
+</pre>
+   <h4 class="subsection">3.5.5 La scene</h4>
+
+<p>Exemple:
+<pre class="smallformat"><pre class="verbatim">&lt;Scene name="Vue 3D">
+	&lt;Decors url="VRMLS/Environement/sceneJourShader.wrl">
+		&lt;Position x="150.0" y="0.0" z="-500"/>
+		&lt;Orientation roll="0.0" pitch="0.0" yaw="3.14"/>
+			
+		&lt;Light directional="true">
+			&lt;Position x="0" y="-350.0" z="226.0"/>
+			&lt;Orientation roll="0.0" pitch="+0.5" yaw="0.0"/>
+			&lt;Color r="1" g="1" b="1"/>      
+		&lt;/Light>
+		&lt;Light directional="false">
+			&lt;Position x="0" y="350.0" z="50.0"/>
+			&lt;Orientation roll="0.0" pitch="+0.5" yaw="3.14"/>
+			&lt;Color r="0.2" g="0.2" b="0.2"/>      
+		&lt;/Light>
+		&lt;Light directional="true" layer="back">
+			&lt;Position x="0" y="-350.0" z="226.0"/>
+			&lt;Orientation roll="0.0" pitch="+0.5" yaw="0.0"/>
+			&lt;Color r="1" g="1" b="1"/>      
+		&lt;/Light>
+		&lt;Fog>
+			&lt;Properties degree="1" density="2.5"/>
+			&lt;Color r="0.8" g="0.8" b="0.8"/>      
+		&lt;/Fog>
+	&lt;/Decors> 
+&lt;/Scene>
+</pre>
+</pre>
+   <h4 class="subsection">3.5.6 La fenêtre de rendu</h4>
+
+<p>Exemple:
+<pre class="smallformat"><pre class="verbatim">&lt;Renderer name="Viewer principal" near="0.4" far="2400">
+	&lt;Scene name = "Vue 3D" viewpoint="006" />
+	&lt;Window x="0" y="0" width="1919" height="1200" capture-mouse="true"/>
+&lt;/Renderer>
+</pre>
+</pre>
+   </body></html>
+

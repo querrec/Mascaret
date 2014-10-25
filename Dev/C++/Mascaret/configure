@@ -1,0 +1,462 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+#----------------------------------------------------------------------------
+
+import sys ; sys.path.insert(0,'..')
+import MascaretConfig
+import os
+import subprocess
+
+import platform
+
+#print platform.version() = 6.1.7600 sous windows 7
+#exit(0)
+
+#-------- Create the construction tool ---------------------------------------
+
+tool=MascaretConfig.Tool(False)
+
+#-------- Check condition to compile --------------------
+#cmd=tool.findExecutable("arevi-config")
+
+#if cmd == None:
+#  print "AReVi is not installed on this machine. Compilation is not possible"
+#  exit(-1)
+
+#p=subprocess.Popen([cmd]+['--install'],
+#                       stdout=subprocess.PIPE)
+#AREVI_INSTALL_DIR=p.communicate()[0].split('\n')[0].strip()
+#tool.settings['LIBS']+=['AReVi']
+#tool.settings['INCDIRS']+=[AREVI_INSTALL_DIR+'/include']
+#if tool.sysName() == "Windows":
+#  tool.settings['INCDIRS']+=[AREVI_INSTALL_DIR+'/include/AReVi/Utils/Win32FlexWorkaround']
+#tool.settings['LIBDIRS']+=[AREVI_INSTALL_DIR+'/lib']
+
+# check installed libslibboost_system.so
+#p=subprocess.Popen([cmd]+['--installed-libs'],
+#                         stdout=subprocess.PIPE)
+#areviLibs=p.communicate()[0].split()
+
+#if areviLibs.count('AReViNS') == 0:
+#  print "AReViNS is not installed on this machine. Compilation is not possible"
+#  exit(-1)
+#tool.settings['LIBS']+=['AReViNS']
+
+#if areviLibs.count('AReViHLib2') == 0:
+#  print "hLib is not installed on this machine. Compilation is not possible"
+#  exit(-1)
+#tool.settings['LIBS']+=['AReViHLib2']
+
+#if areviLibs.count('AnimLib') == 0:
+#  print "AnimLib is not installed on this machine. Compilation is not possible"
+#  exit(-1)
+#tool.settings['LIBS']+=['arWidget']
+
+#if tool.testBoolOption("gtk"):
+#  tool.addLibWithPKGConfig("gtk+-2.0")
+#  tool.settings['DEFINES']['USE_GTK']=None;
+
+#--------- import needed AReVi modules ------------------
+#sys.path.insert(0,os.path.normpath(AREVI_INSTALL_DIR+'/lib'))
+#import register_classes
+
+
+#-------- Global settings -----------------------
+tool.settings['INCDIRS']+=['./include/']
+tool.settings['INCDIRS']+=['./include/Tools/Network']
+tool.settings['INCDIRS']+=['../Tools/include/']
+
+if tool.sysName() == 'Windows':
+  tool.settings['INCDIRS']+=['C:/gnuwin32/include/libxml2']
+  tool.settings['INCDIRS']+=['C:/Program Files/boost/boost_1_43']
+  tool.settings['DEFINES']['_BIND_TO_CURRENT_CRT_VERSION']=1
+  tool.settings['DEFINES']['_SCL_SECURE_NO_WARNINGS']=None
+  tool.settings['CCFLAGS']+=["/TP"]
+  tool.settings['CCFLAGS']+=["/MP"]
+  tool.settings['CCFLAGS']+=["/wd4251"]
+  tool.settings['CCFLAGS']+=["/wd4275"]
+  tool.settings['CCFLAGS']+=["/wd4800"]
+  tool.settings['CCFLAGS']+=["/wd4804"]
+  tool.settings['DBGFLAGS']+=['/MDd']
+  tool.settings['DBGFLAGS']+=['/D_SECURE_SCL=0']
+  tool.settings['OPTFLAGS']+=['/MD']
+  tool.settings['DEFINES']['_WIN32_WINNT']="0x0601"
+else:
+  if tool.testBoolOption('use_mingw'):
+    tool.settings['INCDIRS']+=[os.environ['HOME']+'/windows_lib/local/include/libxml2']
+    tool.settings['INCDIRS']+=[os.environ['HOME']+'/windows_lib/local/include/boost']
+    tool.settings['LIBDIRS']+=[os.environ['HOME']+'/windows_lib/local/lib']
+#    tool.settings['CCFLAGS']+=['--auto-import']
+#    tool.settings['DEFINES']['BOOST_FILESYSTEM_VERSION']=2
+  else:
+    tool.settings['INCDIRS']+=['/usr/include/libxml2']
+    tool.settings['INCDIRS']+=['/usr/include/boost']
+
+
+if tool.sysName() == 'Windows':
+  tool.settings['LIBDIRS']+=['C:/Program Files/boost/boost_1_43/lib']
+  tool.settings['LIBDIRS']+=['C:/gnuwin32/lib']
+if tool.sysName() == 'Windows':
+  tool.settings['LIBS']+=['libxml2']
+else:
+  tool.settings['LIBS']+=['xml2']
+  if tool.testBoolOption('use_mingw'):
+    tool.settings['LIBS']+=['boost_filesystem-mt']
+    tool.settings['LIBS']+=['boost_signals-mt']
+    tool.settings['LIBS']+=['boost_system-mt']
+    tool.settings['LIBS']+=['boost_thread']
+    tool.settings['LIBS']+=['boost_date_time-mt']
+    tool.settings['LIBS']+=['boost_regex-mt']
+    tool.settings['LIBS']+=['ws2_32']
+    tool.settings['LIBS']+=['mswsock']
+    tool.settings['LIBS']+=['zlib1']
+    tool.settings['LDFLAGS']+=['-Wl,--enable-auto-import', '-static-libgcc', '-static-libstdc++']
+    tool.settings['DEFINES']['_WIN32_WINNT']=0x0501
+  else:
+  # cl autolink with the right library on windows. Setting the libdir is suffisant...
+    tool.settings['LIBS']+=['boost_filesystem']
+    tool.settings['LIBS']+=['boost_signals']
+    tool.settings['LIBS']+=['boost_system']
+    tool.settings['LIBS']+=['boost_thread']
+    tool.settings['LIBS']+=['boost_date_time']
+    tool.settings['LIBS']+=['boost_regex']
+
+tool.settings['DEFINES']['_VEHA_LIB']=None
+tool.settings['DEFINES']['_HTTPSERVER_LIB']=None
+
+if tool.testBoolOption("graphviz"):
+    tool.settings['DEFINES']['USE_GRAPHVIZ']=None;
+
+#-------- generator ----------
+fileList=['src/VEHA/Kernel/Element.cpp',
+	'src/VEHA/Kernel/Class.cpp',
+	'src/VEHA/Kernel/BehavioralFeature.cpp',
+	'src/VEHA/Kernel/Property.cpp',
+	'src/VEHA/Kernel/Classifier.cpp',
+	'src/VEHA/Kernel/ValueSpecification.cpp',
+	'src/VEHA/Kernel/DomainSpecification.cpp',
+	'src/VEHA/Kernel/InstanceSpecification.cpp',
+	'src/VEHA/Kernel/Slot.cpp',
+	'src/VEHA/Kernel/SlotDerived.cpp',
+	'src/VEHA/Kernel/Operation.cpp',
+	'src/VEHA/Kernel/Constraint.cpp',
+	'src/VEHA/Kernel/Expression.cpp',
+	'src/VEHA/Kernel/InstanceValue.cpp',
+	'src/VEHA/Kernel/OpaqueExpression.cpp',
+	'src/VEHA/Kernel/Feature.cpp',
+	'src/VEHA/Kernel/Parameter.cpp',
+	'src/VEHA/Kernel/Comment.cpp',
+	'src/VEHA/Kernel/Model.cpp',
+	'src/VEHA/Kernel/Environment.cpp',
+	'src/VEHA/Kernel/Package.cpp',
+	'src/VEHA/Kernel/PrimitiveType.cpp',
+	'src/VEHA/Kernel/LiteralSpecification.cpp',
+	'src/VEHA/Kernel/LiteralReal.cpp',
+	'src/VEHA/Kernel/LiteralInteger.cpp',
+	'src/VEHA/Kernel/LiteralString.cpp',
+	'src/VEHA/Kernel/LiteralBoolean.cpp',
+	'src/VEHA/Entity/EntityClass.cpp',
+	'src/VEHA/Entity/GeometryProperty.cpp',
+	'src/VEHA/Entity/TopologicalProperty.cpp',
+	'src/VEHA/Entity/ShapeProperty.cpp',
+	'src/VEHA/Entity/Entity.cpp',
+	'src/VEHA/Entity/PointSpecification.cpp',
+	'src/VEHA/Entity/RotationVector.cpp',
+	'src/VEHA/Entity/Vector3.cpp',
+	'src/VEHA/Entity/Color.cpp',
+	'src/VEHA/Entity/PointProperty.cpp',
+	'src/VEHA/Entity/PathSpecification.cpp',
+	'src/VEHA/Entity/PathProperty.cpp',
+	'src/VEHA/Entity/PrimitiveGeometry.cpp',
+	'src/VEHA/Entity/ShapeGeometry.cpp',
+	'src/VEHA/Entity/SpecificGeometry.cpp',
+	'src/VEHA/Entity/TopologicalSpecification.cpp',
+	'src/VEHA/Entity/GeometrySpecification.cpp',
+	'src/VEHA/Entity/ShapeSpecification.cpp',
+	'src/VEHA/Entity/AnimationSpecification.cpp',
+	'src/VEHA/Entity/AnimationProperty.cpp',
+	'src/VEHA/Entity/SoundSpecification.cpp',
+	'src/VEHA/Entity/SoundProperty.cpp',
+	'src/VEHA/Entity/VirtualRealityComponentFactory.cpp',
+	'src/VEHA/Entity/VirtualRealitySpecification.cpp',
+	'src/VEHA/Entity/Zone.cpp',
+	'src/VEHA/Behavior/StateMachine/CallEvent.cpp',
+	'src/VEHA/Behavior/StateMachine/ChangeEvent.cpp',
+	'src/VEHA/Behavior/StateMachine/CompositeState.cpp',
+	'src/VEHA/Behavior/StateMachine/FinalState.cpp',
+	'src/VEHA/Behavior/StateMachine/Guard.cpp',
+	'src/VEHA/Behavior/StateMachine/PseudoState.cpp',
+	'src/VEHA/Behavior/StateMachine/SignalEvent.cpp',
+	'src/VEHA/Behavior/StateMachine/StateController.cpp',
+	'src/VEHA/Behavior/StateMachine/State.cpp',
+	'src/VEHA/Behavior/StateMachine/StateMachine.cpp',
+	'src/VEHA/Behavior/StateMachine/StateMachineBehaviorExecution.cpp',
+	'src/VEHA/Behavior/StateMachine/Region.cpp',
+	'src/VEHA/Behavior/StateMachine/Vertex.cpp',
+	'src/VEHA/Behavior/StateMachine/TimeEvent.cpp',
+	'src/VEHA/Behavior/StateMachine/Transition.cpp',
+	'src/VEHA/Behavior/Common/Behavior.cpp',
+	'src/VEHA/Behavior/Common/Signal.cpp',
+	'src/VEHA/Behavior/Common/BehaviorExecution.cpp',
+	'src/VEHA/Behavior/Common/ActivityBehaviorExecutionHelper.cpp',
+	'src/VEHA/Behavior/Common/Event.cpp',
+	'src/VEHA/Behavior/Common/EventOccurence.cpp',
+	'src/VEHA/Behavior/Common/OpaqueBehavior.cpp',
+#	'src/VEHA/Behavior/Common/Operation.cpp',
+	'src/VEHA/Behavior/Common/behaviorScheduler.cpp',
+	'src/VEHA/Behavior/Common/Trigger.cpp',
+	'src/VEHA/Behavior/Activity/ActionNode.cpp',
+	'src/VEHA/Behavior/Activity/ActivityEdge.cpp',
+	'src/VEHA/Behavior/Activity/ActivityFinalNode.cpp',
+	'src/VEHA/Behavior/Activity/Activity.cpp',
+	'src/VEHA/Behavior/Activity/ActivityExecution.cpp',
+	'src/VEHA/Behavior/Activity/ActivityNode.cpp',
+	'src/VEHA/Behavior/Activity/ActivityPartition.cpp',
+	'src/VEHA/Behavior/Activity/ControlFlow.cpp',
+	'src/VEHA/Behavior/Activity/ControlNode.cpp',
+	'src/VEHA/Behavior/Activity/LoopNode.cpp',
+	'src/VEHA/Behavior/Activity/LoopNodeBehavior.cpp',
+	'src/VEHA/Behavior/Activity/LoopNodeBehaviorExecution.cpp',
+	'src/VEHA/Behavior/Activity/DecisionNode.cpp',
+	'src/VEHA/Behavior/Activity/FinalNode.cpp',
+	'src/VEHA/Behavior/Activity/FlowFinalNode.cpp',
+	'src/VEHA/Behavior/Activity/ForkNode.cpp',
+	'src/VEHA/Behavior/Activity/ChoiceNode.cpp',
+	'src/VEHA/Behavior/Activity/InitialNode.cpp',
+	'src/VEHA/Behavior/Activity/JoinNode.cpp',
+	'src/VEHA/Behavior/Activity/MergeNode.cpp',
+	'src/VEHA/Behavior/Activity/ObjectFlow.cpp',
+	'src/VEHA/Behavior/Activity/ObjectNode.cpp',
+	'src/VEHA/Behavior/Activity/ActivityParameterNode.cpp',
+	'src/VEHA/Behavior/Activity/ActivityBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/Action.cpp',
+	'src/VEHA/Behavior/BasicActions/AcceptEventAction.cpp',
+	'src/VEHA/Behavior/BasicActions/AcceptEventBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/AddStructuralFeatureValueAction.cpp',
+	'src/VEHA/Behavior/BasicActions/AddStructuralFeatureValueBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/CallOperationAction.cpp',
+	'src/VEHA/Behavior/BasicActions/CallOperationBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/CallBehaviorAction.cpp',
+	'src/VEHA/Behavior/BasicActions/CallBehaviorBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/GrowUpInstanceAction.cpp',
+	'src/VEHA/Behavior/BasicActions/GrowUpInstanceBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/SendSignalAction.cpp',
+	'src/VEHA/Behavior/BasicActions/SendSignalBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/CreateEntityAction.cpp',
+	'src/VEHA/Behavior/BasicActions/CreateEntityBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/RestoreEnvironmentAction.cpp',
+	'src/VEHA/Behavior/BasicActions/RestoreEnvironmentBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/SetInstanceInRedAction.cpp',
+	'src/VEHA/Behavior/BasicActions/SetInstanceInRedBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/SetInstanceTransparencyAction.cpp',
+	'src/VEHA/Behavior/BasicActions/SetInstanceTransparencyBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/PlayAnimationAction.cpp',
+	'src/VEHA/Behavior/BasicActions/PlayAnimationBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/StopAnimationAction.cpp',
+	'src/VEHA/Behavior/BasicActions/StopAnimationBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/ChangeViewPointAction.cpp',
+	'src/VEHA/Behavior/BasicActions/ChangeViewPointBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/OperationWidgetAction.cpp',
+	'src/VEHA/Behavior/BasicActions/OperationWidgetBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/DummyAction.cpp',
+	'src/VEHA/Behavior/BasicActions/DummyBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/SignalWidgetAction.cpp',
+	'src/VEHA/Behavior/BasicActions/SignalWidgetBehaviorExecution.cpp',
+	'src/VEHA/Behavior/BasicActions/OutputPin.cpp',
+	'src/VEHA/Behavior/BasicActions/Pin.cpp',
+	'src/VEHA/Behavior/BasicActions/InputPin.cpp',
+	'src/VEHA/Behavior/BasicActions/ValuePin.cpp',
+	'src/VEHA/Behavior/Time/TimeExpression.cpp',
+#	'src/VEHA/Entity/interface3D.cpp',
+	'src/VEHA/Behavior/Common/pluginManager.cpp',
+	'src/VEHA/Kernel/CollectionMethods.cpp',
+	'src/VEHA/Kernel/expressionParser.cpp',
+	'src/VEHA/Behavior/Common/OclQuery.cpp',
+	'src/VEHA/Kernel/CallbackManager.cpp',
+	'src/VEHA/Kernel/OCLSpecialMethods.cpp',
+	'src/BEHAVE/Agent.cpp',
+	'src/BEHAVE/AID.cpp',
+	'src/BEHAVE/Mailbox.cpp',
+	'src/BEHAVE/ACLMessage.cpp',
+	'src/BEHAVE/fipaSLParser.cpp',
+	'src/BEHAVE/AgentClass.cpp',
+	'src/BEHAVE/KnowledgeBase.cpp',
+	'src/BEHAVE/SimpleCommunicationBehavior.cpp',
+	'src/BEHAVE/ProceduralBehavior.cpp',
+	'src/BEHAVE/ActionListenerBehavior.cpp',
+	'src/BEHAVE/AgentBehavior.cpp',
+	'src/BEHAVE/AgentBehaviorExecution.cpp',
+	'src/BEHAVE/SimpleBehaviorExecution.cpp',
+	'src/BEHAVE/OneShotBehaviorExecution.cpp',
+	'src/BEHAVE/CyclicBehaviorExecution.cpp',
+	'src/BEHAVE/AgentPlateform.cpp',
+	'src/BEHAVE/OrganisationalStructure.cpp',
+	'src/BEHAVE/OrganisationalEntity.cpp',
+	'src/BEHAVE/Ressource.cpp',
+	'src/BEHAVE/Role.cpp',
+	'src/BEHAVE/RoleClass.cpp',
+	'src/BEHAVE/RoleAssignement.cpp',
+	'src/BEHAVE/RessourceAssignement.cpp',
+	'src/BEHAVE/Procedure.cpp',
+	'src/BEHAVE/ProcedureExecution.cpp',
+	'src/HAVE/EmbodiedAgent.cpp',
+	'src/BEHAVE/HttpCommunicationManager.cpp',
+	'src/HAVE/Body.cpp',
+	'src/HAVE/BodyClass.cpp',
+	'src/HAVE/VirtualHumanClass.cpp',
+	'src/HAVE/VirtualHuman.cpp',
+	'src/Tools/Loaders/XmlParser.cpp',
+	'src/Tools/Loaders/XMIParser.cpp',
+	'src/Tools/Loaders/ModelLoader.cpp',
+	'src/Tools/Loaders/InstanceLoader.cpp',
+	'src/MascaretApplication.cpp', 
+	#'src/Tools/Loaders/InstanceWriter.cpp',
+	'src/Tools/md5.cpp',
+	'src/Tools/Loaders/ModelLoader2.cpp',
+	'src/Tools/Loaders/AbstractModelLoader.cpp',
+	'src/Tools/Loaders/XMI11Loader.cpp',
+	#'src/Tools/Loaders/XMI20Writer.cpp',
+	'src/Tools/Loaders/ParserHelper.cpp',
+	'src/Tools/Network/HttpServer/httpConnection.cpp',
+	'src/Tools/Network/HttpServer/httpRequest.cpp',
+	'src/Tools/Network/HttpServer/httpResponse.cpp',
+	'src/Tools/Network/HttpServer/httpServer.cpp',
+	'src/Tools/Network/HttpServer/httpSession.cpp',
+	'src/Tools/Network/HttpServer/tcpConnection.cpp',
+	'src/Tools/Network/HttpServer/tcpServer.cpp',
+	'src/Tools/Network/Servlets/ManageACLMessageServlet.cpp',
+	'src/Tools/Network/Servlets/ManageActionServlet.cpp',
+	'src/Tools/Network/Servlets/ManageAgentServlet.cpp',
+	'src/Tools/Network/Servlets/ManageAgentKnowledgeBaseServlet.cpp',
+	'src/Tools/Network/Servlets/ManageAgentKBHeadServlet.cpp',
+	'src/Tools/Network/Servlets/ManageAgentsServlet.cpp',
+	'src/Tools/Network/Servlets/ManageApplicationServlet.cpp',
+	'src/Tools/Network/Servlets/ManageCenterViewServlet.cpp',
+	'src/Tools/Network/Servlets/ManageChangeGeometryServlet.cpp',
+	'src/Tools/Network/Servlets/ManageClassServlet.cpp',
+	'src/Tools/Network/Servlets/ManageReloadClassServlet.cpp',
+	'src/Tools/Network/Servlets/ManageConnectServlet.cpp',
+	'src/Tools/Network/Servlets/ManageCreateEntityServlet.cpp',
+	'src/Tools/Network/Servlets/ManageCreateMessageServlet.cpp',
+	'src/Tools/Network/Servlets/ManageCreateUserMessageServlet.cpp',
+	'src/Tools/Network/Servlets/ManageEntityServlet.cpp',
+	'src/Tools/Network/Servlets/ManageEntityJSONServlet.cpp',
+	'src/Tools/Network/Servlets/ManageExecuteQueryServlet.cpp',
+	'src/Tools/Network/Servlets/ManageFIPASLServlet.cpp',
+	'src/Tools/Network/Servlets/ManageFIPASLTestServlet.cpp',
+	'src/Tools/Network/Servlets/ManageHeadServlet.cpp',
+	'src/Tools/Network/Servlets/ManageIndexServlet.cpp',
+	'src/Tools/Network/Servlets/ManageInstancesServlet.cpp',
+	'src/Tools/Network/Servlets/ManageLaunchOperationServlet.cpp',
+	'src/Tools/Network/Servlets/ManageMessagesEnvoyesServlet.cpp',
+	'src/Tools/Network/Servlets/ManageMessagesRecusServlet.cpp',
+	'src/Tools/Network/Servlets/ManageMessagesServlet.cpp',
+	'src/Tools/Network/Servlets/ManageModelServlet.cpp',
+	'src/Tools/Network/Servlets/ManageOperationServlet.cpp',
+	'src/Tools/Network/Servlets/ManageOrganisationalEntityServlet.cpp',
+	'src/Tools/Network/Servlets/ManageOrganisationalStructureServlet.cpp',
+	'src/Tools/Network/Servlets/ManageOrganisationsServlet.cpp',
+	'src/Tools/Network/Servlets/ManageProcedureServlet.cpp',
+	'src/Tools/Network/Servlets/ManageLaunchProcedureServlet.cpp',
+	'src/Tools/Network/Servlets/ManageQueryServlet.cpp',
+	'src/Tools/Network/Servlets/ManageRoleClassServlet.cpp',
+	'src/Tools/Network/Servlets/ManageSendMessageServlet.cpp',
+	'src/Tools/Network/Servlets/ManageSendUserMessageServlet.cpp',
+	'src/Tools/Network/Servlets/ManageSetRedServlet.cpp',
+	'src/Tools/Network/Servlets/ManageSignalServlet.cpp',
+	'src/Tools/Network/Servlets/ManageXOCLServlet.cpp',
+	'src/Tools/Network/Servlets/ManageAttributeServlet.cpp',
+	#'src/Tools/Network/Servlets/ManageXOCLHelperServlet.cpp',
+	#'src/Tools/Network/Servlets/ManageXOCLHelperRemoveServlet.cpp',
+	'src/Tools/Network/Servlets/ManageScenarioServlet.cpp',
+	'src/Tools/Scenario/ScenarioEvent.cpp',
+	'src/Tools/Scenario/ScenarioScheduler.cpp',
+	'src/Tools/Network/Servlets/ManageChangeAttributeServlet.cpp',
+	'src/Tools/Network/Servlets/ManageSetAttributeValueServlet.cpp',
+	'src/Tools/Network/Servlets/ManageSpeedServlet.cpp',
+	'src/Tools/Network/Servlets/ManageViewpointServlet.cpp',
+	'src/Tools/Scenario/Scenario.cpp',
+	'src/IEHA/Visualisation/Scene.cpp',
+	'src/IEHA/Visualisation/Camera.cpp',
+	'src/IEHA/VRApplication.cpp',
+	'src/IEHA/Visualisation/Renderer.cpp',
+	'src/IEHA/Visualisation/RenderToTexture.cpp',
+	'src/IEHA/Visualisation/Window3D.cpp',
+	'src/IEHA/Interaction/Peripheric.cpp',
+	'src/IEHA/Interaction/PaddlePeripheric.cpp',
+	'src/IEHA/Interaction/Axis.cpp',
+	'src/IEHA/Interaction/Button.cpp',
+	'src/IEHA/Interaction/ButtonAxis.cpp',
+	'src/IEHA/Interaction/CartesianBasis.cpp',
+	'src/IEHA/Interaction/Interaction.cpp',
+	'src/IEHA/Interaction/Navigation.cpp',
+	'src/SysML/Block.cpp',
+	
+	#backup module
+	'src/BackupUtils/BackupList.cpp',
+	'src/BackupUtils/IBackupEnabled.cpp',
+	'src/BackupUtils/Backup.cpp',
+	'src/BackupUtils/ProcedureExecutionBackup.cpp',
+	'src/BackupUtils/SlotBackup.cpp',
+
+	'src/Tools/GraphvizExport.cpp'
+	]
+
+testFileList=[
+	'Tests/src/TestsRunner.cpp',
+	'Tests/src/ModelWriterTest.cpp',
+	'Tests/src/ModelLoaderTest.cpp',
+	'Tests/src/XmlParserTest.cpp'
+	]
+#for boost python
+#includeFile="boost/python.hpp"
+#foundFile=False
+#for d in tool.settings['INCDIRS']+['/usr/include']:
+#	header=os.path.normpath(os.path.join(d,includeFile))
+#	try:
+#		f=open(header,'r')
+#		foundFile=True
+#		break
+#	except: pass
+#if foundFile:	
+#	print "Compile WITH Python behaviors"
+#	fileList.extend(
+#		['src/VEHA/Behavior/Common/PythonBehaviorExecution.cpp',
+#		'src/VEHA/Behavior/Common/OpaquePythonBehavior.cpp'])
+#	tool.settings['LIBS']+=['python2.6','boost_python-mt']
+#else:
+
+print "Compile WITHOUT Python behaviors"
+tool.settings['DEFINES']['NOPYTHON']=None
+
+vehaSettings=tool.copySettings()
+
+
+vehaLib=tool.Library('Mascaret',fileList,
+		settings=vehaSettings)
+
+testsSettings=tool.copySettings()
+testsSettings['LIBS']+=['cppunit']
+testsSettings['LIBS']+=['Mascaret']
+testsSettings['INCDIRS']+=['Tests/include']
+tool.settings['INCDIRS']+=['/usr/include']
+
+tool.Program('unitTests',testFileList, settings=testsSettings)
+
+
+#-------- createProject ----------
+if not tool.testBoolOption('vsproj'):
+  tool.run(all=vehaLib)
+
+#-------- create visual project -----------
+if tool.sysName() == 'Windows' and tool.testBoolOption('vsproj'):
+  import ProjectBuilder
+  pb=ProjectBuilder.ProjectBuilderTool(tool)
+  pb.run()
+
+#burk:
+ma=open("makefile","a")
+objfiles=[os.path.splitext(s)[0]+".o" for s in fileList]
+ma.write("libMascaret.a : "+ " ".join(objfiles)+"\n")
+ma.write("\tar -cr libMascaret.a "+" ".join(objfiles)+"\n")
+ma.close()

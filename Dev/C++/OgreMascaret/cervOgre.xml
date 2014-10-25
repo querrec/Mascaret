@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+  <Model url="./Building.xmi" />
+<Area>
+
+  <Entity class="Building" name="CERV">
+    <Shape url="facial.mesh" recursive ="true"/>
+    <Position x="0" y="0" z="-200" />
+    <Orientation roll="0" pitch="0" yaw="0"/>
+  </Entity>
+    <Viewpoint name="initAV">
+      <Position x="0" y="0" z="0"/>
+      <Orientation roll="0.0" pitch="0" yaw="0"/>
+    </Viewpoint>
+</Area>

@@ -1,0 +1,1085 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4c1a490f-dfc4-11e0-bd93-0009dd50902f}</ProjectGuid>
+    <ProjectName>Mascaret</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_VEHA_LIB;_WIN32_WINNT=0x0601;NOPYTHON;_SCL_SECURE_NO_WARNINGS;_HTTPSERVER_LIB;_SECURE_SCL=0;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);.;include;include\Tools\Network;..\Tools\include;D:\Developpement\libxml2-2.4.12-1-lib\include\libxml2;D:\Developpement\boost_1_43_0</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);.;D:\Developpement\boost_1_43_0\lib;D:\Developpement\libxml2-2.4.12-1-lib\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_VEHA_LIB;_WIN32_WINNT=0x0601;NOPYTHON;_SCL_SECURE_NO_WARNINGS;_HTTPSERVER_LIB;_SECURE_SCL=0;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);.;include;include\Tools\Network;..\Tools\include;C:\gnuwin32\include\libxml2;C:\Program Files\boost\boost_1_43;</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);.;C:\Program Files\boost\boost_1_43\lib;C:\gnuwin32\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BEHAVE\ActionListenerBehavior.cpp" />
+    <ClCompile Include="src\MascaretApplication.cpp" />
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAttributeServlet.cpp" />
+    <ClCompile Include="src\Tools\Network\Servlets\ManageLaunchProcedureServlet.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityParameterNode.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\Activity\LoopNode.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\Activity\LoopNodeBehavior.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\Activity\LoopNodeBehaviorExecution.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\AcceptEventAction.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\AcceptEventBehaviorExecution.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\AddStructuralFeatureValueAction.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\AddStructuralFeatureValueBehaviorExecution.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\OperationWidgetAction.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\OperationWidgetBehaviorExecution.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SignalWidgetAction.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SignalWidgetBehaviorExecution.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\InputPin.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\Pin.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\OutputPin.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\ValuePin.cpp" />
+    <ClCompile Include="src\VEHA\Entity\Color.cpp" />
+    <ClCompile Include="src\VEHA\Entity\RotationVector.cpp" />
+    <ClCompile Include="src\VEHA\Entity\Vector3.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\Vector3.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Element.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Element.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Class.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Class.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\BehavioralFeature.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\BehavioralFeature.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\OCLSpecialMethods.cpp" />
+    <ClCompile Include="src\VEHA\Kernel\Property.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Property.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Classifier.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Classifier.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\ValueSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\ValueSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\DomainSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\DomainSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\InstanceSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\InstanceSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Slot.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Slot.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\SlotDerived.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\SlotDerived.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Operation.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Operation.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Constraint.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Constraint.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Expression.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Expression.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\InstanceValue.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\InstanceValue.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\OpaqueExpression.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\OpaqueExpression.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Feature.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Feature.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Parameter.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Parameter.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Comment.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Comment.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Model.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Model.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Environment.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Environment.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Package.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\Package.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\PrimitiveType.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\PrimitiveType.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\LiteralSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralReal.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\LiteralReal.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralInteger.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\LiteralInteger.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralString.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\LiteralString.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralBoolean.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\LiteralBoolean.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\EntityClass.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\EntityClass.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\GeometryProperty.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\GeometryProperty.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\TopologicalProperty.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\TopologicalProperty.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\ShapeProperty.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\ShapeProperty.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\Entity.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\Entity.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PointSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\PointSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PointProperty.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\PointProperty.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PathSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\PathSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PathProperty.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\PathProperty.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PrimitiveGeometry.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\PrimitiveGeometry.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\ShapeGeometry.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\ShapeGeometry.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\SpecificGeometry.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\SpecificGeometry.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\TopologicalSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\TopologicalSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\GeometrySpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\GeometrySpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\ShapeSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\ShapeSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\AnimationSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\AnimationSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\AnimationProperty.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\AnimationProperty.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\SoundSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\SoundSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\SoundProperty.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\SoundProperty.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\VirtualRealityComponentFactory.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\VirtualRealityComponentFactory.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\VirtualRealitySpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\VirtualRealitySpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\Zone.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Entity\Zone.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\CallEvent.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\CallEvent.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\ChangeEvent.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\ChangeEvent.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\CompositeState.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\CompositeState.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\FinalState.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\FinalState.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\Guard.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\Guard.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\PseudoState.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\PseudoState.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\SignalEvent.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\SignalEvent.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\StateController.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\StateController.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\State.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\State.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\StateMachine.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\StateMachine.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\StateMachineBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\StateMachineBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\Region.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\Region.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\Vertex.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\Vertex.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\TimeEvent.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\TimeEvent.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\Transition.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\StateMachine\Transition.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\Behavior.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\Behavior.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\Signal.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\Signal.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\BehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\BehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\Event.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\Event.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\ActivityBehaviorExecutionHelper.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\ActivityBehaviorExecutionHelper.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\EventOccurence.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\EventOccurence.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\OpaqueBehavior.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\OpaqueBehavior.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\behaviorScheduler.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\behaviorScheduler.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\Trigger.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\Trigger.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActionNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ActionNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityEdge.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ActivityEdge.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityFinalNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ActivityFinalNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\Activity.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\Activity.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ActivityExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ActivityNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityPartition.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ActivityPartition.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ControlFlow.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ControlFlow.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ControlNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ControlNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\DecisionNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\DecisionNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\FinalNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\FinalNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\FlowFinalNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\FlowFinalNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ForkNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ForkNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ChoiceNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ChoiceNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\InitialNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\InitialNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\JoinNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\JoinNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\MergeNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\MergeNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ObjectFlow.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ObjectFlow.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ObjectNode.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ObjectNode.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Activity\ActivityBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\Action.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\Action.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\DummyAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\DummyAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\DummyBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\DummyBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CallOperationAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\CallOperationAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CallOperationBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\CallOperationBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CallBehaviorAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\CallBehaviorAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CallBehaviorBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\CallBehaviorBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\GrowUpInstanceAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\GrowUpInstanceAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\GrowUpInstanceBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\GrowUpInstanceBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SendSignalAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\SendSignalAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SendSignalBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\SendSignalBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CreateEntityAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\CreateEntityAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CreateEntityBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\CreateEntityBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\RestoreEnvironmentAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\RestoreEnvironmentAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\RestoreEnvironmentBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\RestoreEnvironmentBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SetInstanceInRedAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\SetInstanceInRedAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SetInstanceInRedBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\SetInstanceInRedBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SetInstanceTransparencyAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\SetInstanceTransparencyAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SetInstanceTransparencyBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\SetInstanceTransparencyBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\PlayAnimationAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\PlayAnimationAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\PlayAnimationBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\PlayAnimationBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\StopAnimationAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\StopAnimationAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\StopAnimationBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\StopAnimationBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\ChangeViewPointAction.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\ChangeViewPointAction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\ChangeViewPointBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\BasicActions\ChangeViewPointBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Time\TimeExpression.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Time\TimeExpression.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\pluginManager.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\pluginManager.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\CollectionMethods.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\CollectionMethods.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\expressionParser.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\expressionParser.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\OclQuery.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Behavior\Common\OclQuery.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\CallbackManager.cpp">
+      <ObjectFileName>$(IntDir)src\VEHA\Kernel\CallbackManager.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Agent.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\Agent.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AID.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\AID.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Mailbox.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\Mailbox.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\ACLMessage.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\ACLMessage.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\fipaSLParser.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\fipaSLParser.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AgentClass.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\AgentClass.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\KnowledgeBase.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\KnowledgeBase.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\SimpleCommunicationBehavior.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\SimpleCommunicationBehavior.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\ProceduralBehavior.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\ProceduralBehavior.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AgentBehavior.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\AgentBehavior.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AgentBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\AgentBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\SimpleBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\SimpleBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\OneShotBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\OneShotBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\CyclicBehaviorExecution.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\CyclicBehaviorExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AgentPlateform.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\AgentPlateform.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\OrganisationalStructure.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\OrganisationalStructure.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\OrganisationalEntity.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\OrganisationalEntity.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Ressource.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\Ressource.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Role.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\Role.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\RoleClass.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\RoleClass.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\RoleAssignement.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\RoleAssignement.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\RessourceAssignement.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\RessourceAssignement.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Procedure.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\Procedure.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\ProcedureExecution.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\ProcedureExecution.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\EmbodiedAgent.cpp">
+      <ObjectFileName>$(IntDir)src\HAVE\EmbodiedAgent.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\HttpCommunicationManager.cpp">
+      <ObjectFileName>$(IntDir)src\BEHAVE\HttpCommunicationManager.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\Body.cpp">
+      <ObjectFileName>$(IntDir)src\HAVE\Body.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\BodyClass.cpp">
+      <ObjectFileName>$(IntDir)src\HAVE\BodyClass.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\VirtualHumanClass.cpp">
+      <ObjectFileName>$(IntDir)src\HAVE\VirtualHumanClass.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\VirtualHuman.cpp">
+      <ObjectFileName>$(IntDir)src\HAVE\VirtualHuman.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Scenario\ScenarioEvent.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Scenario\ScenarioEvent.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Scenario\ScenarioScheduler.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Scenario\ScenarioScheduler.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Scenario\Scenario.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Scenario\Scenario.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\XmlParser.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Loaders\XmlParser.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\ParserHelper.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Loaders\ParserHelper.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\XMIParser.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Loaders\XMIParser.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\ModelLoader.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Loaders\ModelLoader.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\InstanceLoader.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Loaders\InstanceLoader.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\md5.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\md5.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\ModelLoader2.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Loaders\ModelLoader2.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\AbstractModelLoader.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Loaders\AbstractModelLoader.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\XMI11Loader.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Loaders\XMI11Loader.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpConnection.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\HttpServer\httpConnection.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpRequest.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\HttpServer\httpRequest.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpResponse.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\HttpServer\httpResponse.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpServer.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\HttpServer\httpServer.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpSession.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\HttpServer\httpSession.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\tcpConnection.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\HttpServer\tcpConnection.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\tcpServer.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\HttpServer\tcpServer.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSpeedServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageSpeedServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageEntityJSONServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageEntityJSONServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSetAttributeValueServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageSetAttributeValueServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAgentKnowledgeBaseServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageAgentKnowledgeBaseServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAgentKBHeadServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageAgentKBHeadServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageViewpointServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageViewpointServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageACLMessageServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageACLMessageServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageActionServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageActionServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAgentServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageAgentServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAgentsServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageAgentsServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageApplicationServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageApplicationServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageCenterViewServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageCenterViewServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageChangeGeometryServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageChangeGeometryServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageClassServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageClassServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageReloadClassServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageReloadClassServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageConnectServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageConnectServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageCreateEntityServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageCreateEntityServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageCreateMessageServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageCreateMessageServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageCreateUserMessageServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageCreateUserMessageServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageEntityServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageEntityServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageExecuteQueryServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageExecuteQueryServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageFIPASLServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageFIPASLServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageFIPASLTestServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageFIPASLTestServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageHeadServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageHeadServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageIndexServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageIndexServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageInstancesServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageInstancesServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageLaunchOperationServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageLaunchOperationServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageMessagesEnvoyesServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageMessagesEnvoyesServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageMessagesRecusServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageMessagesRecusServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageMessagesServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageMessagesServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageModelServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageModelServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageOperationServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageOperationServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageOrganisationalEntityServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageOrganisationalEntityServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageOrganisationalStructureServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageOrganisationalStructureServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageOrganisationsServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageOrganisationsServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageProcedureServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageProcedureServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageQueryServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageQueryServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageRoleClassServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageRoleClassServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSendMessageServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageSendMessageServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSendUserMessageServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageSendUserMessageServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSetRedServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageSetRedServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSignalServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageSignalServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageXOCLServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageXOCLServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageScenarioServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageScenarioServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageChangeAttributeServlet.cpp">
+      <ObjectFileName>$(IntDir)src\Tools\Network\Servlets\ManageChangeAttributeServlet.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Visualisation\Scene.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Visualisation\Scene.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Visualisation\Renderer.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Visualisation\Renderer.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Visualisation\RenderToTexture.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Visualisation\RenderToTexture.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Visualisation\Camera.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Visualisation\Camera.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\VRApplication.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\VRApplication.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Visualisation\Window3D.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Visualisation\Window3D.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Peripheric.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Interaction\Peripheric.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\PaddlePeripheric.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Interaction\PaddlePeripheric.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Axis.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Interaction\Axis.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Button.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Interaction\Button.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\ButtonAxis.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Interaction\ButtonAxis.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\CartesianBasis.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Interaction\CartesianBasis.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Interaction.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Interaction\Interaction.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Navigation.cpp">
+      <ObjectFileName>$(IntDir)src\IEHA\Interaction\Navigation.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\SysML\Block.cpp">
+      <ObjectFileName>$(IntDir)src\SysML\Block.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BackupUtils\BackupList.cpp">
+      <ObjectFileName>$(IntDir)src\BackupUtils\BackupList.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BackupUtils\IBackupEnabled.cpp">
+      <ObjectFileName>$(IntDir)src\BackupUtils\IBackupEnabled.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BackupUtils\Backup.cpp">
+      <ObjectFileName>$(IntDir)src\BackupUtils\Backup.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BackupUtils\ProcedureExecutionBackup.cpp">
+      <ObjectFileName>$(IntDir)src\BackupUtils\ProcedureExecutionBackup.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\BackupUtils\SlotBackup.cpp">
+      <ObjectFileName>$(IntDir)src\BackupUtils\SlotBackup.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\BEHAVE\ActionListenerBehavior.h" />
+    <ClInclude Include="include\MascaretApplication.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAttributeServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageLaunchProcedureServlet.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityParameterNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\LoopNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\LoopNodeBehavior.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\LoopNodeBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\AcceptEventAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\AcceptEventBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\AddStructuralFeatureValueAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\AddStructuralFeatureValueBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\OperationWidgetAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\OperationWidgetBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SignalWidgetAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SignalWidgetBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Kernel\Element.h" />
+    <ClInclude Include="include\VEHA\Kernel\Comment.h" />
+    <ClInclude Include="include\VEHA\Kernel\Class.h" />
+    <ClInclude Include="include\VEHA\Kernel\Package.h" />
+    <ClInclude Include="include\VEHA\Kernel\InstanceSpecification.h" />
+    <ClInclude Include="include\VEHA\Kernel\Property.h" />
+    <ClInclude Include="include\VEHA\Kernel\Operation.h" />
+    <ClInclude Include="include\VEHA\Kernel\InstanceValue.h" />
+    <ClInclude Include="include\Tools\utils.h" />
+    <ClInclude Include="include\Tools\Scenario/Scenario.h" />
+    <ClInclude Include="include\Tools\Scenario/ScenarioEvent.h" />
+    <ClInclude Include="include\Tools\Scenario/ScenarioScheduler.h" />
+    <ClInclude Include="include\VEHA\Kernel\BehavioralFeature.h" />
+    <ClInclude Include="include\VEHA\Kernel\ValueSpecification.h" />
+    <ClInclude Include="include\VEHA\Kernel\DomainSpecification.h" />
+    <ClInclude Include="include\VEHA\Kernel\Classifier.h" />
+    <ClInclude Include="include\VEHA\Kernel\LiteralReal.h" />
+    <ClInclude Include="include\VEHA\Kernel\LiteralBoolean.h" />
+    <ClInclude Include="include\VEHA\Kernel\LiteralString.h" />
+    <ClInclude Include="include\VEHA\Kernel\LiteralInteger.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\Behavior.h" />
+    <ClInclude Include="include\VEHA\Kernel\Slot.h" />
+    <ClInclude Include="include\VEHA\Kernel\SlotDerived.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\behaviorScheduler.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\ActivityBehaviorExecutionHelper.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\StateMachineBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\Vertex.h" />
+    <ClInclude Include="include\VEHA\Kernel\Expression.h" />
+    <ClInclude Include="include\VEHA\Kernel\Parameter.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\Parameters.h" />
+    <ClInclude Include="include\VEHA\Kernel\Constraint.h" />
+    <ClInclude Include="include\VEHA\Kernel\CallbackManager.h" />
+    <ClInclude Include="include\VEHA\Kernel\OpaqueExpression.h" />
+    <ClInclude Include="include\VEHA\Kernel\Feature.h" />
+    <ClInclude Include="include\VEHA\Kernel\Model.h" />
+    <ClInclude Include="include\VEHA\Kernel\PrimitiveType.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\StateMachine.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\Region.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\State.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\PseudoState.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\Transition.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\SignalEvent.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\CallEvent.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\Activity.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActionNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ObjectNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityEdge.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityPartition.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\Action.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\DummyAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\DummyBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CallOperationAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CallBehaviorAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SendSignalAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\PlayAnimationAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\OutputPin.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\Pin.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\InputPin.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\ValuePin.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\Trigger.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\Event.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\Signal.h" />
+    <ClInclude Include="include\Tools\Loaders\XmlParser.h" />
+    <ClInclude Include="include\VEHA\Kernel\Environment.h" />
+    <ClInclude Include="include\VEHA\Entity\Entity.h" />
+    <ClInclude Include="include\HAVE\VirtualHuman.h" />
+    <ClInclude Include="include\VEHA\Entity\Vector3.h" />
+    <ClInclude Include="include\VEHA\Entity\Color.h" />
+    <ClInclude Include="include\VEHA\Entity\RotationVector.h" />
+    <ClInclude Include="include\VEHA\Entity\ShapeSpecification.h" />
+    <ClInclude Include="include\VEHA\Entity\PointSpecification.h" />
+    <ClInclude Include="include\VEHA\Entity\PathSpecification.h" />
+    <ClInclude Include="include\VEHA\Entity\SoundSpecification.h" />
+    <ClInclude Include="include\VEHA\Entity\AnimationSpecification.h" />
+    <ClInclude Include="include\VEHA\Entity\VirtualRealityComponentFactory.h" />
+    <ClInclude Include="include\VEHA\Kernel\LiteralSpecification.h" />
+    <ClInclude Include="include\VEHA\Entity\EntityClass.h" />
+    <ClInclude Include="include\VEHA\Entity\ShapeProperty.h" />
+    <ClInclude Include="include\VEHA\Entity\TopologicalProperty.h" />
+    <ClInclude Include="include\VEHA\Entity\GeometryProperty.h" />
+    <ClInclude Include="include\VEHA\Entity\PointProperty.h" />
+    <ClInclude Include="include\VEHA\Entity\PathProperty.h" />
+    <ClInclude Include="include\VEHA\Entity\PrimitiveGeometry.h" />
+    <ClInclude Include="include\VEHA\Entity\ShapeGeometry.h" />
+    <ClInclude Include="include\VEHA\Entity\SpecificGeometry.h" />
+    <ClInclude Include="include\VEHA\Entity\TopologicalSpecification.h" />
+    <ClInclude Include="include\VEHA\Entity\GeometrySpecification.h" />
+    <ClInclude Include="include\VEHA\Entity\AnimationProperty.h" />
+    <ClInclude Include="include\VEHA\Entity\SoundProperty.h" />
+    <ClInclude Include="include\VEHA\Entity\VirtualRealitySpecification.h" />
+    <ClInclude Include="include\VEHA\Entity\Zone.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\ChangeEvent.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\CompositeState.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\FinalState.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\Guard.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\BehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\StateController.h" />
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\TimeEvent.h" />
+    <ClInclude Include="include\VEHA\Behavior\Time\TimeExpression.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\EventOccurence.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\OpaqueBehavior.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\pluginManager.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SetInstanceInRedAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SetInstanceTransparencyAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\GrowUpInstanceAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityFinalNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ControlFlow.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ControlNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\DecisionNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\FinalNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\FlowFinalNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ForkNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ChoiceNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\InitialNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\JoinNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\MergeNode.h" />
+    <ClInclude Include="include\VEHA\Behavior\Activity\ObjectFlow.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CallOperationBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CallBehaviorBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\GrowUpInstanceBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SendSignalBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CreateEntityAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CreateEntityBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\RestoreEnvironmentAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\RestoreEnvironmentBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SetInstanceInRedBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SetInstanceTransparencyBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\PlayAnimationBehaviorExecution.h" />
+    <ClInclude Include="include\HAVE\Body.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\StopAnimationAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\StopAnimationBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\ChangeViewPointAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\ChangeViewPointBehaviorExecution.h" />
+    <ClInclude Include="include\IEHA\VRApplication.h" />
+    <ClInclude Include="include\IEHA\Visualisation\Camera.h" />
+    <ClInclude Include="include\VEHA\Kernel\expressionParser.h" />
+    <ClInclude Include="include\VEHA\Kernel\AnyValueSpecification.h" />
+    <ClInclude Include="include\VEHA\Kernel\CollectionMethods.h" />
+    <ClInclude Include="include\VEHA\Kernel\OCLSpecialMethods.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\OclQuery.h" />
+    <ClInclude Include="include\BEHAVE\Agent.h" />
+    <ClInclude Include="include\BEHAVE\AgentClass.h" />
+    <ClInclude Include="include\BEHAVE\AgentBehavior.h" />
+    <ClInclude Include="include\BEHAVE\AgentBehaviorExecution.h" />
+    <ClInclude Include="include\BEHAVE\SimpleBehaviorExecution.h" />
+    <ClInclude Include="include\BEHAVE\OneShotBehaviorExecution.h" />
+    <ClInclude Include="include\BEHAVE\AgentPlateform.h" />
+    <ClInclude Include="include\BEHAVE\ACLMessage.h" />
+    <ClInclude Include="include\BEHAVE\AID.h" />
+    <ClInclude Include="include\BEHAVE\Mailbox.h" />
+    <ClInclude Include="include\BEHAVE\fipaSLParser.h" />
+    <ClInclude Include="include\BEHAVE\KnowledgeBase.h" />
+    <ClInclude Include="include\BEHAVE\CyclicBehaviorExecution.h" />
+    <ClInclude Include="include\BEHAVE\OrganisationalEntity.h" />
+    <ClInclude Include="include\BEHAVE\OrganisationalStructure.h" />
+    <ClInclude Include="include\BEHAVE\Procedure.h" />
+    <ClInclude Include="include\BEHAVE\RoleAssignement.h" />
+    <ClInclude Include="include\BEHAVE\Ressource.h" />
+    <ClInclude Include="include\BEHAVE\RessourceAssignement.h" />
+    <ClInclude Include="include\BEHAVE\SimpleCommunicationBehavior.h" />
+    <ClInclude Include="include\BEHAVE\ProceduralBehavior.h" />
+    <ClInclude Include="include\BEHAVE\ProcedureExecution.h" />
+    <ClInclude Include="include\IEHA\Interaction\Interaction.h" />
+    <ClInclude Include="include\BEHAVE\HttpCommunicationManager.h" />
+    <ClInclude Include="include\BEHAVE\Role.h" />
+    <ClInclude Include="include\BEHAVE\RoleClass.h" />
+    <ClInclude Include="include\HAVE\EmbodiedAgent.h" />
+    <ClInclude Include="include\Tools\Network\httpServer\httpServer.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSetAttributeValueServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentKnowledgeBaseServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentKBHeadServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentViewPointServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSpeedServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageEntityJSONServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageACLMessageServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageActionServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentsServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageApplicationServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageCenterViewServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageChangeGeometryServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageClassServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageReloadClassServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageConnectServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageCreateEntityServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageCreateMessageServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageCreateUserMessageServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageEntityServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageExecuteQueryServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageFIPASLServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageFIPASLTestServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageHeadServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageIndexServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageInstancesServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageLaunchOperationServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageMessagesEnvoyesServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageMessagesRecusServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageMessagesServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageModelServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageOperationServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageOrganisationalEntityServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageOrganisationalStructureServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageOrganisationsServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageProcedureServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageQueryServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageRoleClassServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSendMessageServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSendUserMessageServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSetRedServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSignalServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageXOCLServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageXOCLHelperServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageXOCLHelperRemoveServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageScenarioServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageChangeAttributeServlet.h" />
+    <ClInclude Include="include\HAVE\VirtualHumanClass.h" />
+    <ClInclude Include="include\HAVE\BodyClass.h" />
+    <ClInclude Include="include\Tools\Loaders\XMIParser.h" />
+    <ClInclude Include="include\Tools\Loaders\ModelLoader.h" />
+    <ClInclude Include="include\Tools\Loaders\ParserHelper.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\OpaquePythonBehavior.h" />
+    <ClInclude Include="include\Tools\Loaders\InstanceLoader.h" />
+    <ClInclude Include="include\Tools\Loaders\ModelLoader2.h" />
+    <ClInclude Include="include\IEHA\Visualisation\Window3D.h" />
+    <ClInclude Include="include\IEHA\Visualisation\Renderer.h" />
+    <ClInclude Include="include\IEHA\Visualisation\RenderToTexture.h" />
+    <ClInclude Include="include\Tools\md5.h" />
+    <ClInclude Include="include\Tools\Loaders\AbstractModelLoader.h" />
+    <ClInclude Include="include\Tools\Loaders\XMI11Loader.h" />
+    <ClInclude Include="include\Tools\Network\httpServer\httpConnection.h" />
+    <ClInclude Include="include\Tools\Network\httpServer\httpRequest.h" />
+    <ClInclude Include="include\Tools\Network\httpServer\httpResponse.h" />
+    <ClInclude Include="include\Tools\Network\httpServer\httpConnectionFactory.h" />
+    <ClInclude Include="include\Tools\Network\httpServer\httpSession.h" />
+    <ClInclude Include="include\Tools\Network\httpServer\tcpConnection.h" />
+    <ClInclude Include="include\Tools\Network\httpServer\tcpServer.h" />
+    <ClInclude Include="include\IEHA\Visualisation\Scene.h" />
+    <ClInclude Include="include\IEHA\Visualisation\SkyBox.h" />
+    <ClInclude Include="include\IEHA\Visualisation\Light.h" />
+    <ClInclude Include="include\IEHA\Interaction\PaddlePeripheric.h" />
+    <ClInclude Include="include\IEHA\Interaction\ButtonAxis.h" />
+    <ClInclude Include="include\IEHA\Interaction\Peripheric.h" />
+    <ClInclude Include="include\IEHA\Interaction\Axis.h" />
+    <ClInclude Include="include\IEHA\Interaction\Button.h" />
+    <ClInclude Include="include\IEHA\Interaction\CartesianBasis.h" />
+    <ClInclude Include="include\IEHA\Interaction\Navigation.h" />
+    <ClInclude Include="include\Tools\IDCalculator.h" />
+    <ClInclude Include="include\SysML\Block.h" />
+    <ClInclude Include="include\BackupUtils\BackupList.h" />
+    <ClInclude Include="include\BackupUtils\IBackupEnabled.h" />
+    <ClInclude Include="include\BackupUtils\Backup.h" />
+    <ClInclude Include="include\BackupUtils\ProcedureExecutionBackup.h" />
+    <ClInclude Include="include\BackupUtils\SlotBackup.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

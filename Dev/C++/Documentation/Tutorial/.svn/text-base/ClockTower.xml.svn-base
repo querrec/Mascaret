@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Area name="Scene">
+	<Model url="ClockTower.xmi"/>
+	<Viewpoint name="Camera">
+		<Position x="7.356034755706787" y="-6.181215763092041" z="1.7000000476837158"/>
+		<Orientation roll="-0.007318377494812012" pitch="-0.41558441519737244" yaw="2.5018386840820312"/>
+	</Viewpoint>
+	<Viewpoint name="Camera.001">
+		<Position x="7.251981735229492" y="0.0" z="2.198662519454956"/>
+		<Orientation roll="-0.06737197190523148" pitch="-12.232765197753906" yaw="2.9371862411499023"/>
+	</Viewpoint>
+	<Entity name="Clock" class="Clock">
+		<Shape url="Clock.wrl"/>
+		<Position x="1.0103222131729126" y="0.07408811151981354" z="6.483036518096924"/>
+		<Orientation roll="0.0" pitch="0.0" yaw="0.0"/>
+		<Attribute name="hourHand" value="SmallHand"/>
+		<Attribute name="minuteHand" value="BigHand"/>
+		<Entity name="BigHand" class="Hand">
+			<Shape url="BigHand.wrl"/>
+			<Position x="0.0" y="0.0" z="0.0"/>
+			<Orientation roll="0.0" pitch="0.0" yaw="0.0"/>
+		</Entity>
+		<Entity name="SmallHand" class="Hand">
+			<Shape url="LittleHand.wrl"/>
+			<Position x="0.0" y="0.0" z="0.0"/>
+			<Orientation roll="0.0" pitch="0.0" yaw="0.0"/>
+		</Entity>
+	</Entity>
+	<Entity name="ClockTower" class="ClockTower">
+		<Shape url="Tower.wrl"/>
+		<Position x="0.0" y="0.0" z="4.033113479614258"/>
+		<Orientation roll="0.0" pitch="0.0" yaw="0.0"/>
+		<Attribute name="clock" value="Clock"/>
+	</Entity>
+	<Light name="Lamp" directional="false">
+		<Position x="4.076245307922363" y="1.0054539442062378" z="5.903861999511719"/>
+		<Orientation roll="0.6503279805183411" pitch="0.055217113345861435" yaw="1.8663908243179321"/>
+	</Light>
+	<Entity name="Sol" class="undef">
+		<Shape url="Ground.wrl"/>
+		<Position x="0.0" y="0.0" z="0.0"/>
+		<Orientation roll="0.0" pitch="0.0" yaw="0.0"/>
+	</Entity>
+</Area>

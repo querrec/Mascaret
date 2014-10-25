@@ -1,0 +1,1505 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\VEHA\Kernel\Element.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Class.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\BehavioralFeature.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Property.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Classifier.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\ValueSpecification.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\DomainSpecification.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\InstanceSpecification.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Slot.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\SlotDerived.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Operation.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Constraint.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Expression.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\InstanceValue.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\OpaqueExpression.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Feature.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Parameter.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Comment.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Model.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Environment.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\Package.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\PrimitiveType.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralSpecification.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralReal.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralInteger.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralString.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\LiteralBoolean.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\EntityClass.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\GeometryProperty.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\TopologicalProperty.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\ShapeProperty.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\Entity.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PointSpecification.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PointProperty.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PathSpecification.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PathProperty.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\PrimitiveGeometry.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\ShapeGeometry.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\SpecificGeometry.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\TopologicalSpecification.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\GeometrySpecification.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\ShapeSpecification.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\AnimationSpecification.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\AnimationProperty.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\SoundSpecification.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\SoundProperty.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\VirtualRealityComponentFactory.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\VirtualRealitySpecification.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\Zone.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\CallEvent.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\ChangeEvent.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\CompositeState.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\FinalState.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\Guard.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\PseudoState.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\SignalEvent.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\StateController.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\State.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\StateMachine.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\StateMachineBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\Region.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\Vertex.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\TimeEvent.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\StateMachine\Transition.cpp">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\Behavior.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\Signal.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\BehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\Event.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\EventOccurence.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\OpaqueBehavior.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\behaviorScheduler.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\Trigger.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActionNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityEdge.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityFinalNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\Activity.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityExecution.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityPartition.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ControlFlow.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ControlNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\DecisionNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\FinalNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\FlowFinalNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ForkNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ChoiceNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\InitialNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\JoinNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\MergeNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ObjectFlow.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ObjectNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\Action.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CallOperationAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CallOperationBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\GrowUpInstanceAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\GrowUpInstanceBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SendSignalAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SendSignalBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CreateEntityAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CreateEntityBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\RestoreEnvironmentAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\RestoreEnvironmentBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SetInstanceInRedAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SetInstanceInRedBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SetInstanceTransparencyAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SetInstanceTransparencyBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\PlayAnimationAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\PlayAnimationBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\StopAnimationAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\StopAnimationBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\ChangeViewPointAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\ChangeViewPointBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Time\TimeExpression.cpp">
+      <Filter>VEHA\Behavior\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\pluginManager.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\CollectionMethods.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\expressionParser.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Common\OclQuery.cpp">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\CallbackManager.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Agent.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AID.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Mailbox.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\ACLMessage.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\fipaSLParser.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AgentClass.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\KnowledgeBase.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\SimpleCommunicationBehavior.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\ProceduralBehavior.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AgentBehavior.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AgentBehaviorExecution.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\SimpleBehaviorExecution.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\OneShotBehaviorExecution.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\CyclicBehaviorExecution.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\AgentPlateform.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\OrganisationalStructure.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\OrganisationalEntity.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Ressource.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Role.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\RoleClass.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\RoleAssignement.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\RessourceAssignement.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\Procedure.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\ProcedureExecution.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\EmbodiedAgent.cpp">
+      <Filter>HAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\HttpCommunicationManager.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\Body.cpp">
+      <Filter>HAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\BodyClass.cpp">
+      <Filter>HAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\VirtualHumanClass.cpp">
+      <Filter>HAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HAVE\VirtualHuman.cpp">
+      <Filter>HAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\XmlParser.cpp">
+      <Filter>Tools\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\XMIParser.cpp">
+      <Filter>Tools\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\ModelLoader.cpp">
+      <Filter>Tools\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\InstanceLoader.cpp">
+      <Filter>Tools\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\md5.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\ModelLoader2.cpp">
+      <Filter>Tools\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\AbstractModelLoader.cpp">
+      <Filter>Tools\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Loaders\XMI11Loader.cpp">
+      <Filter>Tools\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpConnection.cpp">
+      <Filter>Tools\Network\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpRequest.cpp">
+      <Filter>Tools\Network\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpResponse.cpp">
+      <Filter>Tools\Network\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpServer.cpp">
+      <Filter>Tools\Network\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\httpSession.cpp">
+      <Filter>Tools\Network\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\tcpConnection.cpp">
+      <Filter>Tools\Network\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\HttpServer\tcpServer.cpp">
+      <Filter>Tools\Network\HttpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageACLMessageServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageActionServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAgentServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAgentsServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageApplicationServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageCenterViewServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageChangeGeometryServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageClassServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageReloadClassServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageConnectServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageCreateEntityServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageCreateMessageServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageCreateUserMessageServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageEntityServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageExecuteQueryServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageFIPASLServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageFIPASLTestServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageHeadServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageIndexServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageInstancesServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageLaunchOperationServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageMessagesEnvoyesServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageMessagesRecusServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageMessagesServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageModelServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageOperationServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageOrganisationalEntityServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageOrganisationalStructureServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageOrganisationsServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageProcedureServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageQueryServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageRoleClassServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSendMessageServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSendUserMessageServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSetRedServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSignalServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageXOCLServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageScenarioServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageChangeAttributeServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Visualisation\Scene.cpp">
+      <Filter>IEHA\Visualisation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Visualisation\Camera.cpp">
+      <Filter>IEHA\Visualisation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\VRApplication.cpp">
+      <Filter>IEHA</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Visualisation\Window3D.cpp">
+      <Filter>IEHA\Visualisation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Peripheric.cpp">
+      <Filter>IEHA\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\PaddlePeripheric.cpp">
+      <Filter>IEHA\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Axis.cpp">
+      <Filter>IEHA\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Button.cpp">
+      <Filter>IEHA\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\ButtonAxis.cpp">
+      <Filter>IEHA\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\CartesianBasis.cpp">
+      <Filter>IEHA\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Interaction.cpp">
+      <Filter>IEHA\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IEHA\Interaction\Navigation.cpp">
+      <Filter>IEHA\Interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\AddStructuralFeatureValueAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\AddStructuralFeatureValueBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAttributeServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\OperationWidgetAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\OperationWidgetBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SignalWidgetAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\SignalWidgetBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\LoopNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\Color.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\RotationVector.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Entity\Vector3.cpp">
+      <Filter>VEHA\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BEHAVE\ActionListenerBehavior.cpp">
+      <Filter>BEHAVE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Kernel\OCLSpecialMethods.cpp">
+      <Filter>VEHA\Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\LoopNodeBehavior.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\LoopNodeBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\Activity\ActivityParameterNode.cpp">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MascaretApplication.cpp" />
+    <ClCompile Include="src\Tools\Network\Servlets\ManageLaunchProcedureServlet.cpp">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\AcceptEventAction.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\AcceptEventBehaviorExecution.cpp">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\VEHA\Kernel\Element.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Comment.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Class.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Package.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\InstanceSpecification.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Property.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Operation.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\InstanceValue.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\utils.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\BehavioralFeature.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\ValueSpecification.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\DomainSpecification.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Classifier.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\LiteralReal.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\LiteralBoolean.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\LiteralString.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\LiteralInteger.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\Behavior.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Slot.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\SlotDerived.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\behaviorScheduler.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\StateMachineBehaviorExecution.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\Vertex.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Expression.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Parameter.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\Parameters.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Constraint.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\CallbackManager.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\OpaqueExpression.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Feature.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Model.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\PrimitiveType.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\StateMachine.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\Region.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\State.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\PseudoState.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\Transition.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\SignalEvent.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\CallEvent.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\Activity.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActionNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ObjectNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityEdge.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityPartition.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\Action.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CallOperationAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SendSignalAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\PlayAnimationAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\Trigger.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\Event.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\Signal.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Loaders\XmlParser.h">
+      <Filter>Tools\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\Environment.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\Entity.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HAVE\VirtualHuman.h">
+      <Filter>HAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\Vector3.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\Color.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\RotationVector.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\ShapeSpecification.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\PointSpecification.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\PathSpecification.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\SoundSpecification.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\AnimationSpecification.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\VirtualRealityComponentFactory.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\LiteralSpecification.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\EntityClass.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\ShapeProperty.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\TopologicalProperty.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\GeometryProperty.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\PointProperty.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\PathProperty.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\PrimitiveGeometry.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\ShapeGeometry.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\SpecificGeometry.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\TopologicalSpecification.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\GeometrySpecification.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\AnimationProperty.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\SoundProperty.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\VirtualRealitySpecification.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Entity\Zone.h">
+      <Filter>VEHA\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\ChangeEvent.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\CompositeState.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\FinalState.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\Guard.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\BehaviorExecution.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\StateController.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\StateMachine\TimeEvent.h">
+      <Filter>VEHA\Behavior\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Time\TimeExpression.h">
+      <Filter>VEHA\Behavior\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\EventOccurence.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\OpaqueBehavior.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\pluginManager.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SetInstanceInRedAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SetInstanceTransparencyAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\GrowUpInstanceAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityFinalNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityBehaviorExecution.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityExecution.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ControlFlow.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ControlNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\DecisionNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\FinalNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\FlowFinalNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ForkNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ChoiceNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\InitialNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\JoinNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\MergeNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ObjectFlow.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CallOperationBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\GrowUpInstanceBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SendSignalBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CreateEntityAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CreateEntityBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\RestoreEnvironmentAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\RestoreEnvironmentBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SetInstanceInRedBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SetInstanceTransparencyBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\PlayAnimationBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HAVE\Body.h">
+      <Filter>HAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\StopAnimationAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\StopAnimationBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\ChangeViewPointAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\ChangeViewPointBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\VRApplication.h">
+      <Filter>IEHA</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Visualisation\Camera.h">
+      <Filter>IEHA\Visualisation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\expressionParser.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\AnyValueSpecification.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\CollectionMethods.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Kernel\OCLSpecialMethods.h">
+      <Filter>VEHA\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\OclQuery.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\Agent.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\AgentClass.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\AgentBehavior.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\AgentBehaviorExecution.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\SimpleBehaviorExecution.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\OneShotBehaviorExecution.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\AgentPlateform.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\ACLMessage.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\AID.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\Mailbox.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\fipaSLParser.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\KnowledgeBase.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\CyclicBehaviorExecution.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\OrganisationalEntity.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\OrganisationalStructure.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\Procedure.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\RoleAssignement.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\Ressource.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\RessourceAssignement.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\SimpleCommunicationBehavior.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\ProceduralBehavior.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\ProcedureExecution.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Interaction\Interaction.h">
+      <Filter>IEHA\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\HttpCommunicationManager.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\Role.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\RoleClass.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HAVE\EmbodiedAgent.h">
+      <Filter>HAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\httpServer\httpServer.h">
+      <Filter>Tools\Network\httpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageACLMessageServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageActionServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentsServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageApplicationServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageCenterViewServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageChangeGeometryServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageClassServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageReloadClassServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageConnectServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageCreateEntityServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageCreateMessageServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageCreateUserMessageServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageEntityServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageExecuteQueryServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageFIPASLServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageFIPASLTestServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageHeadServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageIndexServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageInstancesServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageLaunchOperationServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageMessagesEnvoyesServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageMessagesRecusServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageMessagesServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageModelServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageOperationServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageOrganisationalEntityServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageOrganisationalStructureServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageOrganisationsServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageProcedureServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageQueryServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageRoleClassServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSendMessageServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSendUserMessageServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSetRedServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSignalServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageXOCLServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageXOCLHelperServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageXOCLHelperRemoveServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageScenarioServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageChangeAttributeServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HAVE\VirtualHumanClass.h">
+      <Filter>HAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HAVE\BodyClass.h">
+      <Filter>HAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Loaders\XMIParser.h">
+      <Filter>Tools\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Loaders\ModelLoader.h">
+      <Filter>Tools\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Common\OpaquePythonBehavior.h">
+      <Filter>VEHA\Behavior\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Loaders\InstanceLoader.h">
+      <Filter>Tools\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Loaders\ModelLoader2.h">
+      <Filter>Tools\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Visualisation\Window3D.h">
+      <Filter>IEHA\Visualisation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\md5.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Loaders\AbstractModelLoader.h">
+      <Filter>Tools\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Loaders\XMI11Loader.h">
+      <Filter>Tools\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\httpServer\httpConnection.h">
+      <Filter>Tools\Network\httpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\httpServer\httpRequest.h">
+      <Filter>Tools\Network\httpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\httpServer\httpResponse.h">
+      <Filter>Tools\Network\httpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\httpServer\httpConnectionFactory.h">
+      <Filter>Tools\Network\httpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\httpServer\httpSession.h">
+      <Filter>Tools\Network\httpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\httpServer\tcpConnection.h">
+      <Filter>Tools\Network\httpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\httpServer\tcpServer.h">
+      <Filter>Tools\Network\httpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Visualisation\Scene.h">
+      <Filter>IEHA\Visualisation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Visualisation\SkyBox.h">
+      <Filter>IEHA\Visualisation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Visualisation\Light.h">
+      <Filter>IEHA\Visualisation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Interaction\PaddlePeripheric.h">
+      <Filter>IEHA\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Interaction\ButtonAxis.h">
+      <Filter>IEHA\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Interaction\Peripheric.h">
+      <Filter>IEHA\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Interaction\Axis.h">
+      <Filter>IEHA\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Interaction\Button.h">
+      <Filter>IEHA\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Interaction\CartesianBasis.h">
+      <Filter>IEHA\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEHA\Interaction\Navigation.h">
+      <Filter>IEHA\Interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\IDCalculator.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\AddStructuralFeatureValueAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\AddStructuralFeatureValueBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAttributeServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\OperationWidgetAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\OperationWidgetBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SignalWidgetAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\SignalWidgetBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\LoopNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BEHAVE\ActionListenerBehavior.h">
+      <Filter>BEHAVE</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\ActivityParameterNode.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\LoopNodeBehavior.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\Activity\LoopNodeBehaviorExecution.h">
+      <Filter>VEHA\Behavior\Activity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MascaretApplication.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageLaunchProcedureServlet.h">
+      <Filter>Tools\Network\Servlets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\AcceptEventAction.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\AcceptEventBehaviorExecution.h">
+      <Filter>VEHA\Behavior\BasicActions</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="VEHA">
+      <UniqueIdentifier>{0a7cd212-d14a-43f9-b1d9-a2c6ea9bf584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VEHA\Kernel">
+      <UniqueIdentifier>{66f8d42c-1d80-4184-b508-f0f2ce8ba44b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VEHA\Entity">
+      <UniqueIdentifier>{d0145ae5-9fa8-4e8d-b51f-3a50ceff2b96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VEHA\Behavior">
+      <UniqueIdentifier>{0be150ff-7bfb-4153-80f7-5491178acc0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VEHA\Behavior\StateMachine">
+      <UniqueIdentifier>{f54ad3e4-9dc6-4b33-832a-546c7ce73005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VEHA\Behavior\Common">
+      <UniqueIdentifier>{c477dcd5-da3a-4a09-803d-99434805f427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VEHA\Behavior\Activity">
+      <UniqueIdentifier>{7a29eec8-9f61-48fb-b2af-cba45c894739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VEHA\Behavior\BasicActions">
+      <UniqueIdentifier>{108767b1-d689-4bf2-b9eb-603cb80c4f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VEHA\Behavior\Time">
+      <UniqueIdentifier>{e3565795-d2e6-44c2-93f5-c4dba87bd536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BEHAVE">
+      <UniqueIdentifier>{728fb633-dc78-432e-b753-872aa85f3fe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HAVE">
+      <UniqueIdentifier>{3294462e-15aa-4d71-9595-3296411bc6b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{2f6ec5af-73f2-439c-8d5e-e5de6b9eed91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Loaders">
+      <UniqueIdentifier>{a1ec7a9f-9832-468d-b7b0-12ed140838df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Network">
+      <UniqueIdentifier>{c8749737-544c-4322-b42a-221106f7ba82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Network\HttpServer">
+      <UniqueIdentifier>{5291c174-e710-47a5-8ed5-082bcbcd372e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Network\Servlets">
+      <UniqueIdentifier>{b5808979-3117-40fc-84f7-8e43924517d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IEHA">
+      <UniqueIdentifier>{a1309ae9-d75c-4510-9968-0b0b4f93dedb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IEHA\Visualisation">
+      <UniqueIdentifier>{3ccb9d17-518b-4e50-b6f4-fda9d2e1c9d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IEHA\Interaction">
+      <UniqueIdentifier>{5442b29a-ae24-4dff-8709-210af539dc6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Network\httpServer">
+      <UniqueIdentifier>{077d3bfb-9ce0-4bc6-a7ec-b9a24a2448b2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

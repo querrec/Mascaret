@@ -1,0 +1,169 @@
+#!/usr/bin/env python2
+# -*- coding: iso-8859-1 -*-
+#----------------------------------------------------------------------------
+
+import sys ; sys.path.insert(0,'../Mascaret')
+import MascaretConfig
+import os
+
+#-------- Create the construction tool ---------------------------------------
+
+tool=MascaretConfig.Tool(False)
+
+
+#-------- Global settings -----------------------
+tool.settings['INCDIRS']+=['./include']
+if tool.testBoolOption('use_mingw'):
+  tool.settings['INCDIRS']+=[os.environ['HOME']+'/windows_lib/local/include']
+  tool.settings['INCDIRS']+=[os.environ['HOME']+'/windows_lib/local/include/OGRE']
+  tool.settings['INCDIRS']+=[os.environ['HOME']+'/windows_lib/local/include/OIS']
+  tool.settings['LIBDIRS']+=[os.environ['HOME']+'/windows_lib/local/lib']
+  tool.settings['LIBS']+=['OgreMain', 'OIS']
+else:
+  tool.addLibWithPKGConfig("OGRE")
+  tool.addLibWithPKGConfig("OIS")
+
+
+tool.settings['LIBDIRS']+=['../Mascaret']
+tool.settings['INCDIRS']+=['./include']
+tool.settings['INCDIRS']+=['../Mascaret/include']
+#tool.settings['INCDIRS']+=['/usr/include/boost']
+
+if tool.sysName()=='Windows':
+   tool.settings['LIBS']+=['libxml2']
+   tool.settings['INCDIRS']+=['C:/gnuwin32/include/libxml2']
+   tool.settings['INCDIRS']+=['C:/Program Files/boost/boost_1_43']
+   tool.settings['INCDIRS']+=['C:/gnuwin32/include']
+   tool.settings['INCDIRS']+=['C:/Work/OgreSDK_vc10_v1-7-2/include/OGRE']
+   tool.settings['INCDIRS']+=['C:/Work/OgreSDK_vc10_v1-7-2/include/OIS']
+   tool.settings['DEFINES']['_BIND_TO_CURRENT_CRT_VERSION']=1
+   tool.settings['DEFINES']['_HAS_CPP0X']=0
+   tool.settings['CCFLAGS']+=["/TP"]
+   tool.settings['DBGFLAGS']+=['/MDd']
+   tool.settings['DBGFLAGS']+=['/D_SECURE_SCL=0']
+   tool.settings['OPTFLAGS']+=['/MD']
+   tool.settings['CCFLAGS']+=["/wd4251"]
+   tool.settings['CCFLAGS']+=["/wd4275"]
+   tool.settings['CCFLAGS']+=["/wd4800"]
+   tool.settings['CCFLAGS']+=["/wd4804"]
+   tool.settings['LIBDIRS']+=['C:/gnuwin32/lib']
+   tool.settings['LIBDIRS']+=['C:/Program Files/boost/boost_1_43/lib']
+   if tool.testBoolOption('debug'):
+      tool.settings['LIBDIRS']+=['C:/Work/OgreSDK_vc10_v1-7-2/lib/debug']
+      tool.settings['LIBS']+=['OgreMain_d']
+      tool.settings['LIBS']+=['OIS_d']
+   else:
+      tool.settings['LIBDIRS']+=['C:/Work/OgreSDK_vc10_v1-7-2/lib/release']
+      tool.settings['LIBS']+=['OgreMain']
+      tool.settings['LIBS']+=['OIS']
+else:
+#   tool.settings['INCDIRS']+=['/usr/include/libxml2']
+   if tool.testBoolOption('use_mingw'):
+     tool.settings['INCDIRS']+=[os.environ['HOME']+'/windows_lib/local/include/libxml2']
+     tool.settings['INCDIRS']+=[os.environ['HOME']+'/windows_lib/local/include/boost']
+     tool.settings['INCDIRS']+=[os.environ['HOME']+'/windows_lib/local/include/OGRE']
+     tool.settings['INCDIRS']+=[os.environ['HOME']+'/windows_lib/local/include/OIS']
+     tool.settings['LIBDIRS']+=[os.environ['HOME']+'/windows_lib/local/lib']
+     tool.settings['LDFLAGS']+=['-Wl,--enable-auto-import']
+     tool.settings['DEFINES']['_WIN32_WINNT']=0x0501
+   else:
+     tool.settings['INCDIRS']+=['/usr/include/libxml2']
+     tool.settings['INCDIRS']+=['/usr/include/boost']
+     tool.settings['INCDIRS']+=['/usr/local/include']
+     tool.settings['LIBDIRS']+=['/usr/lib/']
+     tool.settings['LIBDIRS']+=['/usr/local/lib/']
+   tool.settings['LIBS']+=['xml2']
+   if tool.testBoolOption('use_mingw'):
+     tool.settings['LIBS']+=['boost_filesystem-mt']
+     tool.settings['LIBS']+=['boost_signals-mt']
+     tool.settings['LIBS']+=['boost_system-mt']
+     tool.settings['LIBS']+=['boost_thread']
+     tool.settings['LIBS']+=['boost_date_time-mt']
+     tool.settings['LIBS']+=['boost_regex-mt']
+     tool.settings['LIBS']+=['ws2_32']
+     tool.settings['LIBS']+=['mswsock']
+     tool.settings['LIBS']+=['zlib1']
+     tool.settings['LIBS']+=['openal']
+     tool.settings['LIBS']+=['avformat']
+     tool.settings['LIBS']+=['avcodec']
+     tool.settings['LIBS']+=['avutil']
+   else:
+   # cl autolink with the right library on windows. Setting the libdir is suffisant...
+     tool.settings['LIBS']+=['boost_filesystem']
+     tool.settings['LIBS']+=['boost_signals']
+     tool.settings['LIBS']+=['boost_system']
+     tool.settings['LIBS']+=['boost_thread']
+     tool.settings['LIBS']+=['boost_date_time']
+     tool.settings['LIBS']+=['boost_regex']
+     tool.settings['LIBS']+=['openal']
+     tool.settings['LIBS']+=['avformat']
+     tool.settings['LIBS']+=['avcodec']
+     tool.settings['LIBS']+=['avutil']
+
+tool.settings['LIBS']+=['Mascaret']
+libSettings=tool.copySettings()
+libSettings['DEFINES']['_OGRE_MASCARET_LIB']=None
+
+tool.Library('OgreMascaretLib',
+	[
+	#'src/ogreMascaret.cpp',
+	#'src/ogreApplication.cpp',
+	#'src/ogreInterface3D.cpp'
+	"src/VRPlateform/OgreAnimationSpecification.cpp",
+	"src/VRPlateform/OgreCamera.cpp",
+	"src/VRPlateform/OgreLight.cpp",
+	"src/VRPlateform/OgreScene.cpp",
+	"src/VRPlateform/OgreMascaretApplication.cpp",
+	"src/VRPlateform/OgrePointSpecification.cpp",
+	"src/VRPlateform/OgreShapeSpecification.cpp",
+	"src/VRPlateform/OgreSoundSpecification.cpp",
+	"src/VRPlateform/OgreWindow3D.cpp",
+	"src/VRPlateform/OgreRenderToTexture.cpp",
+	"src/VRPlateform/cameraMan.cpp",
+	"src/Animation/OgreAnimation.cpp",
+	"src/Interaction/OgreMouse.cpp",
+	"src/Interaction/OgreCursor.cpp",
+	"src/Interaction/OgreKeyboard.cpp",
+	"src/Assistance/OgreColor.cpp",
+	"src/Assistance/OgreLine.cpp",
+	"src/Assistance/OgreTrihedron.cpp",
+	"src/Assistance/OgreRulerWidget.cpp",
+	"src/OgreVRComponentFactory.cpp",
+	"src/Tools/Sound3D.cpp",
+	"src/Tools/alffmpeg.c",
+	],
+	settings=libSettings)
+
+
+tool.settings['LIBS']+=['OgreMascaretLib']
+tool.Program("ogreMascaret",['src/main.cpp'])
+
+#if tool.testBoolOption('use_mingw'):
+#     tool.settings['LDFLAGS']+=['../Mascaret/Mascaret.a']
+#     tool.Program("ogreMascaret_static",['src/main.cpp',
+#	"src/VRPlateform/OgreAnimationSpecification.cpp",
+#	"src/VRPlateform/OgreCamera.cpp",
+#	"src/VRPlateform/OgreLight.cpp",
+#	"src/VRPlateform/OgreScene.cpp",
+#	"src/VRPlateform/OgreMascaretApplication.cpp",
+#	"src/VRPlateform/OgrePointSpecification.cpp",
+#	"src/VRPlateform/OgreShapeSpecification.cpp",
+#	"src/VRPlateform/OgreSoundSpecification.cpp",
+#	"src/VRPlateform/OgreWindow3D.cpp",
+#	"src/VRPlateform/OgreEntityObject.cpp",
+#	"src/Animation/OgreAnimation.cpp",
+#	"src/Interaction/OgreMouse.cpp",
+#	"src/Interaction/OgreCursor.cpp",
+#	"src/Interaction/OgreKeyboard.cpp",
+#	"src/Assistance/OgreColor.cpp",
+#	"src/OgreVRComponentFactory.cpp"
+#                                        ])
+#-------- createProject ----------
+if tool.testBoolOption('vsproj'):
+  import ProjectBuilder
+  projBuilder=ProjectBuilder.ProjectBuilderTool(tool)
+  projBuilder.run()
+else:
+  tool.run()
+
+#-----------------------------------------------------------------------------

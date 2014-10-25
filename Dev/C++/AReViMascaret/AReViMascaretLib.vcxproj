@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4a36fe00-71db-11e1-824e-bc305bd335c5}</ProjectGuid>
+    <ProjectName>AReViMascaretLib</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_AREVI_WANTS_SECURE_SCL=0;_SCL_SECURE_NO_WARNINGS;_AREVI_MASCARET_LIB;_SECURE_SCL=0</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\querrec\Developpements\animlib\include;C:\Users\querrec\Developpements\hLib\include;C:\Users\querrec\Developpements\ArWidget\include;c:\Users\querrec\Developpements\AReVi\include;c:\Users\querrec\Developpements\AReVi\include\AReVi\Utils\Win32FlexWorkaround;include;C:\Users\querrec\Developpements\mascaret2\branches\sysml\Dev\C++\Mascaret\include;C:\gnuwin32\include\libxml2;C:\Program Files\boost\boost_1_43;C:\gnuwin32\include</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\querrec\Developpements\hLib\lib;C:\Users\querrec\Developpements\ArWidget\lib;C:\Users\querrec\Developpements\animlib\lib;C:\Users\querrec\Developpements\Tools\libxml2-2.4.12-1-lib\lib;%(AdditionalLibraryDirectories);.;c:\Users\querrec\Developpements\AReVi\lib;lib;C:\Users\querrec\Developpements\mascaret2\branches\sysml\Dev\C++\Mascaret;C:\Program Files\boost\boost_1_43\lib;C:\gnuwin32\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);AReVi_d.lib;AReViNS_d.lib;libxml2.lib;AnimLib_d.lib;arWidget_d.lib;AReViHLib2_d.lib;Mascaret.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_BIND_TO_CURRENT_CRT_VERSION=1;_AREVI_WANTS_SECURE_SCL=0;_SCL_SECURE_NO_WARNINGS;_AREVI_MASCARET_LIB;_SECURE_SCL=0;</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);.;c:\Users\querrec\Developpements\AReVi\include;c:\Users\querrec\Developpements\AReVi\include\AReVi\Utils\Win32FlexWorkaround;include;..\Mascaret\include;C:\gnuwin32\include\libxml2;C:\Program Files\boost\boost_1_43;C:\gnuwin32\include;</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251;4275;4800;4804;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);.;c:\Users\querrec\Developpements\AReVi\lib;lib;..\Mascaret;C:\Program Files\boost\boost_1_43\lib;C:\gnuwin32\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);AReVi.lib;AReViNS_d.lib;libxml2.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Assistance\AReViBalloon.cpp" />
+    <ClCompile Include="src\Assistance\AReViColor.cpp" />
+    <ClCompile Include="src\Assistance\AReViImage.cpp" />
+    <ClCompile Include="src\Assistance\AReViOSDDisplay.cpp" />
+    <ClCompile Include="src\Assistance\CairoTextManager.cpp" />
+    <ClCompile Include="src\VRPlateform\AReViAnimationSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViAnimationSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViCamera.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViCamera.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViLight.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViLight.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViScene.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViScene.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViMascaretApplication.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViMascaretApplication.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViPointSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViPointSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViShapeSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViShapeSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViSoundSpecification.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViSoundSpecification.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViWindow3D.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViWindow3D.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\VRPlateform\AReViEntityObject.cpp">
+      <ObjectFileName>$(IntDir)src\VRPlateform\AReViEntityObject.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Animation\AReViAnimation.cpp">
+      <ObjectFileName>$(IntDir)src\Animation\AReViAnimation.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Animation\HLibAnimation.cpp">
+      <ObjectFileName>$(IntDir)src\Animation\HLibAnimation.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Animation\ObjectAnimation.cpp">
+      <ObjectFileName>$(IntDir)src\Animation\ObjectAnimation.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\AReViMouse.cpp">
+      <ObjectFileName>$(IntDir)src\Interaction\AReViMouse.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\AReViCursor.cpp">
+      <ObjectFileName>$(IntDir)src\Interaction\AReViCursor.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Interaction\AReViKeyboard.cpp">
+      <ObjectFileName>$(IntDir)src\Interaction\AReViKeyboard.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Network\AReViMascaretClient.cpp">
+      <ObjectFileName>$(IntDir)src\Network\AReViMascaretClient.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Network\AReViMascaretServer.cpp">
+      <ObjectFileName>$(IntDir)src\Network\AReViMascaretServer.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Network\nsEventEndConnection.cpp">
+      <ObjectFileName>$(IntDir)src\Network\nsEventEndConnection.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\AReViVRComponentFactory.cpp">
+      <ObjectFileName>$(IntDir)src\AReViVRComponentFactory.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="_AReViMascaretClasses.cpp">
+      <ObjectFileName>$(IntDir)_AReViMascaretClasses.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Assistance\AReViBalloon.h" />
+    <ClInclude Include="include\Assistance\AReViColor.h" />
+    <ClInclude Include="include\Assistance\AReViImage.h" />
+    <ClInclude Include="include\Assistance\AReViOSDDisplay.h" />
+    <ClInclude Include="include\Assistance\CairoTextManager.h" />
+    <ClInclude Include="include\VRPlateform\AReViAnimationSpecification.h" />
+    <ClInclude Include="include\Animation\HLibAnimation.h" />
+    <ClInclude Include="include\Animation\ObjectAnimation.h" />
+    <ClInclude Include="include\VRPlateform\AReViCamera.h" />
+    <ClInclude Include="include\VRPlateform\AReViWindow3D.h" />
+    <ClInclude Include="include\VRPlateform\AReViScene.h" />
+    <ClInclude Include="include\VRPlateform\AReViLight.h" />
+    <ClInclude Include="include\VRPlateform\AReViSoundSpecification.h" />
+    <ClInclude Include="include\VRPlateform\AReViMascaretApplication.h" />
+    <ClInclude Include="include\AReViVRComponentFactory.h" />
+    <ClInclude Include="include\Network\AReViMascaretClient.h" />
+    <ClInclude Include="include\Network\AReViMascaretServer.h" />
+    <ClInclude Include="include\Interaction\AReViMouse.h" />
+    <ClInclude Include="include\VRPlateform\AReViPointSpecification.h" />
+    <ClInclude Include="include\VRPlateform\AReViShapeSpecification.h" />
+    <ClInclude Include="include\VRPlateform\AReViEntityObject.h" />
+    <ClInclude Include="include\Animation\AReViAnimation.h" />
+    <ClInclude Include="include\Interaction\AReViCursor.h" />
+    <ClInclude Include="include\Interaction\AReViKeyboard.h" />
+    <ClInclude Include="include\Network\nsEventEndConnection.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

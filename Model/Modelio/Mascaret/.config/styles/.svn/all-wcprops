@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/mascaret2/!svn/ver/1146/branches/sysml/Model/Modelio/Mascaret/.config/styles
+END
+ramc.style
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/mascaret2/!svn/ver/1242/branches/sysml/Model/Modelio/Mascaret/.config/styles/ramc.style
+END
+default.style
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/mascaret2/!svn/ver/1143/branches/sysml/Model/Modelio/Mascaret/.config/styles/default.style
+END
+main.style
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/mascaret2/!svn/ver/1242/branches/sysml/Model/Modelio/Mascaret/.config/styles/main.style
+END
+extern.style
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/mascaret2/!svn/ver/1242/branches/sysml/Model/Modelio/Mascaret/.config/styles/extern.style
+END
+use case.style
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/mascaret2/!svn/ver/1242/branches/sysml/Model/Modelio/Mascaret/.config/styles/use%20case.style
+END
+intern.style
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/mascaret2/!svn/ver/1242/branches/sysml/Model/Modelio/Mascaret/.config/styles/intern.style
+END
