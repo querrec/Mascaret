@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,6 +10,26 @@
     <RootNamespace>Mascaret</RootNamespace>
     <AssemblyName>Mascaret</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publier\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,13 +50,12 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>.\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\TestAnt\antlr-dotnet-csharpruntime-3.5.0.2\Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +74,6 @@
     <Compile Include="BEHAVE\ExternalCommunicationManager.cs" />
     <Compile Include="BEHAVE\FipaSLLexer.cs" />
     <Compile Include="BEHAVE\FipaSLParser.cs" />
-    <Compile Include="BEHAVE\HttpCommunicationManager.cs" />
     <Compile Include="BEHAVE\KnowledgeBase.cs" />
     <Compile Include="BEHAVE\Mailbox.cs" />
     <Compile Include="BEHAVE\OneShotBehaviorExecution.cs" />
@@ -78,33 +96,17 @@
     <Compile Include="HAVE\VirtualHumanClass.cs" />
     <Compile Include="IEHA\Button.cs" />
     <Compile Include="IEHA\ButtonActionInfo.cs" />
+    <Compile Include="IEHA\Camera.cs" />
+    <Compile Include="IEHA\Peripheric.cs" />
+    <Compile Include="IEHA\Windows3D.cs" />
+    <Compile Include="IEHA\Scene.cs" />
+    <Compile Include="IEHA\VRApplication.cs" />
     <Compile Include="IEHA\Interaction.cs" />
     <Compile Include="SysML\Block.cs" />
     <Compile Include="Tools\Loaders\InstanceLoader.cs" />
     <Compile Include="Tools\Loaders\ModelLoader2.cs" />
-    <Compile Include="Tools\NetWork\HttpConnection.cs" />
-    <Compile Include="Tools\NetWork\HttpConnectionFactory.cs" />
-    <Compile Include="Tools\NetWork\HttpRequest.cs" />
-    <Compile Include="Tools\NetWork\HttpResponse.cs" />
-    <Compile Include="Tools\NetWork\HttpServer.cs" />
-    <Compile Include="Tools\NetWork\HttpServlet.cs" />
-    <Compile Include="Tools\NetWork\TcpConnection.cs" />
-    <Compile Include="Tools\NetWork\TcpConnectionFactory.cs" />
-    <Compile Include="Tools\NetWork\TcpServer.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageAgentServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageAgentsServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageClassServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageEntityServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageHeadServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageIndexServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageInstancesServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageLaunchProcedureServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageModelServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageOrganisationalEntityServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageOrganisationalStructureServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageOrganisationsServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageProcedureServlet.cs" />
-    <Compile Include="Tools\NetWork\Servlets\ManageSpeakServlet.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\CallBehaviorBehaviorExecution.cs" />
+    <Compile Include="VEHA\Entity\VirtualRealityComponentFactory.cs" />
     <Compile Include="VEHA\Kernel\BehavioralFeature.cs" />
     <Compile Include="VEHA\Kernel\Class.cs" />
     <Compile Include="VEHA\Kernel\Classifier.cs" />
@@ -213,31 +215,21 @@
     <Compile Include="VEHA\Behavior\StateMachine\Transition.cs" />
     <Compile Include="VEHA\Behavior\StateMachine\Vertex.cs" />
     <Compile Include="VEHA\Behavior\Time\TimeExpression.cs" />
-    <Compile Include="TTS\cereproc.cs" />
-    <Compile Include="TTS\cereproc_priv.cs" />
     <Compile Include="VEHA\Entity\Vector3.cs" />
     <Compile Include="VEHA\Entity\Color.cs" />
     <Compile Include="MascaretApplication.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="BEHAVE\" />
-    <Folder Include="HAVE\" />
-    <Folder Include="IEHA\" />
-    <Folder Include="SysML\" />
-    <Folder Include="Tools\" />
-    <Folder Include="Tools\Loaders\" />
-    <Folder Include="Tools\NetWork\" />
-    <Folder Include="Tools\NetWork\Servlets\" />
-    <Folder Include="VEHA\" />
-    <Folder Include="VEHA\Behavior\" />
-    <Folder Include="VEHA\Entity\" />
-    <Folder Include="VEHA\Kernel\" />
-    <Folder Include="VEHA\Behavior\Activity\" />
-    <Folder Include="VEHA\Behavior\BasicActions\" />
-    <Folder Include="VEHA\Behavior\Common\" />
-    <Folder Include="VEHA\Behavior\StateMachine\" />
-    <Folder Include="VEHA\Behavior\Time\" />
-    <Folder Include="TTS\" />
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
 </Project>

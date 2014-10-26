@@ -1,0 +1,6 @@
+D:\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.csprojResolveAssemblyReference.cache
+D:\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Mascaret.dll
+D:\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Mascaret.pdb
+D:\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Antlr3.Runtime.dll
+D:\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.dll
+D:\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.pdb
