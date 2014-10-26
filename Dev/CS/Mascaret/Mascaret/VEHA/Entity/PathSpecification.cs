@@ -2,32 +2,34 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class PathSpecification : TopologicalSpecification
+namespace Mascaret
 {
-	 
-	private List<PointSpecification> points=new List<PointSpecification>();
-	public List<PointSpecification> Points
-	{
-		get{return points;}
-		set{points = value;}
-	}
-	
-	public PathSpecification() : base(MascaretApplication.Instance.Model.getBasicType("path"))
+    public class PathSpecification : TopologicalSpecification
+    {
 
-	{
-	}
-	
-	public PathSpecification(string str) : base(MascaretApplication.Instance.Model.getBasicType("path"))
+        private List<PointSpecification> points = new List<PointSpecification>();
+        public List<PointSpecification> Points
+        {
+            get { return points; }
+            set { points = value; }
+        }
 
-	{
-		//TODO parse string
-	}
-	
-	public override ValueSpecification clone ()
-	{
-		throw new NotImplementedException ();
-	}
+        public PathSpecification()
+            : base(MascaretApplication.Instance.Model.getBasicType("path"))
+        {
+        }
+
+        public PathSpecification(string str)
+            : base(MascaretApplication.Instance.Model.getBasicType("path"))
+        {
+            //TODO parse string
+        }
+
+        public override ValueSpecification clone()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
 

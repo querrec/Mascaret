@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class FinalState: State
-{	
-	public FinalState(string name) : base(name,"Final")
-	{
-	}
-	
+namespace Mascaret
+{
+    public class FinalState : State
+    {
+        public FinalState(string name)
+            : base(name, "Final")
+        {
+        }
+
+    }
 }
 

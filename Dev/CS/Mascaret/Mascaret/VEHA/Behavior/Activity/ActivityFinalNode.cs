@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class ActivityFinalNode 
+namespace Mascaret
 {
-	
+    public class ActivityFinalNode
+    {
+
+    }
+
 }

@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class AgentClass : Class
-	
+namespace Mascaret
 {
 
-	public AgentClass (string name) : base(name)
-	{
-	}
+    public class AgentClass : Class
+    {
+
+        public AgentClass(string name)
+            : base(name)
+        {
+        }
+    }
 }
 
 

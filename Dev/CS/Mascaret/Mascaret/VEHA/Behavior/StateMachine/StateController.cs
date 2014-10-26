@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class StateController 
+namespace Mascaret
 {
-	
-	public StateController()
-	{
-	}
-	
-	
+    public class StateController
+    {
+
+        public StateController()
+        {
+        }
+
+
+    }
 }

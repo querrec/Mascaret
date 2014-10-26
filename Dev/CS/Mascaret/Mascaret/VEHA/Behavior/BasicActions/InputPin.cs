@@ -1,12 +1,14 @@
 using System;
 
-[Serializable]
-public class InputPin : Pin
+namespace Mascaret
 {
-	public InputPin ()
-	{
-		Kind = "inputPin";
-	}
+    public class InputPin : Pin
+    {
+        public InputPin()
+        {
+            Kind = "inputPin";
+        }
+    }
 }
 
 

@@ -3,19 +3,21 @@ using System.Collections;
 using System.Net.Sockets;
 using System.Net;
 
-
-public abstract class TcpConnection 
+namespace Mascaret
 {
-	/* WINPHONE */
-	protected Socket socket;
-	
-	
-	/* WINPHONE */
-	public TcpConnection(Socket socket)
-	{
-		this.socket = socket;
-	}
-	
-	
-	public abstract void start();
+    public abstract class TcpConnection
+    {
+        /* WINPHONE */
+        protected Socket socket;
+
+
+        /* WINPHONE */
+        public TcpConnection(Socket socket)
+        {
+            this.socket = socket;
+        }
+
+
+        public abstract void start();
+    }
 }

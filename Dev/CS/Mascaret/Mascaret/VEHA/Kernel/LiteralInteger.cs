@@ -1,52 +1,55 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class LiteralInteger : LiteralSpecification
+namespace Mascaret
 {
-	 
-	protected int iValue;
-	public int IValue
-	{
-		get{return iValue;}
-		set{iValue = value;}
-	}
+    public class LiteralInteger : LiteralSpecification
+    {
 
-	public bool setValueFromString(string intvalue)
-	{
-			iValue = int.Parse(intvalue);
-			return true;
-	}
-		
-	public override string getStringFromValue()
-	{
-			return 	(iValue.ToString());
-	}
-		
-	public LiteralInteger(string intvalue) : base(MascaretApplication.Instance.Model.getBasicType("integer"))
+        protected int iValue;
+        public int IValue
+        {
+            get { return iValue; }
+            set { iValue = value; }
+        }
 
-	{			
-			setValueFromString(intvalue);
-	}
-		
-	public LiteralInteger(int i) : base(MascaretApplication.Instance.Model.getBasicType("integer"))
+        public bool setValueFromString(string intvalue)
+        {
+            iValue = int.Parse(intvalue);
+            return true;
+        }
 
-	{
-		iValue = i;
-	}
-	
-	public LiteralInteger() : base(MascaretApplication.Instance.Model.getBasicType("integer"))
-	{
-	}
-		
-	public override ValueSpecification clone()
-	{
-		LiteralInteger vs = new LiteralInteger(0);
-		vs.CLASSTYPE = CLASSTYPE;
-		vs.Type = this.Type;
-		vs.iValue = iValue;
-		return ((ValueSpecification)vs);
-	}
+        public override string getStringFromValue()
+        {
+            return (iValue.ToString());
+        }
 
+        public LiteralInteger(string intvalue)
+            : base(MascaretApplication.Instance.Model.getBasicType("integer"))
+        {
+            setValueFromString(intvalue);
+        }
+
+        public LiteralInteger(int i)
+            : base(MascaretApplication.Instance.Model.getBasicType("integer"))
+        {
+            iValue = i;
+        }
+
+        public LiteralInteger()
+            : base(MascaretApplication.Instance.Model.getBasicType("integer"))
+        {
+        }
+
+        public override ValueSpecification clone()
+        {
+            LiteralInteger vs = new LiteralInteger(0);
+            vs.CLASSTYPE = CLASSTYPE;
+            vs.Type = this.Type;
+            vs.iValue = iValue;
+            return ((ValueSpecification)vs);
+        }
+
+    }
 }
 

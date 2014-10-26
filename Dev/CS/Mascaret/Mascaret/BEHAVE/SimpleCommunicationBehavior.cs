@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Antlr.Runtime;
 using Antlr.Runtime.Misc;
 
-
+namespace Mascaret
+{ 
 public struct FIPAAction
 {
 	public string actionName;
@@ -172,6 +173,8 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 								param.Add(parameters[i].name,parameters[i].Type.createValueFromString(strVal));
 							}
 						}
+                        BehaviorScheduler.Instance.executeBehavior(operation.Method,agt,param,false);
+
 					/*
 						List<ActionNode> possibleTranslation = _translateOperationToActions(operation);
 					
@@ -197,8 +200,8 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 								_requestedAction[be->getSpecification()->getName()].push_back(msg->getSender());
 							}
 						}
-						*/
-					
+						
+					*/
 					
 						ACLMessage reponse = new ACLMessage(ACLPerformative.AGREE);
 						reponse.Content = msg.Content;
@@ -387,5 +390,6 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 		return result;
 	}
 	
+}
 }
 

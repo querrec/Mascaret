@@ -1,11 +1,14 @@
 using System;
 
-[Serializable]
-public class Pin : ObjectNode
+namespace Mascaret
 {
-	public Pin() : base("pin")
-	{
-	}
+    public class Pin : ObjectNode
+    {
+        public Pin()
+            : base("pin")
+        {
+        }
+    }
 }
 
 

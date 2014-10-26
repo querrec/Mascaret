@@ -3,12 +3,15 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class GeometrySpecification : TopologicalSpecification
+namespace Mascaret
 {
-	public GeometrySpecification() : base(null)
-	{
-	}
+    public class GeometrySpecification : TopologicalSpecification
+    {
+        public GeometrySpecification()
+            : base(null)
+        {
+        }
+    }
 }
 
 

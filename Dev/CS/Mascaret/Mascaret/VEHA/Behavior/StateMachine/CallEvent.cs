@@ -1,26 +1,29 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class CallEvent : MascaretEvent, IEquatable<CallEvent>
+namespace Mascaret
 {
-	 
-	private Operation operation=null;
-	public Operation Operation
-	{
-		get{return operation;}
-		set{operation=value;}
-	}
-	
-	public CallEvent(string name) : base(name)
-	{
-		Type = "CallEvent";
-	}
-	
-	public bool Equals (CallEvent other)
-	{
-		if(other == this)
-			return true;
-		return false;
-	}
+    public class CallEvent : MascaretEvent, IEquatable<CallEvent>
+    {
+
+        private Operation operation = null;
+        public Operation Operation
+        {
+            get { return operation; }
+            set { operation = value; }
+        }
+
+        public CallEvent(string name)
+            : base(name)
+        {
+            Type = "CallEvent";
+        }
+
+        public bool Equals(CallEvent other)
+        {
+            if (other == this)
+                return true;
+            return false;
+        }
+    }
 }

@@ -1,6 +1,10 @@
 using System.Collections;
 
-public class Context  {
+namespace Mascaret
+{
+    public class Context
+    {
 
-	
+
+    }
 }

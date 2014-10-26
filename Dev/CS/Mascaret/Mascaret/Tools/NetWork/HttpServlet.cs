@@ -1,6 +1,10 @@
 using System.Collections;
 
-public abstract class HttpServlet 
+namespace Mascaret
 {
-	public abstract void manageRequest(HttpRequest request);
+    public abstract class HttpServlet
+    {
+        public abstract void manageRequest(HttpRequest request);
+    }
 }
+

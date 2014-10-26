@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 
-
-[Serializable]
-public class TopologicalSpecification : VirtualRealitySpecification
+namespace Mascaret
 {
-	public TopologicalSpecification(Classifier type) :base(type)
+    public class TopologicalSpecification : VirtualRealitySpecification
+    {
+        public TopologicalSpecification(Classifier type)
+            : base(type)
+        {
+        }
 
-	{
-	}
-	
-	public override ValueSpecification clone ()
-	{
-		throw new NotImplementedException ();
-	}
+        public override ValueSpecification clone()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
 

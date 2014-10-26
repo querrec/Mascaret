@@ -3,13 +3,15 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class ObjectFlow : ActivityEdge
+namespace Mascaret
 {
-	
-	public ObjectFlow(string name) : base(name)
+    public class ObjectFlow : ActivityEdge
+    {
 
-	{
-		Kind="ObjectFlow";
-	}
+        public ObjectFlow(string name)
+            : base(name)
+        {
+            Kind = "ObjectFlow";
+        }
+    }
 }

@@ -1,21 +1,23 @@
 using System;
 using System.Collections.Generic;
 
-
-[Serializable]
-public class BehavioralFeature : Feature
+namespace Mascaret
 {
-	 
-	private Behavior method;
-	public Behavior Method
-	{
-	   get{return method;}
-	   set{method = value ;}
-	}
+    public class BehavioralFeature : Feature
+    {
 
-	public BehavioralFeature(string name,Behavior behavior) : base(name)
-	{
-		method=behavior;
-	}
+        private Behavior method;
+        public Behavior Method
+        {
+            get { return method; }
+            set { method = value; }
+        }
 
+        public BehavioralFeature(string name, Behavior behavior)
+            : base(name)
+        {
+            method = behavior;
+        }
+
+    }
 }

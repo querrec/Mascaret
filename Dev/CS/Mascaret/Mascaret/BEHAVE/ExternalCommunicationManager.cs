@@ -1,8 +1,11 @@
 using System.Collections;
 
-public abstract class ExternalCommunicationManager 
+namespace Mascaret
 {
+    public abstract class ExternalCommunicationManager
+    {
 
-	public abstract bool sendDistantMessage(AID aid, ACLMessage msg);
+        public abstract bool sendDistantMessage(AID aid, ACLMessage msg);
 
+    }
 }

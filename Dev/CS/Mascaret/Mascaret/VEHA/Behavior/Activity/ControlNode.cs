@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class ControlNode : ActivityNode
+namespace Mascaret
 {
-	
-	public ControlNode(string name,string kind) : base(name,kind)
+    public class ControlNode : ActivityNode
+    {
 
-	{
-	}
+        public ControlNode(string name, string kind)
+            : base(name, kind)
+        {
+        }
+    }
 }

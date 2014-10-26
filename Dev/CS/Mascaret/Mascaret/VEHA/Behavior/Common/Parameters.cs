@@ -2,7 +2,11 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class Parameters {
+namespace Mascaret
+{
+    public class Parameters
+    {
 
 
+    }
 }

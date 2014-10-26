@@ -2,14 +2,16 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class ShapeProperty : Property
+namespace Mascaret
 {
-	public ShapeProperty(string name, Class classe ) : base(name, classe, MascaretApplication.Instance.Model.getBasicType("shape"),null, null, null)
+    public class ShapeProperty : Property
+    {
+        public ShapeProperty(string name, Class classe)
+            : base(name, classe, MascaretApplication.Instance.Model.getBasicType("shape"), null, null, null)
+        {
+        }
 
-	{
-	}
-	
+    }
 }
 
 

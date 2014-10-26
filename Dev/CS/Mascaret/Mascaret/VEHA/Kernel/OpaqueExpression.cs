@@ -2,34 +2,37 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class OpaqueExpression : ValueSpecification
+namespace Mascaret
 {
-	 
-	private string body;
-	public string Body
-	{
-		get{return body;}
-		set{body = value;}
-	}
-	
-	 
-	private string language;
-	public string Language
-	{
-		get{return language;}
-		set{language = value;}
-	}
-	
-	public OpaqueExpression() : base(null)
-	{
-	}
-	
-	public override ValueSpecification clone ()
-	{
-		OpaqueExpression oe = new OpaqueExpression();
-        oe.Language=language;
-        oe.Body = body;
-        return oe;
-	}
+    public class OpaqueExpression : ValueSpecification
+    {
+
+        private string body;
+        public string Body
+        {
+            get { return body; }
+            set { body = value; }
+        }
+
+
+        private string language;
+        public string Language
+        {
+            get { return language; }
+            set { language = value; }
+        }
+
+        public OpaqueExpression()
+            : base(null)
+        {
+        }
+
+        public override ValueSpecification clone()
+        {
+            OpaqueExpression oe = new OpaqueExpression();
+            oe.Language = language;
+            oe.Body = body;
+            return oe;
+        }
+    }
 }

@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
+namespace Mascaret
+{
 public class Procedure:Element
 {
 	 
@@ -26,5 +27,6 @@ public class Procedure:Element
 	{
 	}
 	
+}
 }
 

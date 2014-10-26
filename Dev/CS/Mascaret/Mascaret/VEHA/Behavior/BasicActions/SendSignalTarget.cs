@@ -1,16 +1,19 @@
 using System;
 
-[Serializable]
-public class SendSignalTarget
+namespace Mascaret
 {
-	
-	 
-	public InstanceSpecification target;
-			
-	 
-	public Classifier targetClass;
-	
-	 
-	public string targetName;
-	
+
+    public class SendSignalTarget
+    {
+
+
+        public InstanceSpecification target;
+
+
+        public Classifier targetClass;
+
+
+        public string targetName;
+
+    }
 }

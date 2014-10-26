@@ -2,16 +2,20 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class RoleClass:Class
+namespace Mascaret
 {
+    public class RoleClass : Class
+    {
 
-	public RoleClass(string name) : base(name)
-	{
-	}
-	public RoleClass() : base("")
-	{
-	}
+        public RoleClass(string name)
+            : base(name)
+        {
+        }
+        public RoleClass()
+            : base("")
+        {
+        }
+    }
 }
 
 

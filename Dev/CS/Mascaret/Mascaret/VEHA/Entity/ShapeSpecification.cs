@@ -2,64 +2,70 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public abstract class ShapeSpecification : VirtualRealitySpecification
+namespace Mascaret
 {
-	public string name;
-	 
-	private string url;
-	public string Url
-	{
-		get{return url;}
-	}
-	
-	public ShapeSpecification(string name) : base(MascaretApplication.Instance.Model.getBasicType("shape"))
+    public abstract class ShapeSpecification : VirtualRealitySpecification
+    {
+        public string name;
 
-	{
-		this.name = name;
-	}
-	
-	//Default parameters movable=true, recursive =false, shader=""
-	public ShapeSpecification(string name, string url, bool movable,bool recursive, string shader) : base(MascaretApplication.Instance.Model.getBasicType("shape"))
+        private string url;
+        public string Url
+        {
+            get { return url; }
+        }
 
-	{
-		this.name = name;
-		this.url = url;
-	}
-	
-	//Default parameters movable=true, recursive =false, shader=""
-	public ShapeSpecification(string name, List<double> distances,List<string> urls, bool movable,bool recursive, string shader) : base(MascaretApplication.Instance.Model.getBasicType("shape"))
+        public ShapeSpecification(string name)
+            : base(MascaretApplication.Instance.Model.getBasicType("shape"))
+        {
+            this.name = name;
+        }
 
-	{
-		this.name = name;
-		if(urls.Count>0)
-		{
-			this.url=urls[0];
-		}
-	}
-	
-	public abstract void setVisibility(bool v);
-	public abstract bool getVisibility();
+        //Default parameters movable=true, recursive =false, shader=""
+        public ShapeSpecification(string name, string url, bool movable, bool recursive, string shader)
+            : base(MascaretApplication.Instance.Model.getBasicType("shape"))
+        {
+            this.name = name;
+            this.url = url;
+        }
 
-	public abstract void setScale(Vector3 scale);
-	public abstract Vector3 getScale();
+        //Default parameters movable=true, recursive =false, shader=""
+        public ShapeSpecification(string name, List<double> distances, List<string> urls, bool movable, bool recursive, string shader)
+            : base(MascaretApplication.Instance.Model.getBasicType("shape"))
+        {
+            this.name = name;
+            if (urls.Count > 0)
+            {
+                this.url = urls[0];
+            }
+        }
+
+        public abstract void setVisibility(bool v);
+        public abstract bool getVisibility();
+
+        public abstract void setScale(Vector3 scale);
+        public abstract Vector3 getScale();
 
 
-	public abstract void setEntity(Entity entity);
-	public abstract Entity getEntity();
-	
-	// --- Shape Modifier Operations ---
-	public abstract Color getColor();
-	public abstract void setColor(Color color);
-	public abstract void setTransparent(Color color);
-	public abstract void growUp(float percent);
-	public abstract bool restaureColor(Color color);
-	public abstract bool restaureShape();
-	
-	// --- Operations ---
-	public override ValueSpecification clone()
-	{
-		return null;
-	}
+        public abstract void setEntity(Entity entity);
+        public abstract Entity getEntity();
+
+        // --- Shape Modifier Operations ---
+        public abstract Color getColor();
+        public abstract void setColor(Color color);
+        public abstract void setTransparent(Color color);
+        public abstract void growUp(float percent);
+        public abstract bool restaureColor(Color color);
+        public abstract bool restaureShape();
+
+        public abstract double prepareSpeak(string text);
+        public abstract bool speak(string text);
+
+
+        // --- Operations ---
+        public override ValueSpecification clone()
+        {
+            return null;
+        }
+    }
 }
 

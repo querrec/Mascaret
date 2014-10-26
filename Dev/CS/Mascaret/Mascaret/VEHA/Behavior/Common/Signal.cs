@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class Signal : Class
+namespace Mascaret
 {
-	public Signal(string name) : base(name)
-	{
-	}
+    public class Signal : Class
+    {
+        public Signal(string name)
+            : base(name)
+        {
+        }
+    }
 }
 

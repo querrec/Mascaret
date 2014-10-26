@@ -7,10 +7,12 @@ using System.Collections;
 
 //VERIFIER SI TOUT A BESOIN DETRE SERIALIZER OU NON!!!!!
 
-[Serializable]
-public class ModelLoader2 
-{	
-	[Serializable]
+namespace Mascaret
+{
+    public class ModelLoader2 
+{
+
+
 	public struct ConstraintT{
 	  public string id;
 	  public string constrainedElementID;
@@ -169,6 +171,7 @@ public class ModelLoader2
 		_subStates =  new Dictionary<string, State>();
 		_subStatesID =  new Dictionary<string, string>();
 		_loader = new XDocument();
+
 		try
 		{
 			_loader = XDocument.Load(str);
@@ -177,7 +180,9 @@ public class ModelLoader2
 			//Debug.Log (_xmi.Name);
 			
 			XElement modelNode = null;
-			System.Console.WriteLine(_xmi.Name.LocalName);
+
+
+            
 			if (_xmi.Name.LocalName.ToLower().CompareTo("uml:model")==0)
 				modelNode = _xmi;
 			else 
@@ -194,7 +199,6 @@ public class ModelLoader2
 			if(modelNode!=null)
 			{
 				XAttribute attr = (XAttribute)modelNode.Attribute("name");
-				System.Console.WriteLine("Model : " + attr.Value);
 	
 				if (MascaretApplication.Instance.hasModel(attr.Value)) {
 					model = MascaretApplication.Instance.getModel(attr.Value);
@@ -206,11 +210,8 @@ public class ModelLoader2
 		
 					MascaretApplication.Instance.addModel(model);
 
-					System.Console.WriteLine("######################## STEREOTYPES ########################");
 					
 					addStereotypes();
-		
-					System.Console.WriteLine("######################## PACKAGES ########################");
 					
 					addPackage(modelNode,null);
 		
@@ -219,6 +220,7 @@ public class ModelLoader2
 					addAssociation();
 					addActivitiesAndStateMachines();
 					addCallOperations();
+                    addCallBehaviors();
 					addConditions();
 					
 					EntityClass curEntityClass = new EntityClass("undef");
@@ -229,10 +231,8 @@ public class ModelLoader2
 				}
 			}
 		} catch(FileLoadException e) {
-			System.Console.WriteLine("Errors when openning the file. Error : "+ e.ToString());
 		}
-	
-		System.Console.WriteLine(" ####################### FIN MODEL ");
+
 		// Bouml preserved body end 0001F4E7
 	}		
 	
@@ -252,13 +252,11 @@ public class ModelLoader2
 		if(pkgNameAttr!=null)pkgName = pkgNameAttr.Value;
 		
 		if (String.Compare(type,"uml:Model")!=0 && String.Compare(type,"uml:Package")!=0) {
-			System.Console.WriteLine(pkgName+" is a "+type+" and must be a Package or a Model");
 			return;
 		}
 	
 		Package pkg=null;
 		if (String.Compare(type,"uml:Package")==0 || String.Compare(type,"uml:Model")==0) {
-			System.Console.WriteLine(" Parsing Package : "+pkgName);
 			pkg = new Package(pkgName);
 	
 			pkg.Description=getComment(packageNode);
@@ -393,7 +391,8 @@ public class ModelLoader2
 
 	public void addClass(XElement classNode, Package pkg)
 	{
-		// Bouml preserved body begin 0001F5E7
+        //StreamWriter file = new StreamWriter("log2.txt");
+        
 		string type="", className="", id="";
 	
 		XAttribute attr = (XAttribute)classNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
@@ -401,15 +400,13 @@ public class ModelLoader2
 			
 		attr = (XAttribute)classNode.Attribute("name");
 		if(attr!=null)className=attr.Value;
-	
-		System.Console.WriteLine(" ########### Parsing Class : " + className);
+
 		
 		attr = (XAttribute)classNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
 		if(attr!=null)id=attr.Value;
 
 		if (type.CompareTo("uml:Class")!=0 && type.CompareTo("uml:Interface")!=0) {
-			
-			System.Console.WriteLine( className + " is a " + type + " and must be a class" );;
+
 			return;
 		}
 	
@@ -417,7 +414,13 @@ public class ModelLoader2
 		bool agent = false;
 		bool role = false;
 		Class cl=null;
-	
+
+       // file.WriteLine(" Class : " + className);
+       // file.Flush();
+       // file.Close();
+		
+
+
 		if (isStereotypedEntity(classNode)) {
 			cl = new EntityClass(className);
 			entity = true;
@@ -433,7 +436,6 @@ public class ModelLoader2
 			cl = new RoleClass(className);
 			role = true;
 		} else {
-	         System.Console.WriteLine( " NON STEREOTYPED..... : " + className );
 			cl = new EntityClass(className);
 		}
 	
@@ -476,13 +478,14 @@ public class ModelLoader2
 			{
 				XAttribute attr2 = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
 				//Debug.Log(" Parsing class : " + cl.getFullName() + "/ Attr : " + attr2);
-				if(attr2!=null && attr2.Value.CompareTo("uml:StateMachine")==0)
-					addStateMachineToClass(child, cl);
+				//if(attr2!=null && attr2.Value.CompareTo("uml:StateMachine")==0)
+					//addStateMachineToClass(child, cl);
 				
-				if(attr2!=null && attr2.Value.CompareTo("uml:Activity")==0)
-					addActivityToClass(child, cl);
+				//if(attr2!=null && attr2.Value.CompareTo("uml:Activity")==0)
+					//addActivityToClass(child, cl);
 			}
 		}
+     
 		// Bouml preserved body end 0001F5E7
 	}
 
@@ -490,9 +493,8 @@ public class ModelLoader2
 	{
 		
 		XAttribute orgName = (XAttribute)orgNode.Attribute("name");
-	
-		
-		System.Console.WriteLine(" ########################################### Organisation : " + orgName.Value);
+
+
 		
 	
 		OrganisationalStructure organisation = new OrganisationalStructure(orgName.Value);
@@ -520,35 +522,27 @@ public class ModelLoader2
 				
 				attr =  (XAttribute)child.Attribute("name");
 				if(attr!=null)roleName = attr.Value;
-				
-				
-				System.Console.WriteLine( ">>> PARSING ROLE NAME: " + roleName + " with TYPE: " + childType );
+
+
 				
 				if (classe!=null)
 				{
 					try{
 						
-						System.Console.WriteLine( "classe: " + classe );
-						System.Console.WriteLine( "shared_dynamic_cast<RoleClass> (classe): " + (RoleClass)classe );
 						Role role = new Role(roleName);
 						role.RoleClass = (RoleClass)classe;
 						organisation.addRole(role);
-						System.Console.WriteLine( " >> is role" );
 						
 					}catch(InvalidCastException e)
 					{
-						 System.Console.WriteLine ("class was not role : "+ e.ToString());
 						
-						try{								
-							System.Console.WriteLine( "shared_dynamic_cast<EntityClass> (classe): " + (EntityClass)classe );
+						try{
 							Ressource ressource = new Ressource(roleName);
 							ressource.EntityClass=(EntityClass)classe;
 							organisation.addResource(ressource);
-							System.Console.WriteLine( " >> is resource" );
 							
 						}catch(InvalidCastException e2)
 						{
-							System.Console.WriteLine("Error : "+ e2.ToString());
 						}
 					}
 				}
@@ -584,7 +578,9 @@ public class ModelLoader2
 	public void addSignal(XElement signalNode, Package pkg)
 	{
 		// Bouml preserved body begin 0001F5E7
-		
+
+        StreamWriter file = new StreamWriter("signal.txt");
+
 		string type="", className="",id="";
 	
 		XAttribute attr = (XAttribute)signalNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
@@ -604,8 +600,10 @@ public class ModelLoader2
 		//Debug.Log( " ############## Add Signal : " + className );
 	
 		Signal signal = new Signal(className);
-	
-		
+
+        file.WriteLine("Signal : " + className); file.Flush();
+        file.Close();
+        if (_signals.ContainsKey(id)) return;
 		_signals.Add(id,signal);
 	
 		if (pkg!=null)
@@ -717,7 +715,6 @@ public class ModelLoader2
 
 		type = timeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type").Value;
 		if (type != "uml:TimeEvent") {
-			System.Console.WriteLine("TimeEvent is a " + type + " and must be a timeEvent");
 			return;
 		}
 
@@ -744,7 +741,6 @@ public class ModelLoader2
 		type = changeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type").Value;
 		if (type != "uml:ChangeEvent") 
 		{
-			System.Console.WriteLine("Change Event is a " + type + " and must be a changeEvent");
 			return;
 		}
 		string id = changeNode.Attribute("id").Value;
@@ -786,9 +782,7 @@ public class ModelLoader2
 			} else if (datas.Contains("{OCL}")) {
 				string ocl = "{OCL}";
 				datas = datas.Substring(ocl.Length);
-				
-				System.Console.WriteLine("Create Ocl Query behavior" );
-				System.Console.WriteLine(":::: " + datas + "::::" );
+
 				//b = new OclQuery(opClassName);
 				//b.Body=datas;
 	
@@ -825,7 +819,6 @@ public class ModelLoader2
 	public void addAttribute(XElement attrNode, Class cl)
 	{
 		// Bouml preserved body begin 0001FB67
-		
 		//Debug.Log(" -------- Add Attribute ");
 		XElement typeNode = null;
 	
@@ -870,7 +863,8 @@ public class ModelLoader2
 
 	public Property _addAttribute(XElement attrNode, Class cl)
 	{
-		
+      //  StreamWriter file = new StreamWriter("attribute.txt");
+
 		string type="", attrName="",strVal="", typeNodeType="";
 		bool derived=false;
 		Classifier attributeType=null;
@@ -902,18 +896,28 @@ public class ModelLoader2
 			if(child.Name.LocalName.CompareTo("defaultValue")==0)
 				defaultNode = child;
 		}
+
 		
 		if(defaultNode!=null)
 		{
 			attr = (XAttribute)defaultNode.Attribute("value");
 			if(attr!=null)strVal = attr.Value;
 		}
-		
+      //  file.WriteLine("Attribut : " + attrName);
+      //  file.Flush();
+
 		if(typeNode!=null)
 		{
 			
 			attr = (XAttribute)typeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
 			if(attr!=null)typeNodeType = attr.Value;
+            else
+            { 
+              //  file.WriteLine("Pas d'attribut type"); file.Flush();
+                typeNodeType = ((XAttribute)typeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}idref")).Value;
+                attributeType = model.getBasicType(typeNodeType.ToLower());
+              //  file.WriteLine(attributeType.name); file.Flush();
+            }
 			
 			if(typeNodeType.CompareTo("uml:Class")==0)
 			{
@@ -982,7 +986,9 @@ public class ModelLoader2
 				break;
 			}
 			
-		}	
+		}
+
+      //  file.Close();
 		
 		attrProp.MaximumNumber=int.Parse(mulStr);
 		mulStr = "1";
@@ -1072,7 +1078,7 @@ public class ModelLoader2
 			string opid = it.Value;
 			CallBehaviorAction cb = it.Key;
 			if (_idBehaviors.ContainsKey(opid))
-				cb.addOwnedBehavior(_idBehaviors[opid]);
+				cb.Behavior= _idBehaviors[opid];
 			else
 			{
 				//Debug.Log("[ModelLoader2 Warning] Behavior: " + opid + " not found for ActionNode " + cb.name);
@@ -1135,29 +1141,38 @@ public class ModelLoader2
 	public void _addParameters(Operation op, XElement opNode)
 	{
 		// Bouml preserved body begin 0001FCE7
-		
 		foreach(XElement child in opNode.Elements())
-		{	
+		{
 			if (child.Name.LocalName.CompareTo("ownedParameter")==0) {
 				string paramName="", paramKind="", id="";
-			
+
 				XAttribute attr = (XAttribute)child.Attribute("name");
 				if(attr!=null) paramName = attr.Value;
 			
 				attr = (XAttribute)child.Attribute("direction");
 				if(attr!=null) paramKind = attr.Value;
-			
-				attr = (XAttribute)child.Attribute("id");
+
+                attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
 				if(attr!=null) id = attr.Value;
 			
 				Parameter parameter = new Parameter(paramName, paramKind,null);
-	
+
+                attr = (XAttribute)child.Attribute("type");
+                if (attr != null )
+                { 
+					_parameters.Add(id,parameter);
+                    _paramToType.Add(id, attr.Value); //set type after
+                    op.addParameter(parameter);
+                }
+                else 
+                {
 				foreach(XElement gChild in child.Elements())
 				{
-					if(gChild.Name.LocalName.CompareTo("{http://schema.omg.org/spec/XMI/2.1}type")==0)
+
+					if(gChild.Name.LocalName.CompareTo("type")==0)
 					{
-						
-						attr = (XAttribute)gChild.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+
+                        attr = (XAttribute)gChild.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
 						if(attr!=null && attr.Value.CompareTo("uml:Class")==0)
 						{
 							_parameters.Add(id,parameter);
@@ -1181,11 +1196,13 @@ public class ModelLoader2
 							XAttribute attr2 = (XAttribute)gChild.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
 							if(attr2!=null)_paramToType.Add(id,attr2.Value);
 						}
+
 						op.addParameter(parameter);
 								
 						break;
 					}
 				}
+                }
 				
 			}
 	
@@ -1195,7 +1212,20 @@ public class ModelLoader2
 
 	public void _setParametersType()
 	{
-		
+        foreach(KeyValuePair<string, string> el in _paramToType)
+        {
+            if (_parameters.ContainsKey(el.Key))
+            {
+                Parameter parameter = _parameters[el.Key];
+                if (_classifiers.ContainsKey(el.Value))
+                {
+                    Classifier type = _classifiers[el.Value];
+                    parameter.Type = type;
+                }
+                else { }
+            }
+            else { }
+        }
 	}
 
 	public void addActivity(XNode activityNode, Package pkg)
@@ -1301,13 +1331,14 @@ public class ModelLoader2
 	
 	public void addStateMachineToClass(XElement smNode, Class classe)
 	{
-		
+      StreamWriter file = MascaretApplication.Instance.logfile;
+
 		//Debug.Log ("********* [ModelLoader2 Info] addStateMachineToClass (SM: ");
 
 		string name = smNode.Attribute("name").Value;
 
 		//Debug.Log("RQ : " + name + " Class: " + classe.getFullName());
-		
+       file.WriteLine("StateMachine : " + name); file.Flush();
 		StateMachine machine = new StateMachine(name);
 
 		machine.Description = getComment(smNode);
@@ -1324,9 +1355,53 @@ public class ModelLoader2
 			classe.addOwnedBehavior(machine);
 			machine.Owner = classe;
 		//}
+
+          
 		
 		Dictionary<string, Vertex > vertices = new Dictionary<string, Vertex>();
-		
+
+        foreach (XElement child in smNode.Elements())
+        {
+            if (child.Name.LocalName.CompareTo("packagedElement") == 0 || child.Name.LocalName.CompareTo("ownedMember") == 0)
+            {
+                string childType = "";
+                file.WriteLine("Child : " + child.Name.LocalName);
+                file.Flush();
+
+                XAttribute attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr != null) childType = attr.Value;
+
+                if (childType == "uml:Trigger")
+                {
+                    string id = "";
+                  file.WriteLine("Trigger");
+                    XAttribute attr3 = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+                    if (attr3 != null) id = attr3.Value;
+
+                    foreach (XElement child2 in child.Elements())
+                    { 
+                        if (child2.Name.LocalName.CompareTo("event") == 0 )
+                        {
+                          XAttribute attr2 = (XAttribute)child2.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                            if (attr2 != null) childType = attr2.Value;
+                            if (childType.CompareTo("uml:SignalEvent") == 0)
+                            {
+                                XElement cSignal = child2.Element("signal");
+                                XAttribute idSignal = (XAttribute)cSignal.Attribute("{http://schema.omg.org/spec/XMI/2.1}idref");
+                                string idref = idSignal.Value;
+                                Signal signal = _signals[idref];
+                                file.WriteLine("Signal name : " + signal.name); file.Flush();
+                                SignalEvent signalEvent = new SignalEvent(signal.name);
+                                signalEvent.SignalClass = signal;
+
+                                _events.Add(id, signalEvent);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 		foreach (XElement child in smNode.Elements()) 
 		{
 			if (child.Name.LocalName == "region") 
@@ -1343,6 +1418,7 @@ public class ModelLoader2
 			}
 			
 		}
+    //    file.Close();
 		
 	}
 
@@ -1532,25 +1608,31 @@ public class ModelLoader2
 			
 			ActionNode an = new ActionNode(name,"action");
 			CallBehaviorAction cb = new CallBehaviorAction();
+            cb.Description = getComment(node);
+            cb.name = name;
+            cb.Owner = activity;
 			XElement beNode = node.Element("behavior");
-			/*
-			string opid = beNode ? beNode->getProperty("idref") : node->getProperty("behavior");
+			
+			string opid;
 
-			if (_idBehaviors.find(opid) != _idBehaviors.end())
-			{
-				cb->setBehavior(_idBehaviors[opid]);
-			}
-			else
-			{
-				cerr << "[ModelLoader2 Info] Behavior " << opid
-					<<" not yet found for ActionNode " << name << ". Postbone..." << endl;
-				_callBehaviors[cb] = opid;
-			}
+            if (beNode != null) opid = beNode.Attribute("idref").Value;
+            else opid = node.Attribute("behavior").Value;
 
-			an->setAction(cb);
-			addPins(an,node);
-			actNode = an;
-			*/
+            if (_idBehaviors.ContainsKey(opid))
+            {
+                cb.Behavior = _idBehaviors[opid];
+            }
+            else
+            {
+               // Debug.Log("[ModelLoader2 Info] Behavior " + opid
+               //           + " not yet found for ActionNode " + name + ". Postbone...");
+                _callBehaviors.Add(cb, opid);
+            }
+
+            an.Action = cb;
+            addPins(an, node);
+            actNode = an;
+
 		}
 		else if (type == "uml:CallOperationAction")
 		{
@@ -1558,6 +1640,11 @@ public class ModelLoader2
 			ActionNode an = new ActionNode(name,"action");
 			//Debug.Log("Action Node : " +name);
 			CallOperationAction act = new CallOperationAction();
+            act.Description = getComment(node);
+            act.name = name;
+
+            act.Owner = activity;
+
 			XElement opNode = node.Element("operation");
 			if (opNode != null) 
 			{
@@ -1708,8 +1795,8 @@ public class ModelLoader2
 				actNode.Partitions.Add(_partitions[idPartition]);
 				_partitions[idPartition].Node.Add(actNode);
 			}
-			actNode.Description = getComment(node);
 			actNode.Summary = getSummary(node);
+            actNode.Description = getComment(node);
 			actNode.Tags = getTags(node);
 		}
 	}
@@ -1992,6 +2079,10 @@ public class ModelLoader2
 
 	public void addMachineRegion( XElement node, StateMachine machine, Region region, Dictionary<string, Vertex> vertices)
 	{
+
+     //   StreamWriter file = new StreamWriter("region.txt");
+
+
 		foreach (XElement child in node.Elements()) 
 		{
 			
@@ -2007,6 +2098,7 @@ public class ModelLoader2
 					childId = child.Attribute("{http://schema.omg.org/spec/XMI/2.1}id").Value;
 				if (type == "uml:State") 
 				{
+                 //   file.WriteLine("State : " + name); file.Flush();
 					//cerr << "State : " << name << endl;
 					State state = new State(name,"State");
 					state.Description = getComment(child);
@@ -2015,7 +2107,7 @@ public class ModelLoader2
 					region.Vertices.Add(state);
 					
 					vertices[childId] = state;
-
+                    
 					foreach (XElement vertexChild in child.Elements()) 
 					{
 						
@@ -2057,16 +2149,22 @@ public class ModelLoader2
 							}
 						} else if (vertexChild.Name.LocalName == "Do" || vertexChild.Name.LocalName == "doBehavior" || vertexChild.Name.LocalName == "doActivity") 
 						{
+                         //   file.WriteLine(" ... has Do Activity");
+                            
 							string opDoName;
                             XElement bodyVertexChild = null;
 							foreach(XElement childV in vertexChild.Elements()) 
 							{
+
 								//Debug.Log(childV.Name.LocalName);
 								if (childV.Name.LocalName == "body") bodyVertexChild = childV;
+                                else if (childV.Name.LocalName == "method") { bodyVertexChild = childV; }
 							}
+                            
 							Class cl = (Class)machine.Owner;
 							if (bodyVertexChild != null) 
 							{
+                                /*
 						   		opDoName = bodyVertexChild.Value;
 						   		if(cl.hasOperation(opDoName)) 
 								{
@@ -2077,6 +2175,16 @@ public class ModelLoader2
 								{
 									//Debug.Log ("can't found " + opDoName + " for do behavior of state " + name);
 						   		}
+                                */
+                                opDoName = bodyVertexChild.Attribute("{http://schema.omg.org/spec/XMI/2.1}idref").Value;
+                                if (_idOperations.ContainsKey(opDoName))
+                                {
+                                    Operation op = _idOperations[opDoName];
+                                    state.DoBehavior = op;
+                                 //   file.WriteLine("Do : " + op.getFullName()); file.Flush();
+                                }
+
+                           
 							}
 							else 
 							{
@@ -2091,6 +2199,8 @@ public class ModelLoader2
 								//else 
 									//Debug.Log ("can't found " + opID + " for do behavior of state " + name);
 							}
+                            
+                     
 						}
 					}
 					
@@ -2112,7 +2222,10 @@ public class ModelLoader2
 						kind = child.Attribute("name").Value;
                	    else 
 						kind = child.Attribute("kind").Value;
-					
+
+                 //   file.WriteLine("PseudoState : " + name + " Kind : " + kind); file.Flush();
+
+
 					if (kind == "initial" || kind == "Initial" || kind == "Initial State")
 						ps.kind=PseudoStateKind.INITIAL;
 					else if (kind == "join")
@@ -2146,10 +2259,16 @@ public class ModelLoader2
 					
 					vertices[childId] = fs;
 				}
-			} 
-			else if (child.Name == "transition")
-				addMachineTransition(child, machine, vertices);
+			}
 		}
+
+        foreach (XElement child in node.Elements())
+        {
+            if (child.Name == "transition")
+                addMachineTransition(child, machine, vertices);
+        }
+
+      //  file.Close();
 	}
 	
 	//non gestion des triggers
@@ -2158,7 +2277,8 @@ public class ModelLoader2
 	public void addMachineTransition( XElement node, StateMachine machine, Dictionary<string, Vertex>  vertices)
 	{
 			//shared_ptr<Operation> op;
-		
+
+        StreamWriter fileT = MascaretApplication.Instance.logfile;
 		Transition t = new Transition();
 		string transitionKind = "";
 			
@@ -2172,81 +2292,52 @@ public class ModelLoader2
 			Region region = machine.Region[machine.Region.Count -1];
 			region.Transitions.Add(t);
 		}
+        fileT.WriteLine("-------------------------------------------");
+        fileT.WriteLine("Transition : " + transitionKind); fileT.Flush();
 		
 		// Trigger
+        
 		XElement triggerNode;
 		triggerNode = node.Element("trigger");
 		if (triggerNode != null) 
 		{
-			string triggerName = triggerNode.Attribute("name").Value;
+            if (triggerNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}idref") != null)
+            {
+                string idRef = triggerNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}idref").Value;
+                MascaretEvent evt = this._events[idRef];
+                if (evt != null)
+                {
+                    fileT.WriteLine("Trigger : " + evt.name);
+                    Trigger trigger = new Trigger(evt.name);
+                    trigger.MEvent = evt;
+                    t.Trigger.Add(trigger);
+                }
+            }
+            else
+            {
+			    string triggerName = triggerNode.Attribute("name").Value;
 
-			if (triggerNode.Attribute("event") != null) 
-			{
-				//cerr << "has prop event" << endl;
-				string eventID = triggerNode.Attribute("event").Value;
-				MascaretEvent evt = this._events[eventID];
-				if (evt != null) 
-				{
-					Trigger trigger = new Trigger(evt.name);
-					trigger.MEvent = evt;
-					t.Trigger.Add(trigger);
-				}// else
-					//Debug.Log ("Error : Event not found for trigger : " + triggerName
-					//	+ " in machine " + machine.getFullName() );
-			} 
-			else 
-			{/*
-				Trigger trigger = make_shared<Trigger>(triggerName);
-			if (boost::algorithm::starts_with(triggerName, "after")) 
-				{
-					shared_ptr<TimeEvent> timeevent = make_shared<TimeEvent>(triggerName);
-					string timeStr = triggerName.substr(6);
-					shared_ptr<LiteralReal> time = make_shared<LiteralReal>(timeStr);
-					timeevent->setWhen(time);
-					trigger->setEvent(timeevent);
-				} else 
-				{
-					//cerr << " ###### Trigger : " << triggerName << endl;
-					if (_signals.find(triggerName) == _signals.end())
-						_signals[triggerName] = make_shared<Signal>(triggerName);
-					shared_ptr<SignalEvent> signalevent = make_shared<SignalEvent>(triggerName);
-					trigger->setEvent(signalevent);
-					signalevent->setSignalClass(_signals[triggerName]);
-				}
-				t->addTrigger(trigger);*/
-			}
+			    if (triggerNode.Attribute("event") != null) 
+			    {
+				    //cerr << "has prop event" << endl;
+				    string eventID = triggerNode.Attribute("event").Value;
+				    MascaretEvent evt = this._events[eventID];
+				    if (evt != null) 
+				    {
+                        fileT.WriteLine("Trigger : " + evt.name);
+                     //   if (evt.GetType().ToString() == "Mascaret.SignalEvent") fileT.WriteLine("Trigger Class : " + ((SignalEvent)evt).SignalClass.name);
+                        fileT.Flush();
+					    Trigger trigger = new Trigger(evt.name);
+					    trigger.MEvent = evt;
+					    t.Trigger.Add(trigger);
+				    }// else
+				    	//Debug.Log ("Error : Event not found for trigger : " + triggerName
+					    //	+ " in machine " + machine.getFullName() );
+			    } 
+            }
 		}
 		
-		/* RQ Pas encore gerer
-		// guard
-		shared_ptr<XNode> guardNode;
-		guardNode = node->getChildByName("guard"); // Bouml format
-		string guardEx;
-		if (guardNode) {
-			//cerr << "is guard node" << endl;
-			guardEx = guardNode->getChildByName("specification")->getChildByName(
-				"body")->getInnerText();
-			shared_ptr<Constraint> guard = make_shared<Constraint>();
-			shared_ptr<Expression> exp = make_shared<Expression>(guardEx,
-				_model->getBasicType("boolean"));
-			guard->setSpecification(exp);
-			t->setGuard(guard);
-		} else // test modelio format
-		{
-			guardNode = node->getChildByName("ownedRule");
-			string guardEx;
-			if (guardNode) 
-			{
-				guardEx = guardNode->getChildByName("specification")->getProperty(
-					"value");
-				shared_ptr<Constraint> guard = make_shared<Constraint>();
-				shared_ptr<Expression> exp = make_shared<Expression>(guardEx,
-					_model->getBasicType("boolean"));
-				guard->setSpecification(exp);
-				t->setGuard(guard);
-			}
-		}
-		*/
+		
 		
 		
 		// Effect
@@ -2254,7 +2345,6 @@ public class ModelLoader2
 		effectNode = node.Element("effect");
 		if (effectNode != null) 
 		{
-			//cerr << "is effect node" << endl;
 			string type = effectNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type").Value;
 			if (type == "uml:OpaqueBehavior") 
 			{
@@ -2262,19 +2352,14 @@ public class ModelLoader2
 				{
 					string opName = effectNode.Attribute("specification").Value;
 					Operation op = _idOperations[opName];
-					//if (op == null)
-						//Debug.Log(" Operation not found ..." );
 
 					if (transitionKind != "internal" && op != null) 
 					{
 						CallOperationAction action = new CallOperationAction();
 						t.Effect = action ;
 						action.Operation = op;
-					
-						//cerr << "setting internal transition op" << endl;
 					}
 				
-					//cerr << "has prop 'specification'" << endl;
 				} else 
 				{
 					string sigName = effectNode.Attribute("name").Value;
@@ -2283,8 +2368,6 @@ public class ModelLoader2
 					SendSignalAction action = new SendSignalAction();
 					t.Effect = action;
 					action.SignalClass = sig;
-				
-					//cerr << "doesn't have prop 'specification'" << endl;
 				}
 			}
 		}
@@ -2294,56 +2377,43 @@ public class ModelLoader2
 		{
 			// Source
 			string sourceID = node.Attribute("source").Value;
+            string targetID = node.Attribute("target").Value;
+
+//            fileT.WriteLine("Source : " + sourceID);
+  //          fileT.WriteLine("Target : " + targetID); 
+            foreach(KeyValuePair<string, Vertex> v in vertices)
+            {
+            //    fileT.WriteLine("       Vertex : " + v.Key + " = " + v.Value.name);
+            }
+
+
 			Vertex vertex = null;
+
+
 			
-			if (!vertices.TryGetValue(sourceID, out vertex))
-				System.Console.WriteLine(" Vertex not found ...("+ sourceID + ")");
+			if (!vertices.TryGetValue(sourceID, out vertex)) {
+				 }
 			else 
 			{
+              //  fileT.WriteLine("Source : " + vertex.name);
 				t.Source = vertex;
 				vertex.Outgoing.Add(t);
 			}
 			// target
-			string targetID = node.Attribute("target").Value;
-			
-			if (!vertices.TryGetValue(targetID, out vertex))
-				System.Console.WriteLine(" Vertex not found ...("+ targetID + ")");
-			else 
-			{
-				t.Target = vertex;
-				vertex.Incoming.Add(t);
-			}
-		} else 
-		{
-			/*
-			string sourceID = node->getProperty("source");
-			map<string, shared_ptr<Vertex> >::iterator itV = vertices.find(sourceID);
-			if (itV == vertices.end())
-				cerr << __PRETTY_FUNCTION__ << " Vertex not found ...(" << sourceID << ")" << endl;
-			else 
-			{
-				shared_ptr<XNode> comment = node->getChildByName("ownedComment");
-				if (comment) 
-				{
-					string evtType = comment->getChildByName("body")->getChildByName("text")->getString();
-					shared_ptr<Vertex> vertex = itV->second;
-					if (evtType == "DO")
-						(shared_dynamic_cast<State> (vertex))->setDoBehavior(op);
-					else if (evtType == "ENTRY")
-						(shared_dynamic_cast<State> (vertex))->setEntryBehavior(op);
-					if (evtType == "EXIT")
-						(shared_dynamic_cast<State> (vertex))->setExitBehavior(op);
-					
-					//cerr << "setting Behavior, with comment.... evtType: " << evtType << endl;
-				} else 
-				{
-					shared_ptr<Vertex> vertex = itV->second;
-					(shared_dynamic_cast<State> (vertex))->setDoBehavior(op);
-					//cerr << "setting Behavior, no comment..."<< endl;
-				}
-			}
-			*/
+
+            if (!vertices.TryGetValue(targetID, out vertex))
+            {
+                
+            }
+            else
+            {
+             //   fileT.WriteLine("Target : " + vertex.name);
+
+                t.Target = vertex;
+                vertex.Incoming.Add(t);
+            }
 		}
+        
 	}
 	
 	public void addActivitiesAndStateMachines()
@@ -2394,4 +2464,5 @@ public class ModelLoader2
 		return null;
 	}
 
+}
 }

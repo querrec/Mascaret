@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class CompositeState 
-{	
-	public CompositeState()
-	{
-		
-	}
-	
+namespace Mascaret
+{
+    public class CompositeState
+    {
+        public CompositeState()
+        {
+
+        }
+
+    }
 }
 

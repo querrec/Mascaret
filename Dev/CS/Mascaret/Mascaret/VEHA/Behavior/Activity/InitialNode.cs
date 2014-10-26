@@ -1,9 +1,13 @@
 using System.Collections;
 
-public class InitialNode : ControlNode {
+namespace Mascaret
+{
+    public class InitialNode : ControlNode
+    {
 
-	public InitialNode () : base("Initial","initial")
-
-	{
-	}
+        public InitialNode()
+            : base("Initial", "initial")
+        {
+        }
+    }
 }

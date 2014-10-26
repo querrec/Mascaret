@@ -3,13 +3,16 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class PrimitiveGeometry : GeometrySpecification
+namespace Mascaret
 {
-	public PrimitiveGeometry():base()
-	{
+    public class PrimitiveGeometry : GeometrySpecification
+    {
+        public PrimitiveGeometry()
+            : base()
+        {
 
-	}
+        }
 
+    }
 }
 

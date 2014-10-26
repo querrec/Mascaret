@@ -1,45 +1,47 @@
 using System;
 
 using System.Collections.Generic;
-	
-[Serializable]
-public class InstanceValue : ValueSpecification
+
+namespace Mascaret
 {
-	// --- Attributes ---
-	 
-	protected InstanceSpecification specValue;
-	public InstanceSpecification SpecValue
-	{
-		get{return specValue;}
-		set{specValue = value;}
-	}
-	
-	public InstanceValue(InstanceSpecification instance) : base(instance.Classifier)
+    public class InstanceValue : ValueSpecification
+    {
+        // --- Attributes ---
 
-	{
-		specValue = instance;
-		CLASSTYPE="Instance";
-	}
-	
-	public InstanceValue(Classifier type) : base(type)
+        protected InstanceSpecification specValue;
+        public InstanceSpecification SpecValue
+        {
+            get { return specValue; }
+            set { specValue = value; }
+        }
 
-	{
-		CLASSTYPE="Instance";
-		specValue = null;
-	}
-	
-	public override string getStringFromValue()
-	{
-		if(specValue!=null)
-			return specValue.name;
-		else return "None";
-	}
-	
-	public override ValueSpecification clone()
-	{
-		InstanceValue vs= new InstanceValue(this.Type);
-		vs.specValue = specValue;
-		return (ValueSpecification)vs;
-	}
+        public InstanceValue(InstanceSpecification instance)
+            : base(instance.Classifier)
+        {
+            specValue = instance;
+            CLASSTYPE = "Instance";
+        }
+
+        public InstanceValue(Classifier type)
+            : base(type)
+        {
+            CLASSTYPE = "Instance";
+            specValue = null;
+        }
+
+        public override string getStringFromValue()
+        {
+            if (specValue != null)
+                return specValue.name;
+            else return "None";
+        }
+
+        public override ValueSpecification clone()
+        {
+            InstanceValue vs = new InstanceValue(this.Type);
+            vs.specValue = specValue;
+            return (ValueSpecification)vs;
+        }
+    }
 }
 

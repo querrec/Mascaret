@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class FlowFinalNode
+namespace Mascaret
 {
-	
-	public FlowFinalNode()
-	{
-		
-	}
+    public class FlowFinalNode
+    {
+
+        public FlowFinalNode()
+        {
+
+        }
+    }
 }

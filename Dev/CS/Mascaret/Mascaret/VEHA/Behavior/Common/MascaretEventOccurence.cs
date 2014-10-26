@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 
 
-[Serializable]
-public class MascaretEventOccurence 
+namespace Mascaret
 {
-	
-	public MascaretEventOccurence()
-	{
-		
-	}
+    public class MascaretEventOccurence
+    {
 
+        public MascaretEventOccurence()
+        {
+
+        }
+
+    }
 }
 
