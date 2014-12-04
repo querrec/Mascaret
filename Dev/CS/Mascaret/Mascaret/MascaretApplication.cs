@@ -33,6 +33,7 @@ namespace Mascaret
           
             BaseDir =baseDir;
             XDocument parser;
+            logfile.WriteLine("Loading application file : " + baseDir + "/" + applicationFileName); logfile.Flush();
             parser = XDocument.Load(BaseDir+"/"+applicationFileName);
             XElement root = parser.Root;
             parse(root);
@@ -69,6 +70,7 @@ namespace Mascaret
             //StreamWriter file = new StreamWriter("log.txt");
            // file.WriteLine(url);
            // file.Flush();
+            logfile.WriteLine("Parsing model file : " + url); logfile.Flush();
             ModelLoader2 modelLoader = new ModelLoader2(url, true);
             Model model = modelLoader.Model;
             model.ModelLoader = modelLoader;
@@ -80,7 +82,8 @@ namespace Mascaret
         Environment parseEnvironment(string url, XElement actNode, XElement orgNode)
         {
             Environment env;
-   
+
+            logfile.WriteLine("Parsing Environment file : " + url); logfile.Flush();
 
             XDocument parser = XDocument.Load(BaseDir+"/"+url);
             XElement root = parser.Root;
@@ -95,7 +98,7 @@ namespace Mascaret
                // file.WriteLine(" URL : " + url + " : " + BaseDir + "/" + urlModel);
               //  file.Flush();
               //  file.Close();
-                model = parseModel(BaseDir+"/"+urlModel);
+                model = parseModel(BaseDir+urlModel);
 
                 //map<string, shared_ptr<Environment> >::iterator it = model->getEnvironments().find(url);
                 if (model.Environments.ContainsKey(url))

@@ -165,6 +165,7 @@ namespace Mascaret
 
         public ValueSpecification createValueFromString(string str)
         {
+            MascaretApplication.Instance.logfile.WriteLine("Property::createValue : " + str); MascaretApplication.Instance.logfile.Flush();
             return type.createValueFromString(str);
         }
 

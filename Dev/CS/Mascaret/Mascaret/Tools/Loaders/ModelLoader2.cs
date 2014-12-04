@@ -176,15 +176,20 @@ namespace Mascaret
 		{
 			_loader = XDocument.Load(str);
 			_xmi = _loader.Root;
+
+            MascaretApplication.Instance.logfile.WriteLine("XMI : " + _xmi.Name.LocalName.ToLower()); MascaretApplication.Instance.logfile.Flush();
 					
 			//Debug.Log (_xmi.Name);
 			
 			XElement modelNode = null;
 
 
-            
-			if (_xmi.Name.LocalName.ToLower().CompareTo("uml:model")==0)
+            MascaretApplication.Instance.logfile.WriteLine("Parsing Model"); MascaretApplication.Instance.logfile.Flush();
+			if ((_xmi.Name.LocalName.ToLower().CompareTo("uml:model")==0) || (_xmi.Name.LocalName.ToLower().CompareTo("model")==0))
+            {
+                MascaretApplication.Instance.logfile.WriteLine("OK"); MascaretApplication.Instance.logfile.Flush();
 				modelNode = _xmi;
+            }
 			else 
 			{	
 				foreach(XElement currentNode in _xmi.Elements())
@@ -198,8 +203,11 @@ namespace Mascaret
 			
 			if(modelNode!=null)
 			{
+                
 				XAttribute attr = (XAttribute)modelNode.Attribute("name");
-	
+
+                MascaretApplication.Instance.logfile.WriteLine("ModelName : " + attr.Value); MascaretApplication.Instance.logfile.Flush();
+
 				if (MascaretApplication.Instance.hasModel(attr.Value)) {
 					model = MascaretApplication.Instance.getModel(attr.Value);
 				} else 
@@ -239,18 +247,24 @@ namespace Mascaret
 	void addPackage(XElement packageNode, Package parent)
 	{
 		// Bouml preserved body begin 0001F567
-		
+        StreamWriter file = MascaretApplication.Instance.logfile;
+
+        file.WriteLine("Parsing Packages ..."); file.Flush();
+
 		XAttribute typeAttr =null, pkgNameAttr = null;
 		string type="",pkgName="";
 		typeAttr = (XAttribute)packageNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+        if (typeAttr == null) typeAttr = (XAttribute)packageNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
 		if(typeAttr!=null)type = typeAttr.Value;
 
-		if (typeAttr ==null && packageNode.Name.LocalName.CompareTo("Model")==0)
+        if (typeAttr == null && ( (packageNode.Name.LocalName.CompareTo("Model") == 0) || (packageNode.Name.LocalName.CompareTo("uml:Model") == 0)))
 			type = "uml:Model";
 	
 		pkgNameAttr = (XAttribute)packageNode.Attribute("name");
 		if(pkgNameAttr!=null)pkgName = pkgNameAttr.Value;
-		
+
+        file.WriteLine("type : " + type); file.Flush();
+
 		if (String.Compare(type,"uml:Model")!=0 && String.Compare(type,"uml:Package")!=0) {
 			return;
 		}
@@ -282,6 +296,7 @@ namespace Mascaret
 				string childType = "";
 				
 				XAttribute attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
 				if(attr!=null)childType=attr.Value;
 				//Debug.Log("================    " + childType);
 				if (childType.CompareTo("DataType")==0 || childType.CompareTo("PrimitiveType")==0)
@@ -293,6 +308,7 @@ namespace Mascaret
 				string childType = "";
 				
 				XAttribute attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
 				if(attr!=null)childType=attr.Value;
 				
 				if (childType.CompareTo("Constraint")==0) {
@@ -322,6 +338,11 @@ namespace Mascaret
 			
 			if (child.Name.LocalName.CompareTo("packagedElement")==0 || child.Name.LocalName.CompareTo("ownedMember")==0) {
 				XAttribute attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr == null)
+                    attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+                file.WriteLine("Child : " + child.Name.LocalName); file.Flush();
+                file.WriteLine("Type : " + attr.Value); file.Flush();
+
 				//Debug.Log("ATTR : " + attr.Name + " == " + attr.Value);
 				if (attr!=null && attr.Value.CompareTo("uml:Package")==0)
 					addPackage(child, pkg);
@@ -335,6 +356,7 @@ namespace Mascaret
 				string childType = "";
 				
 				XAttribute attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
 				if(attr!=null)childType=attr.Value;
 				
 				if (childType.CompareTo("uml:SignalEvent")==0)
@@ -354,6 +376,7 @@ namespace Mascaret
 				string childType = "";
 				
 				XAttribute attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
 				if(attr!=null)childType=attr.Value;
 				
 				if (childType.CompareTo("uml:Class")==0 || childType.CompareTo("uml:Interface")==0)
@@ -369,6 +392,8 @@ namespace Mascaret
 		foreach (XElement child in packageNode.Elements()) {
 			if (child.Name.LocalName.CompareTo("packagedElement")==0 || child.Name.LocalName.CompareTo("ownedMember")==0) {
 				XAttribute attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 				if (attr!=null && attr.Value.CompareTo("uml:Collaboration")==0)
 				{	
 					addOrganisationalStructure(child);
@@ -396,6 +421,8 @@ namespace Mascaret
 		string type="", className="", id="";
 	
 		XAttribute attr = (XAttribute)classNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+        if (attr == null) attr = (XAttribute)classNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 		if(attr!=null)type=attr.Value;
 			
 		attr = (XAttribute)classNode.Attribute("name");
@@ -403,6 +430,8 @@ namespace Mascaret
 
 		
 		attr = (XAttribute)classNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)classNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
 		if(attr!=null)id=attr.Value;
 
 		if (type.CompareTo("uml:Class")!=0 && type.CompareTo("uml:Interface")!=0) {
@@ -477,12 +506,14 @@ namespace Mascaret
 			if (child.Name.LocalName.CompareTo("ownedBehavior")==0 || child.Name.LocalName.CompareTo("nestedClassifier")==0) 
 			{
 				XAttribute attr2 = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 				//Debug.Log(" Parsing class : " + cl.getFullName() + "/ Attr : " + attr2);
-				//if(attr2!=null && attr2.Value.CompareTo("uml:StateMachine")==0)
-					//addStateMachineToClass(child, cl);
+				if(attr2!=null && attr2.Value.CompareTo("uml:StateMachine")==0)
+					addStateMachineToClass(child, cl);
 				
-				//if(attr2!=null && attr2.Value.CompareTo("uml:Activity")==0)
-					//addActivityToClass(child, cl);
+				if(attr2!=null && attr2.Value.CompareTo("uml:Activity")==0)
+					addActivityToClass(child, cl);
 			}
 		}
      
@@ -555,12 +586,16 @@ namespace Mascaret
 				string childType="",childName="", childId="";
 				
 				XAttribute attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 				if(attr!=null)childType = attr.Value;
 				
 				attr =  (XAttribute)child.Attribute("name");
 				if(attr!=null)childName = attr.Value;
 				
 				attr =  (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
 				if(attr!=null)childId = attr.Value;
 	
 				if (childType.CompareTo("uml:Activity")==0) {
@@ -584,6 +619,8 @@ namespace Mascaret
 		string type="", className="",id="";
 	
 		XAttribute attr = (XAttribute)signalNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+        if (attr == null) attr = (XAttribute)signalNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 		if(attr!=null)type=attr.Value;
 		
 		attr = (XAttribute)signalNode.Attribute("name");
@@ -595,6 +632,8 @@ namespace Mascaret
 		}
 		
 		attr = (XAttribute)signalNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)signalNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
 		if(attr!=null)id=attr.Value;
 	
 		//Debug.Log( " ############## Add Signal : " + className );
@@ -627,6 +666,8 @@ namespace Mascaret
 			string childName = child.Name.LocalName;
 			
 			XAttribute attr2 = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+            if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 			if(attr2!=null)
 			{
 				if (childName.CompareTo("ownedBehavior")==0) {
@@ -648,9 +689,13 @@ namespace Mascaret
 		string type="", className="",id="";
 	
 		XAttribute attr = (XAttribute)signalNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+        if (attr == null) attr = (XAttribute)signalNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 		if(attr!=null)type=attr.Value;
 		
 		attr = (XAttribute)signalNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)signalNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 		if(attr!=null)id=attr.Value;
 		
 		attr = (XAttribute)signalNode.Attribute("name");
@@ -686,6 +731,8 @@ namespace Mascaret
 		string type="", className="",id="";
 	
 		XAttribute attr = (XAttribute)callNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+        if (attr == null) attr = (XAttribute)callNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 		if(attr!=null)type=attr.Value;
 		
 		attr = (XAttribute)callNode.Attribute("name");
@@ -714,6 +761,8 @@ namespace Mascaret
 		string type;
 
 		type = timeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type").Value;
+        if (type == null) type = timeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type").Value;
+
 		if (type != "uml:TimeEvent") {
 			return;
 		}
@@ -739,6 +788,8 @@ namespace Mascaret
 		string type;
 
 		type = changeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type").Value;
+        if (type == null) type = changeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type").Value;
+
 		if (type != "uml:ChangeEvent") 
 		{
 			return;
@@ -801,6 +852,8 @@ namespace Mascaret
 		_addParameters(operation, opNode);
 		
 		attr = (XAttribute)opNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)opNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
 		if(attr!=null)
 		{
 			//Debug.Log(" Blurp : " + attr.Value);
@@ -841,6 +894,8 @@ namespace Mascaret
 		else
 		{
 			attr = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+            if (attr == null) attr = (XAttribute)attrNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
 			if(attr!=null)assoId =  attr.Value;
 		}
 
@@ -871,6 +926,8 @@ namespace Mascaret
 		XElement typeNode=null,defaultNode=null;
 		
 		XAttribute attr = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+        if (attr == null) attr = (XAttribute)attrNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 		if(attr!=null)type = attr.Value;
 		
 		attr = (XAttribute)attrNode.Attribute("name");
@@ -910,11 +967,15 @@ namespace Mascaret
 		{
 			
 			attr = (XAttribute)typeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+            if (attr == null) attr = (XAttribute)typeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 			if(attr!=null)typeNodeType = attr.Value;
             else
             { 
               //  file.WriteLine("Pas d'attribut type"); file.Flush();
                 typeNodeType = ((XAttribute)typeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}idref")).Value;
+                if (typeNodeType == null) attr = (XAttribute)typeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}idref");
+
                 attributeType = model.getBasicType(typeNodeType.ToLower());
               //  file.WriteLine(attributeType.name); file.Flush();
             }
@@ -1110,6 +1171,8 @@ namespace Mascaret
 	            {
 	                InputPin inputPin  = new InputPin();
 	                inputPin.Id = pins.Attribute("{http://schema.omg.org/spec/XMI/2.1}id").Value;
+                    if (inputPin.Id == null) inputPin.Id = pins.Attribute("{http://www.omg.org/spec/XMI/20131001}id").Value;
+
 	                inputPin.name = pins.Attribute("name").Value;
 	                Classifier ressourceType = getObjectNodeType(pins);
 	                if(ressourceType != null)
@@ -1153,6 +1216,8 @@ namespace Mascaret
 				if(attr!=null) paramKind = attr.Value;
 
                 attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
 				if(attr!=null) id = attr.Value;
 			
 				Parameter parameter = new Parameter(paramName, paramKind,null);
@@ -1173,6 +1238,8 @@ namespace Mascaret
 					{
 
                         attr = (XAttribute)gChild.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                        if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 						if(attr!=null && attr.Value.CompareTo("uml:Class")==0)
 						{
 							_parameters.Add(id,parameter);
@@ -1194,6 +1261,8 @@ namespace Mascaret
 							_parameters.Add(id,parameter);
 							
 							XAttribute attr2 = (XAttribute)gChild.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                            if (attr2 == null) attr2 = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+
 							if(attr2!=null)_paramToType.Add(id,attr2.Value);
 						}
 
@@ -1480,7 +1549,7 @@ namespace Mascaret
 
 	public void addStereotypes()
 	{
-		
+        MascaretApplication.Instance.logfile.WriteLine("Adding stereotypes"); MascaretApplication.Instance.logfile.Flush();
 		foreach(XElement child in  _xmi.Elements())
 		{
 			string classBase = null;

@@ -84,7 +84,6 @@ namespace Mascaret
         public override double execute(double dt)
         {
             StreamWriter file = MascaretApplication.Instance.logfile; file.Flush();
-            //Debug.Log (" --->  " + this.Host.name + " stateMachine Behavior " + this.Specification.getFullName());
             if (first)
             {
                 // TODO: Attention a gerer plus tard : possibilite de fixe l'etat en cours a l'initialisation de l'instance

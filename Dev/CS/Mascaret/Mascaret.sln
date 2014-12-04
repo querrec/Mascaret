@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mascaret", "Mascaret\Mascaret.csproj", "{2922675B-99B8-4F4C-8E45-2125E0D29229}"
 EndProject
 Global
@@ -13,6 +15,9 @@ Global
 		{2922675B-99B8-4F4C-8E45-2125E0D29229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2922675B-99B8-4F4C-8E45-2125E0D29229}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2922675B-99B8-4F4C-8E45-2125E0D29229}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Mascaret\Mascaret.csproj
