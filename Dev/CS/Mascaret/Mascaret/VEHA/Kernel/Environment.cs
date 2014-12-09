@@ -31,7 +31,7 @@ namespace Mascaret
 
         public void addInstance(InstanceSpecification spec)
         {
-            instances.Add(spec.name, spec);
+            instances.Add(spec.name.ToLower(), spec);
         }
 
         public void removeInstance(InstanceSpecification spec)

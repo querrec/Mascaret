@@ -102,7 +102,7 @@ namespace Mascaret
         {
             foreach (AgentBehavior currentAgentBehavior in behaviors)
             {
-                if (currentAgentBehavior.name == behaviorName)
+                if (currentAgentBehavior.name.ToLower() == behaviorName.ToLower())
                     return currentAgentBehavior;
             }
             return null;

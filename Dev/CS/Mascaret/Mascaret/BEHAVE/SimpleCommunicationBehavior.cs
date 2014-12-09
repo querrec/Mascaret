@@ -88,23 +88,33 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 	}
 	
 	protected void manageRequestAction(ACLMessage msg)
-	{
+    {
+       
 		Agent agt = (Agent)(this.Host);
 	
 		string content = msg.Content;
-
+        //System.Console.WriteLine("Content:::::"+content);
 		FIPASLParserResult result = parseFipaSLExpression(content);
 
 		if (result.success)
 		{
 			if (result.isAction)
 			{
+               /* System.Console.WriteLine("Action Name: " + result.action.actionName);
+                System.Console.WriteLine("Result" + result.action.paramValue[0]);
+                System.Console.WriteLine("test:"+content);
+
+                System.Console.WriteLine("AGT :" + agt.getFullName());
+                System.Console.WriteLine("AGT Summary:" + agt.Summary);
+                */
 				bool done = false;
+                
 				AgentBehavior behavior = agt.getBehaviorByBame(result.action.actionName);
-		
+                
 				if (behavior != null)
 				{
 					Dictionary<string,ValueSpecification> parameters = new Dictionary<string,ValueSpecification>();
+                    
 					if(result.action.paramName.Count > 0)
 					{
 						for(int i=0;i<result.action.paramName.Count;i++)
@@ -137,6 +147,7 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 				if (classifier != null  && classifier.Operations.ContainsKey(result.action.actionName))
 				{
 					operation = classifier.Operations[result.action.actionName];
+                    //System.Console.WriteLine("Operation:" + operation.getFullName());
 				}
 		
 				if (operation != null)
@@ -145,19 +156,20 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 					List<Parameter> parameters = operation.Parameters;
 					List<string> paramValue = result.action.paramValue;
 					List<string> paramName = result.action.paramName;
-			
+                    
 					if (parameters.Count == paramValue.Count)
 					{
+                        
 						for (int i=0; i < parameters.Count;i++)
 						{
 							// Pour tous les parametres issus de l'operation
 							string parameterName = parameters[i].name;
-
+                            
 							// Cherche l'indice de ce parameter dans paramsName
 							int indice = 0; bool found=false;
 							while (!found && indice<paramName.Count)
-							{
-								if (paramName[indice] == parameterName)
+                            {
+                                if (paramName[indice].ToLower() == parameterName.ToLower())
 								{
 									found = true;
 								}
@@ -166,14 +178,38 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 									indice++;
 								}
 							}
-					
+                           
 							if (found)
 							{
 								string strVal=paramValue[indice];
-								param.Add(parameters[i].name,parameters[i].Type.createValueFromString(strVal));
+                                
+                                System.Console.Write("Type : "+ parameters[i].Type.getFullName());
+                                System.Console.Write(" - Name: "+parameters[i].name);
+                                System.Console.WriteLine(" - Value: "+strVal);
+
+                                string typeName = parameters[i].Type.getFullName();
+                                if (typeName == "boolean" || typeName == "integer" || typeName == "real" || typeName == "string")
+                                    param.Add(parameters[i].name, parameters[i].Type.createValueFromString(strVal.ToLower()));
+                                else
+                                {
+                                    try
+                                    {
+                                        InstanceSpecification inst = MascaretApplication.Instance.getEnvironment().getInstance(strVal.ToLower());
+                                        param.Add(parameters[i].name, new InstanceValue(inst));
+                                    }
+                                    catch (NullReferenceException e)
+                                    {
+                                        
+                                    }
+                                    
+                                }
+                                
+                                
 							}
 						}
+                        
                         BehaviorScheduler.Instance.executeBehavior(operation.Method,agt,param,false);
+                        
 
 					/*
 						List<ActionNode> possibleTranslation = _translateOperationToActions(operation);
@@ -202,9 +238,11 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 						}
 						
 					*/
-					
+
 						ACLMessage reponse = new ACLMessage(ACLPerformative.AGREE);
 						reponse.Content = msg.Content;
+                       
+                        System.Console.WriteLine("Content-Sent: " + reponse.Content);
 						reponse.Receivers.Add(msg.Sender);
 						agt.send(reponse);
 					}
@@ -263,11 +301,11 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 
 						// Recherche du comportement procedural
 						// UGGLY
-						System.Console.WriteLine("1");
+						//System.Console.WriteLine("1");
 						AgentBehaviorExecution pbehavior = agt.getBehaviorExecutingByName("ProceduralBehavior");
 
 						//AgentBehaviorExecution> behavior2 = agt->getBehaviorExecutionByName("ActionListenerBehavior");
-						System.Console.WriteLine("2");
+						//System.Console.WriteLine("2");
 						if (pbehavior != null)
 						{
 							ProceduralBehavior procBehave  = (ProceduralBehavior) (pbehavior);
@@ -279,7 +317,7 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 								procParams.Add(result.action.paramName[i],stringValue);
 							}
 						
-							System.Console.WriteLine("3");
+							//System.Console.WriteLine("3");
 							Activity act = askedProc.Activity;
 							//List<ActivityNode>  nodes  = act.Nodes;
 					
@@ -343,6 +381,7 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 			ACLMessage reponse = new ACLMessage(ACLPerformative.NOT_UNDERSTOOD);
 			string contentRep  = "";
 			contentRep += content;
+            
 			reponse.Content = contentRep;
 			reponse.Receivers.Add(msg.Sender);
 			agt.send(reponse);
@@ -368,11 +407,17 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 	protected FIPASLParserResult parseFipaSLExpression(string content)
 	{
 		FIPASLParserResult result = new FIPASLParserResult();
-		
-		FipaSLLexer lex = new FipaSLLexer(new ANTLRStringStream(content));	
-	    CommonTokenStream tokens = new CommonTokenStream(lex);
-			
-	    FipaSLParser parser = new FipaSLParser(tokens);
+        System.Console.WriteLine("CONTENT : " + content);
+        string[] x=content.Split(' ');
+        content = x[0] + " " + x[1] + " " + x[2];
+        for (int i = 3; i < x.Length; i++)
+            content += " " + x[i].ToUpper();
+
+        //content = x[0] +":"+ x[1].ToUpper();
+        System.Console.WriteLine("CONTENT-updated : " + content);
+        FipaSLLexer lex = new FipaSLLexer(new ANTLRStringStream(content));
+        CommonTokenStream tokens = new CommonTokenStream(lex); 
+        FipaSLParser parser = new FipaSLParser(tokens);
         parser.parse();
 			
 		result.success = true;
@@ -381,12 +426,20 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 		action.actionName = parser.actionName;
 		action.paramName = new List<string>();
 		action.paramValue = new List<string>();
-		
+
 		action.paramName = parser.paramName;
 		action.paramValue = parser.paramValue;
 		
 		result.action = action;
 		System.Console.WriteLine("MSG : " + action.actionName);
+
+        for (int i = 0; i < action.paramName.Count; i++)
+        {
+            System.Console.WriteLine("MSG"+(i+2)+" : " + action.paramName[i]);
+            System.Console.WriteLine("MSG" + (i + 3) + " : " + action.paramValue[i]);
+        }
+        //System.Console.WriteLine("MSG4 : " + action.paramName[1]);
+        //System.Console.WriteLine("MSG5 : " + action.paramValue[1]);
 		return result;
 	}
 	
