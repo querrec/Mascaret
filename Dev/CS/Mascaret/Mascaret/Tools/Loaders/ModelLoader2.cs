@@ -1710,6 +1710,8 @@ namespace Mascaret
 			//Debug.Log("Action Node : " +name);
 			CallOperationAction act = new CallOperationAction();
             act.Description = getComment(node);
+            an.Fml = getFML(node);
+
             act.name = name;
 
             act.Owner = activity;
@@ -2122,18 +2124,37 @@ namespace Mascaret
 	public string getComment( XElement node)
 	{
 		string comment ="";
-		XElement commentNode = node.Element("ownedComment");
-		if (commentNode != null) 
-		{
-			commentNode = commentNode.Element("body");
-			if (commentNode != null)
-			{
-				comment = commentNode.Value;
-				//Debug.Log(comment);
-			}
-		}
+        
+
+        foreach (XElement commentNode in node.Elements("ownedComment"))
+        {
+            XElement body = commentNode.Element("body");
+            if (body != null)
+            {
+                if (!commentNode.Value.StartsWith("<FML>"))
+                    comment = commentNode.Value;
+            }
+        }
+        
 		return comment;	
 	}
+
+    public string getFML(XElement node)
+    {
+        string FML = "";
+
+        foreach (XElement commentNode in node.Elements("ownedComment"))
+        {
+            XElement body = commentNode.Element("body");
+            if (body != null)
+            {
+                if (commentNode.Value.StartsWith("<FML>"))
+                    FML = commentNode.Value;
+            }
+        }
+
+        return FML;
+    }
 	
 	public string getSummary( XElement node)
 	{

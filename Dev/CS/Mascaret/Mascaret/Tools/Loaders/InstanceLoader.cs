@@ -155,8 +155,8 @@ namespace Mascaret
                     else if (child.Name.LocalName == "Human")
                     {
                         VirtualHuman human = _createHuman(child);
-                        if (human != null)
-                            agentPlateform.addAgent(human);
+                        //if (human != null)
+                            //agentPlateform.addAgent(human);
                     }
                     else if (child.Name.LocalName == "Organisation")
                     {
@@ -259,8 +259,8 @@ namespace Mascaret
                 else if (child.Name.LocalName == "Human")
                 {
                     VirtualHuman human = _createHuman(child);
-                    if (human != null)
-                        agentPlateform.addAgent(human);
+                    //if (human != null)
+                        //agentPlateform.addAgent(human);
                 }
                 else if (child.Name.LocalName == "Organisation")
                 {
@@ -1119,7 +1119,7 @@ namespace Mascaret
                     {  }
                     else
                     {
-                       // file.WriteLine("Structure found"); file.Flush();
+                        MascaretApplication.Instance.logfile.WriteLine("Structure found"); MascaretApplication.Instance.logfile.Flush();
                         organisation = new OrganisationalEntity(name);
                         organisation.Structure = structOrg;
 
@@ -1226,17 +1226,25 @@ namespace Mascaret
 
                                     //Debug.Log( " Affectation Ressource : " + ressourceName + " = " + entityName );
                                     // Recherche de l'entite .....
+                                    MascaretApplication.Instance.logfile.WriteLine("Ressource affect looking entity : " + entityName);
+                                    MascaretApplication.Instance.logfile.Flush();
                                     InstanceSpecification entite = environment.getInstance(entityName);
-                                    if (entite == null) { }
+                                    if (entite == null) {
+                                        MascaretApplication.Instance.logfile.WriteLine("Not found");
+                                        MascaretApplication.Instance.logfile.Flush();
+                                    }
 
                                     // Recherche de la ressource
                                     Ressource res = null;
                                     //Debug.Log( " *** " + structOrg.Ressources.Count );
                                     foreach (Ressource currentRes in structOrg.Ressources)
                                     {
-                                        //	Debug.Log( "Resource search: comparing " + ressources[iRes].getName() + " to " + ressourceName );
+                                        MascaretApplication.Instance.logfile.WriteLine( "Resource search: comparing " + currentRes.name + " to " + ressourceName );
+                                        MascaretApplication.Instance.logfile.Flush();
                                         if (currentRes.name == ressourceName)
                                         {
+                                            MascaretApplication.Instance.logfile.WriteLine("found");
+                                            MascaretApplication.Instance.logfile.Flush();
                                             res = currentRes;
                                             break;
                                         }
@@ -1290,6 +1298,7 @@ namespace Mascaret
                 return h;
             }
             h = new VirtualHuman(agentPlateform, nodeName, vhClasse);
+            agentPlateform.addAgent(h);
 
             h.ControlledByHuman = false; //default
 

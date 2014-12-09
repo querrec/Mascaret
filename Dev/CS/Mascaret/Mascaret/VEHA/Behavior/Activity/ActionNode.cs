@@ -8,6 +8,12 @@ namespace Mascaret
 {
     public class ActionNode : ActivityNode
     {
+        private string fml;
+        public string Fml
+        {
+            get { return fml; }
+            set { fml = value; }
+        }
 
         private Action action;
         public Action Action

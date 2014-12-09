@@ -68,8 +68,10 @@
     <Compile Include="BEHAVE\AgentPlateform.cs" />
     <Compile Include="BEHAVE\AID.cs" />
     <Compile Include="BEHAVE\AssemblyInfo.cs" />
+    <Compile Include="BEHAVE\BehaviorRealizer.cs" />
     <Compile Include="BEHAVE\CallProcedureAction.cs" />
     <Compile Include="BEHAVE\CallProcedureBehaviorExecution.cs" />
+    <Compile Include="BEHAVE\BehaviorPlanner.cs" />
     <Compile Include="BEHAVE\CyclicBehaviorExecution.cs" />
     <Compile Include="BEHAVE\ExternalCommunicationManager.cs" />
     <Compile Include="BEHAVE\FipaSLLexer.cs" />

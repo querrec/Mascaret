@@ -78,6 +78,10 @@ namespace Mascaret
                             {
                                 file.WriteLine("ProceduralBehavior starting : " + actionNodes[i].Description); file.Flush();
 
+                                string fml = actionNodes[i].Fml;
+                                if (fml != "")
+                                    agt.setIntention(fml);
+
                                 actionNodes[i].start(agt, procInfo.getAffectations(), false); //TODO ///////////////////////////////////////// if not flag start, else start
                                 sendActionRealisationMessage(actionNodes[i], procInfo); // TODO
                                 procInfo.informActionRunning(agt.Aid, actionNodes[i]);

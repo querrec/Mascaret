@@ -98,7 +98,8 @@ namespace Mascaret
             /* Affectation de self */
 
             affectations.Add("self", host);
-            //file.WriteLine("Build Affectations"); file.Flush();
+            MascaretApplication.Instance.logfile.WriteLine("Build Affectations"); MascaretApplication.Instance.logfile.Flush();
+
             /* Affectation des parametres */
             activityParams.Clear();
             List<ActivityNode> nodes = procedure.Activity.Nodes;
@@ -252,12 +253,12 @@ namespace Mascaret
         {
             string pname = node.name;
 
-          //  file.WriteLine("TRY TO AFFECT OBJECT : " + pname); file.Flush();
+            MascaretApplication.Instance.logfile.WriteLine("TRY TO AFFECT OBJECT : " + pname); MascaretApplication.Instance.logfile.Flush();
             RessourceAssignement ra = organisation.findRessourceAssignement(pname);
             if (ra != null && ra.Entity != null)
             {
                 affectations.Add(pname, ra.Entity);
-               // file.WriteLine("SUCCESS TO AFFECT OBJECT : " + pname); file.Flush();
+                MascaretApplication.Instance.logfile.WriteLine("SUCCESS TO AFFECT OBJECT : " + pname); MascaretApplication.Instance.logfile.Flush();
             }
             else
             {
@@ -268,7 +269,7 @@ namespace Mascaret
                 }
                 else
                 {
-                 //   file.WriteLine("FAIL TO AFFECT OBJECT : " + pname); file.Flush();
+                    MascaretApplication.Instance.logfile.WriteLine("FAIL TO AFFECT OBJECT : " + pname); MascaretApplication.Instance.logfile.Flush();
                     missing.Add(pname);
                 }
             }

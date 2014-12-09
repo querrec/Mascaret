@@ -41,8 +41,8 @@ namespace Mascaret
 
         public InstanceSpecification getInstance(string name)
         {
-            if (instances.ContainsKey(name))
-                return instances[name];
+            if (instances.ContainsKey(name.ToLower()))
+                return instances[name.ToLower()];
             else
                 return null;
         }

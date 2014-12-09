@@ -61,6 +61,9 @@ namespace Mascaret
             set { controlledByHuman = value; }
         }
 
+        private BehaviorPlanner behaviorPlanner;
+        public BehaviorRealizer behaviorRealizer;
+
         //default parameters KBName = "default"
         public Agent(AgentPlateform ap, string name, AgentClass agentclass, string KBName)
             : base(name, agentclass)
@@ -70,6 +73,8 @@ namespace Mascaret
             this.plateform = ap;
             mailbox = new Mailbox();
             knowledgeBase = new KnowledgeBase(KBName);
+            behaviorPlanner = new BehaviorPlanner();
+            //behaviorRealizer = new BehaviorRealizer();
         }
 
         //default parameters interval = -1, start = true
@@ -168,7 +173,14 @@ namespace Mascaret
             return mailbox.MessagesSent;
         }
 
-
+        public void setIntention(string fml)
+        {
+            List<string> bmlList = behaviorPlanner.parseIntention(fml);
+            foreach (string bml in bmlList)
+            {
+                behaviorRealizer.addBehavior(bml);
+            }
+        }
 
         public void wakeup()
         {
