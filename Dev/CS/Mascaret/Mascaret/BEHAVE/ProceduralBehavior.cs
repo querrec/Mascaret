@@ -7,16 +7,49 @@ namespace Mascaret
     public class ProceduralBehavior : CyclicBehaviorExecution
     {
 
+ 
         public bool ispause = false;
-        StreamWriter file = MascaretApplication.Instance.logfile;
+        public List<ProcedureExecution> runningProcedures = new List<ProcedureExecution>();
+        public List<ActionNode> actionsToDo = new List<ActionNode>();
+        public Dictionary<BehaviorExecution, ActionNode> behaviorToNode = new Dictionary<BehaviorExecution,ActionNode>();
+
+       // StreamWriter file = MascaretApplication.Instance.logfile;
 
 
         public ProceduralBehavior(Behavior behavior, InstanceSpecification host, Dictionary<String, ValueSpecification> p)
             : base(behavior, host, p)
         {
-         
-            runningProcedures = new List<ProcedureExecution>();
-            behaviorToNode = new Dictionary<BehaviorExecution, ActionNode>();
+        }
+
+        public void pushProcedureToDo(Procedure proc, OrganisationalEntity org, Role role, Dictionary<String, ValueSpecification> parameters)
+        {
+            Agent agt = (Agent)(this.Host);
+
+            ProcedureExecution procInfo = new ProcedureExecution(proc, org, agt);
+            procInfo.buildAffectations(parameters, this.Host);
+
+            /* Search if the current agent have something to do in this procedure */
+            List<ActivityPartition> parts = proc.Activity.Partitions;
+            bool found = false;
+            for (int iP = 0; iP < parts.Count; iP++)
+            {
+                if (parts[iP].name == role.name)
+                {
+                    //   file.WriteLine("[ProceduralBehavior Info] Found a role " + role.name + " in procedure " + proc.name); file.Flush();
+                    found = true;
+                }
+            }
+
+            runningProcedures.Add(procInfo);
+            ispause = false;
+
+            if (!found)
+            {
+                //inform all agents that this agent's role in this procedure has ended (used to unblock tokens in ProcedureExecution)
+                sendProcedureDoneMessage(procInfo);
+                runningProcedures.RemoveAt(runningProcedures.Count - 1); //remove it..
+                // ispause = true;
+            }
         }
 
         public override void action()
@@ -24,16 +57,14 @@ namespace Mascaret
             Agent agt = (Agent)(this.Host);
 
             if (ispause) return;
-            StreamWriter file = MascaretApplication.Instance.logfile;
+           // StreamWriter file = MascaretApplication.Instance.logfile;
             //file.WriteLine("NB PRocs : " + runningProcedures.Count); file.Flush();
-
 
             if (runningProcedures.Count > 0)
             {
                 for (int iP = 0; iP < runningProcedures.Count; iP++)
                 {
                    // file.WriteLine("ProceduralBehavior in procedure " + runningProcedures[iP].procedure.name); file.Flush();
-
                     ProcedureExecution procInfo = runningProcedures[iP];
                     List<ActionNode> actionNodes = new List<ActionNode>();
 
@@ -54,80 +85,29 @@ namespace Mascaret
                     }
                     else*/
                     {
-                       // file.WriteLine("ProceduralBehavior getActionToExecute() ... "); file.Flush();
                         actionNodes = procInfo.getActionToExecute();
-                        
-                        //file.WriteLine("Nb actions : " + actionNodes.Count);
-                        if (agt.ControlledByHuman)
-                        {
-                            for (int i = 0; i < actionNodes.Count; i++)
-                            {
-                                actionsToDo.Add(new KeyValuePair<ProcedureExecution,ActionNode> (procInfo,actionNodes[i]));
-                            }
-                        }
                     }
-
                     if (actionNodes.Count > 0)
                     {
-   
+
                         for (int i = 0; i < actionNodes.Count; i++)
                         {
-                            Dictionary<string, InstanceSpecification> affectations = procInfo.getAffectations();
+                            //Dictionary<string, InstanceSpecification> affectations = procInfo.getAffectations();
+                            actionNodes[i].start(agt, procInfo.getAffectations(), false); //TODO ///////////////////////////////////////// if not flag start, else start
+                            sendActionRealisationMessage(actionNodes[i], procInfo); // TODO
+                            procInfo.informActionRunning(agt.Aid, actionNodes[i]);
 
-                            if (!agt.ControlledByHuman)
+                            if (actionNodes[i].CurrentExecution != null)
                             {
-                                file.WriteLine("ProceduralBehavior starting : " + actionNodes[i].Description); file.Flush();
-
-                                string fml = actionNodes[i].Fml;
-                                if (fml != "")
-                                    agt.setIntention(fml);
-
-                                actionNodes[i].start(agt, procInfo.getAffectations(), false); //TODO ///////////////////////////////////////// if not flag start, else start
-                                sendActionRealisationMessage(actionNodes[i], procInfo); // TODO
-                                procInfo.informActionRunning(agt.Aid, actionNodes[i]);
-
-
-                                if (actionNodes[i].CurrentExecution != null)
-                                {
-                                    //cerr << "execution ok" << endl;
-                                    behaviorToNode.Add(actionNodes[i].CurrentExecution, actionNodes[i]);
-
-                                    actionNodes[i].CurrentExecution.addCallbackOnBehaviorStop(onBehaviorStop);
-                                }
-                                else
-                                {
-                                    //cerr << "execution ko --> ignore (= says realization ok)" << endl;
-                                    procInfo.informActionDone(agt.Aid, actionNodes[i]); //TODO
-                                    sendActionDoneMessage(actionNodes[i], procInfo);
-                                }
+                                behaviorToNode.Add(actionNodes[i].CurrentExecution, actionNodes[i]);
+                                actionNodes[i].CurrentExecution.addCallbackOnBehaviorStop(onBehaviorStop);
                             }
                             else
                             {
-                                file.WriteLine("Action Type : " + actionNodes[i].Action.GetType().ToString()); file.Flush();
-                                if (actionNodes[i].Action.GetType().ToString() == "Mascaret.CallBehaviorAction")
-                                {
-                                    actionNodes[i].start(agt, procInfo.getAffectations(), false); //TODO ///////////////////////////////////////// if not flag start, else start
-                                    sendActionRealisationMessage(actionNodes[i], procInfo); // TODO
-                                    procInfo.informActionRunning(agt.Aid, actionNodes[i]);
-
-
-                                    if (actionNodes[i].CurrentExecution != null)
-                                    {
-                                        //cerr << "execution ok" << endl;
-                                        behaviorToNode.Add(actionNodes[i].CurrentExecution, actionNodes[i]);
-
-                                        actionNodes[i].CurrentExecution.addCallbackOnBehaviorStop(onBehaviorStop);
-                                    }
-                                    else
-                                    {
-                                        //cerr << "execution ko --> ignore (= says realization ok)" << endl;
-                                        procInfo.informActionDone(agt.Aid, actionNodes[i]); //TODO
-                                     sendActionDoneMessage(actionNodes[i], procInfo);
-                                    }
-                                }
+                                procInfo.informActionDone(agt.Aid, actionNodes[i]); //TODO
+                                sendActionDoneMessage(actionNodes[i], procInfo);
                             }
                         }
-                        //ispause = true;
                     }
                     else if (agt.getMessageQueue().Count == 0)
                     {
@@ -135,9 +115,9 @@ namespace Mascaret
                         //ispause = true;
                     }
 
-                    if (procInfo.isFinished() && ! agt.ControlledByHuman)
+                    if (procInfo.isFinished())
                     {
-                        file.WriteLine("ProceduralBehavior Procedure : " + runningProcedures[iP].procedure.name + " finie "); file.Flush();
+                        //file.WriteLine("ProceduralBehavior Procedure : " + runningProcedures[iP].procedure.name + " finie "); file.Flush();
                         //inform all agents that this agent's role in this procedure has ended (used to unblock tokens in ProcedureExecution)
                         sendProcedureDoneMessage(procInfo);
 
@@ -145,85 +125,75 @@ namespace Mascaret
                         runningProcedures.RemoveAt(runningProcedures.Count - 1);
                         //cerr << getHost()->getName()<<" : suppression de la procedure"<< endl;
                     }
-                    else if (procInfo.isFinished2() && agt.ControlledByHuman)
+                    else
                     {
-                        bool StillAction = false;
-                        for (int iA = 0; iA < actionsToDo.Count; iA++)
-                        {
-                          //  file.WriteLine("Comparing Procs : " + actionsToDo[iA].Key.procedure.name + " / " + procInfo.procedure.name);
-                            if (actionsToDo[iA].Key.procedure.name == procInfo.procedure.name)
-                            { StillAction = true;
-                         //   file.WriteLine(" Still action : " + actionsToDo[iA].Value.Action.Description);
-                            }
-                        }
-
-                        if (!StillAction)
-                        {
-                         //   file.WriteLine("ProceduralBehavior Procedure : " + runningProcedures[iP].procedure.name + " finie 2"); file.Flush();
-                            //inform all agents that this agent's role in this procedure has ended (used to unblock tokens in ProcedureExecution)
-                            sendProcedureDoneMessage(procInfo);
-
-                            runningProcedures[iP] = runningProcedures[runningProcedures.Count - 1];
-                            runningProcedures.RemoveAt(runningProcedures.Count - 1);
-                            //cerr << getHost()->getName()<<" : suppression de la procedure"<< endl;
-                        }
-                        
+                        iP++;
                     }
+                    
                 }
             }
             else
             {
-//file.Close();
-
-                ispause = true;
-                //pause();
-            }
-            //file.Close();
-
-        }
-
-        public void pushProcedureToDo(Procedure proc, OrganisationalEntity org, Role role, Dictionary<String, ValueSpecification> parameters)
-        {
-            Agent agt = (Agent)(this.Host);
-
-            ProcedureExecution procInfo = new ProcedureExecution(proc, org, agt);
-            procInfo.buildAffectations(parameters, this.Host);
-
-            /* Search if the current agent have something to do in this procedure */
-            List<ActivityPartition> parts = proc.Activity.Partitions;
-            bool found = false;
-            for (int iP = 0; iP < parts.Count; iP++)
-            {
-                if (parts[iP].name == role.name)
-                {
-                 //   file.WriteLine("[ProceduralBehavior Info] Found a role " + role.name + " in procedure " + proc.name); file.Flush();
-                    found = true;
-                }
-            }
-
-            runningProcedures.Add(procInfo);
-            ispause = false;
-
-            if (!found)
-            {
-                //inform all agents that this agent's role in this procedure has ended (used to unblock tokens in ProcedureExecution)
-                sendProcedureDoneMessage(procInfo);
-                runningProcedures.RemoveAt(runningProcedures.Count - 1); //remove it..
                 ispause = true;
             }
         }
 
+    public void stop(string procedureName)
+    {
+	    List<ProcedureExecution> exec = new List<ProcedureExecution>(); // Procedure still running
+	    for (int iP = 0; iP < runningProcedures.Count; iP++)
+	    {
+		    ProcedureExecution procInfo = runningProcedures[iP];
+		    if (procInfo.procedure.name == procedureName)
+		    {
+			    procInfo.stop();
+		    }
+		    else 
+		    {
+			exec.Add(procInfo);
+		    }
+	    }
+
+	    // We put back still running procedure in the vector
+	    runningProcedures.Clear();
+	    for (int iP = 0; iP < exec.Count ; iP++)
+		    runningProcedures.Add(exec[iP]);
+    }
+
+    public void stop(Procedure procedure)
+    {
+	    List<ProcedureExecution> exec = new List<ProcedureExecution>(); // Procedure still running
+	    for (int iP = 0; iP < runningProcedures.Count; iP++)
+	    {
+		    ProcedureExecution procInfo = runningProcedures[iP];
+		    if (procInfo.procedure == procedure)
+		    {
+			    procInfo.stop();
+		    }
+		    else
+		    {
+			    exec.Add(procInfo);
+		    }
+	    }
+
+	    // We put back still running procedure in the vector
+	    runningProcedures.Clear();
+	    for (int iP = 0; iP < exec.Count ; iP++)
+		    runningProcedures.Add(exec[iP]);
+    }
+        
+    public void stopAll()
+    {
+	    for (int iP = 0; iP < runningProcedures.Count; iP++)
+	    {
+		    ProcedureExecution procInfo = runningProcedures[iP];
+		    procInfo.stop();
+	    }
+	    runningProcedures.Clear();
+    }
+        
         public void onBehaviorStop(BehaviorExecution be)
         {
-          //  file.WriteLine(" ### BEHAVIOR STOP " + behaviorToNode[be].name + " ended ");
-            Agent agt = (Agent)(this.Host);
-            if (agt.ControlledByHuman)
-            {
-                for (int i = 0; i < actionsToDo.Count; i++)
-                    if (behaviorToNode[be].Action.name == actionsToDo[i].Value.Action.name)
-                        actionsToDo.RemoveAt(i);
-            }
-
             for (int iP = 0; iP < runningProcedures.Count; iP++)
             {
                 ProcedureExecution procInfo = runningProcedures[iP];
@@ -235,26 +205,45 @@ namespace Mascaret
             ispause = false;
         }
 
-        public void sendProcedureDoneMessage(ProcedureExecution procInfo)
+        public void onActionDone(AID agent, ActionNode action)
         {
-            Agent agt = (Agent)(this.Host);
+	        for (int iP = 0; iP < runningProcedures.Count;iP++ )
+	        {
+		        ProcedureExecution procInfo = runningProcedures[iP];
 
-            ACLMessage procMsg = new ACLMessage(ACLPerformative.INFORM);
+		        procInfo.informActionDone(agent,action);
+	        }
+            ispause = false;
+        }
 
-            //we inform at wich time the procedure finish
-            TimeExpression timestamp = BehaviorScheduler.Instance.getCurrentVirtualTime();
-            procMsg.Timestamp = timestamp;
+        public void onActionDone(AID agent, string actionName)
+        {
+	        for (int iP = 0; iP < runningProcedures.Count;iP++ )
+	        {
+		        ProcedureExecution procInfo = runningProcedures[iP];
+		
+		        procInfo.informActionDone(agent,actionName);
+	        }
+        }
 
-            string content = "((done (action ";
-            content += agt.name;
-            content += " ";
-            content += "(" + clean(procInfo.procedure.name) + ")";
-            content += ")))";
-            procMsg.Content = content;
+        public void onActionRunning(AID agent, ActionNode action)
+        {
+	        for (int iP = 0; iP < runningProcedures.Count;iP++ )
+	        {
+		        ProcedureExecution procInfo = runningProcedures[iP];
+		
+		        procInfo.informActionRunning(agent,action);
+	        }
+        }
 
-            procMsg.Receivers.Add(MascaretApplication.Instance.Agent.Aid);
-
-            agt.send(procMsg);
+        public void onActionRunning(AID agent, string actionName)
+        {
+	        for (int iP = 0; iP < runningProcedures.Count;iP++ )
+	        {
+		        ProcedureExecution procInfo = runningProcedures[iP];
+		
+		        procInfo.informActionRunning(agent,actionName);
+	        }
         }
 
         public void sendActionRealisationMessage(ActionNode action, ProcedureExecution procInfo)
@@ -304,6 +293,7 @@ namespace Mascaret
             content += "(" + clean(action.name) + ")";
             content += ")))";
             procMsg.Content = content;
+            //MascaretApplication.Instance.VRComponentFactory.Log(content);
 
             //send message to other agents
             List<AID> agents = procInfo.getOtherAgents();
@@ -315,6 +305,32 @@ namespace Mascaret
             agt.send(procMsg);
         }
 
+
+        public void sendProcedureDoneMessage(ProcedureExecution procInfo)
+        {
+            Agent agt = (Agent)(this.Host);
+
+            ACLMessage procMsg = new ACLMessage(ACLPerformative.INFORM);
+
+            //we inform at wich time the procedure finish
+            TimeExpression timestamp = BehaviorScheduler.Instance.getCurrentVirtualTime();
+            procMsg.Timestamp = timestamp;
+
+            string content = "((done (action ";
+            content += agt.name;
+            content += " ";
+            content += "(" + clean(procInfo.procedure.name) + ")";
+            content += ")))";
+            procMsg.Content = content;
+
+            procMsg.Receivers.Add(MascaretApplication.Instance.Agent.Aid);
+
+            agt.send(procMsg);
+        }
+
+       
+
+        
         string clean(string toClean)
         {
             string returned = toClean;
@@ -326,9 +342,7 @@ namespace Mascaret
             return returned;
         }
 
-        public List<ProcedureExecution> runningProcedures;
-        public List< KeyValuePair<ProcedureExecution, ActionNode> > actionsToDo = new List<KeyValuePair<ProcedureExecution, ActionNode>>();
-        public Dictionary<BehaviorExecution, ActionNode> behaviorToNode;
+       
 
 
     }

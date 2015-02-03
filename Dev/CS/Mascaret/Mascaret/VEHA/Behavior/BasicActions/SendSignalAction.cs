@@ -34,6 +34,7 @@ namespace Mascaret
         public SendSignalAction()
         {
             Kind = "SendSignal";
+            target = null;
         }
 
         public bool Equals(SendSignalAction other)

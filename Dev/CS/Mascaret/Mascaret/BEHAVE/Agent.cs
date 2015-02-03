@@ -61,7 +61,7 @@ namespace Mascaret
             set { controlledByHuman = value; }
         }
 
-        private BehaviorPlanner behaviorPlanner;
+        public BehaviorPlanner behaviorPlanner;
         public BehaviorRealizer behaviorRealizer;
 
         //default parameters KBName = "default"
@@ -73,7 +73,7 @@ namespace Mascaret
             this.plateform = ap;
             mailbox = new Mailbox();
             knowledgeBase = new KnowledgeBase(KBName);
-            behaviorPlanner = new BehaviorPlanner();
+            behaviorPlanner = new BehaviorPlanner(this);
             //behaviorRealizer = new BehaviorRealizer();
         }
 

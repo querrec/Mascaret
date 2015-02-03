@@ -8,6 +8,7 @@ namespace Mascaret
 public struct FIPAAction
 {
 	public string actionName;
+    public string performer;
 	public List<string> paramName;
 	public List<string> paramValue;
 }
@@ -16,6 +17,8 @@ public struct FIPASLParserResult
 {
 	public bool success;
 	public bool isAction;
+    public bool isDone;
+    public bool isStarted;
 	public FIPAAction action;
 };
 
@@ -81,6 +84,85 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 	
 	protected void manageInform(ACLMessage msg)
 	{
+        Agent agt = (Agent)(this.Host);
+        string content = msg.Content;
+        FIPASLParserResult result = parseFipaSLExpression(content);
+        if (result.isAction)
+        {
+            if (result.success)
+            {
+
+                AgentBehaviorExecution be = agt.getBehaviorExecutingByName("ProceduralBehavior");
+                if (be != null)
+                {
+                    ProceduralBehavior pbe = (ProceduralBehavior)(be);
+                    AID aid = new AID(result.action.performer, agt.Aid.PlateformName, agt.Aid.PlateformPort);
+                    if (result.isDone)
+                    {
+
+                        aid = new AID(result.action.performer, agt.Aid.PlateformName, agt.Aid.PlateformPort);
+                        pbe.onActionDone(aid, result.action.actionName);
+                    }
+                    else
+                    {
+
+                        pbe.onActionRunning(aid, result.action.actionName);
+                    }
+                }
+            }
+        }
+        else
+        {
+            /*
+            //cerr << result.variable << " of entity : " << result.entity << " == " << result.value << endl;
+            Agent agt = (Agent)(Host);
+            KnowledgeBase kb = agt.KnowledgeBase;
+            Environment env = kb.Environment;
+            if (env != null)
+            {
+                InstanceSpecification entity;
+                entity = env.getInstance(result.entity);
+                if (entity)
+                {
+                    shared_ptr<Slot> variable;
+                    variable = entity->getProperty(result.variable);
+                    if (variable)
+                    {
+                        variable->addValueFromString(result.value);
+                    }
+                    else
+                    {
+                        shared_ptr<ACLMessage> reponse = shared_ptr<ACLMessage>(new ACLMessage(NOT_UNDERSTOOD));
+                        reponse->setContent(content);
+                        reponse->addReceiver(msg->getSender());
+                        agt->send(reponse);
+                    }
+                }
+                else
+                {
+                    shared_ptr<ACLMessage> reponse = shared_ptr<ACLMessage>(new ACLMessage(NOT_UNDERSTOOD));
+                    reponse->setContent(content);
+                    reponse->addReceiver(msg->getSender());
+                    agt->send(reponse);
+                }
+            }
+            else
+            {
+                shared_ptr<ACLMessage> reponse = shared_ptr<ACLMessage>(new ACLMessage(NOT_UNDERSTOOD));
+                reponse->setContent(content);
+                reponse->addReceiver(msg->getSender());
+                agt->send(reponse);
+            }*/
+        }
+        /*
+        if (msg->getXMLContent())
+        {
+            shared_ptr<XmlParser> newParser = shared_ptr<XmlParser>(new XmlParser());
+            newParser->createFile("parser");
+            shared_ptr<XmlNode> newRoot_node = newParser->getRoot();
+            newRoot_node->addChild(msg->getXMLContent(), false);
+            cerr << newParser->writeString() << endl;
+        }*/
 	}
 	
 	protected void manageQueryRef(ACLMessage msg)
@@ -408,10 +490,10 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 	{
 		FIPASLParserResult result = new FIPASLParserResult();
         System.Console.WriteLine("CONTENT : " + content);
-        string[] x=content.Split(' ');
-        content = x[0] + " " + x[1] + " " + x[2];
-        for (int i = 3; i < x.Length; i++)
-            content += " " + x[i].ToUpper();
+        //string[] x=content.Split(' ');
+        //content = x[0] + " " + x[1] + " " + x[2];
+       // for (int i = 3; i < x.Length; i++)
+           // content += " " + x[i].ToUpper();
 
         //content = x[0] +":"+ x[1].ToUpper();
         System.Console.WriteLine("CONTENT-updated : " + content);
@@ -422,8 +504,11 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 			
 		result.success = true;
 		result.isAction = parser.isAction;
+        result.isDone = parser.done;
+        result.isStarted = parser.started;
 		FIPAAction action = new FIPAAction();
 		action.actionName = parser.actionName;
+        action.performer = parser.performer;
 		action.paramName = new List<string>();
 		action.paramValue = new List<string>();
 

@@ -102,7 +102,10 @@ namespace Mascaret
 
                     XDocument parser;
                     this.basedir = filename;
-                    parser = XDocument.Load(filename);
+
+                    //parser = XDocument.Load(filename);
+                    String s = MascaretApplication.Instance.readFlow(filename);
+                    parser = XDocument.Parse(s);
 
                     _parseInstances(parser.Root);
                     _addRelations();
@@ -1119,7 +1122,7 @@ namespace Mascaret
                     {  }
                     else
                     {
-                        MascaretApplication.Instance.logfile.WriteLine("Structure found"); MascaretApplication.Instance.logfile.Flush();
+                      //  MascaretApplication.Instance.logfile.WriteLine("Structure found"); MascaretApplication.Instance.logfile.Flush();
                         organisation = new OrganisationalEntity(name);
                         organisation.Structure = structOrg;
 
@@ -1226,12 +1229,12 @@ namespace Mascaret
 
                                     //Debug.Log( " Affectation Ressource : " + ressourceName + " = " + entityName );
                                     // Recherche de l'entite .....
-                                    MascaretApplication.Instance.logfile.WriteLine("Ressource affect looking entity : " + entityName);
-                                    MascaretApplication.Instance.logfile.Flush();
+                                  //  MascaretApplication.Instance.logfile.WriteLine("Ressource affect looking entity : " + entityName);
+                                  //  MascaretApplication.Instance.logfile.Flush();
                                     InstanceSpecification entite = environment.getInstance(entityName);
                                     if (entite == null) {
-                                        MascaretApplication.Instance.logfile.WriteLine("Not found");
-                                        MascaretApplication.Instance.logfile.Flush();
+                                     //   MascaretApplication.Instance.logfile.WriteLine("Not found");
+                                     //   MascaretApplication.Instance.logfile.Flush();
                                     }
 
                                     // Recherche de la ressource
@@ -1239,12 +1242,12 @@ namespace Mascaret
                                     //Debug.Log( " *** " + structOrg.Ressources.Count );
                                     foreach (Ressource currentRes in structOrg.Ressources)
                                     {
-                                        MascaretApplication.Instance.logfile.WriteLine( "Resource search: comparing " + currentRes.name + " to " + ressourceName );
-                                        MascaretApplication.Instance.logfile.Flush();
+                                     //   MascaretApplication.Instance.logfile.WriteLine( "Resource search: comparing " + currentRes.name + " to " + ressourceName );
+                                     //   MascaretApplication.Instance.logfile.Flush();
                                         if (currentRes.name == ressourceName)
                                         {
-                                            MascaretApplication.Instance.logfile.WriteLine("found");
-                                            MascaretApplication.Instance.logfile.Flush();
+                                          //  MascaretApplication.Instance.logfile.WriteLine("found");
+                                          //  MascaretApplication.Instance.logfile.Flush();
                                             res = currentRes;
                                             break;
                                         }
@@ -1562,7 +1565,7 @@ namespace Mascaret
 
         protected void _addRelations()
         {
-            StreamWriter file = MascaretApplication.Instance.logfile;
+          //  StreamWriter file = MascaretApplication.Instance.logfile;
 
             //Debug.Log( "Add Relation" );
             foreach (Relation currentRelation in relations)

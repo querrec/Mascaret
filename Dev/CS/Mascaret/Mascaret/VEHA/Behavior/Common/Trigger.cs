@@ -25,8 +25,7 @@ namespace Mascaret
                 return false;
             if (mEvent.Type == "SignalEvent")
             {
-                StreamWriter file = MascaretApplication.Instance.logfile;
-                file.WriteLine(((SignalEvent)mEvent).name + " = " + ((SignalEvent)trigger.mEvent).Signal.Classifier.name);
+               // StreamWriter file = MascaretApplication.Instance.logfile;
                 if (mEvent as SignalEvent != null && ((SignalEvent)mEvent).name == ((SignalEvent)trigger.mEvent).Signal.Classifier.name)
                 {
                     return true;

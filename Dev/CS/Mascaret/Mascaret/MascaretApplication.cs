@@ -5,14 +5,12 @@ using System.Xml.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
+
 namespace Mascaret
 {
     public class MascaretApplication
     {
         protected static MascaretApplication instance = null;
-
-        public StreamWriter logfile = new StreamWriter ("logFile.txt"); 
-
 
         public static MascaretApplication Instance
         {
@@ -32,9 +30,14 @@ namespace Mascaret
            
           
             BaseDir =baseDir;
+
             XDocument parser;
-            logfile.WriteLine("Loading application file : " + baseDir + "/" + applicationFileName); logfile.Flush();
-            parser = XDocument.Load(BaseDir+"/"+applicationFileName);
+           // logfile.WriteLine("Loading application file : " + BaseDir + "/" + applicationFileName); logfile.Flush();
+            string assetPath = BaseDir + "/"+applicationFileName;
+
+
+            String s = readFlow(BaseDir + "/" + applicationFileName);
+            parser = XDocument.Parse(s);
             XElement root = parser.Root;
             parse(root);
         }
@@ -70,7 +73,7 @@ namespace Mascaret
             //StreamWriter file = new StreamWriter("log.txt");
            // file.WriteLine(url);
            // file.Flush();
-            logfile.WriteLine("Parsing model file : " + url); logfile.Flush();
+           // logfile.WriteLine("Parsing model file : " + url); logfile.Flush();
             ModelLoader2 modelLoader = new ModelLoader2(url, true);
             Model model = modelLoader.Model;
             model.ModelLoader = modelLoader;
@@ -81,11 +84,12 @@ namespace Mascaret
 
         Environment parseEnvironment(string url, XElement actNode, XElement orgNode)
         {
-            Environment env;
+            Environment env = null;
 
-            logfile.WriteLine("Parsing Environment file : " + url); logfile.Flush();
+         //   logfile.WriteLine("Parsing Environment file : " + url); logfile.Flush();
 
-            XDocument parser = XDocument.Load(BaseDir+"/"+url);
+            String s = readFlow(BaseDir + "/" + url);
+            XDocument parser = XDocument.Parse(s);
             XElement root = parser.Root;
 
             Model model;
@@ -98,9 +102,8 @@ namespace Mascaret
                // file.WriteLine(" URL : " + url + " : " + BaseDir + "/" + urlModel);
               //  file.Flush();
               //  file.Close();
-                model = parseModel(BaseDir+urlModel);
-
-                //map<string, shared_ptr<Environment> >::iterator it = model->getEnvironments().find(url);
+                model = parseModel(BaseDir+"/"+urlModel);
+                
                 if (model.Environments.ContainsKey(url))
                 {
                     env = model.Environments[url];
@@ -121,6 +124,7 @@ namespace Mascaret
                     if (orgNode != null)
                         instanceLoader.parseInstances(agentPlateform, env, orgNode.Attribute("url").Value, true);
                 }
+                
             }
             else
                 env = null;
@@ -256,6 +260,11 @@ namespace Mascaret
         {
             get { return virtualRealityComponentFactory; }
             set { virtualRealityComponentFactory = value; }
+        }
+
+        public string readFlow(string url)
+        {
+            return virtualRealityComponentFactory.readFlow(url);
         }
 
 

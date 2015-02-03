@@ -53,13 +53,17 @@ namespace Mascaret
             this.activity = activity;
             affectations = new Dictionary<string, InstanceSpecification>();
 
+
             /* Affectation des parametres */
-            //		Debug.Log("BUILD AFFECTATIONS ........ "+ activity.name);
+            MascaretApplication.Instance.VRComponentFactory.Log("BUILD AFFECTATIONS ........ "+ activity.name + " : " + activity.Partitions.Count);
 
             foreach (ActivityPartition currentPartition in activity.Partitions)
             {
                 if (currentPartition.name == "this")
+                {
                     affectations.Add("this", host);
+                   // MascaretApplication.Instance.VRComponentFactory.Log("Affectation de this a : " + host.name);
+                }
                 else
                 {
                     if (p.ContainsKey(currentPartition.name))
@@ -72,7 +76,7 @@ namespace Mascaret
                         if (host.Slots.ContainsKey(currentPartition.name))
                             affectations.Add(currentPartition.name, host.getProperty(currentPartition.name).getValue().valueSpecificationToInstanceSpecification());
                         else
-                            System.Console.WriteLine("[ActivityBehaviorExecution.cpp] Affectation Partition de " + currentPartition.name + " impossible ...");
+                            MascaretApplication.Instance.VRComponentFactory.Log("[ActivityBehaviorExecution.cpp] Affectation Partition de " + currentPartition.name + " impossible ...");
                     }
                 }
 
@@ -80,7 +84,7 @@ namespace Mascaret
                 {
                     if (currentNode.Kind == "object")
                     {
-                        //					Debug.Log(" Parameters size : "+p.KeysList.Count);
+                        MascaretApplication.Instance.VRComponentFactory.Log(" Parameters size : "+p.Count);
                         if (p.ContainsKey(currentNode.name))
                         {
                             InstanceValue val = (InstanceValue)p[currentNode.name];
@@ -88,15 +92,17 @@ namespace Mascaret
                         }
                         else
                         {
+                            MascaretApplication.Instance.VRComponentFactory.Log("Slot ? " + currentNode.name);
                             if (host.Slots.ContainsKey(currentNode.name))
                             {
                                 try
                                 {
+                                    MascaretApplication.Instance.VRComponentFactory.Log("Find");
                                     affectations.Add(currentNode.name, ((InstanceValue)(host.getProperty(currentNode.name).getValue())).SpecValue);
                                 }
                                 catch (Exception)
                                 {
-                                    System.Console.WriteLine("Multiple relation found, not supported, get the last one");
+                                   // MascaretApplication.Instance.VRComponentFactory.Log("Multiple relation found, not supported, get the last one");
                                     foreach (ValueSpecification currentValue in host.getProperty(currentNode.name).Values.Values)
                                     {
                                         affectations.Add(currentNode.name, currentValue.valueSpecificationToInstanceSpecification());
@@ -104,8 +110,8 @@ namespace Mascaret
                                     }
                                 }
                             }
-                            else
-                                System.Console.WriteLine("[ActivityBehaviorExecution.cpp] Affectation Object de " + currentNode.name + " impossible ...");
+                           // else
+                              //  MascaretApplication.Instance.VRComponentFactory.Log("[ActivityBehaviorExecution.cpp] Affectation Object de " + currentNode.name + " impossible ...");
                         }
 
                     }
@@ -117,23 +123,30 @@ namespace Mascaret
                             if (action.Kind == "SendSignal")
                             {
                                 SendSignalAction sendAct = (SendSignalAction)action;
-
-                                if (sendAct.Target != null && sendAct.Target.target.name != "")
+                                MascaretApplication.Instance.VRComponentFactory.Log("SendSignal to affect");
+                                if (sendAct.Target != null && sendAct.Target.targetName != "")
                                 {
-                                    if (p.ContainsKey(sendAct.Target.target.name))
+                                    MascaretApplication.Instance.VRComponentFactory.Log("Look for : " + sendAct.Target.targetName);
+
+                                    if (p.ContainsKey(sendAct.Target.targetName))
                                     {
-                                        InstanceValue val = (InstanceValue)p[sendAct.Target.target.name];
-                                        affectations.Add(sendAct.Target.target.name, val.SpecValue);
+                                        InstanceValue val = (InstanceValue)p[sendAct.Target.targetName];
+                                        affectations.Add(sendAct.Target.targetName, val.SpecValue);
                                     }
                                     else
                                     {
-                                        if (host.Slots.ContainsKey(sendAct.Target.target.name))
+                                        if (host.Slots.ContainsKey(sendAct.Target.targetName))
                                         {
-                                            affectations.Add(sendAct.Target.target.name, host.getProperty(sendAct.Target.target.name).getValue().valueSpecificationToInstanceSpecification());
-                                            sendAct.Target.target = host.getProperty(sendAct.Target.target.name).getValue().valueSpecificationToInstanceSpecification();
+                                            InstanceSpecification instance = ((InstanceValue)(host.getProperty(sendAct.Target.targetName).getValue())).SpecValue;                                            
+                                            MascaretApplication.Instance.VRComponentFactory.Log("Affecttion : " + sendAct.Target.targetName + " a " + instance.getFullName());
+
+                                            affectations.Add(sendAct.Target.targetName, instance);
+                                            sendAct.Target.target = instance;
+                                            //affectations.Add(sendAct.Target.targetName, host.getProperty(sendAct.Target.targetName).getValue().valueSpecificationToInstanceSpecification());
+                                            //sendAct.Target.target = host.getProperty(sendAct.Target.targetName).getValue().valueSpecificationToInstanceSpecification();
                                         }
-                                        //else
-                                        //Debug.LogError( "[ActivityBehaviorExecution.cpp] Affectation SendAction de " + sendAct.Target.target.name + " impossible ...");
+                                        else
+                                        MascaretApplication.Instance.VRComponentFactory.Log("[ActivityBehaviorExecution.cpp] Affectation SendAction de " + sendAct.Target.targetName + " impossible ...");
                                     }
                                 }
                             }

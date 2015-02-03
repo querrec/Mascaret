@@ -50,12 +50,12 @@ namespace Mascaret
         {
             foreach (RessourceAssignement currentRA in ressourcesAssignement)
             {
-                MascaretApplication.Instance.logfile.WriteLine("FindRessource :" + currentRA.Ressource.name + " == " + resName);
-                MascaretApplication.Instance.logfile.Flush();
+             //   MascaretApplication.Instance.logfile.WriteLine("FindRessource :" + currentRA.Ressource.name + " == " + resName);
+             //   MascaretApplication.Instance.logfile.Flush();
                 if (currentRA.Ressource.name == resName)
                 {
-                    MascaretApplication.Instance.logfile.WriteLine(".... Found");
-                    MascaretApplication.Instance.logfile.Flush();
+              //      MascaretApplication.Instance.logfile.WriteLine(".... Found");
+               //     MascaretApplication.Instance.logfile.Flush();
                     return currentRA;
                 }
             }

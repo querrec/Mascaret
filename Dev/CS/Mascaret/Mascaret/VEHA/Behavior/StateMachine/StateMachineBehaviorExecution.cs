@@ -83,7 +83,8 @@ namespace Mascaret
 
         public override double execute(double dt)
         {
-            StreamWriter file = MascaretApplication.Instance.logfile; file.Flush();
+          //  StreamWriter file = MascaretApplication.Instance.logfile; file.Flush();
+         //   file.WriteLine("StateMachine"); file.Flush();
             if (first)
             {
                 // TODO: Attention a gerer plus tard : possibilite de fixe l'etat en cours a l'initialisation de l'instance
@@ -93,7 +94,7 @@ namespace Mascaret
                 List<Region> res = machine.Region;
 
                 bool foundInitialState = false;
-
+               // file.WriteLine("Pseudo state : " + ps.Count); file.Flush();
                 foreach (PseudoState pseudo in ps)
                 {
                     if (pseudo.kind == PseudoStateKind.INITIAL)
@@ -105,6 +106,7 @@ namespace Mascaret
                             //if (_currentState) _currentState->desactivate();
                             activateState(transition.Target, p);
                         }
+                        //file.WriteLine("Found Initial"); file.Flush();
                         foundInitialState = true;
                         break;
                     }
@@ -117,32 +119,34 @@ namespace Mascaret
             {
                 while (eventQueue.Count != 0)
                 {
-
                     Vertex currentState = this.currentState;
                     if (currentState == null)//|| (currentState.Noninterpt && currentState.running)) 
                     { break; }
 
                    // if (this.Host.name == "tiroirProduits")
-                        file.WriteLine(" --->  " + this.Host.name + " stateMachine Behavior " + this.Specification.getFullName()+ " in " + currentState.getFullName()); file.Flush();
+                       // file.WriteLine(" --->  " + this.Host.name + " stateMachine Behavior " + this.Specification.getFullName()+ " in " + currentState.getFullName()); file.Flush();
 
                     Trigger trigger = eventQueue[0];
                     eventQueue.RemoveAt(0);
                     List<Transition> trans = currentState.Outgoing;
-                    file.WriteLine("Nb Trans : " + trans.Count); file.Flush();
+                    MascaretApplication.Instance.VRComponentFactory.Log(" Trigger : " + trigger.name);
+                   // file.WriteLine("Nb Trans : " + trans.Count); file.Flush();
                     for (int iT = 0; iT < trans.Count; iT++)
                     {
                         
                         List<Trigger> transTriggers = trans[iT].Trigger;
-                        file.WriteLine("Nb Triger : " + transTriggers.Count); file.Flush();
+                      //  file.WriteLine("Nb Triger : " + transTriggers.Count); file.Flush();
                         for (int i = 0; i < transTriggers.Count; i++)
                         {
                             Trigger transTrigger = transTriggers[i];
-                            if (this.Host.name == "tiroirProduits")
-                                file.WriteLine(" --->  " + this.Host.name + " " +  transTrigger.getFullName()); file.Flush();
+                           // if (this.Host.name == "tiroirProduits")
+                               // file.WriteLine(" --->  " + this.Host.name + " " +  transTrigger.getFullName()); file.Flush();
+                            
                             if (transTrigger.equals(trigger))
                             {
                                 Dictionary<string, ValueSpecification> param = new Dictionary<string, ValueSpecification>();
                                 //OclParser::Context context;
+                                MascaretApplication.Instance.VRComponentFactory.Log(" Trigger OK");
 
                                 MascaretEvent evt = trigger.MEvent;
                                 if (evt != null && evt.Type == "SignalEvent")
@@ -183,9 +187,12 @@ namespace Mascaret
                                     Action effect = trans[iT].Effect;
                                     if (effect != null)
                                     {
+                                        MascaretApplication.Instance.VRComponentFactory.Log("Has effect");
+
                                         BehaviorScheduler.Instance.executeBehavior(effect, this.Host, param, false);
                                     }
 
+                                    MascaretApplication.Instance.VRComponentFactory.Log("Activate new state : " + trans[iT].Target.name);
                                     activateState(trans[iT].Target, param);
                                 }
                             }
@@ -206,8 +213,8 @@ namespace Mascaret
 
         public void addSignal(InstanceSpecification signal)
         {
-            StreamWriter file = MascaretApplication.Instance.logfile;
-            file.WriteLine("recu signal : " + signal.name + " par " + Host.name); file.Flush();
+           // StreamWriter file = MascaretApplication.Instance.logfile;
+          //  file.WriteLine("recu signal : " + signal.name + " par " + Host.name); file.Flush();
             Trigger trigger = new Trigger(signal.name);
             SignalEvent se = new SignalEvent(signal.name);
             se.Signal = signal;
@@ -234,9 +241,9 @@ namespace Mascaret
 
         protected bool activateState(Vertex state, Dictionary<string, ValueSpecification> p)
         {
-            StreamWriter file = MascaretApplication.Instance.logfile;
+           // StreamWriter file = MascaretApplication.Instance.logfile;
 
-            file.WriteLine("Activating State : " + state.name); file.Flush();
+          //  file.WriteLine("Activating State : " + state.name); file.Flush();
             currentState = state;
 
            if (state as FinalState == null)
@@ -277,8 +284,8 @@ namespace Mascaret
             currentState.running = false;
             currentActionDone = true;
 
-            StreamWriter file = MascaretApplication.Instance.logfile; file.Flush();
-            file.WriteLine("Behavior stopped");
+          //  StreamWriter file = MascaretApplication.Instance.logfile; file.Flush();
+          //  file.WriteLine("Behavior stopped");
 
 
             foreach (Transition currentTransition in currentState.Outgoing)

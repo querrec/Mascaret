@@ -9,5 +9,7 @@ namespace Mascaret
     {
         public abstract ShapeSpecification createShape(string name, string url, bool movable = true, bool recursive = false, string shader = "");
         public abstract BehaviorExecution InstanciateOpaqueBehavior(Behavior behavior, string typeName, InstanceSpecification host, Dictionary<string, ValueSpecification> p);
+        public abstract string readFlow(string url);
+        public abstract void Log(string logMessage);
     }
 }

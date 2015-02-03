@@ -47,35 +47,38 @@ namespace Mascaret
 
         public override double execute(double dt)
         {
-            //Debug.Log(" EXECUTION SEND SIGNAL ... : " + action.Target.target.getFullName());
+            //MascaretApplication.Instance.VRComponentFactory.Log(" EXECUTION SEND SIGNAL ... : " + action.Target.target.getFullName());
 
             if (action.Target.target != null)
             {
-                System.Console.WriteLine("Send Signal Action to " + action.Target.target.getFullName() + " : " + action.Target.target.SmBehaviorExecutions.Count);
+              //  MascaretApplication.Instance.VRComponentFactory.Log("Send Signal Action to " + action.Target.target.getFullName() + " : " + action.Target.target.SmBehaviorExecutions.Count);
                 foreach (StateMachineBehaviorExecution smBe in action.Target.target.SmBehaviorExecutions)
                 {
+                    MascaretApplication.Instance.VRComponentFactory.Log("Send signal Machine : " + smBe.getStateMachine().name);
                     if (action.Signal != null)
                         smBe.addSignal(action.Signal);
                     else
                     {
                         if (action.SignalClass != null)
                         {
+                            MascaretApplication.Instance.VRComponentFactory.Log("Send Signal " + action.SignalClass.name + " to " + action.Target.target.name);
+
                             InstanceSpecification sig = new InstanceSpecification(action.SignalClass.name, action.SignalClass);
                             smBe.addSignal(sig);
                         }
                         else
-                            System.Console.WriteLine("Pas de Signal");
+                            MascaretApplication.Instance.VRComponentFactory.Log("Pas de Signal");
                     }
                 }
             }
             else
             {
                 if (action.Signal != null)
-                    System.Console.WriteLine(action.Signal.name);
+                    MascaretApplication.Instance.VRComponentFactory.Log(action.Signal.name);
                 else if (action.SignalClass != null)
-                    System.Console.WriteLine(" (Class) " + action.SignalClass.name);
+                    MascaretApplication.Instance.VRComponentFactory.Log(" (Class) " + action.SignalClass.name);
                 else
-                    System.Console.WriteLine(" No signal or signalClass");
+                    MascaretApplication.Instance.VRComponentFactory.Log(" No signal or signalClass");
 
                 foreach (InstanceSpecification currentInstance in MascaretApplication.Instance.getEnvironment().InstanceSpecifications.Values)
                 {
@@ -92,7 +95,7 @@ namespace Mascaret
                                 smBe.addSignal(sig);
                             }
                             else
-                                System.Console.WriteLine("Pas de Signal");
+                                MascaretApplication.Instance.VRComponentFactory.Log("Pas de Signal");
                         }
                     }
                 }

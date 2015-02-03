@@ -39,10 +39,10 @@ namespace Mascaret
         //default parameters sync = false
         public void start(InstanceSpecification host, Dictionary<string, InstanceSpecification> affectations, bool sync)
         {
-            StreamWriter file = MascaretApplication.Instance.logfile;
+           // StreamWriter file = MascaretApplication.Instance.logfile;
             if (action == null)
             {
-                file.WriteLine("Le noeud " + name + " n'a pas d'action associée!!!"); file.Flush();
+               // file.WriteLine("Le noeud " + name + " n'a pas d'action associée!!!"); file.Flush();
                 return;
             }
 
@@ -75,7 +75,7 @@ namespace Mascaret
             }
             if (action.Kind == "CallOperation")
             {
-                file.WriteLine("Executing Call operation" + action.name + " " + ((CallOperationAction)action).Operation.getFullName()); file.Flush();
+               // file.WriteLine("Executing Call operation" + action.name + " " + ((CallOperationAction)action).Operation.getFullName()); file.Flush();
 
                 if (((CallOperationAction)action).isDynamic())
                 {
@@ -88,13 +88,13 @@ namespace Mascaret
                     {
 
                         string paramName = currentPin.getIncomingObjectNode()[0].name;
-                        file.WriteLine(" Looking for : " + paramName); file.Flush();
+                      //  file.WriteLine(" Looking for : " + paramName); file.Flush();
                         if (!affectations.ContainsKey(currentPin.getIncomingObjectNode()[0].name))
                         {
-                            file.WriteLine(((CallOperationAction)action).Operation.getFullName() + " from " + action.Owner.name + " MISS " + currentPin.getIncomingObjectNode()[0].name); file.Flush();
+                    //        file.WriteLine(((CallOperationAction)action).Operation.getFullName() + " from " + action.Owner.name + " MISS " + currentPin.getIncomingObjectNode()[0].name); file.Flush();
                         }
                         InstanceValue val = new InstanceValue(affectations[currentPin.getIncomingObjectNode()[0].name]);
-                        file.WriteLine("..... Trouve " + val.ToString()); file.Flush();
+                    //    file.WriteLine("..... Trouve " + val.ToString()); file.Flush();
                         param.Add(currentPin.name, val);
                     }
                 }

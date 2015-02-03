@@ -7,6 +7,5 @@ D:\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.p
 C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Mascaret.dll
 C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Mascaret.pdb
 C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Antlr3.Runtime.dll
-C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.csprojResolveAssemblyReference.cache
 C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.dll
 C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.pdb
