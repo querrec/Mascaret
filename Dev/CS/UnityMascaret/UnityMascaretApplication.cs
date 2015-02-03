@@ -6,12 +6,14 @@ using System.IO;
 
 public class UnityMascaretApplication : MonoBehaviour {
 
-	private VRApplication mascaret;
-
-
+	public VRApplication mascaret;
+	public Vector2 scrollPosition; 
+	public bool debugMode = true;
+	
 	public string applicationFile;
 	List<string> keyPressed = new List<string>();
 
+	
 	void Start()
 	{
 		mascaret = VRApplication.Instance;
@@ -23,11 +25,10 @@ public class UnityMascaretApplication : MonoBehaviour {
 		mascaret.parse (applicationFile,Application.dataPath+"/StreamingAssets/");
 
 	}
-
+	
 	void Update()
 	{
 		mascaret.step();
-		//File.WriteAllText(Application.persistentDataPath+"/unityEolienne2.txt",mascaret.Model.AllClasses.Count.ToString());
 	}
 
 	public void OnGUI()
@@ -71,6 +72,7 @@ public class UnityMascaretApplication : MonoBehaviour {
 		}
 	}
 
-
-
+	
+	
 }
+

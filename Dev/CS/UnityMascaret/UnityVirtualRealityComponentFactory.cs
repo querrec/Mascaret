@@ -14,7 +14,7 @@ public class UnityVirtualRealityComponentFactory : VirtualRealityComponentFactor
 		return shape;
 	}
 
-	public override BehaviorExecution InstanciateOpaqueBehavior(Behavior behavior, string typeName, InstanceSpecification host, Dictionary<string, ValueSpecification> p)
+	public override BehaviorExecution InstanciateOpaqueBehavior(Mascaret.Behavior behavior, string typeName, InstanceSpecification host, Dictionary<string, ValueSpecification> p)
 	{
 		Type type = Types.GetType( typeName,"Assembly-CSharp" );
 		BehaviorExecution be = null;
@@ -28,5 +28,32 @@ public class UnityVirtualRealityComponentFactory : VirtualRealityComponentFactor
 		}
 		return be;
 	}
+
+    public override void Log (string logMessage)
+    {
+        Debug.Log(logMessage);
+    }
+    
+    public override string readFlow (string url)
+    {
+        string assetPath = url;
+        
+        #if UNITY_STANDALONE_WIN  || UNITY_EDITOR
+        assetPath = "file://" + assetPath;
+        #endif
+        
+        if (assetPath != null) {// Load XML structure
+            WWW configFile = new WWW (assetPath);
+            while (!configFile.isDone){
+                if (!string.IsNullOrEmpty (configFile.error)) {
+                    Debug.Log ("File " + assetPath + " cannot be downloaded : error = " + configFile.error);
+                    return "";
+                }
+            }
+            
+            return configFile.text;
+        } else
+            return "";
+    }
 
 }
