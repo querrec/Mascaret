@@ -533,26 +533,28 @@ namespace Mascaret
 
         public void informActionRunning(AID agent, string actionName)
         {
+            MascaretApplication.Instance.VRComponentFactory.Log("Start : " + actionName);
+
             ActionNode action = getActionByNameFor(agent, actionName);
             informActionRunning(agent, action);
         }
 
         public void informActionRunning(AID agent, ActionNode action)
         {
-
             //check if procedure will advance if this action is made
             bool canAdvance = true;
 
             ActionNode actionToRun = null;
+            MascaretApplication.Instance.VRComponentFactory.Log("Start : " + action.getFullName());
+
             // Test if action owned by agent
             if (action.Partitions[0].name == agentToPartition[agent.toString()].name)
                 actionToRun = action;
-            //		else
-            //			cerr << "This action " << action->getFullName() << " doesn't belong to agent " << agent->getName() << endl;
+            else
+            	MascaretApplication.Instance.VRComponentFactory.Log( "This action " + action.getFullName() + " doesn't belong to agent " + agent.toString());
              if (actionToRun != null)
              {
                  //check if procedure can advance (action is reachable from the previous done actions)
-		
                  List<ActionNode> possibleNextActions = getActionToExecuteFor(agent);
 			
                  for (int i=0; i<possibleNextActions.Count; ++i)
@@ -604,15 +606,17 @@ namespace Mascaret
 
                         //add to "done" list
                         actionsDone.Add(doneAction);
+
+                        MascaretApplication.Instance.VRComponentFactory.Log("AllActionsDone : " + agent.toString());
                         if (!allActionsDone.ContainsKey(agent.toString())) 
                             allActionsDone.Add(agent.toString(), new List<ActionNode>());
-
                         allActionsDone[agent.toString()].Add(doneAction);
 
+                        MascaretApplication.Instance.VRComponentFactory.Log("allActionsDoneTimestamps : " + agent.toString());
                         if (!allActionsDoneTimestamps.ContainsKey(agent.toString()))
                             allActionsDoneTimestamps.Add(agent.toString(),new List<TimeExpression>());
                         allActionsDoneTimestamps[agent.toString()].Add( doneAction.CurrentExecution.Finish);
-                        
+                        MascaretApplication.Instance.VRComponentFactory.Log("Done");
                     }
                     else
                     {

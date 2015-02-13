@@ -9,3 +9,13 @@ C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\M
 C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Antlr3.Runtime.dll
 C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.dll
 C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.pdb
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.csproj.Antlr4GeneratedCodeFileListAbsolute.txt
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Antlr4.Runtime.net35.dll
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Antlr4.Runtime.net35.xml
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\FipaSLLexer.cs
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\FipaSLParser.cs
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\FipaSLListener.cs
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\FipaSLBaseListener.cs
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\FipaSLVisitor.cs
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\FipaSLBaseVisitor.cs
+C:\Users\Utilisateur\Developpement\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.csprojResolveAssemblyReference.cache

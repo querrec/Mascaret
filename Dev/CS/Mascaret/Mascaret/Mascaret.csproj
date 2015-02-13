@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <Import Project="..\packages\Antlr4.4.3.0\build\Antlr4.props" Condition="Exists('..\packages\Antlr4.4.3.0\build\Antlr4.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -31,6 +32,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>e2b52340</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +56,9 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>.\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Antlr4.Runtime.net35">
+      <HintPath>..\packages\Antlr4.Runtime.4.3.0\lib\net35-client\Antlr4.Runtime.net35.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -75,8 +80,6 @@
     <Compile Include="BEHAVE\BehaviorPlanner.cs" />
     <Compile Include="BEHAVE\CyclicBehaviorExecution.cs" />
     <Compile Include="BEHAVE\ExternalCommunicationManager.cs" />
-    <Compile Include="BEHAVE\FipaSLLexer.cs" />
-    <Compile Include="BEHAVE\FipaSLParser.cs" />
     <Compile Include="BEHAVE\KnowledgeBase.cs" />
     <Compile Include="BEHAVE\Mailbox.cs" />
     <Compile Include="BEHAVE\OneShotBehaviorExecution.cs" />
@@ -235,4 +238,18 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Antlr4 Include="BEHAVE\FipaSL.g4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Antlr4>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Activez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est le suivant : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Antlr4.4.3.0\build\Antlr4.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Antlr4.4.3.0\build\Antlr4.props'))" />
+    <Error Condition="!Exists('..\packages\Antlr4.4.3.0\build\Antlr4.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Antlr4.4.3.0\build\Antlr4.targets'))" />
+  </Target>
+  <Import Project="..\packages\Antlr4.4.3.0\build\Antlr4.targets" Condition="Exists('..\packages\Antlr4.4.3.0\build\Antlr4.targets')" />
 </Project>
