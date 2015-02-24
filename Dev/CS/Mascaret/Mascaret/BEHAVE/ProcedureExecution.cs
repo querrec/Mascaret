@@ -48,6 +48,9 @@ namespace Mascaret
                     {
                         agentToPartition.Add(assignements[j].Agent.toString(), partition);
                         partitionToAgent.Add(partition, assignements[j].Agent);
+                        Agent agt = MascaretApplication.Instance.AgentPlateform.Agents[assignements[j].Agent.toString()];
+                        if (agt == null) MascaretApplication.Instance.VRComponentFactory.Log("CA VA TRANCHER");
+                        affectations.Add(partition.name, agt);
                     }
                 }
             }
@@ -306,7 +309,15 @@ namespace Mascaret
                 buildAffectationsPostbone(missing);
             }
 
-            //RQ PARSER		procedure.Activity.setContext(buildOclContext(activityParams));
+            procedure.Activity.context = _buildOclContext(activityParams);
+            List<ActivityNode> actnodes = procedure.Activity.Nodes; 
+            foreach (ActivityNode actnode in actnodes)
+            {
+                if (actnode.Kind == "action")
+                {
+                    ((ActionNode)actnode).Action.context = procedure.Activity.context;
+                }
+            }
         }
 
         public void stop()
@@ -992,6 +1003,23 @@ namespace Mascaret
         {
             return affectations;
         }
+
+        private Dictionary<string, ValueSpecification> _buildOclContext(Dictionary<String, ValueSpecification> parameters) 
+        { 
+            /* Construction du contexte des constraintes */ 
+            Dictionary<string, ValueSpecification> context = new Dictionary<string,ValueSpecification>(); 
+ 	 
+            foreach(KeyValuePair<string,InstanceSpecification> affect in affectations)
+            {
+                context.Add(affect.Key, new InstanceValue(affect.Value));
+            }
+            foreach (KeyValuePair<string, ValueSpecification> affect in parameters)
+            {
+                context.Add(affect.Key, affect.Value);
+            }
+
+            return context; 
+        } 
 
     }
 }

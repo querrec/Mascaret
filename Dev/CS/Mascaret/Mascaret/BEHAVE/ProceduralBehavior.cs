@@ -93,6 +93,7 @@ namespace Mascaret
                         for (int i = 0; i < actionNodes.Count; i++)
                         {
                             //Dictionary<string, InstanceSpecification> affectations = procInfo.getAffectations();
+                            //actionNodes[i].procInfo.procedure.Activity.Context
                             actionNodes[i].start(agt, procInfo.getAffectations(), false); //TODO ///////////////////////////////////////// if not flag start, else start
                             sendActionRealisationMessage(actionNodes[i], procInfo); // TODO
                             procInfo.informActionRunning(agt.Aid, actionNodes[i]);

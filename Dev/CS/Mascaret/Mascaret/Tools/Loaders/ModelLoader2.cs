@@ -826,27 +826,38 @@ namespace Mascaret
 
 	public void addChangeEvent(XElement changeNode, Package pkg)
 	{
-		string type;
+		string type = "";
 
-		type = changeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type").Value;
-        if (type == null) type = changeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type").Value;
+        if (changeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type") != null)
+		    type = changeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type").Value;
+        else if (changeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type")!= null) 
+            type = changeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type").Value;
 
+        MascaretApplication.Instance.VRComponentFactory.Log("Type = " + type);
 		if (type != "uml:ChangeEvent") 
 		{
 			return;
 		}
-		string id = changeNode.Attribute("id").Value;
+
+        string id = "";
+        if (changeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id") != null)
+            id = changeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id").Value;
+        else if (changeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id") != null)
+            id = changeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id").Value;
 
 		ChangeEvent changeEvent = new ChangeEvent(id);
 		
 		if (changeNode.Element("changeExpression") != null) 
 		{
+            MascaretApplication.Instance.VRComponentFactory.Log("New Change Event : " + id);
+
 			string changeExp = changeNode.Element("changeExpression").Attribute("value").Value;
+            
 			Expression exp = new Expression(changeExp,this.Model.BasicTypes["boolean"]);
 			changeEvent.ChangeExpression = exp;
 		}
 		/* add in package*/
-		_events.Add(id,changeEvent);	
+		_events.Add(id,changeEvent);
 	}
 
 	//TODO: choper contenu de data (tag? description?)
@@ -1664,6 +1675,7 @@ namespace Mascaret
 
 	public void addActivityNode( XElement node, Activity activity)
 	{
+        MascaretApplication.Instance.VRComponentFactory.Log("New activity node");
         string type = "";
         string id = "";
         if (node.Attribute("{http://schema.omg.org/spec/XMI/2.1}type") != null)
@@ -1671,19 +1683,29 @@ namespace Mascaret
         else
             type = node.Attribute("{http://www.omg.org/spec/XMI/20131001}type").Value;
 
-		string name = node.Attribute("name").Value;
+        MascaretApplication.Instance.VRComponentFactory.Log(" Type : " + type);
+
         if (node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id") != null)
 		    id = node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id").Value;
         else 
             id = node.Attribute("{http://www.omg.org/spec/XMI/20131001}id").Value;
+        MascaretApplication.Instance.VRComponentFactory.Log(" ID : " + id);
+
+        string name = "";
+        if (node.Attribute("name") != null)
+            name = node.Attribute("name").Value;
+        else name = id;
+        MascaretApplication.Instance.VRComponentFactory.Log(" Name : " + name);
+
+
 		string idPartition = "";
 		if (node.Attribute("inPartition") != null)
 			idPartition = node.Attribute("inPartition").Value;
 
-        //MascaretApplication.Instance.logfile.WriteLine(id); MascaretApplication.Instance.logfile.Flush();
-        //MascaretApplication.Instance.logfile.WriteLine(type); MascaretApplication.Instance.logfile.Flush();
-        //MascaretApplication.Instance.logfile.WriteLine(name); MascaretApplication.Instance.logfile.Flush();
-        //MascaretApplication.Instance.logfile.WriteLine(idPartition); MascaretApplication.Instance.logfile.Flush();
+        MascaretApplication.Instance.VRComponentFactory.Log(id); 
+        MascaretApplication.Instance.VRComponentFactory.Log(type); 
+        MascaretApplication.Instance.VRComponentFactory.Log(name); 
+        MascaretApplication.Instance.VRComponentFactory.Log(idPartition); 
 
 		ActivityNode actNode = null;
 		
@@ -1916,34 +1938,44 @@ namespace Mascaret
 
 		} else if (type == "uml:AcceptEventAction") 
 		{
-			/*
-			shared_ptr<ActionNode> an = make_shared<ActionNode>(name);
-			shared_ptr<AcceptEventAction> act= make_shared<AcceptEventAction>();
+            MascaretApplication.Instance.VRComponentFactory.Log("New uml:AcceptEventAction");
+			ActionNode an = new ActionNode(name,"action");
+			AcceptEventAction act= new AcceptEventAction();
 
-			shared_ptr<XmlNode> triggerNode = node->getChildByName("trigger");
-			if (triggerNode) 
+			XElement triggerNode = node.Element("trigger");
+			if (triggerNode != null) 
 			{
-				shared_ptr<Trigger> trigger = make_shared<Trigger>(node->getProperty("name"));
-				trigger->setId(triggerNode->getProperty("id"));
+                MascaretApplication.Instance.VRComponentFactory.Log("trigger node found");
+                
+				Trigger trigger = new Trigger (name);
+                MascaretApplication.Instance.VRComponentFactory.Log("Debug : " + name);
+                string idT = "";
+                if (triggerNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id") != null)
+                    idT = triggerNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id").Value;
+                else
+                    idT = triggerNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id").Value;
 
-				if (triggerNode->hasProperty("event")) 
+				trigger.Id = idT;
+                MascaretApplication.Instance.VRComponentFactory.Log(trigger.Id);
+
+				if (triggerNode.Attribute("event") != null) 
 				{
-					string idEvent = triggerNode->getProperty("event");
+					string idEvent = triggerNode.Attribute("event").Value;
 
-					map<string, shared_ptr<Event> >::iterator it = _events.find(
-						idEvent);
-					if (it != _events.end()) 
+					if (_events.ContainsKey(idEvent)) 
 					{
-						trigger->setEvent(_events[idEvent]);
-						act->setTrigger(trigger);
+						trigger.MEvent = _events[idEvent];
+						act.setTrigger(trigger);
 					} else
-						cerr << "Could not find event : " << idEvent << endl;
+						MascaretApplication.Instance.VRComponentFactory.Log( "Could not find event : " + idEvent);
 				}
 			}
-			an->setAction(act);
+			an.Action = act;
 			addPins(an,node);
 			actNode = an;
-			*/
+
+            MascaretApplication.Instance.VRComponentFactory.Log(" Fin AcceptEventAction");
+			
 		}
 		// ...
 		else 

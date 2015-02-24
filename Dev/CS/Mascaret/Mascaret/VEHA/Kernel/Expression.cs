@@ -1,5 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Antlr4.Runtime;
+using Antlr4.Runtime.Atn;
+using Antlr4.Runtime.Misc;
+using DFA = Antlr4.Runtime.Dfa.DFA;
 
 
 namespace Mascaret
@@ -28,6 +32,40 @@ namespace Mascaret
             : base(returnType)
         {
             expressionValue = expression;
+        }
+
+        public ValueSpecification evaluateExpression(InstanceSpecification owner)
+        {
+            return null;
+        }
+
+        public ValueSpecification evaluateExpression(Dictionary<string, ValueSpecification> c)
+        {
+
+            MascaretApplication.Instance.VRComponentFactory.Log("Evaluate Expression");
+
+            foreach(KeyValuePair<string,ValueSpecification> val in c)
+            {
+                string valueS = "NotDef";
+                ValueSpecification value = val.Value;
+                if (value.GetType().ToString() == "Mascaret.InstanceValue")
+                    valueS = ((InstanceValue)value).SpecValue.getFullName();
+                else
+                    MascaretApplication.Instance.VRComponentFactory.Log(value.GetType().ToString());
+                    
+                MascaretApplication.Instance.VRComponentFactory.Log("Context : " + val.Key + " = " + valueS);
+            }
+
+            OCLExpressionLexer lex = new OCLExpressionLexer(new AntlrInputStream(expressionValue));
+            CommonTokenStream tokens = new CommonTokenStream(lex);
+            OCLExpressionParser parser = new OCLExpressionParser(tokens);
+            parser.context = c;
+            parser.expression();
+            MascaretApplication.Instance.VRComponentFactory.Log("Parsing  : " + expressionValue);
+            MascaretApplication.Instance.VRComponentFactory.Log("Nb Erreur : " + parser.NumberOfSyntaxErrors);
+
+            
+            return (LiteralBoolean)(parser.value);
         }
 
         public override ValueSpecification clone()

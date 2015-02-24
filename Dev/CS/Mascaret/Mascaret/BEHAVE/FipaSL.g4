@@ -76,7 +76,7 @@ using System.Collections.Generic;
  float : DIGIT+'.'DIGIT+;
 
  DIGIT  : [0-9] ;
- ID : [a-zA-Z]+;
+ ID : [a-zA-Z_]([a-zA-Z_-]|[0-9])+;
  WS : [ \t\r\n]+ -> skip;
 
  LPAREN : '(' ;

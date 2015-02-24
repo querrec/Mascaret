@@ -30,7 +30,7 @@ namespace Mascaret
             set { owner = value; }
         }
 
-        //OCLParser.Context context;
+        public Dictionary<string,ValueSpecification> context;
 
         public Behavior(string name)
             : base(name)

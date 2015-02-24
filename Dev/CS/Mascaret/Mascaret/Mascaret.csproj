@@ -111,6 +111,8 @@
     <Compile Include="SysML\Block.cs" />
     <Compile Include="Tools\Loaders\InstanceLoader.cs" />
     <Compile Include="Tools\Loaders\ModelLoader2.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\AcceptEventAction.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\AcceptEventBehaviorExecution.cs" />
     <Compile Include="VEHA\Behavior\BasicActions\CallBehaviorBehaviorExecution.cs" />
     <Compile Include="VEHA\Entity\VirtualRealityComponentFactory.cs" />
     <Compile Include="VEHA\Kernel\BehavioralFeature.cs" />
@@ -243,6 +245,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Antlr4>
     <None Include="packages.config" />
+    <Antlr4 Include="VEHA\Kernel\OCLExpression.g4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CustomToolNamespace>Mascaret</CustomToolNamespace>
+      <Generator>MSBuild:Compile</Generator>
+    </Antlr4>
   </ItemGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
