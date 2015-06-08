@@ -485,7 +485,6 @@ namespace Mascaret
        // file.Close();
 		
 
-
 		if (isStereotypedEntity(classNode)) {
 			cl = new EntityClass(className);
 			entity = true;
@@ -2230,7 +2229,7 @@ namespace Mascaret
 		// Bouml preserved body begin 0001FFE7
 	
 		XAttribute attr = (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
-        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
 
 		if(attr!=null) return (_stereoEntities.Contains(attr.Value));
 		else return false;
@@ -2241,7 +2240,7 @@ namespace Mascaret
 	public bool isStereotypedAgent( XElement node) {
 		// Bouml preserved body begin 00020067
 		XAttribute attr= (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
-        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
 
 		if(attr!=null) return (_stereoAgents.Contains(attr.Value));
 		else return false;
@@ -2249,7 +2248,7 @@ namespace Mascaret
 	}
 	public bool isStereotypedVirtualHuman( XElement node) {
 		XAttribute attr= (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
-        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
 
 		if(attr!=null) return (_stereoVirtualHumans.Contains(attr.Value));
 		else return false;
@@ -2259,7 +2258,7 @@ namespace Mascaret
 		// Bouml preserved body begin 000200E7
 		
 		XAttribute attr= (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
-        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
 
 		if(attr!=null) return (_stereoRoles.Contains(attr.Value));
 		else return false;
@@ -2270,7 +2269,7 @@ namespace Mascaret
 		// Bouml preserved body begin 000219E7
 		
 		XAttribute attr= (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
-        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
 
 		if(attr!=null) return (_stereoBuiltIn.Contains(attr.Value));
 		else return false;
@@ -2281,7 +2280,7 @@ namespace Mascaret
 		// Bouml preserved body begin 000219E7
 		
 		XAttribute attr= (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
-        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
 
 		if(attr!=null) return (_stereoNonInterupt.Contains(attr.Value));
 		else return false;
@@ -2291,7 +2290,7 @@ namespace Mascaret
 	public bool isStereotypedBlock( XElement node) {
 		
 		XAttribute attr= (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
-        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
 
 		if(attr!=null) return (_stereoBlocks.Contains(attr.Value));
 		else return false;

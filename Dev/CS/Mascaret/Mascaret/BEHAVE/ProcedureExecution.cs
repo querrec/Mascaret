@@ -22,6 +22,11 @@ namespace Mascaret
         protected Dictionary<String, InstanceSpecification> affectations;
         protected List<ActivityExecutionToken> activeTokens;
 
+        public List<ActivityExecutionToken> getActiveToken()
+        {
+            return activeTokens;
+        }
+
         public ProcedureExecution(Procedure procedure, OrganisationalEntity organisation, Agent agent)
         {
             this.procedure = procedure;
