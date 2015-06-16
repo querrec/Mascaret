@@ -49,12 +49,17 @@ namespace Mascaret
             XElement orgNode = root.Element("Organisations");
 
             {
-                // Parametres par defaut de l'applie ....
-                string ressourceDir = "HTTPServerBaseDir";
-                agentPlateform = new AgentPlateform("localhost", 8080, ressourceDir, false);
-                agent = new Agent(agentPlateform, "HTTPManager", null, "");
-                agent.addBehavior("SimpleCommunicationBehavior", 0.2, true);
-                agentPlateform.addAgent(agent);
+                if (agentPlateform == null)
+                {
+                    this.VRComponentFactory.Log("Agent Plateform");
+                    // Parametres par defaut de l'applie ....
+                    string ressourceDir = "HTTPServerBaseDir";
+                    agentPlateform = new AgentPlateform("localhost", 8080, ressourceDir, false);
+                    agent = new Agent(agentPlateform, "HTTPManager", null, "");
+                    agent.addBehavior("SimpleCommunicationBehavior", 0.2, true);
+                    agentPlateform.addAgent(agent);
+                }
+     
             }
 
             foreach (XElement child in root.Elements())
@@ -92,7 +97,7 @@ namespace Mascaret
             XDocument parser = XDocument.Parse(s);
             XElement root = parser.Root;
 
-            Model model;
+        //    Model model;
             XElement modelNode = root.Element("Model");
             if (modelNode != null)
             {
@@ -102,13 +107,13 @@ namespace Mascaret
                // file.WriteLine(" URL : " + url + " : " + BaseDir + "/" + urlModel);
               //  file.Flush();
               //  file.Close();
-                model = parseModel(BaseDir+"/"+urlModel);
+                if (model == null) model = parseModel(BaseDir+"/"+urlModel);
                 
-                if (model.Environments.ContainsKey(url))
-                {
-                    env = model.Environments[url];
-                }
-                else
+               // if (model.Environments.ContainsKey(url))
+              //  {
+               //     env = model.Environments[url];
+              //  }
+              //  else
                 {
                     env = new Environment(model);
                     env.Url = url;

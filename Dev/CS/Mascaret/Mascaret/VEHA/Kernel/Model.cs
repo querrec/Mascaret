@@ -105,6 +105,7 @@ namespace Mascaret
 
         public void addEnvironment(Environment env)
         {
+            if (environments.Count != 0) environments.Clear();
             environments.Add(env.Url, env);
         }
 

@@ -47,16 +47,15 @@ namespace Mascaret
             Role askedRole = null;
 
             List<OrganisationalEntity> orgs = appli.AgentPlateform.Organisations;
-            StreamWriter file = new StreamWriter("CallProcedure.txt");
-            file.AutoFlush = true;
-            file.WriteLine("CallProcedure"); file.Flush();
+
+            appli.VRComponentFactory.Log("CallProcedure"); 
 
             for (int iOrg = 0; iOrg < orgs.Count; iOrg++)
             {
-                file.WriteLine(" Org " + orgs[iOrg].name + " ?"); file.Flush();
+                appli.VRComponentFactory.Log(" Org " + orgs[iOrg].name + " ?");
                 if (orgs[iOrg].name == action.OrganisationalEntity)
                 {
-                    file.WriteLine("Org : " + orgs[iOrg].name + " found"); file.Flush();
+                    appli.VRComponentFactory.Log("Org : " + orgs[iOrg].name + " found");
                     OrganisationalStructure os = orgs[iOrg].Structure;
                     List<Procedure> procs = os.Procedures;
                     askedOrg = orgs[iOrg];
@@ -65,23 +64,23 @@ namespace Mascaret
                     {
                         if (procs[iP].name == action.Procedure)
                         {
-                            file.WriteLine("Procedure " + procs[iP].name + " found");
+                            appli.VRComponentFactory.Log("Procedure " + procs[iP].name + " found");
                             askedProc = procs[iP];
                             List<RoleAssignement> assigns = orgs[iOrg].RoleAssignement;
 
-                            file.WriteLine("Assigns : " + assigns.Count); file.Flush();
+                            appli.VRComponentFactory.Log("Assigns : " + assigns.Count);
                             for (int iAss = 0; iAss < assigns.Count; iAss++)
                             {
                                 Agent agt = appli.AgentPlateform.Agents[assigns[iAss].Agent.toString()];
                                 askedRole = assigns[iAss].Role;
 
-                                file.WriteLine("Role : " + assigns[iAss].Role.name + " == " + agt.name); file.Flush();
+                                appli.VRComponentFactory.Log("Role : " + assigns[iAss].Role.name + " == " + agt.name);
 
                                 AgentBehaviorExecution pbehavior = agt.getBehaviorExecutingByName("ProceduralBehavior");
 
                                 if (pbehavior != null)
                                 {
-                                    file.WriteLine("Procedure launched for " + agt.name); file.Flush();
+                                    appli.VRComponentFactory.Log("Procedure launched for " + agt.name);
                                     ProceduralBehavior procBehave = (ProceduralBehavior)(pbehavior);
 
                                     Dictionary<string, ValueSpecification> procParams = new Dictionary<string, ValueSpecification>();

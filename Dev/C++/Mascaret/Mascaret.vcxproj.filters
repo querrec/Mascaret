@@ -704,6 +704,33 @@
     <ClCompile Include="src\VEHA\Behavior\BasicActions\AcceptEventBehaviorExecution.cpp">
       <Filter>VEHA\Behavior\BasicActions</Filter>
     </ClCompile>
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\InputPin.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\Pin.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\OutputPin.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\ValuePin.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\Common\ActivityBehaviorExecutionHelper.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\DummyAction.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\DummyBehaviorExecution.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CallBehaviorAction.cpp" />
+    <ClCompile Include="src\VEHA\Behavior\BasicActions\CallBehaviorBehaviorExecution.cpp" />
+    <ClCompile Include="src\Tools\Scenario\ScenarioEvent.cpp" />
+    <ClCompile Include="src\Tools\Scenario\ScenarioScheduler.cpp" />
+    <ClCompile Include="src\Tools\Scenario\Scenario.cpp" />
+    <ClCompile Include="src\Tools\Loaders\ParserHelper.cpp" />
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSpeedServlet.cpp" />
+    <ClCompile Include="src\Tools\Network\Servlets\ManageEntityJSONServlet.cpp" />
+    <ClCompile Include="src\Tools\Network\Servlets\ManageSetAttributeValueServlet.cpp" />
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAgentKnowledgeBaseServlet.cpp" />
+    <ClCompile Include="src\Tools\Network\Servlets\ManageAgentKBHeadServlet.cpp" />
+    <ClCompile Include="src\Tools\Network\Servlets\ManageViewpointServlet.cpp" />
+    <ClCompile Include="src\IEHA\Visualisation\Renderer.cpp" />
+    <ClCompile Include="src\IEHA\Visualisation\RenderToTexture.cpp" />
+    <ClCompile Include="src\SysML\Block.cpp" />
+    <ClCompile Include="src\BackupUtils\BackupList.cpp" />
+    <ClCompile Include="src\BackupUtils\IBackupEnabled.cpp" />
+    <ClCompile Include="src\BackupUtils\Backup.cpp" />
+    <ClCompile Include="src\BackupUtils\ProcedureExecutionBackup.cpp" />
+    <ClCompile Include="src\BackupUtils\SlotBackup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\VEHA\Kernel\Element.h">
@@ -1439,6 +1466,33 @@
     <ClInclude Include="include\VEHA\Behavior\BasicActions\AcceptEventBehaviorExecution.h">
       <Filter>VEHA\Behavior\BasicActions</Filter>
     </ClInclude>
+    <ClInclude Include="include\Tools\Scenario/Scenario.h" />
+    <ClInclude Include="include\Tools\Scenario/ScenarioEvent.h" />
+    <ClInclude Include="include\Tools\Scenario/ScenarioScheduler.h" />
+    <ClInclude Include="include\VEHA\Behavior\Common\ActivityBehaviorExecutionHelper.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\DummyAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\DummyBehaviorExecution.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CallBehaviorAction.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\OutputPin.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\Pin.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\InputPin.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\ValuePin.h" />
+    <ClInclude Include="include\VEHA\Behavior\BasicActions\CallBehaviorBehaviorExecution.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSetAttributeValueServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentKnowledgeBaseServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentKBHeadServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageAgentViewPointServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageSpeedServlet.h" />
+    <ClInclude Include="include\Tools\Network\Servlets\ManageEntityJSONServlet.h" />
+    <ClInclude Include="include\Tools\Loaders\ParserHelper.h" />
+    <ClInclude Include="include\IEHA\Visualisation\Renderer.h" />
+    <ClInclude Include="include\IEHA\Visualisation\RenderToTexture.h" />
+    <ClInclude Include="include\SysML\Block.h" />
+    <ClInclude Include="include\BackupUtils\BackupList.h" />
+    <ClInclude Include="include\BackupUtils\IBackupEnabled.h" />
+    <ClInclude Include="include\BackupUtils\Backup.h" />
+    <ClInclude Include="include\BackupUtils\ProcedureExecutionBackup.h" />
+    <ClInclude Include="include\BackupUtils\SlotBackup.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VEHA">

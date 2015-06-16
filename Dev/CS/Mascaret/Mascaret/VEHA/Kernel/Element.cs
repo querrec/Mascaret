@@ -15,6 +15,13 @@ namespace Mascaret
         }
 
 
+        private string stereotype = "";
+        public string Stereotype
+        {
+            get { return stereotype; }
+            set { stereotype = value; }
+        }
+
         private string summary;
         public string Summary
         {

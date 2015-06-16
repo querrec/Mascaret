@@ -49,6 +49,8 @@ namespace Mascaret
 	 
 	protected List<string> _stereoBlocks=new List<string>();
 
+    protected Dictionary<string, List<String>> _otherStereo = new Dictionary<string,List<string>>();
+
 	 
 	private Dictionary<String,Class> _idClass;
 
@@ -975,10 +977,14 @@ namespace Mascaret
       //  StreamWriter file = new StreamWriter("attribute.txt");
 
 		string type="", attrName="",strVal="", typeNodeType="";
+        string id = "";
 		bool derived=false;
 		Classifier attributeType=null;
 		XElement typeNode=null,defaultNode=null;
-		
+
+        XAttribute attrid = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attrid != null) id = attrid.Value;
+
 		XAttribute attr = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
         if (attr == null) attr = (XAttribute)attrNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
         if (attr == null) attr = (XAttribute)attrNode.Attribute("type");
@@ -1082,6 +1088,12 @@ namespace Mascaret
 		}
 	
 		Property attrProp = new Property(attrName, cl, attributeType,null, valueSpec,null);
+        if (hasStereotype(id))
+        {
+            attrProp.Stereotype = getStereotype(id);
+            MascaretApplication.Instance.VRComponentFactory.Log("DEBUG /// STEREOTYPE : " + attrName + " : " + attrProp.Stereotype);
+        }
+
 	
 		
 		string mulStr = "1";
@@ -1667,8 +1679,49 @@ namespace Mascaret
 				_stereoPostconditions.Add(constraintBase);
 			else if (child.Name.LocalName.Contains("Block"))
 				_stereoBlocks.Add(classBase);
+            else
+            {
+                if (_otherStereo.ContainsKey(child.Name.LocalName))
+                {
+                    MascaretApplication.Instance.VRComponentFactory.Log("EXIST Prop");
+                    XAttribute attrS =(XAttribute) child.Attribute("base_Property");
+                    if (attrS != null)
+                        _otherStereo[child.Name.LocalName].Add(attrS.Value);
+                }
+                else
+                {
+                    MascaretApplication.Instance.VRComponentFactory.Log("NEW Prop");
+
+                    XAttribute attrS =(XAttribute) child.Attribute("base_Property");
+                    if (attrS != null)
+                    {
+                        MascaretApplication.Instance.VRComponentFactory.Log("---> " + child.Name.LocalName+ attrS.Value);
+                        _otherStereo.Add(child.Name.LocalName, new List<string>());
+                        _otherStereo[child.Name.LocalName].Add(attrS.Value);
+                    }
+                }
+            }
 		}
 	}
+
+    public bool hasStereotype(string id)
+    {
+        bool found = false;
+        foreach (KeyValuePair<string, List<String>> stereos in _otherStereo)
+        {
+            if (stereos.Value.Contains(id)) found = true;
+        }
+        return found;
+    }
+
+    public string getStereotype(string id)
+    {
+        foreach (KeyValuePair<string, List<String>> stereos in _otherStereo)
+        {
+            if (stereos.Value.Contains(id)) return stereos.Key;
+        }
+        return "";
+    }
 
 	//FinalNode, Merge et Decision devraent �tre des activityNode !!
 

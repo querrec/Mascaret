@@ -77,7 +77,8 @@ namespace Mascaret
 
         public void addAgent(Agent agent)
         {
-            agents.Add(agent.Aid.toString(), agent);
+            if (!agents.ContainsKey(agent.Aid.toString()))
+                agents.Add(agent.Aid.toString(), agent);
         }
 
         public bool isLocalAgent(AID aid)
