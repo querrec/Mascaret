@@ -135,7 +135,7 @@ namespace Mascaret
             this.maximumNumber = 1;
 
             if (def != null)
-                this.defaultValue = def.clone();
+                this.defaultValue = def;
             else
             {
                 string typeName = type.name;

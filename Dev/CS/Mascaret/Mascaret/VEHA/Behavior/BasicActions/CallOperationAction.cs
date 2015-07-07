@@ -31,7 +31,7 @@ namespace Mascaret
         }
 
 
-        private Dictionary<string, string> arguments;
+        private Dictionary<string, string> arguments = new Dictionary<string, string>();
         public Dictionary<string, string> Arguments
         {
             get { return arguments; }

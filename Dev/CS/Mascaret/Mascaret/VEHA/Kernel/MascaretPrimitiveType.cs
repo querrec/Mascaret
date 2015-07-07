@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Mascaret
 {
-    public class MascaretPrimitiveType : Classifier
+    public class MascaretPrimitiveType : Class
     {
 
 

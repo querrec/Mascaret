@@ -14,6 +14,10 @@ namespace Mascaret
         {
             this.action = paction;
             System.Console.WriteLine("CallOperationAction : " + action.Operation.Method);
+            foreach (ValuePin pin in action.ValuePins)
+            {
+                p.Add(pin.name, pin.ValueSpec);
+            }
             behaviorExecution = action.Operation.Method.createBehaviorExecution(this.Host, p, false);
         }
 

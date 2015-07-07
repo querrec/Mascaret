@@ -109,6 +109,8 @@
     <Compile Include="IEHA\VRApplication.cs" />
     <Compile Include="IEHA\Interaction.cs" />
     <Compile Include="SysML\Block.cs" />
+    <Compile Include="SysML\Unit.cs" />
+    <Compile Include="SysML\ValueType.cs" />
     <Compile Include="Tools\Loaders\InstanceLoader.cs" />
     <Compile Include="Tools\Loaders\ModelLoader2.cs" />
     <Compile Include="VEHA\Behavior\BasicActions\AcceptEventAction.cs" />

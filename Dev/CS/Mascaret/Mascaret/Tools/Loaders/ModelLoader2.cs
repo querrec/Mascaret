@@ -49,8 +49,14 @@ namespace Mascaret
 	 
 	protected List<string> _stereoBlocks=new List<string>();
 
-    protected Dictionary<string, List<String>> _otherStereo = new Dictionary<string,List<string>>();
+    protected List<string> _stereoUnit = new List<string>();
 
+    protected List<string> _stereoValueType = new List<string>();
+
+    protected Dictionary<string, List<String>> _otherStereo = new Dictionary<string,List<string>>();
+    protected Dictionary<string, string> _valueTypeToUnit = new Dictionary<string, string>();
+    protected Dictionary<string, Unit> _units = new Dictionary<string, Unit>();
+    protected Dictionary<string, string> _unitRefs = new Dictionary<string, string>();
 	 
 	private Dictionary<String,Class> _idClass;
 
@@ -291,7 +297,56 @@ namespace Mascaret
 				model.Package=pkg;
 			}
 		}
-		
+
+        foreach (XElement child in packageNode.Elements())
+        {
+
+            if (child.Name.LocalName.CompareTo("packagedElement") == 0 || child.Name.LocalName.CompareTo("ownedMember") == 0)
+            {
+                string childType = "";
+                string id = "";
+				
+				XAttribute attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+				if(attr!=null)childType=attr.Value;
+
+                attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+				if(attr!=null)id=attr.Value;
+
+                //MascaretApplication.Instance.VRComponentFactory.Log("================    " + childType);
+				if (childType.CompareTo("uml:InstanceSpecification")==0 )
+                {
+                    if (isStereotypedUnit(child))
+                    {
+                        string unitName = "";
+                        XAttribute attrName = (XAttribute)child.Attribute("name");
+                        if (attrName != null) unitName = attrName.Value;
+                        string classifier = "";
+                        string classifierType = "";
+                        XElement typeNode = child.Element("classifier");
+
+                        XAttribute attrType = (XAttribute)typeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+                        if (attrType == null) attrType = (XAttribute)typeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+                        if (attrType != null) classifierType = attrType.Value;
+
+			            if (classifierType == "uml:PrimitiveType")
+                        {
+					
+				            attrType = (XAttribute)typeNode.Attribute("href");
+				            if(attr!=null)classifier = attr.Value.Substring(attr.Value.IndexOf("#")+1);
+				
+				            Class cl = model.getBasicType(classifier.ToLower());
+                            Unit unit = new Unit(unitName, cl);
+                            _units.Add(id,unit);
+                            MascaretApplication.Instance.VRComponentFactory.Log("NEW UNIT : " + unitName + " : " + cl.name);
+			            }
+                        
+                    }
+                }
+            }
+        }
+
 		foreach (XElement child in packageNode.Elements()) {
 
 			if (child.Name.LocalName.CompareTo("packagedElement")==0 || child.Name.LocalName.CompareTo("ownedMember")==0) 
@@ -303,7 +358,7 @@ namespace Mascaret
 				if(attr!=null)childType=attr.Value;
 
 				//Debug.Log("================    " + childType);
-				if (childType.CompareTo("DataType")==0 || childType.CompareTo("PrimitiveType")==0)
+				if (childType.CompareTo("uml:DataType")==0 || childType.CompareTo("PrimitiveType")==0)
 					addDatatype(child);
                 else if (childType.CompareTo("uml:Signal") == 0)
                 {
@@ -1012,11 +1067,14 @@ namespace Mascaret
 				defaultNode = child;
 		}
 
-		
+
 		if(defaultNode!=null)
 		{
 			attr = (XAttribute)defaultNode.Attribute("value");
-			if(attr!=null)strVal = attr.Value;
+            if (attr != null)
+            {
+                strVal = attr.Value;
+            }
 		}
       //  file.WriteLine("Attribut : " + attrName);
       //  file.Flush();
@@ -1076,8 +1134,9 @@ namespace Mascaret
 			else 
 				attributeType = model.getBasicType(typeNodeType.ToLower());
 		}
-					
-		ValueSpecification valueSpec=null;
+				
+	    ValueSpecification valueSpec = null;
+
 		if (derived) {
 			
 			Expression curExpression = new Expression(strVal,attributeType);
@@ -1086,6 +1145,12 @@ namespace Mascaret
 		} else if (strVal.CompareTo("")==0) {
 			//value = attributeType.createValueFromString(strVal);
 		}
+
+        if (strVal !="")
+        {
+            MascaretApplication.Instance.VRComponentFactory.Log("HAS A DEFAULT VALUE : " + strVal);
+            valueSpec = attributeType.createValueFromString(strVal);
+        }
 	
 		Property attrProp = new Property(attrName, cl, attributeType,null, valueSpec,null);
         if (hasStereotype(id))
@@ -1218,16 +1283,46 @@ namespace Mascaret
 	    {
 	        if(pins.Name.LocalName=="argument")
 	        {
-	            if(pins.Attribute("type").Value=="uml:ValuePin")
+                MascaretApplication.Instance.VRComponentFactory.Log("ARGUMENT PIN ################################");
+
+                XAttribute att = pins.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+                if (att == null) att = pins.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+
+                if (att != null)
+                MascaretApplication.Instance.VRComponentFactory.Log(att.Value);
+                if (att != null && att.Value == "uml:ValuePin")
 				{
 	                ValuePin valuePin = new ValuePin();
-	                string id = pins.Attribute("id").Value;
+                    XAttribute attID = pins.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+                    if (attID == null) attID = pins.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
+	                string id = attID.Value;
 					string name = pins.Attribute("name").Value;
+                    MascaretApplication.Instance.VRComponentFactory.Log("Pin Name : " + name);
 					valuePin.Id = id;
 					valuePin.name = name;
-	                Classifier ressourceType = getObjectNodeType(pins);
+
+                    string strType = "";
+                    XElement typeNode = pins.Element("type");
+                    XAttribute attr = (XAttribute)typeNode.Attribute("href");
+                    if (attr != null) strType = attr.Value.Substring(attr.Value.IndexOf("#") + 1);
+
+                    MascaretPrimitiveType attributeType = model.getBasicType(strType.ToLower());
+
+                    valuePin.ResourceType = attributeType;
+
+                    string strValue = "";
+                    XElement valueNode = pins.Element("value");
+                    XAttribute attrV = (XAttribute)valueNode.Attribute("value");
+                    if (attrV != null) strValue = attrV.Value;
+
+                    MascaretApplication.Instance.VRComponentFactory.Log("Valeur : " + strValue);
+                    valuePin.ValueSpec = new LiteralInteger(strValue);
+
+	                /*Classifier ressourceType = getObjectNodeType(pins);
 	                if(ressourceType != null)
-	                	valuePin.ResourceType = ressourceType;
+	                	valuePin.ResourceType = ressourceType;*/
+
 	                an.Action.ValuePins.Add(valuePin);
 	                _objectNodes.Add(valuePin.Id, valuePin);
 	            }
@@ -1511,7 +1606,7 @@ namespace Mascaret
                     string id = "";
                //   file.WriteLine("Trigger");
                     XAttribute attr3 = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
-                    if (attr3 == null) attr3 = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+                    if (attr3 == null) attr3 = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
 
                     if (attr3 != null) id = attr3.Value;
 
@@ -1527,7 +1622,7 @@ namespace Mascaret
                             {
                                 XElement cSignal = child2.Element("signal");
                                 XAttribute idSignal = (XAttribute)cSignal.Attribute("{http://schema.omg.org/spec/XMI/2.1}idref");
-                                if (idSignal == null) idSignal = (XAttribute)cSignal.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
+                                if (idSignal == null) idSignal = (XAttribute)cSignal.Attribute("{http://www.omg.org/spec/XMI/20131001}idref");
 
                                 string idref = idSignal.Value;
                                 Signal signal = _signals[idref];
@@ -1572,8 +1667,24 @@ namespace Mascaret
 		}
 	}
 
-	public void addDatatype(XNode dtNode)
+	public void addDatatype(XElement dtNode)
 	{
+        if (isStereotypedValueType(dtNode))
+        {
+            XAttribute attr = (XAttribute)dtNode.Attribute("name");
+            string name = attr.Value;
+
+            attr = (XAttribute)dtNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+            if (attr == null) attr = (XAttribute)dtNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+            string id = attr.Value;
+            string idUnitTag = _valueTypeToUnit[id];
+            string idUnit = _unitRefs[idUnitTag];
+            Unit unit = _units[idUnit];
+            ValueType valueType = new ValueType(name);
+            valueType.Unit = unit;
+            _classifiers.Add(id, valueType);
+            model.Package.addClasses(valueType);
+        }
 		
 	}
 
@@ -1628,8 +1739,26 @@ namespace Mascaret
 			string elementBase = null;
 			string interfaceBase = null;
 			string constraintBase = null;
-			
-			XAttribute attr = (XAttribute)child.Attribute("base_Class");
+            string baseInstance = null;
+            string baseDataType = null;
+            string unit = null;
+
+            XAttribute attr = (XAttribute)child.Attribute("base_InstanceSpecification");
+
+            if (attr != null)
+                baseInstance = attr.Value;
+
+            attr = (XAttribute)child.Attribute("base_DataType");
+
+            if (attr != null)
+                baseDataType = attr.Value;
+
+            attr = (XAttribute)child.Attribute("unit");
+
+            if (attr != null)
+                unit = attr.Value;
+
+			attr = (XAttribute)child.Attribute("base_Class");
 			
 			if(attr!=null)
 				classBase = attr.Value;
@@ -1648,7 +1777,27 @@ namespace Mascaret
 			if(attr!=null)
 				constraintBase = attr.Value;
 
-			if (child.Name.LocalName.Contains("Agent")) {
+            if (child.Name.LocalName.Contains("Unit"))
+            {
+                string id = "";
+                _stereoUnit.Add(baseInstance);
+                attr = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+                if (attr == null) attr = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
+		        if(attr!=null)id=attr.Value;
+                _unitRefs.Add(id, baseInstance);
+            }
+            else if (child.Name.LocalName.Contains("ValueType"))
+            {
+                _stereoValueType.Add(baseDataType);
+                string unitRef = "";
+                attr = (XAttribute)child.Attribute("unit");
+                if (attr != null)
+                    unitRef = attr.Value;
+
+                _valueTypeToUnit.Add(baseDataType, unitRef);
+            }
+			else if (child.Name.LocalName.Contains("Agent")) {
 				_stereoAgents.Add(elementBase);
 			} else if (child.Name.LocalName.Contains("VirtualHuman")) {
 				if (classBase!=null)
@@ -1690,7 +1839,7 @@ namespace Mascaret
                 }
                 else
                 {
-                    MascaretApplication.Instance.VRComponentFactory.Log("NEW Prop");
+                   // MascaretApplication.Instance.VRComponentFactory.Log("NEW Prop");
 
                     XAttribute attrS =(XAttribute) child.Attribute("base_Property");
                     if (attrS != null)
@@ -2289,6 +2438,32 @@ namespace Mascaret
 		
 		// Bouml preserved body end 0001FFE7
 	}
+
+
+
+    public bool isStereotypedUnit(XElement node)
+    {
+        // Bouml preserved body begin 0001FFE7
+
+        XAttribute attr = (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
+        if (attr != null) return (_stereoUnit.Contains(attr.Value));
+        else return false;
+
+        // Bouml preserved body end 0001FFE7
+    }
+    public bool isStereotypedValueType(XElement node)
+    {
+        // Bouml preserved body begin 0001FFE7
+
+        XAttribute attr = (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+        if (attr != null) return (_stereoValueType.Contains(attr.Value));
+        else return false;
+
+        // Bouml preserved body end 0001FFE7
+    }
 
 	public bool isStereotypedAgent( XElement node) {
 		// Bouml preserved body begin 00020067
