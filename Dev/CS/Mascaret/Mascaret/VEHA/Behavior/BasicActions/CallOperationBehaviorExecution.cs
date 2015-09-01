@@ -13,12 +13,17 @@ namespace Mascaret
             : base(paction, host, p, false)
         {
             this.action = paction;
-            System.Console.WriteLine("CallOperationAction : " + action.Operation.Method);
+            MascaretApplication.Instance.VRComponentFactory.Log("CallOperationAction : " + action.Operation.Method);
+
             foreach (ValuePin pin in action.ValuePins)
             {
                 p.Add(pin.name, pin.ValueSpec);
             }
+            MascaretApplication.Instance.VRComponentFactory.Log("READY TO Start");
+
             behaviorExecution = action.Operation.Method.createBehaviorExecution(this.Host, p, false);
+            if (behaviorExecution == null) MascaretApplication.Instance.VRComponentFactory.Log("Chérie ca va trancher");
+  
         }
 
         public override void stop()

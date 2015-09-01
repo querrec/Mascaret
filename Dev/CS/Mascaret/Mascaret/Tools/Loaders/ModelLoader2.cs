@@ -19,6 +19,12 @@ namespace Mascaret
 	  public string specification;
 	}
 
+    public struct EndRoleS
+    {
+        public string role;
+        public string part;
+    }
+
 	 
 	private List <OrganisationalStructure> orgStructure = new List<OrganisationalStructure>();
 	public List <OrganisationalStructure> OrgStructure
@@ -53,12 +59,17 @@ namespace Mascaret
 
     protected List<string> _stereoValueType = new List<string>();
 
+    protected List<string> _stereoFlowPort = new List<string>();
+
     protected Dictionary<string, List<String>> _otherStereo = new Dictionary<string,List<string>>();
     protected Dictionary<string, string> _valueTypeToUnit = new Dictionary<string, string>();
     protected Dictionary<string, Unit> _units = new Dictionary<string, Unit>();
     protected Dictionary<string, string> _unitRefs = new Dictionary<string, string>();
+    protected Dictionary<string, string> _flowPortDirection = new Dictionary<string, string>();
 	 
 	private Dictionary<String,Class> _idClass;
+    private Dictionary<string, Property> _idProps = new Dictionary<string, Property>();
+    private List<KeyValuePair<ConnectorEnd, EndRoleS>> _connectorEnds = new List<KeyValuePair<ConnectorEnd, EndRoleS>>();
 
 	private XDocument _loader = null;
 
@@ -235,6 +246,7 @@ namespace Mascaret
 					_setParametersType();
 					addGeneralizations();
 					addAssociation();
+                    addConnectorEnd();
 					addActivitiesAndStateMachines();
 					addCallOperations();
                     addCallBehaviors();
@@ -581,6 +593,25 @@ namespace Mascaret
 				if(attr2!=null)
 					_toGeneralize.Add(new KeyValuePair<string,string>(id, attr2.Value));
 			}
+            else if (child.Name.LocalName.CompareTo("ownedConnector")==0)
+            {
+                Connector connector = new Connector();
+                cl.addConnector(connector);
+                foreach (XElement childEnd in child.Elements())
+                {
+                    ConnectorEnd ce = new ConnectorEnd();
+
+                    string endRole = ((XAttribute)childEnd.Attribute("role")).Value;
+                    string partWithPort = ((XAttribute)childEnd.Attribute("partWithPort")).Value;
+
+                    EndRoleS end = new EndRoleS();
+                    end.role = endRole;
+                    end.part = partWithPort;
+
+                    _connectorEnds.Add(new KeyValuePair<ConnectorEnd, EndRoleS>(ce, end));
+                    connector.addEnd(ce);
+                }
+            }
 		}
 		
 		foreach(KeyValuePair <CallEvent, string> pair in _callEvents){
@@ -658,6 +689,7 @@ namespace Mascaret
 						Role role = new Role(roleName);
 						role.RoleClass = (RoleClass)classe;
 						organisation.addRole(role);
+                        MascaretApplication.Instance.VRComponentFactory.Log("NEW ROLE : " + roleName);
 						
 					}catch(InvalidCastException e)
 					{
@@ -1031,16 +1063,21 @@ namespace Mascaret
 	{
       //  StreamWriter file = new StreamWriter("attribute.txt");
 
+        XElement initialAttrNode = attrNode;
+
 		string type="", attrName="",strVal="", typeNodeType="";
         string id = "";
 		bool derived=false;
 		Classifier attributeType=null;
 		XElement typeNode=null,defaultNode=null;
 
-        XAttribute attrid = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
-        if (attrid != null) id = attrid.Value;
+        XAttribute attr = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)attrNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+        if (attr == null) attr = (XAttribute)attrNode.Attribute("id");
 
-		XAttribute attr = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
+        if (attr != null) id = attr.Value;
+
+		attr = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
         if (attr == null) attr = (XAttribute)attrNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
         if (attr == null) attr = (XAttribute)attrNode.Attribute("type");
 
@@ -1078,6 +1115,7 @@ namespace Mascaret
 		}
       //  file.WriteLine("Attribut : " + attrName);
       //  file.Flush();
+
 
 		if(typeNode!=null)
 		{
@@ -1152,7 +1190,24 @@ namespace Mascaret
             valueSpec = attributeType.createValueFromString(strVal);
         }
 	
-		Property attrProp = new Property(attrName, cl, attributeType,null, valueSpec,null);
+        Property attrProp = null;
+        if (isStereotypedFlowPort(initialAttrNode))
+        {
+            FlowPort fl = new FlowPort(attrName, cl, attributeType, null, valueSpec, null);
+            MascaretApplication.Instance.VRComponentFactory.Log(id);
+            fl.Direction = _flowPortDirection[id];
+            MascaretApplication.Instance.VRComponentFactory.Log("NEW FLOW PORT : " + attrName + " : " + fl.Direction);
+            attrProp = fl;
+            _idProps.Add(id, attrProp);
+        }
+        else
+        {
+            attrProp = new Property(attrName, cl, attributeType, null, valueSpec, null);
+            _idProps.Add(id, attrProp);
+            MascaretApplication.Instance.VRComponentFactory.Log("NEW ATTRIBUTE : " + attrName + " / " + type);
+
+        }
+
         if (hasStereotype(id))
         {
             attrProp.Stereotype = getStereotype(id);
@@ -1213,6 +1268,21 @@ namespace Mascaret
 	
 		// Bouml preserved body end 0001FBE7
 	}
+
+    public void addConnectorEnd()
+    {
+        foreach (KeyValuePair<ConnectorEnd, EndRoleS> cer in _connectorEnds)
+        {
+            string role = cer.Value.role;
+            string part = cer.Value.part;
+
+            Property propRole = _idProps[role];
+            Property propPart = _idProps[part];
+            ConnectorEnd ce = cer.Key;
+            ce.PartWithPort = propPart;
+            ce.Role = propRole;
+        }
+    }
 
 	//TODO: rajouter multiplicité
 	public void addAssociation()
@@ -1290,6 +1360,7 @@ namespace Mascaret
 
                 if (att != null)
                 MascaretApplication.Instance.VRComponentFactory.Log(att.Value);
+
                 if (att != null && att.Value == "uml:ValuePin")
 				{
 	                ValuePin valuePin = new ValuePin();
@@ -1329,8 +1400,10 @@ namespace Mascaret
 	            else
 	            {
 	                InputPin inputPin  = new InputPin();
-	                inputPin.Id = pins.Attribute("{http://schema.omg.org/spec/XMI/2.1}id").Value;
-                    if (inputPin.Id == null) inputPin.Id = pins.Attribute("{http://www.omg.org/spec/XMI/20131001}id").Value;
+
+                    XAttribute inputAtt = pins.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+                    if (inputAtt == null) inputAtt = pins.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+                    if (inputAtt != null) inputPin.Id = inputAtt.Value;
 
 	                inputPin.name = pins.Attribute("name").Value;
 	                Classifier ressourceType = getObjectNodeType(pins);
@@ -1545,6 +1618,7 @@ namespace Mascaret
 		}
 		
 		activity.Description = getComment(activityNode);
+        MascaretApplication.Instance.VRComponentFactory.Log("********** Activity : " + getComment(activityNode));
 		activity.Summary = getSummary(activityNode);
 		activity.Tags = getTags(activityNode);
 		
@@ -1787,6 +1861,22 @@ namespace Mascaret
 		        if(attr!=null)id=attr.Value;
                 _unitRefs.Add(id, baseInstance);
             }
+            else if (child.Name.LocalName.Contains("FlowPort"))
+            {
+                string basePort = "";
+                string direction = "";
+
+                attr = (XAttribute)child.Attribute("base_Port");
+                if (attr != null)
+                    basePort = attr.Value;
+                _stereoFlowPort.Add(basePort);
+
+                attr = (XAttribute)child.Attribute("direction");
+                if (attr != null) direction = attr.Value;
+
+                _flowPortDirection.Add(basePort, direction);
+                MascaretApplication.Instance.VRComponentFactory.Log(basePort + " -> " + direction);
+            }
             else if (child.Name.LocalName.Contains("ValueType"))
             {
                 _stereoValueType.Add(baseDataType);
@@ -1876,7 +1966,6 @@ namespace Mascaret
 
 	public void addActivityNode( XElement node, Activity activity)
 	{
-        MascaretApplication.Instance.VRComponentFactory.Log("New activity node");
         string type = "";
         string id = "";
         if (node.Attribute("{http://schema.omg.org/spec/XMI/2.1}type") != null)
@@ -1884,35 +1973,24 @@ namespace Mascaret
         else
             type = node.Attribute("{http://www.omg.org/spec/XMI/20131001}type").Value;
 
-        MascaretApplication.Instance.VRComponentFactory.Log(" Type : " + type);
 
         if (node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id") != null)
 		    id = node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id").Value;
         else 
             id = node.Attribute("{http://www.omg.org/spec/XMI/20131001}id").Value;
-        MascaretApplication.Instance.VRComponentFactory.Log(" ID : " + id);
 
         string name = "";
         if (node.Attribute("name") != null)
             name = node.Attribute("name").Value;
         else name = id;
-        MascaretApplication.Instance.VRComponentFactory.Log(" Name : " + name);
 
 
 		string idPartition = "";
 		if (node.Attribute("inPartition") != null)
 			idPartition = node.Attribute("inPartition").Value;
 
-        MascaretApplication.Instance.VRComponentFactory.Log(id); 
-        MascaretApplication.Instance.VRComponentFactory.Log(type); 
-        MascaretApplication.Instance.VRComponentFactory.Log(name); 
-        MascaretApplication.Instance.VRComponentFactory.Log(idPartition); 
-
 		ActivityNode actNode = null;
-		
-
-		//Debug.Log(" TYPE NODE : " + type);
-		
+				
 		if (type == "uml:InitialNode")
 		{
 			actNode = new InitialNode();
@@ -1946,9 +2024,16 @@ namespace Mascaret
 			if(ressourceType != null)
 				objNode.ResourceType = ressourceType;
 			actNode = objNode;
-            string type2 = node.Attribute("{http://schema.omg.org/spec/XMI/2.1}type").Value;
-			if (_idClass.ContainsKey(type2))
-				((ObjectNode)actNode).ResourceType = _idClass[type2];
+            string type2 = "";
+            if (node.Attribute("{http://schema.omg.org/spec/XMI/2.1}type") != null)
+                type2 = node.Attribute("{http://schema.omg.org/spec/XMI/2.1}type").Value;
+            else
+                type2 = node.Attribute("type").Value;
+
+            if (_idClass.ContainsKey(type2))
+            {
+                ((ObjectNode)actNode).ResourceType = _idClass[type2];
+            }
 		}
 		else if (type == "uml:ValueSpecificationAction") 
 		{
@@ -2263,8 +2348,8 @@ namespace Mascaret
         string sourceid = node.Attribute("source").Value;
         string targetid = node.Attribute("target").Value;
 
-        //MascaretApplication.Instance.logfile.WriteLine("sourceid : " + sourceid); MascaretApplication.Instance.logfile.Flush();
-        //MascaretApplication.Instance.logfile.WriteLine("targetid : " + targetid); MascaretApplication.Instance.logfile.Flush();
+        MascaretApplication.Instance.VRComponentFactory.Log("sourceid : " + sourceid);
+        MascaretApplication.Instance.VRComponentFactory.Log("targetid : " + targetid); 
 
 		string type = "";
         if (node.Attribute("{http://schema.omg.org/spec/XMI/2.1}type") != null) 
@@ -2292,7 +2377,7 @@ namespace Mascaret
 		{
 			if (!_objectNodes.ContainsKey(sourceid))
 			{
-                //MascaretApplication.Instance.logfile.WriteLine("erreur source"); MascaretApplication.Instance.logfile.Flush();
+                MascaretApplication.Instance.VRComponentFactory.Log("erreur source");
 
 				//Debug.Log("edge source not found : " + sourceid);
 				return;
@@ -2307,7 +2392,7 @@ namespace Mascaret
 		if (!_activityNodes.ContainsKey(targetid)) {
 			if (!_objectNodes.ContainsKey(targetid))
 			{
-                //MascaretApplication.Instance.logfile.WriteLine("erreur cible"); MascaretApplication.Instance.logfile.Flush();
+                MascaretApplication.Instance.VRComponentFactory.Log("erreur cible");
 
 				//Debug.Log("edge Target not found: " + targetid);
 				return;
@@ -2438,6 +2523,19 @@ namespace Mascaret
 		
 		// Bouml preserved body end 0001FFE7
 	}
+
+    public bool isStereotypedFlowPort(XElement node)
+    {
+        // Bouml preserved body begin 0001FFE7
+
+        XAttribute attr = (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
+        if (attr != null) return (this._stereoFlowPort.Contains(attr.Value));
+        else return false;
+
+        // Bouml preserved body end 0001FFE7
+    }
 
 
 
