@@ -117,6 +117,8 @@
     <Compile Include="VEHA\Behavior\BasicActions\AcceptEventAction.cs" />
     <Compile Include="VEHA\Behavior\BasicActions\AcceptEventBehaviorExecution.cs" />
     <Compile Include="VEHA\Behavior\BasicActions\CallBehaviorBehaviorExecution.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\PlayAnimationAction.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\PlayAnimationBehaviorExecution.cs" />
     <Compile Include="VEHA\Entity\VirtualRealityComponentFactory.cs" />
     <Compile Include="VEHA\Kernel\BehavioralFeature.cs" />
     <Compile Include="VEHA\Kernel\Class.cs" />

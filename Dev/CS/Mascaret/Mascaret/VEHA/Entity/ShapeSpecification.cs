@@ -60,6 +60,7 @@ namespace Mascaret
         public abstract double prepareSpeak(string text);
         public abstract bool speak(string text);
 
+        public abstract double playAnimation(string animationName);
 
         // --- Operations ---
         public override ValueSpecification clone()
