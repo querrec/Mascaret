@@ -29,7 +29,7 @@ namespace Mascaret
 
         public Class _lookForOperation(Class cl)
         {
-            //Debug.Log("----- Trying to create opaque behavior : " + cl.name + " : " + body + " : " + cl.Parents.Count);
+            MascaretApplication.Instance.VRComponentFactory.Log("----- Trying to create opaque behavior : " + cl.name + " : " + body + " : " + cl.Parents.Count);
             if (cl.Operations.ContainsKey(body))
             {
                 return cl;
@@ -48,8 +48,12 @@ namespace Mascaret
 
         public override BehaviorExecution createBehaviorExecution(InstanceSpecification host, Dictionary<string, ValueSpecification> p, bool sync)
         {
+
+            MascaretApplication.Instance.VRComponentFactory.Log("OPAQUEBEHAVIOR::CREATEBEHAVIOREXECUTION");
+
             Class cl = (Class)(host.Classifier);
 
+            MascaretApplication.Instance.VRComponentFactory.Log(cl.getFullName());
 
             Class ocl = _lookForOperation(cl);
 

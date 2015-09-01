@@ -16,7 +16,15 @@ namespace Mascaret
             set { package = value; }
         }
 
-
+        protected List<Connector> connectors = new List<Connector>();
+        public List<Connector> getConnectors()
+        {
+            return connectors;
+        }
+        public void addConnector(Connector connector)
+        {
+            connectors.Add(connector);
+        }
 
         private Dictionary<String, Property> attributes;
         public Dictionary<String, Property> Attributes
