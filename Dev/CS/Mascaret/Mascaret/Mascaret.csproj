@@ -261,4 +261,7 @@
     <Error Condition="!Exists('..\packages\Antlr4.4.3.0\build\Antlr4.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Antlr4.4.3.0\build\Antlr4.targets'))" />
   </Target>
   <Import Project="..\packages\Antlr4.4.3.0\build\Antlr4.targets" Condition="Exists('..\packages\Antlr4.4.3.0\build\Antlr4.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)$(TargetFileName) "C:\Users\Florian\Documents\east-projet-unity\Maintenance\Assets\Plugins\Mascaret\Mascaret.dll"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

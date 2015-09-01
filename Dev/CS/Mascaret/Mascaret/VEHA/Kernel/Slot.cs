@@ -158,7 +158,109 @@ namespace Mascaret
             return null;
         }
 
+        public T getValue<T>()
+        {
+            //callbackMethod
+            _update();
 
+            ValueSpecification vSpec = null;
+            if (values.Count == 1)
+                foreach (ValueSpecification valueSpec in values.Values)
+                    vSpec = valueSpec;
+            
+            // Check if value exist
+            if (vSpec == null)
+                return default(T);
+
+            // Check if value is a Litteral Specification
+            if (vSpec.GetType().IsSubclassOf(typeof(LiteralSpecification)))
+            {
+                // The value exist now get the Classifier
+                Type type = typeof(T);
+                IConvertible value = null;
+                if (type.Equals(typeof(System.Boolean)))
+                    value = vSpec.getBoolFromValue();
+                else if (type.Equals(typeof(System.Int32)))
+                    value = vSpec.getIntFromValue();
+                else if (type.Equals(typeof(System.Double)) || type.Equals(typeof(System.Single)))
+                    value = vSpec.getDoubleFromValue();
+                else
+                    value = vSpec.getStringFromValue();
+
+                return (T)value;
+            }
+            else
+                throw new Exception("Can not use this method with this kind of Value");
+        }
+
+        public InstanceSpecification getInstanceValue()
+        {
+            //callbackMethod
+            _update();
+
+            ValueSpecification vSpec = null;
+            if (values.Count == 1)
+                foreach (ValueSpecification valueSpec in values.Values)
+                    vSpec = valueSpec;
+
+            // Check if value exist
+            if (vSpec == null)
+                return null;
+
+            if (vSpec.GetType().IsSubclassOf(typeof(LiteralSpecification)))
+                throw new Exception("Can not use this method with this kind of parameter !");
+
+            InstanceValue iValue = (InstanceValue)vSpec;
+            return iValue.SpecValue;
+        }
+
+        public Dictionary<string, T> getValues<T> ()
+        {
+            //callbackMethod
+            _update();
+
+            Dictionary<string, T> dict = new Dictionary<string, T>();
+
+            foreach (KeyValuePair<string, ValueSpecification> pair in values)
+            {
+                // Check if value is a Litteral Specification
+                ValueSpecification vSpec = pair.Value;
+                if (vSpec.GetType().IsSubclassOf(typeof(LiteralSpecification)))
+                {
+                    // The value exist now get the Classifier
+                    Type type = typeof(T);
+                    IConvertible value = null;
+                    if (type.Equals(typeof(System.Boolean)))
+                        value = vSpec.getBoolFromValue();
+                    else if (type.Equals(typeof(System.Int32)))
+                        value = vSpec.getIntFromValue();
+                    else if (type.Equals(typeof(System.Double)) || type.Equals(typeof(System.Single)))
+                        value = vSpec.getDoubleFromValue();
+                    else
+                        value = vSpec.getStringFromValue();
+
+                    dict.Add(pair.Key, (T)value);
+                }
+            }
+
+            return dict;
+        }
+
+        public Dictionary<string, InstanceSpecification> getInstanceValues()
+        {
+            //callbackMethod
+            _update();
+
+            Dictionary<string, InstanceSpecification> dict = new Dictionary<string, InstanceSpecification>();
+
+            foreach (KeyValuePair<string, ValueSpecification> pair in values)
+            {
+                InstanceValue iValue = (InstanceValue)pair.Value;
+                dict.Add(pair.Key, iValue.SpecValue);
+            }
+
+            return dict;
+        }
     }
 
 }

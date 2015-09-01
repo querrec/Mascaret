@@ -57,6 +57,21 @@ namespace Mascaret
             return "";
         }
 
+        public virtual bool getBoolFromValue()
+        {
+            return false;
+        }
+
+        public virtual int getIntFromValue()
+        {
+            return 0;
+        }
+
+        public virtual double getDoubleFromValue ()
+        {
+            return 0f;
+        }
+
         public InstanceSpecification valueSpecificationToInstanceSpecification()
         {
             InstanceSpecification curInstanceSpec = new InstanceSpecification("", (Class)type);

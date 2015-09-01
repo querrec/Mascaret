@@ -24,6 +24,11 @@ namespace Mascaret
             return (iValue.ToString());
         }
 
+        public override int getIntFromValue()
+        {
+            return iValue;
+        }
+
         public LiteralInteger(string intvalue)
             : base(MascaretApplication.Instance.Model.getBasicType("integer"))
         {

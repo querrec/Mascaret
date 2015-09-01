@@ -26,6 +26,11 @@ namespace Mascaret
             return (rValue.ToString());
         }
 
+        public override double getDoubleFromValue()
+        {
+            return rValue;
+        }
+
         public LiteralReal()
             : base(MascaretApplication.Instance.Model.getBasicType("real"))
         {
