@@ -27,6 +27,11 @@ namespace Mascaret
             return (bValue ? "true" : "false");
         }
 
+        public override bool getBoolFromValue()
+        {
+            return bValue;
+        }
+
         public LiteralBoolean()
             : base(MascaretApplication.Instance.Model.getBasicType("boolean"))
         {
