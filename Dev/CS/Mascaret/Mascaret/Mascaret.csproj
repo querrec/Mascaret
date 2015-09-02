@@ -109,6 +109,7 @@
     <Compile Include="IEHA\VRApplication.cs" />
     <Compile Include="IEHA\Interaction.cs" />
     <Compile Include="SysML\Block.cs" />
+    <Compile Include="SysML\FlowPort.cs" />
     <Compile Include="SysML\Unit.cs" />
     <Compile Include="SysML\ValueType.cs" />
     <Compile Include="Tools\Loaders\InstanceLoader.cs" />
@@ -116,11 +117,15 @@
     <Compile Include="VEHA\Behavior\BasicActions\AcceptEventAction.cs" />
     <Compile Include="VEHA\Behavior\BasicActions\AcceptEventBehaviorExecution.cs" />
     <Compile Include="VEHA\Behavior\BasicActions\CallBehaviorBehaviorExecution.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\PlayAnimationAction.cs" />
+    <Compile Include="VEHA\Behavior\BasicActions\PlayAnimationBehaviorExecution.cs" />
     <Compile Include="VEHA\Entity\VirtualRealityComponentFactory.cs" />
     <Compile Include="VEHA\Kernel\BehavioralFeature.cs" />
     <Compile Include="VEHA\Kernel\Class.cs" />
     <Compile Include="VEHA\Kernel\Classifier.cs" />
     <Compile Include="VEHA\Kernel\Comment.cs" />
+    <Compile Include="VEHA\Kernel\Connector.cs" />
+    <Compile Include="VEHA\Kernel\ConnectorEnd.cs" />
     <Compile Include="VEHA\Kernel\Constraint.cs" />
     <Compile Include="VEHA\Kernel\Context.cs" />
     <Compile Include="VEHA\Kernel\DomainSpecification.cs" />
@@ -141,6 +146,7 @@
     <Compile Include="VEHA\Kernel\Operation.cs" />
     <Compile Include="VEHA\Kernel\Package.cs" />
     <Compile Include="VEHA\Kernel\Parameter.cs" />
+    <Compile Include="VEHA\Kernel\Port.cs" />
     <Compile Include="VEHA\Kernel\Property.cs" />
     <Compile Include="VEHA\Kernel\Slot.cs" />
     <Compile Include="VEHA\Kernel\SlotDerived.cs" />

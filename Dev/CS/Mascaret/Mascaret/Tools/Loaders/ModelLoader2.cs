@@ -19,6 +19,12 @@ namespace Mascaret
 	  public string specification;
 	}
 
+    public struct playAnim
+    {
+        public string id;
+        public string animationName;
+    }
+
 	 
 	private List <OrganisationalStructure> orgStructure = new List<OrganisationalStructure>();
 	public List <OrganisationalStructure> OrgStructure
@@ -32,6 +38,7 @@ namespace Mascaret
 	//CONVERSION PAS TOUT A FAIT JUSTE!!!!! SET N'AUTORISE QUE DES VALEURS UNIQUES
 	 
 	protected List<string> _stereoEntities=new List<string>();
+    protected List<playAnim> _stereoplayAnim = new List<playAnim>();
 	 
 	protected List<string> _stereoAgents=new List<string>();
 	 
@@ -1787,6 +1794,24 @@ namespace Mascaret
 		        if(attr!=null)id=attr.Value;
                 _unitRefs.Add(id, baseInstance);
             }
+
+            else if (child.Name.LocalName.Contains("PlayAnimation"))
+            {
+                string id = "";
+                string animation = "";
+
+                XAttribute attrAnim = (XAttribute)child.Attribute("Animation");
+                if (attrAnim != null) animation = attrAnim.Value;
+                XAttribute attrID = (XAttribute)child.Attribute("base_OpaqueAction");
+                if (attrID != null) id = attrID.Value;
+
+                playAnim action = new playAnim(); 
+                action.animationName = animation; 
+                action.id = id; 
+                    
+                _stereoplayAnim.Add(action);
+
+            }
             else if (child.Name.LocalName.Contains("ValueType"))
             {
                 _stereoValueType.Add(baseDataType);
@@ -1959,6 +1984,25 @@ namespace Mascaret
 			_activityExpressions[node->getProperty("id")] = expression;
 			*/
 		}
+        else if ( type == "uml:OpaqueAction")
+        {
+            if (isStereotypedPlayAnimation(node))
+            {
+                string animationName = getAnimName(node);
+                MascaretApplication.Instance.VRComponentFactory.Log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEW PLAY ANIMATION : " + name + "    " + animationName);
+               
+                ActionNode an = new ActionNode(name, "action");
+                PlayAnimationAction ap = new PlayAnimationAction();
+                ap.Description = getComment(node);
+                ap.name = name;
+                ap.Owner = activity;
+                ap.animationName = animationName;
+
+                an.Action = ap;
+                addPins(an, node);
+                actNode = an;
+            }
+        }
 		else if (type == "uml:CallBehaviorAction")
 		{
 			
@@ -2438,6 +2482,40 @@ namespace Mascaret
 		
 		// Bouml preserved body end 0001FFE7
 	}
+
+    public string getAnimName(XElement node)
+    {
+        // Bouml preserved body begin 0001FFE7
+
+        XAttribute attr = (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+        string id = attr.Value;
+
+        foreach (playAnim p in _stereoplayAnim)
+        {
+            if (p.id == id) return p.animationName;
+        }
+        return "";
+
+        // Bouml preserved body end 0001FFE7
+    }
+
+    public bool isStereotypedPlayAnimation(XElement node)
+    {
+        // Bouml preserved body begin 0001FFE7
+
+        XAttribute attr = (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+        string id = attr.Value;
+
+        foreach(playAnim p in _stereoplayAnim)
+        {
+            if (p.id == id) return true;
+        }
+        return false;
+
+        // Bouml preserved body end 0001FFE7
+    }
 
 
 
