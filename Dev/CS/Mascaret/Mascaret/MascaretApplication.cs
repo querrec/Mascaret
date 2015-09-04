@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace Mascaret
 {
+
+    public delegate void LogHandler(string message);
+
     public class MascaretApplication
     {
         protected static MascaretApplication instance = null;
@@ -24,6 +27,15 @@ namespace Mascaret
             }
         }
 
+        #region Log
+        public event LogHandler Log;
+
+        public void OnLog(string message)
+        {
+            if (Log != null)
+                Log(message);
+        } 
+        #endregion
 
         public virtual void parse(string applicationFileName, string baseDir)
         {
