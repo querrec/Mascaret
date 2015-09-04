@@ -31,7 +31,7 @@ namespace Mascaret
 
         public void addInstance(InstanceSpecification spec)
         {
-            instances.Add(spec.name.ToLower(), spec);
+            instances.Add(spec.name/*.ToLower()*/, spec);
         }
 
         public void removeInstance(InstanceSpecification spec)
@@ -41,8 +41,8 @@ namespace Mascaret
 
         public InstanceSpecification getInstance(string name)
         {
-            if (instances.ContainsKey(name.ToLower()))
-                return instances[name.ToLower()];
+            if (instances.ContainsKey(name/*.ToLower()*/))
+                return instances[name/*.ToLower()*/];
             else
                 return null;
         }
