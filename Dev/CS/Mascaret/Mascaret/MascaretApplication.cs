@@ -37,7 +37,7 @@ namespace Mascaret
         } 
         #endregion
 
-        public virtual void parse(string applicationFileName, string baseDir)
+        public virtual void parse(string applicationFileName, string baseDir, bool loadAll)
         {
            
           
@@ -51,10 +51,10 @@ namespace Mascaret
             String s = readFlow(BaseDir + "/" + applicationFileName);
             parser = XDocument.Parse(s);
             XElement root = parser.Root;
-            parse(root);
+            parse(root, loadAll);
         }
 
-        public virtual void parse(XElement root)
+        public virtual void parse(XElement root, bool loadAll)
         {
             XElement appliNode = root.Element("ApplicationParameters");
             XElement actnode = root.Element("Actors");
@@ -80,7 +80,7 @@ namespace Mascaret
                 if (child.Name.LocalName == "Environment")
                 {
                     string envUrl = child.Attribute("url").Value;
-                    Environment env = parseEnvironment(envUrl, actnode, orgNode);
+                    Environment env = parseEnvironment(envUrl, actnode, orgNode, loadAll);
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace Mascaret
             return model;
         }
 
-        Environment parseEnvironment(string url, XElement actNode, XElement orgNode)
+        Environment parseEnvironment(string url, XElement actNode, XElement orgNode, bool loadAll)
         {
             Environment env = null;
 
@@ -126,7 +126,7 @@ namespace Mascaret
                //     env = model.Environments[url];
               //  }
               //  else
-                {
+               if (loadAll) {
                     env = new Environment(model);
                     env.Url = url;
                     model.addEnvironment(env);

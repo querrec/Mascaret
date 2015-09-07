@@ -268,6 +268,7 @@
   </Target>
   <Import Project="..\packages\Antlr4.4.3.0\build\Antlr4.targets" Condition="Exists('..\packages\Antlr4.4.3.0\build\Antlr4.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetDir)$(TargetFileName) "C:\Users\Florian\Documents\east-projet-unity\EAST\Assets\Plugins\Mascaret\Mascaret.dll"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
