@@ -30,14 +30,14 @@ namespace Mascaret
             instance = this;
         }
 
-        public override void parse(string applicationFileName, string baseDir)
+        public override void parse(string applicationFileName, string baseDir, bool loadAll)
         {
-            base.parse(applicationFileName, baseDir);
+            base.parse(applicationFileName, baseDir, loadAll);
         }
 
-        public override void parse(XElement root)
+        public override void parse(XElement root, bool loadAll)
         {
-            base.parse(root);
+            base.parse(root, loadAll);
 
             XElement interactionNode = root.Element("Interactions");
             if (interactionNode != null)
