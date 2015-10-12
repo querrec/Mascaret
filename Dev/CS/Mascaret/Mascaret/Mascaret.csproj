@@ -85,6 +85,7 @@
     <Compile Include="BEHAVE\OneShotBehaviorExecution.cs" />
     <Compile Include="BEHAVE\OrganisationalEntity.cs" />
     <Compile Include="BEHAVE\OrganisationalStructure.cs" />
+    <Compile Include="BEHAVE\PedagogicalScenario.cs" />
     <Compile Include="BEHAVE\ProceduralBehavior.cs" />
     <Compile Include="BEHAVE\Procedure.cs" />
     <Compile Include="BEHAVE\ProcedureExecution.cs" />

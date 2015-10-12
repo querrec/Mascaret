@@ -60,6 +60,8 @@ namespace Mascaret
 
     protected List<string> _stereoValueType = new List<string>();
 
+    protected List<string> _stereoPedagogicalScenario = new List<string>();
+
     protected Dictionary<string, List<String>> _otherStereo = new Dictionary<string,List<string>>();
     protected Dictionary<string, string> _valueTypeToUnit = new Dictionary<string, string>();
     protected Dictionary<string, Unit> _units = new Dictionary<string, Unit>();
@@ -254,7 +256,7 @@ namespace Mascaret
 					model.registerAllClasses();
 				}
 			}
-		} catch(FileLoadException e) {
+		} catch(FileLoadException ) {
 		}
 
 		// Bouml preserved body end 0001F4E7
@@ -539,9 +541,7 @@ namespace Mascaret
 			return;
 		}
 	
-		bool entity = false;
-		bool agent = false;
-		bool role = false;
+		
 		Class cl=null;
 
        // file.WriteLine(" Class : " + className);
@@ -551,18 +551,14 @@ namespace Mascaret
 
 		if (isStereotypedEntity(classNode)) {
 			cl = new EntityClass(className);
-			entity = true;
 		} else if (isStereotypedBlock(classNode)) {
 			cl = new Block(className);
-			entity = true;
 		} else if (isStereotypedAgent(classNode)) {
 			cl = new AgentClass(className);
-			agent = true;
 		} else if (isStereotypedVirtualHuman(classNode)) {
 			cl = new VirtualHumanClass(className);
 		} else if (isStereotypedRole(classNode)) {
 			cl = new RoleClass(className);
-			role = true;
 		} else {
 			cl = new EntityClass(className);
 		}
@@ -666,7 +662,7 @@ namespace Mascaret
 						role.RoleClass = (RoleClass)classe;
 						organisation.addRole(role);
 						
-					}catch(InvalidCastException e)
+					}catch(InvalidCastException )
 					{
 						
 						try{
@@ -674,7 +670,7 @@ namespace Mascaret
 							ressource.EntityClass=(EntityClass)classe;
 							organisation.addResource(ressource);
 							
-						}catch(InvalidCastException e2)
+						}catch(InvalidCastException )
 						{
 						}
 					}
@@ -702,7 +698,12 @@ namespace Mascaret
 	
 				if (childType.CompareTo("uml:Activity")==0) {
 					Activity activity = addActivity(child);
-					Procedure procedure = new Procedure(childName);
+                    Procedure procedure = null;  
+                    MascaretApplication.Instance.VRComponentFactory.Log(" ?????? Procedure : " + childId);
+                    if (isStereotypedScenarioPedagogique(child))
+                        procedure = new PedagogicalScenario(childName);
+                    else
+                        procedure = new Procedure(childName);
 					procedure.Activity=activity;
 					organisation.addProcedure(procedure);
 					_idBehaviors.Add(childId,activity);
@@ -1748,6 +1749,7 @@ namespace Mascaret
 			string constraintBase = null;
             string baseInstance = null;
             string baseDataType = null;
+            string baseActiviy = null;
             string unit = null;
 
             XAttribute attr = (XAttribute)child.Attribute("base_InstanceSpecification");
@@ -1783,6 +1785,10 @@ namespace Mascaret
 			attr =(XAttribute) child.Attribute("base_Constraint");
 			if(attr!=null)
 				constraintBase = attr.Value;
+
+            attr = (XAttribute)child.Attribute("base_Activity");
+            if (attr != null)
+                baseActiviy = attr.Value;
 
             if (child.Name.LocalName.Contains("Unit"))
             {
@@ -1833,7 +1839,16 @@ namespace Mascaret
 				{
 					_stereoVirtualHumans.Add(elementBase);
 				}
-			} else if (child.Name.LocalName.Contains("Entity")) {
+			}
+            else if (child.Name.LocalName.Contains("ScenarioPedagogique"))
+            {
+                if (baseActiviy != null)
+                    _stereoPedagogicalScenario.Add(baseActiviy);
+                else
+                    _stereoPedagogicalScenario.Add(elementBase);
+            }
+            else if (child.Name.LocalName.Contains("Entity"))
+            {
 				if (classBase!=null)
 					_stereoEntities.Add(classBase);
 				else
@@ -1861,6 +1876,7 @@ namespace Mascaret
                     XAttribute attrS =(XAttribute) child.Attribute("base_Property");
                     if (attrS != null)
                         _otherStereo[child.Name.LocalName].Add(attrS.Value);
+                    
                 }
                 else
                 {
@@ -1873,6 +1889,7 @@ namespace Mascaret
                         _otherStereo.Add(child.Name.LocalName, new List<string>());
                         _otherStereo[child.Name.LocalName].Add(attrS.Value);
                     }
+                    
                 }
             }
 		}
@@ -2252,7 +2269,7 @@ namespace Mascaret
 	//TODO
 	public void addActivityParameter( XElement paramNode, Activity activity)
 	{
-		string type, attrName;
+		string attrName;
 		attrName = paramNode.Attribute("name").Value;
 
 		XElement typeNode = paramNode.Element("type");
@@ -2517,6 +2534,18 @@ namespace Mascaret
         // Bouml preserved body end 0001FFE7
     }
 
+    public bool isStereotypedScenarioPedagogique(XElement node)
+    {
+        // Bouml preserved body begin 0001FFE7
+
+        XAttribute attr = (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+
+        if (attr != null) return (this._stereoPedagogicalScenario.Contains(attr.Value));
+        else return false;
+
+        // Bouml preserved body end 0001FFE7
+    }
 
 
     public bool isStereotypedUnit(XElement node)

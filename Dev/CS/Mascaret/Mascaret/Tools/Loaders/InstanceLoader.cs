@@ -112,7 +112,7 @@ namespace Mascaret
                 }
                 relations.Clear();
             }
-            catch (FileLoadException e)
+            catch (FileLoadException)
             {
             }
 
@@ -920,7 +920,8 @@ namespace Mascaret
                     {
                         name = attr.Value;
                     }
-                    ShapeSpecification specif = MascaretApplication.Instance.VRComponentFactory.createShape(entity.name + "_" + name, url, movable, recursive, shader);
+                    ShapeSpecification specif = MascaretApplication.Instance.VRComponentFactory.createShape(entity.name, url, movable, recursive, shader);
+                    //ShapeSpecification specif = MascaretApplication.Instance.VRComponentFactory.createShape(entity.name + "_" + name, url, movable, recursive, shader);
                     //entity.getProperty(shapeName).addValue(specif);
                     entity.setActiveShape(name);
 
@@ -1059,7 +1060,7 @@ namespace Mascaret
                             parser = XDocument.Load(attr.Value + basedir);
                             _readGeometryEntity(parser.Root, entity);
                         }
-                        catch (FileLoadException e)
+                        catch (FileLoadException )
                         {
                         }
                     }
@@ -1371,40 +1372,31 @@ namespace Mascaret
                     if (!added)
                         h.addBehavior(beNodeName, 0, start);
                 }
-                /* Est-ce utilisé quelque part? Voir en détail le fonctionnement avec le pointeur sur fonction symbol
-                 * else if (child.Name == "KnowledgeBase")
+                /* Est-ce utilisé quelque part? Voir en détail le fonctionnement avec le pointeur sur fonction symbol*/
+                else if (child.Name == "KnowledgeBase")
                 {
                     string name = "";
 				
                     attr = (XAttribute)child.Attribute("name");
                     if(attr!=null) name = attr.Value;
 				
-                    void * symbol = 0;
-                    symbol = PluginManager::getInstance().getSymbol(name+"_init");
-                    if (symbol)
+                    KnowledgeBase kb = h.KnowledgeBase;
+                    kb.name = name;
+                   
+                    XElement envNode = child.Element("Environment");
+                    if (envNode != null)
                     {
-                        BaseInitFunc baseInit=reinterpret_cast<BaseInitFunc>((intptr_t)symbol);
-                        KnowledgeBase knowledgebase = baseInit();
-                        h.setKnowledgeBase(knowledgebase);
+                        string url = ((XAttribute)envNode.Attribute("url")).Value;
+                        Environment env = parseEnvironment(url);
+                        kb.Environment = env;
                     }
                     else
                     {
-                        KnowledgeBase kb = h.getKnowledgeBase();
-                                        kb.setName(name);
-                        XElement envNode = child.getChildByName("Environment");
-                        if (envNode)
-                        {
-                            string url = envNode.getProperty("url");
-                            Environment env = parseEnvironment(url);
-                            kb.setEnvironment(env);
-                        }
-                        else
-                        {
-                            Debug.Log( " Agent has global knowledge on environment" );
-                            kb.setEnvironment(MascaretApplication::getInstance().getEnvironment());
-                        }
+                        MascaretApplication.Instance.VRComponentFactory.Log( " Agent has global knowledge on environment" );
+                        kb.Environment = MascaretApplication.Instance.getEnvironment();
                     }
-                }*/
+                    
+                }
                 else if (child.Name.LocalName == "Attribute")
                 {
                     attr = (XAttribute)child.Attribute("name");
@@ -1487,7 +1479,8 @@ namespace Mascaret
             Model model = null;
 
             XDocument parser = null;
-            parser = XDocument.Load(url);
+            string baseDir = MascaretApplication.Instance.BaseDir;
+            parser = XDocument.Load(baseDir+"/"+url);
             XElement root = parser.Root;
 
             foreach (XElement childNode in root.Elements())
@@ -1507,9 +1500,11 @@ namespace Mascaret
             env.Url = url;
             model.addEnvironment(env);
 
-            string baseDir = MascaretApplication.Instance.BaseDir;
+            
+            MascaretApplication.Instance.VRComponentFactory.Log(baseDir);
 
-            InstanceLoader instanceLoader = new InstanceLoader(agentPlateform, env, url + "/" + baseDir, false);
+            //InstanceLoader instanceLoader = new InstanceLoader(agentPlateform, env, url + "/" + baseDir, false);
+            InstanceLoader instanceLoader = new InstanceLoader(agentPlateform, env, baseDir + "/" + url, false);
 
             return env;
         }
@@ -1518,8 +1513,8 @@ namespace Mascaret
         {
             string baseDir = MascaretApplication.Instance.BaseDir;
 
-            ModelLoader2 modelLoader = new ModelLoader2(url + "/" + baseDir, true);
-
+          //  ModelLoader2 modelLoader = new ModelLoader2(url + "/" + baseDir, true);
+            ModelLoader2 modelLoader = new ModelLoader2(baseDir + "/" + url, true);
             Model model = modelLoader.Model;
             model.ModelLoader = modelLoader;
 

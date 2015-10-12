@@ -154,7 +154,7 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
                                         InstanceSpecification inst = MascaretApplication.Instance.getEnvironment().getInstance(strVal.ToLower());
                                         param.Add(parameters[i].name, new InstanceValue(inst));
                                     }
-                                    catch (NullReferenceException e)
+                                    catch (NullReferenceException)
                                     {
 
                                     }
