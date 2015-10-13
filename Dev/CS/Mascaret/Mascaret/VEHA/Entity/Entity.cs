@@ -488,6 +488,49 @@ namespace Mascaret
                     parent.children.Add(this);
             }
         }
+
+        public Entity Clone()
+        {
+            MascaretApplication.Instance.VRComponentFactory.Log(" ######## Cloning : " + this.name);
+
+            Entity clone = new Entity(this.name, (EntityClass)(this.Classifier));
+            
+            /*foreach (Slot slot in this.Slots.Values)
+            {
+
+                //clone.Slots.Add(slot.getValue().getStringFromValue(), slot);
+
+                //Slot s = new Slot();
+
+                foreach (KeyValuePair<string, ValueSpecification> pair in slot.Values)
+                {
+                    //clone.Slots.Add(pair.Value.getStringFromValue(), slot);
+                    ValueSpecification val = pair.Value.clone();
+                    //s.addValue(val);
+                }
+                clone.Slots.Add(slot.getValue().getStringFromValue(), s);
+            }*/
+
+            foreach (KeyValuePair<string,Slot> slot in this.Slots)
+            {
+                
+                MascaretApplication.Instance.VRComponentFactory.Log(" ######## Add Value for : " + slot.Value.DefiningProperty.name);
+               
+                //clone.addSlot(slot.Value.DefiningProperty);
+                Slot s = clone.getProperty(slot.Value.DefiningProperty.name);
+                
+                foreach (KeyValuePair<string, ValueSpecification> pair in slot.Value.Values)
+                {
+                    ValueSpecification val = pair.Value.clone();
+                    s.addValue(val);
+                }
+                
+            }
+
+            return clone;
+        }
+
+        
     }
 }
 
