@@ -34,23 +34,30 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CLSCompliant(false)]
 public partial class FipaSLParser : Parser {
 	public const int
-		T__4=1, T__3=2, T__2=3, T__1=4, T__0=5, DIGIT=6, ID=7, WS=8, LPAREN=9, 
-		RPAREN=10, COLON=11;
+		T__16=1, T__15=2, T__14=3, T__13=4, T__12=5, T__11=6, T__10=7, T__9=8, 
+		T__8=9, T__7=10, T__6=11, T__5=12, T__4=13, T__3=14, T__2=15, T__1=16, 
+		T__0=17, DIGIT=18, ID=19, WS=20, LPAREN=21, RPAREN=22, COLON=23, QUES=24;
 	public static readonly string[] tokenNames = {
-		"<INVALID>", "'done'", "'feasible'", "'action'", "'started'", "'.'", "DIGIT", 
-		"ID", "WS", "'('", "')'", "':'"
+		"<INVALID>", "'done'", "'result'", "'member'", "'true'", "'!='", "'>='", 
+		"'<'", "'='", "'contains'", "'>'", "'<='", "'feasible'", "'iota'", "'action'", 
+		"'started'", "'.'", "'false'", "DIGIT", "ID", "WS", "'('", "')'", "':'", 
+		"'?'"
 	};
 	public const int
 		RULE_content = 0, RULE_contentexpression = 1, RULE_proposition = 2, RULE_wff = 3, 
-		RULE_actionop = 4, RULE_actionexpression = 5, RULE_functionalterm = 6, 
-		RULE_parameter = 7, RULE_parametername = 8, RULE_parametervalue = 9, RULE_term = 10, 
-		RULE_constant = 11, RULE_numericalconstant = 12, RULE_agent = 13, RULE_functionsymbol = 14, 
-		RULE_integer = 15, RULE_float = 16;
+		RULE_atomicformula = 4, RULE_actionop = 5, RULE_term = 6, RULE_binarytempop = 7, 
+		RULE_identifyingexpression = 8, RULE_referentialoperator = 9, RULE_actionexpression = 10, 
+		RULE_functionalterm = 11, RULE_parameter = 12, RULE_parametername = 13, 
+		RULE_parametervalue = 14, RULE_constant = 15, RULE_variable = 16, RULE_variableidentifier = 17, 
+		RULE_numericalconstant = 18, RULE_agent = 19, RULE_predicatesymbol = 20, 
+		RULE_propositionsymbol = 21, RULE_functionsymbol = 22, RULE_integer = 23, 
+		RULE_float = 24;
 	public static readonly string[] ruleNames = {
-		"content", "contentexpression", "proposition", "wff", "actionop", "actionexpression", 
-		"functionalterm", "parameter", "parametername", "parametervalue", "term", 
-		"constant", "numericalconstant", "agent", "functionsymbol", "integer", 
-		"float"
+		"content", "contentexpression", "proposition", "wff", "atomicformula", 
+		"actionop", "term", "binarytempop", "identifyingexpression", "referentialoperator", 
+		"actionexpression", "functionalterm", "parameter", "parametername", "parametervalue", 
+		"constant", "variable", "variableidentifier", "numericalconstant", "agent", 
+		"predicatesymbol", "propositionsymbol", "functionsymbol", "integer", "float"
 	};
 
 	public override string GrammarFileName { get { return "FipaSL.g4"; } }
@@ -64,6 +71,9 @@ public partial class FipaSLParser : Parser {
 
 
 	    public bool isAction = false;
+		public bool isIota = false;
+		public bool isEqual = false;
+
 	    public bool done = false;
 	    public bool started = false;
 
@@ -72,7 +82,8 @@ public partial class FipaSLParser : Parser {
 	    public string performer = "";
 	    public string entityName = "";
 	    public string actionName = "";
-	    public string variable = "";
+	    public string askedTerm = "";
+		public string predicateSymbol = "";
 
 	    public List<string> paramValue = new List<string>();
 	    public List<string> paramName = new List<string>();
@@ -117,9 +128,9 @@ public partial class FipaSLParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 34; Match(LPAREN);
-			State = 35; contentexpression();
-			State = 36; Match(RPAREN);
+			State = 50; Match(LPAREN);
+			State = 51; contentexpression();
+			State = 52; Match(RPAREN);
 			}
 		}
 		catch (RecognitionException re) {
@@ -136,6 +147,9 @@ public partial class FipaSLParser : Parser {
 	public partial class ContentexpressionContext : ParserRuleContext {
 		public ActionexpressionContext actionexpression() {
 			return GetRuleContext<ActionexpressionContext>(0);
+		}
+		public IdentifyingexpressionContext identifyingexpression() {
+			return GetRuleContext<IdentifyingexpressionContext>(0);
 		}
 		public PropositionContext proposition() {
 			return GetRuleContext<PropositionContext>(0);
@@ -165,19 +179,26 @@ public partial class FipaSLParser : Parser {
 		ContentexpressionContext _localctx = new ContentexpressionContext(_ctx, State);
 		EnterRule(_localctx, 2, RULE_contentexpression);
 		try {
-			State = 40;
+			State = 57;
 			switch ( Interpreter.AdaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 38; actionexpression();
+				State = 54; identifyingexpression();
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 39; proposition();
+				State = 55; actionexpression();
+				}
+				break;
+
+			case 3:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 56; proposition();
 				}
 				break;
 			}
@@ -224,7 +245,7 @@ public partial class FipaSLParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 42; wff();
+			State = 59; wff();
 			}
 		}
 		catch (RecognitionException re) {
@@ -245,6 +266,9 @@ public partial class FipaSLParser : Parser {
 		public ITerminalNode LPAREN() { return GetToken(FipaSLParser.LPAREN, 0); }
 		public ActionopContext actionop() {
 			return GetRuleContext<ActionopContext>(0);
+		}
+		public AtomicformulaContext atomicformula() {
+			return GetRuleContext<AtomicformulaContext>(0);
 		}
 		public ITerminalNode RPAREN() { return GetToken(FipaSLParser.RPAREN, 0); }
 		public WffContext(ParserRuleContext parent, int invokingState)
@@ -272,12 +296,140 @@ public partial class FipaSLParser : Parser {
 		WffContext _localctx = new WffContext(_ctx, State);
 		EnterRule(_localctx, 6, RULE_wff);
 		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 44; Match(LPAREN);
-			State = 45; actionop();
-			State = 46; actionexpression();
-			State = 47; Match(RPAREN);
+			State = 67;
+			switch ( Interpreter.AdaptivePredict(_input,1,_ctx) ) {
+			case 1:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 61; Match(LPAREN);
+				State = 62; actionop();
+				State = 63; actionexpression();
+				State = 64; Match(RPAREN);
+				}
+				break;
+
+			case 2:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 66; atomicformula();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class AtomicformulaContext : ParserRuleContext {
+		public PredicatesymbolContext _predicatesymbol;
+		public TermContext _term;
+		public PredicatesymbolContext predicatesymbol() {
+			return GetRuleContext<PredicatesymbolContext>(0);
+		}
+		public TermContext[] term() {
+			return GetRuleContexts<TermContext>();
+		}
+		public TermContext term(int i) {
+			return GetRuleContext<TermContext>(i);
+		}
+		public PropositionsymbolContext propositionsymbol() {
+			return GetRuleContext<PropositionsymbolContext>(0);
+		}
+		public ITerminalNode LPAREN() { return GetToken(FipaSLParser.LPAREN, 0); }
+		public ITerminalNode RPAREN() { return GetToken(FipaSLParser.RPAREN, 0); }
+		public BinarytempopContext binarytempop() {
+			return GetRuleContext<BinarytempopContext>(0);
+		}
+		public AtomicformulaContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_atomicformula; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.EnterAtomicformula(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.ExitAtomicformula(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAtomicformula(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public AtomicformulaContext atomicformula() {
+		AtomicformulaContext _localctx = new AtomicformulaContext(_ctx, State);
+		EnterRule(_localctx, 8, RULE_atomicformula);
+		int _la;
+		try {
+			State = 89;
+			switch ( Interpreter.AdaptivePredict(_input,3,_ctx) ) {
+			case 1:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 69; propositionsymbol();
+				}
+				break;
+
+			case 2:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 70; Match(LPAREN);
+				State = 71; _localctx._predicatesymbol = predicatesymbol();
+				predicateSymbol = (_localctx._predicatesymbol!=null?_input.GetText(_localctx._predicatesymbol.start,_localctx._predicatesymbol.stop):null);
+				State = 74;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+				do {
+					{
+					{
+					State = 73; term();
+					}
+					}
+					State = 76;
+					_errHandler.Sync(this);
+					_la = _input.La(1);
+				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DIGIT) | (1L << ID) | (1L << LPAREN) | (1L << QUES))) != 0) );
+				State = 78; Match(RPAREN);
+				}
+				break;
+
+			case 3:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 80; Match(LPAREN);
+				State = 81; binarytempop();
+				State = 82; _localctx._term = term();
+				State = 83; _localctx._term = term();
+				value=(_localctx._term!=null?_input.GetText(_localctx._term.start,_localctx._term.stop):null);
+				State = 85; Match(RPAREN);
+				}
+				break;
+
+			case 4:
+				EnterOuterAlt(_localctx, 4);
+				{
+				State = 87; Match(T__13);
+				}
+				break;
+
+			case 5:
+				EnterOuterAlt(_localctx, 5);
+				{
+				State = 88; Match(T__0);
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -315,32 +467,303 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public ActionopContext actionop() {
 		ActionopContext _localctx = new ActionopContext(_ctx, State);
-		EnterRule(_localctx, 8, RULE_actionop);
+		EnterRule(_localctx, 10, RULE_actionop);
 		try {
-			State = 54;
+			State = 96;
 			switch (_input.La(1)) {
-			case T__4:
+			case T__16:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 49; Match(T__4);
+				State = 91; Match(T__16);
 				done = true;
 				}
 				break;
-			case T__3:
+			case T__5:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 51; Match(T__3);
+				State = 93; Match(T__5);
 				}
 				break;
-			case T__1:
+			case T__2:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 52; Match(T__1);
+				State = 94; Match(T__2);
 				started = true;
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class TermContext : ParserRuleContext {
+		public IdentifyingexpressionContext identifyingexpression() {
+			return GetRuleContext<IdentifyingexpressionContext>(0);
+		}
+		public ConstantContext constant() {
+			return GetRuleContext<ConstantContext>(0);
+		}
+		public VariableContext variable() {
+			return GetRuleContext<VariableContext>(0);
+		}
+		public TermContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_term; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.EnterTerm(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.ExitTerm(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTerm(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public TermContext term() {
+		TermContext _localctx = new TermContext(_ctx, State);
+		EnterRule(_localctx, 12, RULE_term);
+		try {
+			State = 101;
+			switch (_input.La(1)) {
+			case DIGIT:
+			case ID:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 98; constant();
+				}
+				break;
+			case LPAREN:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 99; identifyingexpression();
+				}
+				break;
+			case QUES:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 100; variable();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class BinarytempopContext : ParserRuleContext {
+		public BinarytempopContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_binarytempop; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.EnterBinarytempop(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.ExitBinarytempop(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBinarytempop(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public BinarytempopContext binarytempop() {
+		BinarytempopContext _localctx = new BinarytempopContext(_ctx, State);
+		EnterRule(_localctx, 14, RULE_binarytempop);
+		try {
+			State = 113;
+			switch (_input.La(1)) {
+			case T__9:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 103; Match(T__9);
+				isEqual = true;
+				}
+				break;
+			case T__7:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 105; Match(T__7);
+				}
+				break;
+			case T__11:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 106; Match(T__11);
+				}
+				break;
+			case T__10:
+				EnterOuterAlt(_localctx, 4);
+				{
+				State = 107; Match(T__10);
+				}
+				break;
+			case T__6:
+				EnterOuterAlt(_localctx, 5);
+				{
+				State = 108; Match(T__6);
+				}
+				break;
+			case T__12:
+				EnterOuterAlt(_localctx, 6);
+				{
+				State = 109; Match(T__12);
+				}
+				break;
+			case T__14:
+				EnterOuterAlt(_localctx, 7);
+				{
+				State = 110; Match(T__14);
+				}
+				break;
+			case T__8:
+				EnterOuterAlt(_localctx, 8);
+				{
+				State = 111; Match(T__8);
+				}
+				break;
+			case T__15:
+				EnterOuterAlt(_localctx, 9);
+				{
+				State = 112; Match(T__15);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class IdentifyingexpressionContext : ParserRuleContext {
+		public TermContext _term;
+		public TermContext term() {
+			return GetRuleContext<TermContext>(0);
+		}
+		public ReferentialoperatorContext referentialoperator() {
+			return GetRuleContext<ReferentialoperatorContext>(0);
+		}
+		public WffContext wff() {
+			return GetRuleContext<WffContext>(0);
+		}
+		public ITerminalNode LPAREN() { return GetToken(FipaSLParser.LPAREN, 0); }
+		public ITerminalNode RPAREN() { return GetToken(FipaSLParser.RPAREN, 0); }
+		public IdentifyingexpressionContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_identifyingexpression; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.EnterIdentifyingexpression(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.ExitIdentifyingexpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentifyingexpression(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public IdentifyingexpressionContext identifyingexpression() {
+		IdentifyingexpressionContext _localctx = new IdentifyingexpressionContext(_ctx, State);
+		EnterRule(_localctx, 16, RULE_identifyingexpression);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 115; Match(LPAREN);
+			State = 116; referentialoperator();
+			isIota = true;
+			State = 118; _localctx._term = term();
+			askedTerm = (_localctx._term!=null?_input.GetText(_localctx._term.start,_localctx._term.stop):null);
+			State = 120; wff();
+			State = 121; Match(RPAREN);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ReferentialoperatorContext : ParserRuleContext {
+		public ReferentialoperatorContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_referentialoperator; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.EnterReferentialoperator(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.ExitReferentialoperator(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReferentialoperator(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ReferentialoperatorContext referentialoperator() {
+		ReferentialoperatorContext _localctx = new ReferentialoperatorContext(_ctx, State);
+		EnterRule(_localctx, 18, RULE_referentialoperator);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 123; Match(T__4);
 			}
 		}
 		catch (RecognitionException re) {
@@ -387,17 +810,17 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public ActionexpressionContext actionexpression() {
 		ActionexpressionContext _localctx = new ActionexpressionContext(_ctx, State);
-		EnterRule(_localctx, 10, RULE_actionexpression);
+		EnterRule(_localctx, 20, RULE_actionexpression);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 56; Match(LPAREN);
-			State = 57; Match(T__2);
+			State = 125; Match(LPAREN);
+			State = 126; Match(T__3);
 			isAction = true;
-			State = 59; _localctx._agent = agent();
+			State = 128; _localctx._agent = agent();
 			performer = (_localctx._agent!=null?_input.GetText(_localctx._agent.start,_localctx._agent.stop):null);
-			State = 61; functionalterm();
-			State = 62; Match(RPAREN);
+			State = 130; functionalterm();
+			State = 131; Match(RPAREN);
 			}
 		}
 		catch (RecognitionException re) {
@@ -447,28 +870,28 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public FunctionaltermContext functionalterm() {
 		FunctionaltermContext _localctx = new FunctionaltermContext(_ctx, State);
-		EnterRule(_localctx, 12, RULE_functionalterm);
+		EnterRule(_localctx, 22, RULE_functionalterm);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 64; Match(LPAREN);
-			State = 65; _localctx._functionsymbol = functionsymbol();
+			State = 133; Match(LPAREN);
+			State = 134; _localctx._functionsymbol = functionsymbol();
 			actionName = (_localctx._functionsymbol!=null?_input.GetText(_localctx._functionsymbol.start,_localctx._functionsymbol.stop):null);
-			State = 70;
+			State = 139;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==COLON) {
 				{
 				{
-				State = 67; parameter();
+				State = 136; parameter();
 				}
 				}
-				State = 72;
+				State = 141;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 73; Match(RPAREN);
+			State = 142; Match(RPAREN);
 			}
 		}
 		catch (RecognitionException re) {
@@ -512,12 +935,12 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public ParameterContext parameter() {
 		ParameterContext _localctx = new ParameterContext(_ctx, State);
-		EnterRule(_localctx, 14, RULE_parameter);
+		EnterRule(_localctx, 24, RULE_parameter);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 75; parametername();
-			State = 76; parametervalue();
+			State = 144; parametername();
+			State = 145; parametervalue();
 			}
 		}
 		catch (RecognitionException re) {
@@ -558,12 +981,12 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public ParameternameContext parametername() {
 		ParameternameContext _localctx = new ParameternameContext(_ctx, State);
-		EnterRule(_localctx, 16, RULE_parametername);
+		EnterRule(_localctx, 26, RULE_parametername);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 78; Match(COLON);
-			State = 79; _localctx._ID = Match(ID);
+			State = 147; Match(COLON);
+			State = 148; _localctx._ID = Match(ID);
 			paramName.Add((_localctx._ID!=null?_localctx._ID.Text:null));
 			}
 		}
@@ -606,57 +1029,12 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public ParametervalueContext parametervalue() {
 		ParametervalueContext _localctx = new ParametervalueContext(_ctx, State);
-		EnterRule(_localctx, 18, RULE_parametervalue);
+		EnterRule(_localctx, 28, RULE_parametervalue);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 82; _localctx._term = term();
+			State = 151; _localctx._term = term();
 			paramValue.Add((_localctx._term!=null?_input.GetText(_localctx._term.start,_localctx._term.stop):null));
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.ReportError(this, re);
-			_errHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class TermContext : ParserRuleContext {
-		public ConstantContext constant() {
-			return GetRuleContext<ConstantContext>(0);
-		}
-		public TermContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_term; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IFipaSLListener typedListener = listener as IFipaSLListener;
-			if (typedListener != null) typedListener.EnterTerm(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IFipaSLListener typedListener = listener as IFipaSLListener;
-			if (typedListener != null) typedListener.ExitTerm(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitTerm(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public TermContext term() {
-		TermContext _localctx = new TermContext(_ctx, State);
-		EnterRule(_localctx, 20, RULE_term);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 85; constant();
 			}
 		}
 		catch (RecognitionException re) {
@@ -698,24 +1076,116 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public ConstantContext constant() {
 		ConstantContext _localctx = new ConstantContext(_ctx, State);
-		EnterRule(_localctx, 22, RULE_constant);
+		EnterRule(_localctx, 30, RULE_constant);
 		try {
-			State = 89;
+			State = 156;
 			switch (_input.La(1)) {
 			case DIGIT:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 87; numericalconstant();
+				State = 154; numericalconstant();
 				}
 				break;
 			case ID:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 88; Match(ID);
+				State = 155; Match(ID);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class VariableContext : ParserRuleContext {
+		public VariableidentifierContext variableidentifier() {
+			return GetRuleContext<VariableidentifierContext>(0);
+		}
+		public VariableContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_variable; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.EnterVariable(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.ExitVariable(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariable(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public VariableContext variable() {
+		VariableContext _localctx = new VariableContext(_ctx, State);
+		EnterRule(_localctx, 32, RULE_variable);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 158; variableidentifier();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class VariableidentifierContext : ParserRuleContext {
+		public IToken _ID;
+		public ITerminalNode ID() { return GetToken(FipaSLParser.ID, 0); }
+		public ITerminalNode QUES() { return GetToken(FipaSLParser.QUES, 0); }
+		public VariableidentifierContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_variableidentifier; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.EnterVariableidentifier(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.ExitVariableidentifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariableidentifier(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public VariableidentifierContext variableidentifier() {
+		VariableidentifierContext _localctx = new VariableidentifierContext(_ctx, State);
+		EnterRule(_localctx, 34, RULE_variableidentifier);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 160; Match(QUES);
+			State = 161; _localctx._ID = Match(ID);
+			paramName.Add((_localctx._ID!=null?_localctx._ID.Text:null));
 			}
 		}
 		catch (RecognitionException re) {
@@ -759,21 +1229,21 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public NumericalconstantContext numericalconstant() {
 		NumericalconstantContext _localctx = new NumericalconstantContext(_ctx, State);
-		EnterRule(_localctx, 24, RULE_numericalconstant);
+		EnterRule(_localctx, 36, RULE_numericalconstant);
 		try {
-			State = 93;
-			switch ( Interpreter.AdaptivePredict(_input,4,_ctx) ) {
+			State = 166;
+			switch ( Interpreter.AdaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 91; integer();
+				State = 164; integer();
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 92; @float();
+				State = 165; @float();
 				}
 				break;
 			}
@@ -814,11 +1284,97 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public AgentContext agent() {
 		AgentContext _localctx = new AgentContext(_ctx, State);
-		EnterRule(_localctx, 26, RULE_agent);
+		EnterRule(_localctx, 38, RULE_agent);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 95; Match(ID);
+			State = 168; Match(ID);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class PredicatesymbolContext : ParserRuleContext {
+		public ITerminalNode ID() { return GetToken(FipaSLParser.ID, 0); }
+		public PredicatesymbolContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_predicatesymbol; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.EnterPredicatesymbol(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.ExitPredicatesymbol(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPredicatesymbol(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public PredicatesymbolContext predicatesymbol() {
+		PredicatesymbolContext _localctx = new PredicatesymbolContext(_ctx, State);
+		EnterRule(_localctx, 40, RULE_predicatesymbol);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 170; Match(ID);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class PropositionsymbolContext : ParserRuleContext {
+		public ITerminalNode ID() { return GetToken(FipaSLParser.ID, 0); }
+		public PropositionsymbolContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_propositionsymbol; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.EnterPropositionsymbol(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IFipaSLListener typedListener = listener as IFipaSLListener;
+			if (typedListener != null) typedListener.ExitPropositionsymbol(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IFipaSLVisitor<TResult> typedVisitor = visitor as IFipaSLVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPropositionsymbol(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public PropositionsymbolContext propositionsymbol() {
+		PropositionsymbolContext _localctx = new PropositionsymbolContext(_ctx, State);
+		EnterRule(_localctx, 42, RULE_propositionsymbol);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 172; Match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -857,11 +1413,11 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public FunctionsymbolContext functionsymbol() {
 		FunctionsymbolContext _localctx = new FunctionsymbolContext(_ctx, State);
-		EnterRule(_localctx, 28, RULE_functionsymbol);
+		EnterRule(_localctx, 44, RULE_functionsymbol);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 97; Match(ID);
+			State = 174; Match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -903,24 +1459,30 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public IntegerContext integer() {
 		IntegerContext _localctx = new IntegerContext(_ctx, State);
-		EnterRule(_localctx, 30, RULE_integer);
-		int _la;
+		EnterRule(_localctx, 46, RULE_integer);
 		try {
+			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 100;
+			State = 177;
 			_errHandler.Sync(this);
-			_la = _input.La(1);
+			_alt = 1;
 			do {
-				{
-				{
-				State = 99; Match(DIGIT);
+				switch (_alt) {
+				case 1:
+					{
+					{
+					State = 176; Match(DIGIT);
+					}
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
 				}
-				}
-				State = 102;
+				State = 179;
 				_errHandler.Sync(this);
-				_la = _input.La(1);
-			} while ( _la==DIGIT );
+				_alt = Interpreter.AdaptivePredict(_input,10,_ctx);
+			} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
 			}
 		}
 		catch (RecognitionException re) {
@@ -962,38 +1524,45 @@ public partial class FipaSLParser : Parser {
 	[RuleVersion(0)]
 	public FloatContext @float() {
 		FloatContext _localctx = new FloatContext(_ctx, State);
-		EnterRule(_localctx, 32, RULE_float);
+		EnterRule(_localctx, 48, RULE_float);
 		int _la;
 		try {
+			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 105;
+			State = 182;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			do {
 				{
 				{
-				State = 104; Match(DIGIT);
+				State = 181; Match(DIGIT);
 				}
 				}
-				State = 107;
+				State = 184;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			} while ( _la==DIGIT );
-			State = 109; Match(T__0);
-			State = 111;
+			State = 186; Match(T__1);
+			State = 188;
 			_errHandler.Sync(this);
-			_la = _input.La(1);
+			_alt = 1;
 			do {
-				{
-				{
-				State = 110; Match(DIGIT);
+				switch (_alt) {
+				case 1:
+					{
+					{
+					State = 187; Match(DIGIT);
+					}
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
 				}
-				}
-				State = 113;
+				State = 190;
 				_errHandler.Sync(this);
-				_la = _input.La(1);
-			} while ( _la==DIGIT );
+				_alt = Interpreter.AdaptivePredict(_input,12,_ctx);
+			} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1008,42 +1577,74 @@ public partial class FipaSLParser : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\rv\x4\x2\t\x2\x4"+
-		"\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t\t\x4"+
-		"\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10\t\x10\x4"+
-		"\x11\t\x11\x4\x12\t\x12\x3\x2\x3\x2\x3\x2\x3\x2\x3\x3\x3\x3\x5\x3+\n\x3"+
-		"\x3\x4\x3\x4\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3"+
-		"\x6\x5\x6\x39\n\x6\x3\a\x3\a\x3\a\x3\a\x3\a\x3\a\x3\a\x3\a\x3\b\x3\b\x3"+
-		"\b\x3\b\a\bG\n\b\f\b\xE\bJ\v\b\x3\b\x3\b\x3\t\x3\t\x3\t\x3\n\x3\n\x3\n"+
-		"\x3\n\x3\v\x3\v\x3\v\x3\f\x3\f\x3\r\x3\r\x5\r\\\n\r\x3\xE\x3\xE\x5\xE"+
-		"`\n\xE\x3\xF\x3\xF\x3\x10\x3\x10\x3\x11\x6\x11g\n\x11\r\x11\xE\x11h\x3"+
-		"\x12\x6\x12l\n\x12\r\x12\xE\x12m\x3\x12\x3\x12\x6\x12r\n\x12\r\x12\xE"+
-		"\x12s\x3\x12\x2\x2\x2\x13\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2\x10\x2"+
-		"\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2\"\x2\x2\x2m\x2$"+
-		"\x3\x2\x2\x2\x4*\x3\x2\x2\x2\x6,\x3\x2\x2\x2\b.\x3\x2\x2\x2\n\x38\x3\x2"+
-		"\x2\x2\f:\x3\x2\x2\x2\xE\x42\x3\x2\x2\x2\x10M\x3\x2\x2\x2\x12P\x3\x2\x2"+
-		"\x2\x14T\x3\x2\x2\x2\x16W\x3\x2\x2\x2\x18[\x3\x2\x2\x2\x1A_\x3\x2\x2\x2"+
-		"\x1C\x61\x3\x2\x2\x2\x1E\x63\x3\x2\x2\x2 \x66\x3\x2\x2\x2\"k\x3\x2\x2"+
-		"\x2$%\a\v\x2\x2%&\x5\x4\x3\x2&\'\a\f\x2\x2\'\x3\x3\x2\x2\x2(+\x5\f\a\x2"+
-		")+\x5\x6\x4\x2*(\x3\x2\x2\x2*)\x3\x2\x2\x2+\x5\x3\x2\x2\x2,-\x5\b\x5\x2"+
-		"-\a\x3\x2\x2\x2./\a\v\x2\x2/\x30\x5\n\x6\x2\x30\x31\x5\f\a\x2\x31\x32"+
-		"\a\f\x2\x2\x32\t\x3\x2\x2\x2\x33\x34\a\x3\x2\x2\x34\x39\b\x6\x1\x2\x35"+
-		"\x39\a\x4\x2\x2\x36\x37\a\x6\x2\x2\x37\x39\b\x6\x1\x2\x38\x33\x3\x2\x2"+
-		"\x2\x38\x35\x3\x2\x2\x2\x38\x36\x3\x2\x2\x2\x39\v\x3\x2\x2\x2:;\a\v\x2"+
-		"\x2;<\a\x5\x2\x2<=\b\a\x1\x2=>\x5\x1C\xF\x2>?\b\a\x1\x2?@\x5\xE\b\x2@"+
-		"\x41\a\f\x2\x2\x41\r\x3\x2\x2\x2\x42\x43\a\v\x2\x2\x43\x44\x5\x1E\x10"+
-		"\x2\x44H\b\b\x1\x2\x45G\x5\x10\t\x2\x46\x45\x3\x2\x2\x2GJ\x3\x2\x2\x2"+
-		"H\x46\x3\x2\x2\x2HI\x3\x2\x2\x2IK\x3\x2\x2\x2JH\x3\x2\x2\x2KL\a\f\x2\x2"+
-		"L\xF\x3\x2\x2\x2MN\x5\x12\n\x2NO\x5\x14\v\x2O\x11\x3\x2\x2\x2PQ\a\r\x2"+
-		"\x2QR\a\t\x2\x2RS\b\n\x1\x2S\x13\x3\x2\x2\x2TU\x5\x16\f\x2UV\b\v\x1\x2"+
-		"V\x15\x3\x2\x2\x2WX\x5\x18\r\x2X\x17\x3\x2\x2\x2Y\\\x5\x1A\xE\x2Z\\\a"+
-		"\t\x2\x2[Y\x3\x2\x2\x2[Z\x3\x2\x2\x2\\\x19\x3\x2\x2\x2]`\x5 \x11\x2^`"+
-		"\x5\"\x12\x2_]\x3\x2\x2\x2_^\x3\x2\x2\x2`\x1B\x3\x2\x2\x2\x61\x62\a\t"+
-		"\x2\x2\x62\x1D\x3\x2\x2\x2\x63\x64\a\t\x2\x2\x64\x1F\x3\x2\x2\x2\x65g"+
-		"\a\b\x2\x2\x66\x65\x3\x2\x2\x2gh\x3\x2\x2\x2h\x66\x3\x2\x2\x2hi\x3\x2"+
-		"\x2\x2i!\x3\x2\x2\x2jl\a\b\x2\x2kj\x3\x2\x2\x2lm\x3\x2\x2\x2mk\x3\x2\x2"+
-		"\x2mn\x3\x2\x2\x2no\x3\x2\x2\x2oq\a\a\x2\x2pr\a\b\x2\x2qp\x3\x2\x2\x2"+
-		"rs\x3\x2\x2\x2sq\x3\x2\x2\x2st\x3\x2\x2\x2t#\x3\x2\x2\x2\n*\x38H[_hms";
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\x1A\xC3\x4\x2\t"+
+		"\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t"+
+		"\t\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10"+
+		"\t\x10\x4\x11\t\x11\x4\x12\t\x12\x4\x13\t\x13\x4\x14\t\x14\x4\x15\t\x15"+
+		"\x4\x16\t\x16\x4\x17\t\x17\x4\x18\t\x18\x4\x19\t\x19\x4\x1A\t\x1A\x3\x2"+
+		"\x3\x2\x3\x2\x3\x2\x3\x3\x3\x3\x3\x3\x5\x3<\n\x3\x3\x4\x3\x4\x3\x5\x3"+
+		"\x5\x3\x5\x3\x5\x3\x5\x3\x5\x5\x5\x46\n\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3"+
+		"\x6\x6\x6M\n\x6\r\x6\xE\x6N\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6"+
+		"\x3\x6\x3\x6\x3\x6\x3\x6\x5\x6\\\n\x6\x3\a\x3\a\x3\a\x3\a\x3\a\x5\a\x63"+
+		"\n\a\x3\b\x3\b\x3\b\x5\bh\n\b\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t"+
+		"\x3\t\x3\t\x5\tt\n\t\x3\n\x3\n\x3\n\x3\n\x3\n\x3\n\x3\n\x3\n\x3\v\x3\v"+
+		"\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\r\x3\r\x3\r\x3\r\a\r\x8C\n"+
+		"\r\f\r\xE\r\x8F\v\r\x3\r\x3\r\x3\xE\x3\xE\x3\xE\x3\xF\x3\xF\x3\xF\x3\xF"+
+		"\x3\x10\x3\x10\x3\x10\x3\x11\x3\x11\x5\x11\x9F\n\x11\x3\x12\x3\x12\x3"+
+		"\x13\x3\x13\x3\x13\x3\x13\x3\x14\x3\x14\x5\x14\xA9\n\x14\x3\x15\x3\x15"+
+		"\x3\x16\x3\x16\x3\x17\x3\x17\x3\x18\x3\x18\x3\x19\x6\x19\xB4\n\x19\r\x19"+
+		"\xE\x19\xB5\x3\x1A\x6\x1A\xB9\n\x1A\r\x1A\xE\x1A\xBA\x3\x1A\x3\x1A\x6"+
+		"\x1A\xBF\n\x1A\r\x1A\xE\x1A\xC0\x3\x1A\x2\x2\x2\x1B\x2\x2\x4\x2\x6\x2"+
+		"\b\x2\n\x2\f\x2\xE\x2\x10\x2\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2"+
+		"\x1E\x2 \x2\"\x2$\x2&\x2(\x2*\x2,\x2.\x2\x30\x2\x32\x2\x2\x2\xC3\x2\x34"+
+		"\x3\x2\x2\x2\x4;\x3\x2\x2\x2\x6=\x3\x2\x2\x2\b\x45\x3\x2\x2\x2\n[\x3\x2"+
+		"\x2\x2\f\x62\x3\x2\x2\x2\xEg\x3\x2\x2\x2\x10s\x3\x2\x2\x2\x12u\x3\x2\x2"+
+		"\x2\x14}\x3\x2\x2\x2\x16\x7F\x3\x2\x2\x2\x18\x87\x3\x2\x2\x2\x1A\x92\x3"+
+		"\x2\x2\x2\x1C\x95\x3\x2\x2\x2\x1E\x99\x3\x2\x2\x2 \x9E\x3\x2\x2\x2\"\xA0"+
+		"\x3\x2\x2\x2$\xA2\x3\x2\x2\x2&\xA8\x3\x2\x2\x2(\xAA\x3\x2\x2\x2*\xAC\x3"+
+		"\x2\x2\x2,\xAE\x3\x2\x2\x2.\xB0\x3\x2\x2\x2\x30\xB3\x3\x2\x2\x2\x32\xB8"+
+		"\x3\x2\x2\x2\x34\x35\a\x17\x2\x2\x35\x36\x5\x4\x3\x2\x36\x37\a\x18\x2"+
+		"\x2\x37\x3\x3\x2\x2\x2\x38<\x5\x12\n\x2\x39<\x5\x16\f\x2:<\x5\x6\x4\x2"+
+		";\x38\x3\x2\x2\x2;\x39\x3\x2\x2\x2;:\x3\x2\x2\x2<\x5\x3\x2\x2\x2=>\x5"+
+		"\b\x5\x2>\a\x3\x2\x2\x2?@\a\x17\x2\x2@\x41\x5\f\a\x2\x41\x42\x5\x16\f"+
+		"\x2\x42\x43\a\x18\x2\x2\x43\x46\x3\x2\x2\x2\x44\x46\x5\n\x6\x2\x45?\x3"+
+		"\x2\x2\x2\x45\x44\x3\x2\x2\x2\x46\t\x3\x2\x2\x2G\\\x5,\x17\x2HI\a\x17"+
+		"\x2\x2IJ\x5*\x16\x2JL\b\x6\x1\x2KM\x5\xE\b\x2LK\x3\x2\x2\x2MN\x3\x2\x2"+
+		"\x2NL\x3\x2\x2\x2NO\x3\x2\x2\x2OP\x3\x2\x2\x2PQ\a\x18\x2\x2Q\\\x3\x2\x2"+
+		"\x2RS\a\x17\x2\x2ST\x5\x10\t\x2TU\x5\xE\b\x2UV\x5\xE\b\x2VW\b\x6\x1\x2"+
+		"WX\a\x18\x2\x2X\\\x3\x2\x2\x2Y\\\a\x6\x2\x2Z\\\a\x13\x2\x2[G\x3\x2\x2"+
+		"\x2[H\x3\x2\x2\x2[R\x3\x2\x2\x2[Y\x3\x2\x2\x2[Z\x3\x2\x2\x2\\\v\x3\x2"+
+		"\x2\x2]^\a\x3\x2\x2^\x63\b\a\x1\x2_\x63\a\xE\x2\x2`\x61\a\x11\x2\x2\x61"+
+		"\x63\b\a\x1\x2\x62]\x3\x2\x2\x2\x62_\x3\x2\x2\x2\x62`\x3\x2\x2\x2\x63"+
+		"\r\x3\x2\x2\x2\x64h\x5 \x11\x2\x65h\x5\x12\n\x2\x66h\x5\"\x12\x2g\x64"+
+		"\x3\x2\x2\x2g\x65\x3\x2\x2\x2g\x66\x3\x2\x2\x2h\xF\x3\x2\x2\x2ij\a\n\x2"+
+		"\x2jt\b\t\x1\x2kt\a\f\x2\x2lt\a\b\x2\x2mt\a\t\x2\x2nt\a\r\x2\x2ot\a\a"+
+		"\x2\x2pt\a\x5\x2\x2qt\a\v\x2\x2rt\a\x4\x2\x2si\x3\x2\x2\x2sk\x3\x2\x2"+
+		"\x2sl\x3\x2\x2\x2sm\x3\x2\x2\x2sn\x3\x2\x2\x2so\x3\x2\x2\x2sp\x3\x2\x2"+
+		"\x2sq\x3\x2\x2\x2sr\x3\x2\x2\x2t\x11\x3\x2\x2\x2uv\a\x17\x2\x2vw\x5\x14"+
+		"\v\x2wx\b\n\x1\x2xy\x5\xE\b\x2yz\b\n\x1\x2z{\x5\b\x5\x2{|\a\x18\x2\x2"+
+		"|\x13\x3\x2\x2\x2}~\a\xF\x2\x2~\x15\x3\x2\x2\x2\x7F\x80\a\x17\x2\x2\x80"+
+		"\x81\a\x10\x2\x2\x81\x82\b\f\x1\x2\x82\x83\x5(\x15\x2\x83\x84\b\f\x1\x2"+
+		"\x84\x85\x5\x18\r\x2\x85\x86\a\x18\x2\x2\x86\x17\x3\x2\x2\x2\x87\x88\a"+
+		"\x17\x2\x2\x88\x89\x5.\x18\x2\x89\x8D\b\r\x1\x2\x8A\x8C\x5\x1A\xE\x2\x8B"+
+		"\x8A\x3\x2\x2\x2\x8C\x8F\x3\x2\x2\x2\x8D\x8B\x3\x2\x2\x2\x8D\x8E\x3\x2"+
+		"\x2\x2\x8E\x90\x3\x2\x2\x2\x8F\x8D\x3\x2\x2\x2\x90\x91\a\x18\x2\x2\x91"+
+		"\x19\x3\x2\x2\x2\x92\x93\x5\x1C\xF\x2\x93\x94\x5\x1E\x10\x2\x94\x1B\x3"+
+		"\x2\x2\x2\x95\x96\a\x19\x2\x2\x96\x97\a\x15\x2\x2\x97\x98\b\xF\x1\x2\x98"+
+		"\x1D\x3\x2\x2\x2\x99\x9A\x5\xE\b\x2\x9A\x9B\b\x10\x1\x2\x9B\x1F\x3\x2"+
+		"\x2\x2\x9C\x9F\x5&\x14\x2\x9D\x9F\a\x15\x2\x2\x9E\x9C\x3\x2\x2\x2\x9E"+
+		"\x9D\x3\x2\x2\x2\x9F!\x3\x2\x2\x2\xA0\xA1\x5$\x13\x2\xA1#\x3\x2\x2\x2"+
+		"\xA2\xA3\a\x1A\x2\x2\xA3\xA4\a\x15\x2\x2\xA4\xA5\b\x13\x1\x2\xA5%\x3\x2"+
+		"\x2\x2\xA6\xA9\x5\x30\x19\x2\xA7\xA9\x5\x32\x1A\x2\xA8\xA6\x3\x2\x2\x2"+
+		"\xA8\xA7\x3\x2\x2\x2\xA9\'\x3\x2\x2\x2\xAA\xAB\a\x15\x2\x2\xAB)\x3\x2"+
+		"\x2\x2\xAC\xAD\a\x15\x2\x2\xAD+\x3\x2\x2\x2\xAE\xAF\a\x15\x2\x2\xAF-\x3"+
+		"\x2\x2\x2\xB0\xB1\a\x15\x2\x2\xB1/\x3\x2\x2\x2\xB2\xB4\a\x14\x2\x2\xB3"+
+		"\xB2\x3\x2\x2\x2\xB4\xB5\x3\x2\x2\x2\xB5\xB3\x3\x2\x2\x2\xB5\xB6\x3\x2"+
+		"\x2\x2\xB6\x31\x3\x2\x2\x2\xB7\xB9\a\x14\x2\x2\xB8\xB7\x3\x2\x2\x2\xB9"+
+		"\xBA\x3\x2\x2\x2\xBA\xB8\x3\x2\x2\x2\xBA\xBB\x3\x2\x2\x2\xBB\xBC\x3\x2"+
+		"\x2\x2\xBC\xBE\a\x12\x2\x2\xBD\xBF\a\x14\x2\x2\xBE\xBD\x3\x2\x2\x2\xBF"+
+		"\xC0\x3\x2\x2\x2\xC0\xBE\x3\x2\x2\x2\xC0\xC1\x3\x2\x2\x2\xC1\x33\x3\x2"+
+		"\x2\x2\xF;\x45N[\x62gs\x8D\x9E\xA8\xB5\xBA\xC0";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

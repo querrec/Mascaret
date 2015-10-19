@@ -112,7 +112,7 @@ namespace Mascaret
                 }
                 relations.Clear();
             }
-            catch (FileLoadException)
+            catch (FileLoadException e)
             {
             }
 
@@ -1060,7 +1060,7 @@ namespace Mascaret
                             parser = XDocument.Load(attr.Value + basedir);
                             _readGeometryEntity(parser.Root, entity);
                         }
-                        catch (FileLoadException )
+                        catch (FileLoadException e)
                         {
                         }
                     }

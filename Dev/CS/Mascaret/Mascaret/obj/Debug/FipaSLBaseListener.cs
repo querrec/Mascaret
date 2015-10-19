@@ -39,19 +39,6 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class FipaSLBaseListener : IFipaSLListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FipaSLParser.parametervalue"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterParametervalue([NotNull] FipaSLParser.ParametervalueContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="FipaSLParser.parametervalue"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitParametervalue([NotNull] FipaSLParser.ParametervalueContext context) { }
-
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="FipaSLParser.agent"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -63,6 +50,19 @@ public partial class FipaSLBaseListener : IFipaSLListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitAgent([NotNull] FipaSLParser.AgentContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.atomicformula"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAtomicformula([NotNull] FipaSLParser.AtomicformulaContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.atomicformula"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAtomicformula([NotNull] FipaSLParser.AtomicformulaContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="FipaSLParser.constant"/>.
@@ -130,19 +130,6 @@ public partial class FipaSLBaseListener : IFipaSLListener {
 	public virtual void ExitFloat([NotNull] FipaSLParser.FloatContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FipaSLParser.actionexpression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterActionexpression([NotNull] FipaSLParser.ActionexpressionContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="FipaSLParser.actionexpression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitActionexpression([NotNull] FipaSLParser.ActionexpressionContext context) { }
-
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="FipaSLParser.content"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -156,30 +143,30 @@ public partial class FipaSLBaseListener : IFipaSLListener {
 	public virtual void ExitContent([NotNull] FipaSLParser.ContentContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FipaSLParser.functionalterm"/>.
+	/// Enter a parse tree produced by <see cref="FipaSLParser.variableidentifier"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFunctionalterm([NotNull] FipaSLParser.FunctionaltermContext context) { }
+	public virtual void EnterVariableidentifier([NotNull] FipaSLParser.VariableidentifierContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="FipaSLParser.functionalterm"/>.
+	/// Exit a parse tree produced by <see cref="FipaSLParser.variableidentifier"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFunctionalterm([NotNull] FipaSLParser.FunctionaltermContext context) { }
+	public virtual void ExitVariableidentifier([NotNull] FipaSLParser.VariableidentifierContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FipaSLParser.wff"/>.
+	/// Enter a parse tree produced by <see cref="FipaSLParser.identifyingexpression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterWff([NotNull] FipaSLParser.WffContext context) { }
+	public virtual void EnterIdentifyingexpression([NotNull] FipaSLParser.IdentifyingexpressionContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="FipaSLParser.wff"/>.
+	/// Exit a parse tree produced by <see cref="FipaSLParser.identifyingexpression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitWff([NotNull] FipaSLParser.WffContext context) { }
+	public virtual void ExitIdentifyingexpression([NotNull] FipaSLParser.IdentifyingexpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="FipaSLParser.proposition"/>.
@@ -208,17 +195,17 @@ public partial class FipaSLBaseListener : IFipaSLListener {
 	public virtual void ExitParameter([NotNull] FipaSLParser.ParameterContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FipaSLParser.functionsymbol"/>.
+	/// Enter a parse tree produced by <see cref="FipaSLParser.term"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFunctionsymbol([NotNull] FipaSLParser.FunctionsymbolContext context) { }
+	public virtual void EnterTerm([NotNull] FipaSLParser.TermContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="FipaSLParser.functionsymbol"/>.
+	/// Exit a parse tree produced by <see cref="FipaSLParser.term"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFunctionsymbol([NotNull] FipaSLParser.FunctionsymbolContext context) { }
+	public virtual void ExitTerm([NotNull] FipaSLParser.TermContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="FipaSLParser.parametername"/>.
@@ -234,19 +221,6 @@ public partial class FipaSLBaseListener : IFipaSLListener {
 	public virtual void ExitParametername([NotNull] FipaSLParser.ParameternameContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="FipaSLParser.term"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterTerm([NotNull] FipaSLParser.TermContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="FipaSLParser.term"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitTerm([NotNull] FipaSLParser.TermContext context) { }
-
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="FipaSLParser.actionop"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -258,6 +232,136 @@ public partial class FipaSLBaseListener : IFipaSLListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitActionop([NotNull] FipaSLParser.ActionopContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.parametervalue"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterParametervalue([NotNull] FipaSLParser.ParametervalueContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.parametervalue"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitParametervalue([NotNull] FipaSLParser.ParametervalueContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.binarytempop"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBinarytempop([NotNull] FipaSLParser.BinarytempopContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.binarytempop"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBinarytempop([NotNull] FipaSLParser.BinarytempopContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.actionexpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterActionexpression([NotNull] FipaSLParser.ActionexpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.actionexpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitActionexpression([NotNull] FipaSLParser.ActionexpressionContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.functionalterm"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFunctionalterm([NotNull] FipaSLParser.FunctionaltermContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.functionalterm"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFunctionalterm([NotNull] FipaSLParser.FunctionaltermContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.propositionsymbol"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPropositionsymbol([NotNull] FipaSLParser.PropositionsymbolContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.propositionsymbol"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPropositionsymbol([NotNull] FipaSLParser.PropositionsymbolContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.wff"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterWff([NotNull] FipaSLParser.WffContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.wff"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitWff([NotNull] FipaSLParser.WffContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.variable"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterVariable([NotNull] FipaSLParser.VariableContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.variable"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitVariable([NotNull] FipaSLParser.VariableContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.functionsymbol"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFunctionsymbol([NotNull] FipaSLParser.FunctionsymbolContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.functionsymbol"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFunctionsymbol([NotNull] FipaSLParser.FunctionsymbolContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.referentialoperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterReferentialoperator([NotNull] FipaSLParser.ReferentialoperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.referentialoperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitReferentialoperator([NotNull] FipaSLParser.ReferentialoperatorContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="FipaSLParser.predicatesymbol"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPredicatesymbol([NotNull] FipaSLParser.PredicatesymbolContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="FipaSLParser.predicatesymbol"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPredicatesymbol([NotNull] FipaSLParser.PredicatesymbolContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

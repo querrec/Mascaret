@@ -93,7 +93,6 @@ C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\bi
 C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Antlr3.Runtime.dll
 C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Antlr4.Runtime.net35.dll
 C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\bin\Debug\Antlr4.Runtime.net35.xml
-C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.csprojResolveAssemblyReference.cache
 C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\FipaSLLexer.cs
 C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\FipaSLParser.cs
 C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\FipaSLListener.cs

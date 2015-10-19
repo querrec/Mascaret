@@ -33,6 +33,13 @@ namespace Mascaret
                 scb.Interval = 0.5;
                 return scb;
             }
+            else if (name == "CommunicationBehavior")
+            {
+                System.Console.WriteLine(" ######## CREATE COM BEHAVIOR");
+                CommunicationBehavior scb = new CommunicationBehavior((Behavior)this, host, p);
+                scb.Interval = 0.5;
+                return scb;
+            }
             else if (name == "ProceduralBehavior")
             {
                 ProceduralBehavior pb = new ProceduralBehavior((Behavior)this, host, p);

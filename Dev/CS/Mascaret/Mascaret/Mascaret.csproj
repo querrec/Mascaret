@@ -96,6 +96,7 @@
     <Compile Include="BEHAVE\RoleClass.cs" />
     <Compile Include="BEHAVE\SimpleBehaviorExecution.cs" />
     <Compile Include="BEHAVE\SimpleCommunicationBehavior.cs" />
+    <Compile Include="CommunicationBehavior.cs" />
     <Compile Include="HAVE\Body.cs" />
     <Compile Include="HAVE\BodyClass.cs" />
     <Compile Include="HAVE\EmbodiedAgent.cs" />

@@ -36,18 +36,18 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IFipaSLVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FipaSLParser.parametervalue"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitParametervalue([NotNull] FipaSLParser.ParametervalueContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="FipaSLParser.agent"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitAgent([NotNull] FipaSLParser.AgentContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.atomicformula"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAtomicformula([NotNull] FipaSLParser.AtomicformulaContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="FipaSLParser.constant"/>.
@@ -85,13 +85,6 @@ public interface IFipaSLVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitFloat([NotNull] FipaSLParser.FloatContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FipaSLParser.actionexpression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitActionexpression([NotNull] FipaSLParser.ActionexpressionContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="FipaSLParser.content"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -99,18 +92,18 @@ public interface IFipaSLVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitContent([NotNull] FipaSLParser.ContentContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FipaSLParser.functionalterm"/>.
+	/// Visit a parse tree produced by <see cref="FipaSLParser.variableidentifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitFunctionalterm([NotNull] FipaSLParser.FunctionaltermContext context);
+	Result VisitVariableidentifier([NotNull] FipaSLParser.VariableidentifierContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FipaSLParser.wff"/>.
+	/// Visit a parse tree produced by <see cref="FipaSLParser.identifyingexpression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitWff([NotNull] FipaSLParser.WffContext context);
+	Result VisitIdentifyingexpression([NotNull] FipaSLParser.IdentifyingexpressionContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="FipaSLParser.proposition"/>.
@@ -127,11 +120,11 @@ public interface IFipaSLVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitParameter([NotNull] FipaSLParser.ParameterContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FipaSLParser.functionsymbol"/>.
+	/// Visit a parse tree produced by <see cref="FipaSLParser.term"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitFunctionsymbol([NotNull] FipaSLParser.FunctionsymbolContext context);
+	Result VisitTerm([NotNull] FipaSLParser.TermContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="FipaSLParser.parametername"/>.
@@ -141,17 +134,80 @@ public interface IFipaSLVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitParametername([NotNull] FipaSLParser.ParameternameContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="FipaSLParser.term"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitTerm([NotNull] FipaSLParser.TermContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="FipaSLParser.actionop"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitActionop([NotNull] FipaSLParser.ActionopContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.parametervalue"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitParametervalue([NotNull] FipaSLParser.ParametervalueContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.binarytempop"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBinarytempop([NotNull] FipaSLParser.BinarytempopContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.actionexpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitActionexpression([NotNull] FipaSLParser.ActionexpressionContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.functionalterm"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunctionalterm([NotNull] FipaSLParser.FunctionaltermContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.propositionsymbol"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPropositionsymbol([NotNull] FipaSLParser.PropositionsymbolContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.wff"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitWff([NotNull] FipaSLParser.WffContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.variable"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariable([NotNull] FipaSLParser.VariableContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.functionsymbol"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunctionsymbol([NotNull] FipaSLParser.FunctionsymbolContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.referentialoperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitReferentialoperator([NotNull] FipaSLParser.ReferentialoperatorContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="FipaSLParser.predicatesymbol"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPredicatesymbol([NotNull] FipaSLParser.PredicatesymbolContext context);
 }
 } // namespace Mascaret

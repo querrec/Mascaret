@@ -267,7 +267,7 @@ namespace Mascaret
 		// Bouml preserved body begin 0001F567
        // StreamWriter file = MascaretApplication.Instance.logfile;
 
-       // file.WriteLine("Parsing Packages ..."); file.Flush();
+       MascaretApplication.Instance.VRComponentFactory.Log("Parsing Packages ...");
 
 		XAttribute typeAttr =null, pkgNameAttr = null;
 		string type="",pkgName="";
@@ -281,7 +281,7 @@ namespace Mascaret
 		pkgNameAttr = (XAttribute)packageNode.Attribute("name");
 		if(pkgNameAttr!=null)pkgName = pkgNameAttr.Value;
 
-       // file.WriteLine("type : " + type); file.Flush();
+        MascaretApplication.Instance.VRComponentFactory.Log("type : " + type);
 
 		if (String.Compare(type,"uml:Model")!=0 && String.Compare(type,"uml:Package")!=0) {
 			return;
@@ -294,6 +294,8 @@ namespace Mascaret
 			pkg.Description=getComment(packageNode);
 			pkg.Summary=getSummary(packageNode);
 			pkg.Tags=getTags(packageNode);
+
+           
 	
 			if (parent!=null)
 			{
@@ -328,6 +330,7 @@ namespace Mascaret
                 {
                     if (isStereotypedUnit(child))
                     {
+
                         string unitName = "";
                         XAttribute attrName = (XAttribute)child.Attribute("name");
                         if (attrName != null) unitName = attrName.Value;
@@ -335,11 +338,14 @@ namespace Mascaret
                         string classifierType = "";
                         XElement typeNode = child.Element("classifier");
 
+                        MascaretApplication.Instance.VRComponentFactory.Log("UNIT : " + unitName);
+
                         XAttribute attrType = (XAttribute)typeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
                         if (attrType == null) attrType = (XAttribute)typeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
                         if (attrType != null) classifierType = attrType.Value;
+                        MascaretApplication.Instance.VRComponentFactory.Log("Type : " + classifierType);
 
-			            if (classifierType == "uml:PrimitiveType")
+			            if (classifierType == "uml:PrimitiveType" || attrType == null)
                         {
 					
 				            attrType = (XAttribute)typeNode.Attribute("href");
@@ -1682,11 +1688,20 @@ namespace Mascaret
             XAttribute attr = (XAttribute)dtNode.Attribute("name");
             string name = attr.Value;
 
+
             attr = (XAttribute)dtNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
             if (attr == null) attr = (XAttribute)dtNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
             string id = attr.Value;
+
+            MascaretApplication.Instance.VRComponentFactory.Log("ADD Datatype : " + name + " / " + id);
+
             string idUnitTag = _valueTypeToUnit[id];
+            MascaretApplication.Instance.VRComponentFactory.Log("TypeToUnit[" + id + "] = " + idUnitTag);
+
             string idUnit = _unitRefs[idUnitTag];
+            MascaretApplication.Instance.VRComponentFactory.Log("unitRef[" + idUnitTag + "] = " + idUnit);
+
+
             Unit unit = _units[idUnit];
             ValueType valueType = new ValueType(name);
             valueType.Unit = unit;
@@ -1799,6 +1814,7 @@ namespace Mascaret
 
 		        if(attr!=null)id=attr.Value;
                 _unitRefs.Add(id, baseInstance);
+                MascaretApplication.Instance.VRComponentFactory.Log("NEW Add UnitRef : " + id);
             }
 
             else if (child.Name.LocalName.Contains("PlayAnimation"))
@@ -1827,6 +1843,7 @@ namespace Mascaret
                     unitRef = attr.Value;
 
                 _valueTypeToUnit.Add(baseDataType, unitRef);
+
             }
 			else if (child.Name.LocalName.Contains("Agent")) {
 				_stereoAgents.Add(elementBase);

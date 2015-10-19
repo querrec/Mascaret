@@ -15,13 +15,24 @@ public struct FIPAAction
 	public List<string> paramValue;
 }
 
+public struct FIPAIota
+{
+    public string predicate;
+    public string result;
+    public List<string> paramName;
+    public string value;
+}
+
 public struct FIPASLParserResult
 {
 	public bool success;
 	public bool isAction;
+    public bool isIota;
+    public bool isEqual;
     public bool isDone;
     public bool isStarted;
 	public FIPAAction action;
+    public FIPAIota iota;
 };
 
 [Serializable]
@@ -154,7 +165,7 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
                                         InstanceSpecification inst = MascaretApplication.Instance.getEnvironment().getInstance(strVal.ToLower());
                                         param.Add(parameters[i].name, new InstanceValue(inst));
                                     }
-                                    catch (NullReferenceException)
+                                    catch (NullReferenceException e)
                                     {
 
                                     }
@@ -353,7 +364,7 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 		if (content == "Model") sendModel(msg);
 		else if (content == "Organisation") sendOrganisation(msg);
 		else if (content == "Actions") sendActions(msg);
-		else if (content == "Entities") sendEntities(msg);  // Renvoi les attributs et etats de chaque entités appartenant  a la procedure et abonne aux messages de modifications d'attributs
+        else if (content == "Entities") sendEntities(msg);  // Renvoi les attributs et etats de chaque entités appartenant  a la procedure et abonne aux messages de modifications d'attributs
 		else
 		{
 			string[] words = content.Split(' ');
@@ -401,65 +412,148 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
                 }
             }
         }
-        else
+        else if (result.isEqual)
         {
-            /*
-            //cerr << result.variable << " of entity : " << result.entity << " == " << result.value << endl;
-            Agent agt = (Agent)(Host);
-            KnowledgeBase kb = agt.KnowledgeBase;
-            Environment env = kb.Environment;
-            if (env != null)
+            string entityName = result.iota.paramName[2];
+            string slotName = result.iota.paramName[0];
+            string value = result.iota.value ;
+
+            MascaretApplication.Instance.VRComponentFactory.Log(entityName + "." + slotName + "=" + value);
+
+            KnowledgeBase kb = ((Agent)(this.Host)).KnowledgeBase;
+            Mascaret.Environment envKB = kb.Environment;
+            List<Entity> entities = envKB.getEntities();
+            foreach (Entity entity in entities)
             {
-                InstanceSpecification entity;
-                entity = env.getInstance(result.entity);
-                if (entity)
+                if (entity.name == entityName)
                 {
-                    shared_ptr<Slot> variable;
-                    variable = entity->getProperty(result.variable);
-                    if (variable)
+                    MascaretApplication.Instance.VRComponentFactory.Log("ENTITY ...");
+                    foreach (KeyValuePair<string, Slot> s in entity.Slots)
                     {
-                        variable->addValueFromString(result.value);
-                    }
-                    else
-                    {
-                        shared_ptr<ACLMessage> reponse = shared_ptr<ACLMessage>(new ACLMessage(NOT_UNDERSTOOD));
-                        reponse->setContent(content);
-                        reponse->addReceiver(msg->getSender());
-                        agt->send(reponse);
+                        if (s.Value.name == slotName)
+                        {
+                           s.Value.addValueFromString(value);
+                        }
                     }
                 }
-                else
-                {
-                    shared_ptr<ACLMessage> reponse = shared_ptr<ACLMessage>(new ACLMessage(NOT_UNDERSTOOD));
-                    reponse->setContent(content);
-                    reponse->addReceiver(msg->getSender());
-                    agt->send(reponse);
-                }
+
             }
-            else
-            {
-                shared_ptr<ACLMessage> reponse = shared_ptr<ACLMessage>(new ACLMessage(NOT_UNDERSTOOD));
-                reponse->setContent(content);
-                reponse->addReceiver(msg->getSender());
-                agt->send(reponse);
-            }*/
         }
-        /*
-        if (msg->getXMLContent())
-        {
-            shared_ptr<XmlParser> newParser = shared_ptr<XmlParser>(new XmlParser());
-            newParser->createFile("parser");
-            shared_ptr<XmlNode> newRoot_node = newParser->getRoot();
-            newRoot_node->addChild(msg->getXMLContent(), false);
-            cerr << newParser->writeString() << endl;
-        }*/
+       
 	}
 	
 	protected void manageQueryRef(ACLMessage msg)
 	{
+        /*
+        Dictionary<string, Agent> agents = VRApplication.Instance.AgentPlateform.Agents;
+             
+        string agentName = msg.Sender.toString();
+        //MascaretApplication.Instance.VRComponentFactory.Log("Sender : " + agentName + " - Host: "+this.Host.name);
+        if (agents.ContainsKey(agentName))
+        {
+            Mascaret.Agent agt = agents[agentName];
+
+            ProceduralBehavior pbehavior = (ProceduralBehavior)(agt.getBehaviorExecutingByName("ProceduralBehavior"));
+            List<ProcedureExecution> procedures = pbehavior.runningProcedures;
+            //MascaretApplication.Instance.VRComponentFactory.Log("M-Procedures : " + procedures.Count);
+            foreach (ProcedureExecution proc in procedures)
+                MascaretApplication.Instance.VRComponentFactory.Log(proc.procedure.getFullName());
+
+            List<KeyValuePair<ProcedureExecution, ActionNode>> actionNodes = pbehavior.actionsToDo;
+            //MascaretApplication.Instance.VRComponentFactory.Log("M-Action Nodes Count: " + actionNodes.Count);
+
+            for (int atd = 0; atd < actionNodes.Count; ++atd)
+            {
+                if (actionNodes[atd].Value.Action.GetType().ToString() == "Mascaret.CallOperationAction")
+                {
+                    //MascaretApplication.Instance.VRComponentFactory.Log("Action Node Description: "+actionNodes[atd].Value.Description);
+                    string fml=null;
+                    if (msg.Content == "action")
+                    {
+                        fml = "<FML><Performative>Inform</Performative><Receivers><Receiver>" + agentName + "</Receiver></Receivers><Content>" + actionNodes[atd].Value.Description + "</Content><Emotion>Neutral</Emotion><Ressources><Ressource>" + "" + "</Ressource></Ressources></FML>";
+                    }
+                    else if (msg.Content == "object")
+                    {
+                        CallOperationAction coa = (CallOperationAction)(actionNodes[atd].Value.Action);
+                        List<InputPin> pins = coa.InputPins;
+                        if (pins.Count >= 1)
+                        {
+                            InputPin ip = pins[0];
+                            List<ObjectNode> nObjNode = ip.getIncomingObjectNode();
+
+                            if (nObjNode.Count >= 1)
+                            {
+                                ObjectNode on = nObjNode[0];
+                                foreach (ProcedureExecution pe in procedures)
+                                {
+                                    Dictionary<string, InstanceSpecification> affect = pe.getAffectations();
+                                    if (affect.ContainsKey(on.name))
+                                    {
+                                        InstanceSpecification instance = affect[on.name];
+                                        fml = "<FML><Performative>Point</Performative><Receivers><Receiver>" + agentName + "</Receiver></Receivers><Content>" + "" + "</Content><Emotion>Neutral</Emotion><Ressources><Ressource>" + instance.name + "</Ressource></Ressources></FML>";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    if(fml != null) ((EmbodiedAgent)(Host)).addIntention(fml);
+                }
+            }
+        }*/
+
+        //////////////////////////////////////////////////bilal Sep2015////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        string content = msg.Content;
+
+        FIPASLParserResult result = parseFipaSLExpression(content);
+        
+        Dictionary<string, Agent> agents = VRApplication.Instance.AgentPlateform.Agents;
+
+        if (result.isIota)
+        {
+            FIPAIota iota = result.iota;
+            if (iota.predicate == "slot")
+            {
+                string res = getSlot(iota.paramName);
+                MascaretApplication.Instance.VRComponentFactory.Log("IOTA : " + iota.predicate + " " + iota.result + " == " + res);
+                if (res != "")
+                {
+                    // give the intention
+                    ACLMessage aclMsg = new ACLMessage(ACLPerformative.INFORM);
+                    aclMsg.Sender = ((Agent)Host).Aid;
+                    aclMsg.Receivers.Add(msg.Sender);
+                    aclMsg.Content = "((= (iota ?" + iota.paramName[0] + " (" + iota.predicate + " ?" + iota.paramName[1] + " ?" + iota.paramName[2] + ")) " + res + "))";
+                    ((Agent)Host).send(aclMsg);
+                    MascaretApplication.Instance.VRComponentFactory.Log("Inform message: "+aclMsg.Content);
+                }
+            }
+        }
+        
+
+        /*string agentName = msg.Sender.toString();
+        MascaretApplication.Instance.VRComponentFactory.Log("Sender : " + agentName + " - Host: "+this.Host.name);
+        if (agents.ContainsKey(agentName))
+        {
+            Mascaret.Agent agt = agents[agentName];
+            KnowledgeBase kb = agt.KnowledgeBase;
+            Mascaret.Environment envKB = kb.Environment;
+            List<Entity> entitiesKB = envKB.getEntities();
+            foreach (Entity entity in entitiesKB)
+            {
+                MascaretApplication.Instance.VRComponentFactory.Log(entity.getFullName());
+                if (entity.Slots.Count > 0)
+                {
+                    foreach (KeyValuePair<string, Slot> s in entity.Slots)
+                    {
+                        if (s.Value.getValue() != null)
+                            MascaretApplication.Instance.VRComponentFactory.Log(s.Key + " = " + s.Value.getValue().getStringFromValue());
+                    }
+                }
+            }
+
+        }*/
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
-	
-	
 	
 	protected void sendModel(ACLMessage msg)
 	{
@@ -488,32 +582,93 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
         MascaretApplication.Instance.VRComponentFactory.Log("Parsing  : " + content);
         MascaretApplication.Instance.VRComponentFactory.Log("Nb Erreur : " + parser.NumberOfSyntaxErrors);
 
-			
-		result.success = true;
-		result.isAction = parser.isAction;
-        result.isDone = parser.done;
-        result.isStarted = parser.started;
-		FIPAAction action = new FIPAAction();
-       
-		action.actionName = parser.actionName;
-        action.performer = parser.performer;
-		action.paramName = new List<string>();
-		action.paramValue = new List<string>();
-		action.paramName = parser.paramName;
-		action.paramValue = parser.paramValue;
-		
-		result.action = action;
-		System.Console.WriteLine("MSG : " + action.actionName);
-
-        for (int i = 0; i < action.paramName.Count; i++)
+        if (parser.isAction)
         {
-            System.Console.WriteLine("MSG"+(i+2)+" : " + action.paramName[i]);
-            System.Console.WriteLine("MSG" + (i + 3) + " : " + action.paramValue[i]);
+
+            result.success = true;
+            result.isAction = parser.isAction;
+            result.isDone = parser.done;
+            result.isStarted = parser.started;
+            FIPAAction action = new FIPAAction();
+
+            action.actionName = parser.actionName;
+            action.performer = parser.performer;
+            action.paramName = new List<string>();
+            action.paramValue = new List<string>();
+            action.paramName = parser.paramName;
+            action.paramValue = parser.paramValue;
+            MascaretApplication.Instance.VRComponentFactory.Log("Action Name: " + action.actionName);
+            MascaretApplication.Instance.VRComponentFactory.Log("Performer: " + action.performer);
+            result.action = action;
+            MascaretApplication.Instance.VRComponentFactory.Log("MSG : " + action.actionName);
+
+            for (int i = 0; i < action.paramName.Count; i++)
+            {
+                MascaretApplication.Instance.VRComponentFactory.Log("MSG" + (i + 2) + " : " + action.paramName[i]);
+                MascaretApplication.Instance.VRComponentFactory.Log("MSG" + (i + 3) + " : " + action.paramValue[i]);
+            }
+            //System.Console.WriteLine("MSG4 : " + action.paramName[1]);
+            //System.Console.WriteLine("MSG5 : " + action.paramValue[1]);
         }
-        //System.Console.WriteLine("MSG4 : " + action.paramName[1]);
-        //System.Console.WriteLine("MSG5 : " + action.paramValue[1]);
+        else if (parser.isEqual)
+        {
+            if (parser.isIota)
+            {
+                result.isEqual = true;
+                result.isIota = true;
+                result.iota = new FIPAIota();
+                result.iota.predicate = parser.predicateSymbol;
+                result.iota.result = parser.askedTerm;
+                result.iota.paramName = new List<string>();
+                result.iota.paramName = parser.paramName;
+                result.iota.value = parser.value;
+            }
+        }
+        else if (parser.isIota)
+        {
+            result.isIota = true;
+            result.iota = new FIPAIota();
+            result.iota.predicate = parser.predicateSymbol;
+            result.iota.result = parser.askedTerm;
+            result.iota.paramName = new List<string>();
+            result.iota.paramName = parser.paramName;
+
+            MascaretApplication.Instance.VRComponentFactory.Log("IOTA : " + parser.predicateSymbol + " " + parser.askedTerm + " : " + parser.paramName.Count);
+
+
+        }
 		return result;
 	}
+
+    protected string getSlot(List<string> p)
+    {
+        string entityName = p[2];
+        string slotName = p[1];
+
+        MascaretApplication.Instance.VRComponentFactory.Log(entityName + "." + slotName);
+        string value = "";
+
+        KnowledgeBase kb = ((Agent)(this.Host)).KnowledgeBase;
+        Mascaret.Environment envKB = kb.Environment;
+        List<Entity> entities = envKB.getEntities();
+        foreach (Entity entity in entities)
+        {
+            if (entity.name == entityName)
+            {
+                MascaretApplication.Instance.VRComponentFactory.Log("ENTITY ...");
+                foreach (KeyValuePair<string, Slot> s in entity.Slots)
+                {
+                    if (s.Value.name == slotName)
+                    {
+                        value = s.Value.getValue().getStringFromValue();
+                    }
+                }
+            }
+            
+        }
+        
+        return value;
+    }
 	
 }
 }
