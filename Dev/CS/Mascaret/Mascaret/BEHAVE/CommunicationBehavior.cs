@@ -7,7 +7,7 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 
 namespace Mascaret
 {
-    
+
 
     [Serializable]
     public class CommunicationBehavior : CyclicBehaviorExecution
@@ -26,12 +26,13 @@ namespace Mascaret
             if (msg != null)
             {
                 MascaretApplication.Instance.VRComponentFactory.Log("Communication Behavior");
-                MascaretApplication.Instance.VRComponentFactory.Log("Conversation-ID: "+msg.ConversationID);
+                MascaretApplication.Instance.VRComponentFactory.Log("Conversation-ID: " + msg.ConversationID);
                 /*if (msg.Performative == ACLPerformative.REQUEST)
                 {
                     manageRequest(msg);
                 }
-                else */if (msg.Performative == ACLPerformative.INFORM)
+                else */
+                if (msg.Performative == ACLPerformative.INFORM)
                 {
                     manageInform(msg);
                 }
@@ -109,6 +110,7 @@ namespace Mascaret
                 FIPAIota iota = result.iota;
                 if (iota.predicate == "slot")
                 {
+                    string fml;
                     string res = getSlot(iota.paramName);
                     MascaretApplication.Instance.VRComponentFactory.Log("IOTA : " + iota.predicate + " " + iota.result + " == " + res);
                     if (res != "")
@@ -121,7 +123,14 @@ namespace Mascaret
                         aclMsg.ConversationID = msg.ConversationID;
                         ((Agent)Host).send(aclMsg);
                         MascaretApplication.Instance.VRComponentFactory.Log("Inform message: " + aclMsg.Content);
+                        //bilal 19-10-15
+                        fml = "<FML><Performative>Inform</Performative><Receivers><Receiver>" + msg.Sender + "</Receiver></Receivers><Content>" +/* "the " + iota.paramName[1] + " of " + iota.paramName[2] + "is" +*/ res + "</Content><Emotion>Neutral</Emotion><Ressources><Ressource>" + "" + "</Ressource></Ressources></FML>";
                     }
+                    //bilal 19-10-15
+                    else
+                        fml = "<FML><Performative>Inform</Performative><Receivers><Receiver>" + msg.Sender + "</Receiver></Receivers><Content>" + "I don't know" + /*" the value of the " + iota.paramName[1] + " of " + iota.paramName[2] +*/ "</Content><Emotion>Neutral</Emotion><Ressources><Ressource>" + "" + "</Ressource></Ressources></FML>";
+                    if (fml != null) ((EmbodiedAgent)(Host)).addIntention(fml);
+                    //bilal 19-10-15
                 }
             }
         }

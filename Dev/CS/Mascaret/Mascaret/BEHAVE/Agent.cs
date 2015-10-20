@@ -173,6 +173,13 @@ namespace Mascaret
             return mailbox.MessagesSent;
         }
 
+        //bilal 19-10-15
+        public virtual void addIntention(string intention)
+        {
+
+        }
+        //bilal 19-10-15
+
         public void setIntention(string fml)
         {
             List<string> bmlList = behaviorPlanner.parseIntention(fml);
