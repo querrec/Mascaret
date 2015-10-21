@@ -25,6 +25,19 @@ namespace Mascaret
         public string animationName;
     }
 
+    public struct FlowPortT
+    {
+        public string basePort;
+        public string direction;
+    }
+
+    public struct ConnectorEndT
+    {
+        public ConnectorEnd ce;
+        public string partWithPort;
+        public string role;
+    }
+
 	 
 	private List <OrganisationalStructure> orgStructure = new List<OrganisationalStructure>();
 	public List <OrganisationalStructure> OrgStructure
@@ -62,10 +75,17 @@ namespace Mascaret
 
     protected List<string> _stereoPedagogicalScenario = new List<string>();
 
+    protected List<FlowPortT> _stereoFlowPort = new List<FlowPortT>();
+
+    protected List<ConnectorEndT> _connectors = new List<ConnectorEndT>();
+
     protected Dictionary<string, List<String>> _otherStereo = new Dictionary<string,List<string>>();
     protected Dictionary<string, string> _valueTypeToUnit = new Dictionary<string, string>();
     protected Dictionary<string, Unit> _units = new Dictionary<string, Unit>();
     protected Dictionary<string, string> _unitRefs = new Dictionary<string, string>();
+
+    protected Dictionary<string, Property> _properties = new Dictionary<string, Property>();
+
 	 
 	private Dictionary<String,Class> _idClass;
 
@@ -244,6 +264,7 @@ namespace Mascaret
 					_setParametersType();
 					addGeneralizations();
 					addAssociation();
+                    addConnectors();
 					addActivitiesAndStateMachines();
 					addCallOperations();
                     addCallBehaviors();
@@ -581,16 +602,22 @@ namespace Mascaret
 		cl.Tags=getTags(classNode);
 	
 		foreach (XElement child in classNode.Elements()) {
-			if (child.Name.LocalName.CompareTo("ownedOperation")==0)
-				addOperation(child, cl);
-			else if (child.Name.LocalName.CompareTo("ownedAttribute")==0)
-				addAttribute(child, cl);
-			else if (child.Name.LocalName.CompareTo("generalization")==0) {
-				XAttribute attr2 = (XAttribute)child.Attribute("general");
-				if(attr2!=null)
-					_toGeneralize.Add(new KeyValuePair<string,string>(id, attr2.Value));
-			}
+            if (child.Name.LocalName.CompareTo("ownedOperation") == 0)
+                addOperation(child, cl);
+            else if (child.Name.LocalName.CompareTo("ownedAttribute") == 0)
+                addAttribute(child, cl);
+            else if (child.Name.LocalName.CompareTo("generalization") == 0)
+            {
+                XAttribute attr2 = (XAttribute)child.Attribute("general");
+                if (attr2 != null)
+                    _toGeneralize.Add(new KeyValuePair<string, string>(id, attr2.Value));
+            }
 		}
+        foreach (XElement child in classNode.Elements())
+        {
+            if (child.Name.LocalName.CompareTo("ownedConnector") == 0)
+                addConnector(child, cl);
+        }
 		
 		foreach(KeyValuePair <CallEvent, string> pair in _callEvents){
 			
@@ -991,6 +1018,45 @@ namespace Mascaret
 		// Bouml preserved body end 0001FAE7
 	}
 
+    public void addConnector(XElement attrNode, Class cl)
+    {
+        Connector connector = new Connector();
+        cl.addConnector(connector);
+
+        foreach (XElement child in attrNode.Elements())
+        {
+            if (child.Name.LocalName.CompareTo("end") == 0)
+            {
+                string partWithPort = "";
+                string role = "";
+
+                
+
+                XAttribute attr = (XAttribute)child.Attribute("partWithPort");
+                if (attr != null)
+                    partWithPort = attr.Value;
+
+                attr = (XAttribute)child.Attribute("role");
+                if (attr != null)
+                    role = attr.Value;
+
+
+                if (partWithPort != "")
+                {
+                    ConnectorEnd ce = new ConnectorEnd();
+                    connector.addEnd(ce);
+                    ConnectorEndT cet;
+                    cet.ce = ce;
+                    cet.partWithPort = partWithPort;
+                    cet.role = role;
+                    _connectors.Add(cet);
+                }
+
+            }
+        }
+
+    }
+
 	public void addAttribute(XElement attrNode, Class cl)
 	{
 		// Bouml preserved body begin 0001FB67
@@ -1052,6 +1118,7 @@ namespace Mascaret
 		XElement typeNode=null,defaultNode=null;
 
         XAttribute attrid = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attrid == null) attrid = (XAttribute)attrNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
         if (attrid != null) id = attrid.Value;
 
 		XAttribute attr = (XAttribute)attrNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
@@ -1165,15 +1232,26 @@ namespace Mascaret
             MascaretApplication.Instance.VRComponentFactory.Log("HAS A DEFAULT VALUE : " + strVal);
             valueSpec = attributeType.createValueFromString(strVal);
         }
-	
-		Property attrProp = new Property(attrName, cl, attributeType,null, valueSpec,null);
+
+        Property attrProp = null;
+        if (isStereotypedFlowPort(attrNode))
+        {
+            attrProp = new FlowPort(attrName, cl, attributeType, null, valueSpec, null);
+            ((FlowPort)attrProp).Direction = getFlowPortDirection(attrNode);
+            MascaretApplication.Instance.VRComponentFactory.Log("FLOWPORT : " + ((FlowPort)attrProp).Direction+ " / " + id);
+
+        }
+		else attrProp = new Property(attrName, cl, attributeType,null, valueSpec,null);
+
+        _properties.Add(id, attrProp);
+
+
         if (hasStereotype(id))
         {
             attrProp.Stereotype = getStereotype(id);
             MascaretApplication.Instance.VRComponentFactory.Log("DEBUG /// STEREOTYPE : " + attrName + " : " + attrProp.Stereotype);
         }
 
-	
 		
 		string mulStr = "1";
 		
@@ -1672,6 +1750,16 @@ namespace Mascaret
 		
 	}
 
+    public void addConnectors()
+    {
+        foreach(ConnectorEndT cet in _connectors)
+        {
+            cet.ce.Role = _properties[cet.role];
+            cet.ce.PartWithPort = _properties[cet.partWithPort];
+        }
+
+    }
+
 	public void addGeneralizations()
 	{
 		//Debug.Log(" ##### GENERALISATION : " + _toGeneralize.Count);
@@ -1817,6 +1905,21 @@ namespace Mascaret
                 MascaretApplication.Instance.VRComponentFactory.Log("NEW Add UnitRef : " + id);
             }
 
+            else if (child.Name.LocalName.Contains("FlowPort"))
+            {
+                string basePort = "";
+                XAttribute attrFlow = (XAttribute)child.Attribute("base_Port");
+
+                if (attrFlow != null)
+                    basePort = attrFlow.Value;
+
+                FlowPortT fpt;
+                fpt.basePort = basePort;
+                fpt.direction = ((XAttribute)child.Attribute("direction")).Value;
+                MascaretApplication.Instance.VRComponentFactory.Log("STEREO DIRECTION : " + fpt.direction);
+
+                _stereoFlowPort.Add(fpt);
+            }
             else if (child.Name.LocalName.Contains("PlayAnimation"))
             {
                 string id = "";
@@ -1827,10 +1930,10 @@ namespace Mascaret
                 XAttribute attrID = (XAttribute)child.Attribute("base_OpaqueAction");
                 if (attrID != null) id = attrID.Value;
 
-                playAnim action = new playAnim(); 
-                action.animationName = animation; 
-                action.id = id; 
-                    
+                playAnim action = new playAnim();
+                action.animationName = animation;
+                action.id = id;
+
                 _stereoplayAnim.Add(action);
 
             }
@@ -1845,18 +1948,21 @@ namespace Mascaret
                 _valueTypeToUnit.Add(baseDataType, unitRef);
 
             }
-			else if (child.Name.LocalName.Contains("Agent")) {
-				_stereoAgents.Add(elementBase);
-			} else if (child.Name.LocalName.Contains("VirtualHuman")) {
-				if (classBase!=null)
-				{
-					_stereoVirtualHumans.Add(classBase);
-				}
-				else
-				{
-					_stereoVirtualHumans.Add(elementBase);
-				}
-			}
+            else if (child.Name.LocalName.Contains("Agent"))
+            {
+                _stereoAgents.Add(elementBase);
+            }
+            else if (child.Name.LocalName.Contains("VirtualHuman"))
+            {
+                if (classBase != null)
+                {
+                    _stereoVirtualHumans.Add(classBase);
+                }
+                else
+                {
+                    _stereoVirtualHumans.Add(elementBase);
+                }
+            }
             else if (child.Name.LocalName.Contains("ScenarioPedagogique"))
             {
                 if (baseActiviy != null)
@@ -1866,47 +1972,50 @@ namespace Mascaret
             }
             else if (child.Name.LocalName.Contains("Entity"))
             {
-				if (classBase!=null)
-					_stereoEntities.Add(classBase);
-				else
-					_stereoEntities.Add(elementBase);
-			} else if (child.Name.LocalName.Contains("Role")) {
-				if (interfaceBase!=null)
-					_stereoRoles.Add(interfaceBase);
-				else
-					_stereoRoles.Add(elementBase);
-			} else if (child.Name.LocalName.Contains("BuiltIn"))
-				_stereoBuiltIn.Add(elementBase);
-			else if (child.Name.LocalName.Contains("NonInterupt"))
-				_stereoNonInterupt.Add(elementBase);
-			else if (child.Name.LocalName.Contains("precondition"))
-				_stereoPreconditions.Add(constraintBase);
-			else if (child.Name.LocalName.Contains("postcondition"))
-				_stereoPostconditions.Add(constraintBase);
-			else if (child.Name.LocalName.Contains("Block"))
-				_stereoBlocks.Add(classBase);
+                if (classBase != null)
+                    _stereoEntities.Add(classBase);
+                else
+                    _stereoEntities.Add(elementBase);
+            }
+            else if (child.Name.LocalName.Contains("Role"))
+            {
+                if (interfaceBase != null)
+                    _stereoRoles.Add(interfaceBase);
+                else
+                    _stereoRoles.Add(elementBase);
+            }
+            else if (child.Name.LocalName.Contains("BuiltIn"))
+                _stereoBuiltIn.Add(elementBase);
+            else if (child.Name.LocalName.Contains("NonInterupt"))
+                _stereoNonInterupt.Add(elementBase);
+            else if (child.Name.LocalName.Contains("precondition"))
+                _stereoPreconditions.Add(constraintBase);
+            else if (child.Name.LocalName.Contains("postcondition"))
+                _stereoPostconditions.Add(constraintBase);
+            else if (child.Name.LocalName.Contains("Block"))
+                _stereoBlocks.Add(classBase);
             else
             {
                 if (_otherStereo.ContainsKey(child.Name.LocalName))
                 {
                     MascaretApplication.Instance.VRComponentFactory.Log("EXIST Prop");
-                    XAttribute attrS =(XAttribute) child.Attribute("base_Property");
+                    XAttribute attrS = (XAttribute)child.Attribute("base_Property");
                     if (attrS != null)
                         _otherStereo[child.Name.LocalName].Add(attrS.Value);
-                    
+
                 }
                 else
                 {
-                   // MascaretApplication.Instance.VRComponentFactory.Log("NEW Prop");
+                    // MascaretApplication.Instance.VRComponentFactory.Log("NEW Prop");
 
-                    XAttribute attrS =(XAttribute) child.Attribute("base_Property");
+                    XAttribute attrS = (XAttribute)child.Attribute("base_Property");
                     if (attrS != null)
                     {
-                        MascaretApplication.Instance.VRComponentFactory.Log("---> " + child.Name.LocalName+ attrS.Value);
+                        MascaretApplication.Instance.VRComponentFactory.Log("---> " + child.Name.LocalName + attrS.Value);
                         _otherStereo.Add(child.Name.LocalName, new List<string>());
                         _otherStereo[child.Name.LocalName].Add(attrS.Value);
                     }
-                    
+
                 }
             }
 		}
@@ -2530,6 +2639,36 @@ namespace Mascaret
             if (p.id == id) return p.animationName;
         }
         return "";
+
+        // Bouml preserved body end 0001FFE7
+    }
+
+    public string getFlowPortDirection(XElement node)
+    {
+        XAttribute attr = (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+        string id = attr.Value;
+
+        foreach (FlowPortT flp in _stereoFlowPort)
+        {
+            if (flp.basePort == id) return flp.direction;
+        }
+        return "";
+    }
+
+    public bool isStereotypedFlowPort(XElement node)
+    {
+        // Bouml preserved body begin 0001FFE7
+
+        XAttribute attr = (XAttribute)node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+        if (attr == null) attr = (XAttribute)node.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+        string id = attr.Value;
+
+        foreach (FlowPortT flp in _stereoFlowPort)
+        {
+            if (flp.basePort == id) return true;
+        }
+        return false;
 
         // Bouml preserved body end 0001FFE7
     }

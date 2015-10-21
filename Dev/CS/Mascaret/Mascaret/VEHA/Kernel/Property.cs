@@ -7,7 +7,6 @@ namespace Mascaret
     public class Property : Feature
     {
 
-
         private Classifier type = null;
         public Classifier Type
         {
