@@ -75,6 +75,8 @@ namespace Mascaret
 
     protected List<string> _stereoPedagogicalScenario = new List<string>();
 
+    protected Dictionary<string, string> _scenarioToScene = new Dictionary<string, string>();
+
     protected List<FlowPortT> _stereoFlowPort = new List<FlowPortT>();
 
     protected List<ConnectorEndT> _connectors = new List<ConnectorEndT>();
@@ -734,7 +736,13 @@ namespace Mascaret
                     Procedure procedure = null;  
                     MascaretApplication.Instance.VRComponentFactory.Log(" ?????? Procedure : " + childId);
                     if (isStereotypedScenarioPedagogique(child))
+                    {
                         procedure = new PedagogicalScenario(childName);
+
+                        XAttribute attr2 = (XAttribute)child.Attribute("{http://schema.omg.org/spec/XMI/2.1}id");
+                        if (attr2 == null) attr2 = (XAttribute)child.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
+                        ((PedagogicalScenario)procedure).Scene = this._scenarioToScene[attr2.Value];
+                    }
                     else
                         procedure = new Procedure(childName);
 					procedure.Activity=activity;
@@ -1965,10 +1973,24 @@ namespace Mascaret
             }
             else if (child.Name.LocalName.Contains("ScenarioPedagogique"))
             {
+                string scene = "";
+
+                XAttribute attrScene = (XAttribute)child.Attribute("Scene");
+                if (attrScene != null) scene = attrScene.Value;
+
                 if (baseActiviy != null)
+                {
                     _stereoPedagogicalScenario.Add(baseActiviy);
+                    _scenarioToScene.Add(baseActiviy, scene);
+                }
                 else
+                {
                     _stereoPedagogicalScenario.Add(elementBase);
+                    _scenarioToScene.Add(elementBase, scene);
+
+                }
+
+               
             }
             else if (child.Name.LocalName.Contains("Entity"))
             {

@@ -108,3 +108,4 @@ C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\ob
 C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.csproj.Antlr4GeneratedCodeFileListAbsolute.txt
 C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.dll
 C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.pdb
+C:\Users\Utilisateur\Developpement\Mascaret\Mascaret\Dev\CS\Mascaret\Mascaret\obj\Debug\Mascaret.csprojResolveAssemblyReference.cache
