@@ -48,14 +48,13 @@ namespace Mascaret
 
         public RessourceAssignement findRessourceAssignement(string resName)
         {
+            
             foreach (RessourceAssignement currentRA in ressourcesAssignement)
             {
-             //   MascaretApplication.Instance.logfile.WriteLine("FindRessource :" + currentRA.Ressource.name + " == " + resName);
-             //   MascaretApplication.Instance.logfile.Flush();
+                MascaretApplication.Instance.VRComponentFactory.Log("FindRessource :" + currentRA.Ressource.name + " == " + resName);
                 if (currentRA.Ressource.name == resName)
                 {
-              //      MascaretApplication.Instance.logfile.WriteLine(".... Found");
-               //     MascaretApplication.Instance.logfile.Flush();
+                    MascaretApplication.Instance.VRComponentFactory.Log(".... Found");
                     return currentRA;
                 }
             }

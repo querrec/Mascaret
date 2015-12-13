@@ -13,17 +13,24 @@ namespace Mascaret
         public static string BMLHEADER = "<bml xmlns=\"http://www.bml-initiative.org/bml/bml-1.0\" xmlns:ext=\"http://www.bml-initiative.org/bml/coreextensions-1.0\"";
 
         private Agent agent;
-        public BehaviorRealizer behaviorRealizer;
 
         public BehaviorPlanner(Agent agent)
         {
             this.agent = agent;
         }
 
-        public List<string> parseIntention(string fml)
+        public virtual List<string> parseIntention(string fml)
         {
-            List<string> bmlList = new List<string>();
+            // Do some interesting thing like 
+            // * Send a message
+            // * Start an action/behavior
+            // * Modify internal (KB, Emotion,...)
 
+
+            List<string> bmlList = new List<string>();
+            return bmlList;
+
+            /*
             string bml = BMLHEADER;
             string id = "id=\"bml1\"";
             string characterId = "characterId=\"" + agent.name + "\"";
@@ -90,10 +97,11 @@ namespace Mascaret
             bmlList.Add(bml);
 
             //bilal 19-10-15
-            foreach (string bmlI in bmlList)
-                this.behaviorRealizer.addBehavior(bmlI);
+            //foreach (string bmlI in bmlList)
+                //this.behaviorRealizer.addBehavior(bmlI);
             //bilal 19-10-15
-            return bmlList;
+             * */
+            
          
         }
 

@@ -62,7 +62,6 @@ namespace Mascaret
         }
 
         public BehaviorPlanner behaviorPlanner;
-        public BehaviorRealizer behaviorRealizer;
 
         //default parameters KBName = "default"
         public Agent(AgentPlateform ap, string name, AgentClass agentclass, string KBName)
@@ -73,7 +72,7 @@ namespace Mascaret
             this.plateform = ap;
             mailbox = new Mailbox();
             knowledgeBase = new KnowledgeBase(KBName);
-            behaviorPlanner = new BehaviorPlanner(this);
+            //behaviorPlanner = new BehaviorPlanner(this);
             //behaviorRealizer = new BehaviorRealizer();
         }
 
@@ -174,20 +173,11 @@ namespace Mascaret
         }
 
         //bilal 19-10-15
-        public virtual void addIntention(string intention)
+        public virtual void addIntention(string fml)
         {
-
+            behaviorPlanner.parseIntention(fml);
         }
         //bilal 19-10-15
-
-        public void setIntention(string fml)
-        {
-            List<string> bmlList = behaviorPlanner.parseIntention(fml);
-            foreach (string bml in bmlList)
-            {
-                behaviorRealizer.addBehavior(bml);
-            }
-        }
 
         public void wakeup()
         {

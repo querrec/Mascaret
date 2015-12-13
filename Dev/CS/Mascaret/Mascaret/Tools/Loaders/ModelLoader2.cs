@@ -667,7 +667,9 @@ namespace Mascaret
 		organisation.Tags=getTags(orgNode);
 	
 		//Debug.Log(MascaretApplication.Instance.Model.name);
-		
+
+        MascaretApplication.Instance.VRComponentFactory.Log(MascaretApplication.Instance.Model.name);
+
 		MascaretApplication.Instance.AgentPlateform.Structures.Add(organisation);
 	
 		foreach (XElement child in orgNode.Elements()) {
