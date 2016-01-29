@@ -12,7 +12,7 @@ namespace Mascaret
     {
         public static string BMLHEADER = "<bml xmlns=\"http://www.bml-initiative.org/bml/bml-1.0\" xmlns:ext=\"http://www.bml-initiative.org/bml/coreextensions-1.0\"";
 
-        private Agent agent;
+        public Agent agent;
 
         public BehaviorPlanner(Agent agent)
         {

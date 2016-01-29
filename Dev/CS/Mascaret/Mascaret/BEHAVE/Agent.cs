@@ -5,6 +5,7 @@ namespace Mascaret
 {
     public class Agent : InstanceSpecification
     {
+        public string emotion;
 
         private List<AgentBehavior> behaviors = new List<AgentBehavior>();
         public List<AgentBehavior> Behaviors
@@ -74,6 +75,7 @@ namespace Mascaret
             knowledgeBase = new KnowledgeBase(KBName);
             //behaviorPlanner = new BehaviorPlanner(this);
             //behaviorRealizer = new BehaviorRealizer();
+            emotion = "joyStrong";
         }
 
         //default parameters interval = -1, start = true

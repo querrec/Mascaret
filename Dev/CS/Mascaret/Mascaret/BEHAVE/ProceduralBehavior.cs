@@ -69,12 +69,12 @@ namespace Mascaret
                     List<ActionNode> actionNodes = new List<ActionNode>();
 
                     //remove those which are not agreed upon
-                  /*  if (agt.ControlledByHuman)
+                   /*if (agt.ControlledByHuman)
                     {
-                        file.WriteLine("[ProceduralBehavior Info] Agent controlled ... "); file.Flush();
+                        MascaretApplication.Instance.VRComponentFactory.Log("[ProceduralBehavior Info] Agent controlled ... ");
                         actionNodes = procInfo.getActionToExecute();
                         for (int atd = 0; atd < actionNodes.Count; ++atd)
-                          file.WriteLine("ProceduralBehavior Info] -- Human has to do : " + actionNodes[atd].name); file.Flush();
+                          MascaretApplication.Instance.VRComponentFactory.Log("ProceduralBehavior Info] -- Human has to do : " + actionNodes[atd].name);
                         actionNodes.Clear();
 
                         for (int atd = 0; atd < actionsToDo.Count; ++atd)
@@ -94,19 +94,50 @@ namespace Mascaret
                         {
                             //Dictionary<string, InstanceSpecification> affectations = procInfo.getAffectations();
                             //actionNodes[i].procInfo.procedure.Activity.Context
-                            actionNodes[i].start(agt, procInfo.getAffectations(), false); //TODO ///////////////////////////////////////// if not flag start, else start
-                            sendActionRealisationMessage(actionNodes[i], procInfo); // TODO
-                            procInfo.informActionRunning(agt.Aid, actionNodes[i]);
-
-                            if (actionNodes[i].CurrentExecution != null)
+                            bool isCallBehavior = false;
+                            if (actionNodes[i].Action.Kind == "CallBehavior") isCallBehavior = true;
+                            if (!agt.ControlledByHuman)
                             {
-                                behaviorToNode.Add(actionNodes[i].CurrentExecution, actionNodes[i]);
-                                actionNodes[i].CurrentExecution.addCallbackOnBehaviorStop(onBehaviorStop);
+                                actionNodes[i].start(agt, procInfo.getAffectations(), false); //TODO ///////////////////////////////////////// if not flag start, else start
+                                sendActionRealisationMessage(actionNodes[i], procInfo); // TODO
+                                procInfo.informActionRunning(agt.Aid, actionNodes[i]);
+
+                                if (actionNodes[i].CurrentExecution != null)
+                                {
+                                    behaviorToNode.Add(actionNodes[i].CurrentExecution, actionNodes[i]);
+                                    actionNodes[i].CurrentExecution.addCallbackOnBehaviorStop(onBehaviorStop);
+                                }
+                                else
+                                {
+                                    procInfo.informActionDone(agt.Aid, actionNodes[i]); //TODO
+                                    sendActionDoneMessage(actionNodes[i], procInfo);
+                                }
                             }
                             else
                             {
-                                procInfo.informActionDone(agt.Aid, actionNodes[i]); //TODO
-                                sendActionDoneMessage(actionNodes[i], procInfo);
+                                if (isCallBehavior)
+                                {
+                                    actionNodes[i].start(agt, procInfo.getAffectations(), false); //TODO ///////////////////////////////////////// if not flag start, else start
+                                    sendActionRealisationMessage(actionNodes[i], procInfo); // TODO
+                                    procInfo.informActionRunning(agt.Aid, actionNodes[i]);
+
+                                    if (actionNodes[i].CurrentExecution != null)
+                                    {
+                                        behaviorToNode.Add(actionNodes[i].CurrentExecution, actionNodes[i]);
+                                        actionNodes[i].CurrentExecution.addCallbackOnBehaviorStop(onBehaviorStop);
+                                    }
+                                    else
+                                    {
+                                        procInfo.informActionDone(agt.Aid, actionNodes[i]); //TODO
+                                        sendActionDoneMessage(actionNodes[i], procInfo);
+                                    }
+
+                                }
+                                else
+                                {
+                                    actionsToDo.Add(actionNodes[i]);
+                                    MascaretApplication.Instance.VRComponentFactory.Log("ProceduralBehavior Info] -- Human has to do : " + actionNodes[i].name);
+                                }
                             }
                         }
                     }
