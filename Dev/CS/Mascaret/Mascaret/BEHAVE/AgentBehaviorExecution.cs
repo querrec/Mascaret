@@ -10,6 +10,11 @@ namespace Mascaret
         {
         }
 
+        public AgentBehaviorExecution()
+        {
+
+        }
+
         public abstract void action();
 
         public abstract bool done();

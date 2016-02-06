@@ -21,6 +21,10 @@ namespace Mascaret
         {
         }
 
+        public ProceduralBehavior()
+        {
+        }
+
         public void pushProcedureToDo(Procedure proc, OrganisationalEntity org, Role role, Dictionary<String, ValueSpecification> parameters)
         {
             Agent agt = (Agent)(this.Host);

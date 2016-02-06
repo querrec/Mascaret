@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+
 
 namespace Mascaret
 {
@@ -26,36 +28,28 @@ namespace Mascaret
         //default parameters sync = false
         public override BehaviorExecution createBehaviorExecution(InstanceSpecification host, Dictionary<String, ValueSpecification> p, bool sync)
         {
-            if (name == "SimpleCommunicationBehavior")
+
+            
+            Type [] types = Assembly.GetCallingAssembly().GetTypes();
+            Type type = null;
+            foreach (Type t in types)
             {
-                System.Console.WriteLine(" ######## CREATE SIMPLE COM BEHAVIOR");
-                SimpleCommunicationBehavior scb = new SimpleCommunicationBehavior((Behavior)this, host, p);
-                scb.Interval = 0.5;
-                return scb;
+                if (t.Name == name) type = t;
+                MascaretApplication.Instance.VRComponentFactory.Log(t.Name);
             }
-            else if (name == "CommunicationBehavior")
+            
+            
+            BehaviorExecution be = null;
+            if (type != null)
             {
-                System.Console.WriteLine(" ######## CREATE COM BEHAVIOR");
-                CommunicationBehavior scb = new CommunicationBehavior((Behavior)this, host, p);
-                scb.Interval = 0.5;
-                return scb;
+                be = (BehaviorExecution)(Activator.CreateInstance(type));
+                be.init((Behavior)this, host, p, false);
             }
-            else if (name == "ProceduralBehavior")
-            {
-                ProceduralBehavior pb = new ProceduralBehavior((Behavior)this, host, p);
-                pb.Interval = 0.5;
-                return pb;
-            }
-            else if (name == "ActionListenerBehavior")
-            {
-                ActionListenerBehavior alb = new ActionListenerBehavior((Behavior)this, host, p);
-                return alb as BehaviorExecution;
-            }
-            else
-            {
-                //BehaviorInitDeleterFunc operations
-                return null;
-            }
+            else MascaretApplication.Instance.VRComponentFactory.Log("ERREUR : " + name + " not found");
+            
+
+            return be;
+           
         }
 
 

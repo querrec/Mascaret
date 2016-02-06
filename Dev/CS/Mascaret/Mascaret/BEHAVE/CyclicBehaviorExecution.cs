@@ -10,6 +10,10 @@ namespace Mascaret
         {
         }
 
+        public CyclicBehaviorExecution()
+        {
+        }
+
         public override bool done()
         {
             return false;

@@ -19,6 +19,10 @@ namespace Mascaret
 
         }
 
+        public SimpleBehaviorExecution()
+        {
+        }
+
         public override double execute(double dt)
         {
             action();

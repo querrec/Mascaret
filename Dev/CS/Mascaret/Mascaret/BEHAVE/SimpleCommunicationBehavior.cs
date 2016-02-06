@@ -42,6 +42,10 @@ public class SimpleCommunicationBehavior:CyclicBehaviorExecution
 	{
 		
 	}
+
+    public SimpleCommunicationBehavior()
+    {
+    }
 	
 	public override void action()
 	{
