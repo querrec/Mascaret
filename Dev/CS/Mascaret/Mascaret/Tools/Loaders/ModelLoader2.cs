@@ -1406,20 +1406,34 @@ namespace Mascaret
 
                     string strType = "";
                     XElement typeNode = pins.Element("type");
-                    XAttribute attr = (XAttribute)typeNode.Attribute("href");
-                    if (attr != null) strType = attr.Value.Substring(attr.Value.IndexOf("#") + 1);
-
+                    if (typeNode != null)
+                    {
+                        XAttribute attr = (XAttribute)typeNode.Attribute("href");
+                        if (attr != null) strType = attr.Value.Substring(attr.Value.IndexOf("#") + 1);
+                    }
+                    
                     MascaretPrimitiveType attributeType = model.getBasicType(strType.ToLower());
+                    if (attributeType == null) MascaretApplication.Instance.VRComponentFactory.Log("Erreur Type : " + strType);
+
 
                     valuePin.ResourceType = attributeType;
 
                     string strValue = "";
                     XElement valueNode = pins.Element("value");
-                    XAttribute attrV = (XAttribute)valueNode.Attribute("value");
-                    if (attrV != null) strValue = attrV.Value;
+                    if (valueNode != null)
+                    {
+                        XAttribute attrV = (XAttribute)valueNode.Attribute("value");
+                        if (attrV != null) strValue = attrV.Value;
+                    }
+                    else
+                    {
+                        strValue = getComment(pins);
+                        
+                    }
 
                     MascaretApplication.Instance.VRComponentFactory.Log("Valeur : " + strValue);
-                    valuePin.ValueSpec = new LiteralInteger(strValue);
+                    //valuePin.ValueSpec = new LiteralInteger(strValue);
+                    valuePin.ValueSpec = attributeType.createValueFromString(strValue);
 
 	                /*Classifier ressourceType = getObjectNodeType(pins);
 	                if(ressourceType != null)
