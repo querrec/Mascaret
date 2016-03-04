@@ -267,7 +267,7 @@ public partial class OCLExpressionParser : Parser {
 					{
 					State = 61; Match(GT);
 					State = 62; additiveexpression();
-					double l = ((LiteralReal)lvalue).RValue; double r = ((LiteralReal)value).RValue; if (l > r) value = new LiteralBoolean(true); else value = new LiteralBoolean(false);
+					double l = ((LiteralReal)lvalue).RValue; double r = ((LiteralReal)value).RValue; MascaretApplication.Instance.VRComponentFactory.Log(""+l +">" +r); if (l > r) value = new LiteralBoolean(true); else value = new LiteralBoolean(false);
 					}
 					}
 					break;
@@ -564,7 +564,7 @@ public partial class OCLExpressionParser : Parser {
 				{
 				State = 103; Match(DOT);
 				State = 104; _localctx._propertycall = propertycall();
-				value = (((InstanceValue)value).SpecValue).Slots[(_localctx._propertycall!=null?_input.GetText(_localctx._propertycall.start,_localctx._propertycall.stop):null)].getValue(); 
+				MascaretApplication.Instance.VRComponentFactory.Log("Prop " + (_localctx._propertycall!=null?_input.GetText(_localctx._propertycall.start,_localctx._propertycall.stop):null));value = (((InstanceValue)value).SpecValue).Slots[(_localctx._propertycall!=null?_input.GetText(_localctx._propertycall.start,_localctx._propertycall.stop):null)].getValue(); 
 				}
 				}
 				State = 111;
@@ -622,7 +622,7 @@ public partial class OCLExpressionParser : Parser {
 				EnterOuterAlt(_localctx, 1);
 				{
 				State = 112; _localctx._STRING = Match(STRING);
-				 value = context[(_localctx._STRING!=null?_localctx._STRING.Text:null)];
+				 MascaretApplication.Instance.VRComponentFactory.Log("PRIME" + (_localctx._STRING!=null?_localctx._STRING.Text:null)); value = context[(_localctx._STRING!=null?_localctx._STRING.Text:null)];
 				}
 				break;
 			case DIGIT:

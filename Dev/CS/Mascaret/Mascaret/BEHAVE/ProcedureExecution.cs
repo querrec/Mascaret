@@ -314,7 +314,9 @@ namespace Mascaret
                 buildAffectationsPostbone(missing);
             }
 
-            procedure.Activity.context = _buildOclContext(activityParams);
+            //procedure.Activity.context = _buildOclContext(activityParams);
+            _buildOclContext(activityParams);
+            MascaretApplication.Instance.VRComponentFactory.Log("#############################################ACTIVITY CONTEXT : " + procedure.Activity.Context.Count);
             List<ActivityNode> actnodes = procedure.Activity.Nodes; 
             foreach (ActivityNode actnode in actnodes)
             {
@@ -746,6 +748,7 @@ namespace Mascaret
                 for (int i = 0; i < outgoingNormal.Count; ++i)
                 {
                     //if <no guard> or <guard but evaluates ok>
+                    MascaretApplication.Instance.VRComponentFactory.Log("TRY TO ADVANCE : " + procedure.Activity.Context.Count);
                     if ((outgoingNormal[i].Guard == null) || (outgoingNormal[i].Guard != null && (outgoingNormal[i].Guard.eval(procedure.Activity.Context))))
                     {
                         foundWayOut = true;
@@ -1016,11 +1019,11 @@ namespace Mascaret
  	 
             foreach(KeyValuePair<string,InstanceSpecification> affect in affectations)
             {
-                context.Add(affect.Key, new InstanceValue(affect.Value));
+                procedure.Activity.Context.Add(affect.Key, new InstanceValue(affect.Value));
             }
             foreach (KeyValuePair<string, ValueSpecification> affect in parameters)
             {
-                context.Add(affect.Key, affect.Value);
+                procedure.Activity.Context.Add(affect.Key, affect.Value);
             }
 
             return context; 

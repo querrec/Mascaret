@@ -17,9 +17,17 @@ namespace Mascaret
         {
         }
 
-        public bool eval(Context context)
+        public bool eval(Dictionary<string, ValueSpecification> context)
         {
-            return false;
+            MascaretApplication.Instance.VRComponentFactory.Log("Evaluate constraint : " + context.Count);
+            foreach(KeyValuePair<string,ValueSpecification> c in context)
+                MascaretApplication.Instance.VRComponentFactory.Log(c.Key);
+
+            Expression expr = (Expression)(specification);
+            ValueSpecification resultVS = expr.evaluateExpression(context);
+            bool result = ((LiteralBoolean)(resultVS)).BValue;
+            MascaretApplication.Instance.VRComponentFactory.Log("Result " + result);
+            return result;
         }
 
     }

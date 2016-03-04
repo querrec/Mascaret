@@ -29,6 +29,8 @@ namespace Mascaret
 
         void OnButtonPressed(Button button, bool pressed)
         {
+
+
             foreach (ButtonActionInfo interaction in interactions)
             {
                 if (interaction.pressed == pressed && interaction.button.name == button.name)
@@ -47,13 +49,14 @@ namespace Mascaret
 
                             if (action.GetType().ToString() == "Mascaret.SendSignalAction")
                             {
+                                MascaretApplication.Instance.VRComponentFactory.Log("############################ Interaction");
                                 Signal signalC = ((SendSignalAction)(action)).SignalClass;
                                 InstanceSpecification signal = new InstanceSpecification(signalC.name, signalC);
 
                                 action2 = new SendSignalAction();
                                 ((SendSignalAction)(action2)).SignalClass = ((SendSignalAction)(action)).SignalClass;
                                 ((SendSignalAction)(action2)).Target = new SendSignalTarget();
-                                ((SendSignalAction)(action2)).Target.target = entity;
+                                ((SendSignalAction)(action2)).Target.target = null;
                                 ((SendSignalAction)(action2)).Signal = signal;
                             }
                             else if (action.GetType().ToString() == "Mascaret.CallOperationAction")

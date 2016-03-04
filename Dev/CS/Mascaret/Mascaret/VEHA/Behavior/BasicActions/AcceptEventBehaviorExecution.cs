@@ -28,7 +28,27 @@ namespace Mascaret
                 Expression expr = (Expression)(changeEvent.ChangeExpression);
                 ValueSpecification resultVS = expr.evaluateExpression(context);
                 result = ((LiteralBoolean)(resultVS)).BValue;
-                MascaretApplication.Instance.VRComponentFactory.Log("Checking context of AcceptEventAction " + changeEvent.Type);
+                MascaretApplication.Instance.VRComponentFactory.Log("Result " + result);
+            }
+            else if (_action.getTrigger().MEvent.Type == "SignalEvent")
+            {
+                ProceduralBehavior pb = (ProceduralBehavior)((VirtualHuman)Host).getBehaviorExecutingByName("ProceduralBehavior");
+                SignalEvent se = (SignalEvent)_action.getTrigger().MEvent;
+
+                if (pb._signals.Count > 0)
+                {
+                    foreach (InstanceSpecification signal in pb._signals)
+                    {
+                        if (signal != null)
+                        if (signal.Classifier != null)
+                        {
+                            if (signal.Classifier.name == se.SignalClass.name) result = true;
+                        }
+                    }
+                }
+                
+                pb._signals.Clear();
+
             }
                 /*
             else if (_action->getTrigger()->getEvent()->getType() == "TimeEvent")

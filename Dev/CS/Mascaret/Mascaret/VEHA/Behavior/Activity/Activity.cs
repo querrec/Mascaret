@@ -13,7 +13,7 @@ namespace Mascaret
             set { edges = value; }
         }
 
-        public Context Context;
+        public Dictionary<string, ValueSpecification> Context = new Dictionary<string,ValueSpecification>();
 
 
         private List<ActivityPartition> partitions = new List<ActivityPartition>();

@@ -63,6 +63,7 @@ namespace Mascaret
             parser.expression();
             MascaretApplication.Instance.VRComponentFactory.Log("Parsing  : " + expressionValue);
             MascaretApplication.Instance.VRComponentFactory.Log("Nb Erreur : " + parser.NumberOfSyntaxErrors);
+            MascaretApplication.Instance.VRComponentFactory.Log("Result : " + parser.value);
 
             
             return (LiteralBoolean)(parser.value);

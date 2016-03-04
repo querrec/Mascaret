@@ -35,7 +35,6 @@ namespace Mascaret
             foreach (Type t in types)
             {
                 if (t.Name == name) type = t;
-                MascaretApplication.Instance.VRComponentFactory.Log(t.Name);
             }
             
             

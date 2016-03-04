@@ -6,7 +6,7 @@ namespace Mascaret
 {
     public class ProceduralBehavior : CyclicBehaviorExecution
     {
-
+        public List<InstanceSpecification> _signals = new List<InstanceSpecification>();
  
         public bool ispause = false;
         public List<ProcedureExecution> runningProcedures = new List<ProcedureExecution>();

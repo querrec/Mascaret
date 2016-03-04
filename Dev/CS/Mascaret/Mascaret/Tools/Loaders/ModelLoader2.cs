@@ -290,7 +290,7 @@ namespace Mascaret
 		// Bouml preserved body begin 0001F567
        // StreamWriter file = MascaretApplication.Instance.logfile;
 
-       MascaretApplication.Instance.VRComponentFactory.Log("Parsing Packages ...");
+       //MascaretApplication.Instance.VRComponentFactory.Log("Parsing Packages ...");
 
 		XAttribute typeAttr =null, pkgNameAttr = null;
 		string type="",pkgName="";
@@ -304,7 +304,7 @@ namespace Mascaret
 		pkgNameAttr = (XAttribute)packageNode.Attribute("name");
 		if(pkgNameAttr!=null)pkgName = pkgNameAttr.Value;
 
-        MascaretApplication.Instance.VRComponentFactory.Log("type : " + type);
+        //MascaretApplication.Instance.VRComponentFactory.Log("type : " + type);
 
 		if (String.Compare(type,"uml:Model")!=0 && String.Compare(type,"uml:Package")!=0) {
 			return;
@@ -361,12 +361,12 @@ namespace Mascaret
                         string classifierType = "";
                         XElement typeNode = child.Element("classifier");
 
-                        MascaretApplication.Instance.VRComponentFactory.Log("UNIT : " + unitName);
+                        //MascaretApplication.Instance.VRComponentFactory.Log("UNIT : " + unitName);
 
                         XAttribute attrType = (XAttribute)typeNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
                         if (attrType == null) attrType = (XAttribute)typeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
                         if (attrType != null) classifierType = attrType.Value;
-                        MascaretApplication.Instance.VRComponentFactory.Log("Type : " + classifierType);
+                        //MascaretApplication.Instance.VRComponentFactory.Log("Type : " + classifierType);
 
 			            if (classifierType == "uml:PrimitiveType" || attrType == null)
                         {
@@ -377,7 +377,7 @@ namespace Mascaret
 				            Class cl = model.getBasicType(classifier.ToLower());
                             Unit unit = new Unit(unitName, cl);
                             _units.Add(id,unit);
-                            MascaretApplication.Instance.VRComponentFactory.Log("NEW UNIT : " + unitName + " : " + cl.name);
+                           // MascaretApplication.Instance.VRComponentFactory.Log("NEW UNIT : " + unitName + " : " + cl.name);
 			            }
                         
                     }
@@ -668,7 +668,7 @@ namespace Mascaret
 	
 		//Debug.Log(MascaretApplication.Instance.Model.name);
 
-        MascaretApplication.Instance.VRComponentFactory.Log(MascaretApplication.Instance.Model.name);
+       // MascaretApplication.Instance.VRComponentFactory.Log(MascaretApplication.Instance.Model.name);
 
 		MascaretApplication.Instance.AgentPlateform.Structures.Add(organisation);
 	
@@ -736,7 +736,7 @@ namespace Mascaret
 				if (childType.CompareTo("uml:Activity")==0) {
 					Activity activity = addActivity(child);
                     Procedure procedure = null;  
-                    MascaretApplication.Instance.VRComponentFactory.Log(" ?????? Procedure : " + childId);
+                    //MascaretApplication.Instance.VRComponentFactory.Log(" ?????? Procedure : " + childId);
                     if (isStereotypedScenarioPedagogique(child))
                     {
                         procedure = new PedagogicalScenario(childName);
@@ -940,7 +940,7 @@ namespace Mascaret
         else if (changeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type")!= null) 
             type = changeNode.Attribute("{http://www.omg.org/spec/XMI/20131001}type").Value;
 
-        MascaretApplication.Instance.VRComponentFactory.Log("Type = " + type);
+        //MascaretApplication.Instance.VRComponentFactory.Log("Type = " + type);
 		if (type != "uml:ChangeEvent") 
 		{
 			return;
@@ -956,7 +956,7 @@ namespace Mascaret
 		
 		if (changeNode.Element("changeExpression") != null) 
 		{
-            MascaretApplication.Instance.VRComponentFactory.Log("New Change Event : " + id);
+            //MascaretApplication.Instance.VRComponentFactory.Log("New Change Event : " + id);
 
 			string changeExp = changeNode.Element("changeExpression").Attribute("value").Value;
             
@@ -1239,7 +1239,7 @@ namespace Mascaret
 
         if (strVal !="")
         {
-            MascaretApplication.Instance.VRComponentFactory.Log("HAS A DEFAULT VALUE : " + strVal);
+            //MascaretApplication.Instance.VRComponentFactory.Log("HAS A DEFAULT VALUE : " + strVal);
             valueSpec = attributeType.createValueFromString(strVal);
         }
 
@@ -1248,7 +1248,7 @@ namespace Mascaret
         {
             attrProp = new FlowPort(attrName, cl, attributeType, null, valueSpec, null);
             ((FlowPort)attrProp).Direction = getFlowPortDirection(attrNode);
-            MascaretApplication.Instance.VRComponentFactory.Log("FLOWPORT : " + ((FlowPort)attrProp).Direction+ " / " + id);
+            //MascaretApplication.Instance.VRComponentFactory.Log("FLOWPORT : " + ((FlowPort)attrProp).Direction+ " / " + id);
 
         }
 		else attrProp = new Property(attrName, cl, attributeType,null, valueSpec,null);
@@ -1259,7 +1259,7 @@ namespace Mascaret
         if (hasStereotype(id))
         {
             attrProp.Stereotype = getStereotype(id);
-            MascaretApplication.Instance.VRComponentFactory.Log("DEBUG /// STEREOTYPE : " + attrName + " : " + attrProp.Stereotype);
+            //MascaretApplication.Instance.VRComponentFactory.Log("DEBUG /// STEREOTYPE : " + attrName + " : " + attrProp.Stereotype);
         }
 
 		
@@ -1385,13 +1385,13 @@ namespace Mascaret
 	    {
 	        if(pins.Name.LocalName=="argument")
 	        {
-                MascaretApplication.Instance.VRComponentFactory.Log("ARGUMENT PIN ################################");
+               // MascaretApplication.Instance.VRComponentFactory.Log("ARGUMENT PIN ################################");
 
                 XAttribute att = pins.Attribute("{http://www.omg.org/spec/XMI/20131001}type");
                 if (att == null) att = pins.Attribute("{http://schema.omg.org/spec/XMI/2.1}type");
 
                 if (att != null)
-                MascaretApplication.Instance.VRComponentFactory.Log(att.Value);
+                //MascaretApplication.Instance.VRComponentFactory.Log(att.Value);
                 if (att != null && att.Value == "uml:ValuePin")
 				{
 	                ValuePin valuePin = new ValuePin();
@@ -1400,7 +1400,7 @@ namespace Mascaret
 
 	                string id = attID.Value;
 					string name = pins.Attribute("name").Value;
-                    MascaretApplication.Instance.VRComponentFactory.Log("Pin Name : " + name);
+                   // MascaretApplication.Instance.VRComponentFactory.Log("Pin Name : " + name);
 					valuePin.Id = id;
 					valuePin.name = name;
 
@@ -1413,7 +1413,7 @@ namespace Mascaret
                     }
                     
                     MascaretPrimitiveType attributeType = model.getBasicType(strType.ToLower());
-                    if (attributeType == null) MascaretApplication.Instance.VRComponentFactory.Log("Erreur Type : " + strType);
+                    //if (attributeType == null) MascaretApplication.Instance.VRComponentFactory.Log("Erreur Type : " + strType);
 
 
                     valuePin.ResourceType = attributeType;
@@ -1431,7 +1431,7 @@ namespace Mascaret
                         
                     }
 
-                    MascaretApplication.Instance.VRComponentFactory.Log("Valeur : " + strValue);
+                    //MascaretApplication.Instance.VRComponentFactory.Log("Valeur : " + strValue);
                     //valuePin.ValueSpec = new LiteralInteger(strValue);
                     valuePin.ValueSpec = attributeType.createValueFromString(strValue);
 
@@ -1805,13 +1805,13 @@ namespace Mascaret
             if (attr == null) attr = (XAttribute)dtNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id");
             string id = attr.Value;
 
-            MascaretApplication.Instance.VRComponentFactory.Log("ADD Datatype : " + name + " / " + id);
+            //MascaretApplication.Instance.VRComponentFactory.Log("ADD Datatype : " + name + " / " + id);
 
             string idUnitTag = _valueTypeToUnit[id];
-            MascaretApplication.Instance.VRComponentFactory.Log("TypeToUnit[" + id + "] = " + idUnitTag);
+            //MascaretApplication.Instance.VRComponentFactory.Log("TypeToUnit[" + id + "] = " + idUnitTag);
 
             string idUnit = _unitRefs[idUnitTag];
-            MascaretApplication.Instance.VRComponentFactory.Log("unitRef[" + idUnitTag + "] = " + idUnit);
+            //MascaretApplication.Instance.VRComponentFactory.Log("unitRef[" + idUnitTag + "] = " + idUnit);
 
 
             Unit unit = _units[idUnit];
@@ -1926,7 +1926,7 @@ namespace Mascaret
 
 		        if(attr!=null)id=attr.Value;
                 _unitRefs.Add(id, baseInstance);
-                MascaretApplication.Instance.VRComponentFactory.Log("NEW Add UnitRef : " + id);
+                //MascaretApplication.Instance.VRComponentFactory.Log("NEW Add UnitRef : " + id);
             }
 
             else if (child.Name.LocalName.Contains("FlowPort"))
@@ -1940,7 +1940,7 @@ namespace Mascaret
                 FlowPortT fpt;
                 fpt.basePort = basePort;
                 fpt.direction = ((XAttribute)child.Attribute("direction")).Value;
-                MascaretApplication.Instance.VRComponentFactory.Log("STEREO DIRECTION : " + fpt.direction);
+                //MascaretApplication.Instance.VRComponentFactory.Log("STEREO DIRECTION : " + fpt.direction);
 
                 _stereoFlowPort.Add(fpt);
             }
@@ -2036,7 +2036,7 @@ namespace Mascaret
             {
                 if (_otherStereo.ContainsKey(child.Name.LocalName))
                 {
-                    MascaretApplication.Instance.VRComponentFactory.Log("EXIST Prop");
+                    //MascaretApplication.Instance.VRComponentFactory.Log("EXIST Prop");
                     XAttribute attrS = (XAttribute)child.Attribute("base_Property");
                     if (attrS != null)
                         _otherStereo[child.Name.LocalName].Add(attrS.Value);
@@ -2049,7 +2049,7 @@ namespace Mascaret
                     XAttribute attrS = (XAttribute)child.Attribute("base_Property");
                     if (attrS != null)
                     {
-                        MascaretApplication.Instance.VRComponentFactory.Log("---> " + child.Name.LocalName + attrS.Value);
+                        //MascaretApplication.Instance.VRComponentFactory.Log("---> " + child.Name.LocalName + attrS.Value);
                         _otherStereo.Add(child.Name.LocalName, new List<string>());
                         _otherStereo[child.Name.LocalName].Add(attrS.Value);
                     }
@@ -2082,7 +2082,7 @@ namespace Mascaret
 
 	public void addActivityNode( XElement node, Activity activity)
 	{
-        MascaretApplication.Instance.VRComponentFactory.Log("New activity node");
+        //MascaretApplication.Instance.VRComponentFactory.Log("New activity node");
         string type = "";
         string id = "";
         if (node.Attribute("{http://schema.omg.org/spec/XMI/2.1}type") != null)
@@ -2090,29 +2090,29 @@ namespace Mascaret
         else
             type = node.Attribute("{http://www.omg.org/spec/XMI/20131001}type").Value;
 
-        MascaretApplication.Instance.VRComponentFactory.Log(" Type : " + type);
+        //MascaretApplication.Instance.VRComponentFactory.Log(" Type : " + type);
 
         if (node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id") != null)
 		    id = node.Attribute("{http://schema.omg.org/spec/XMI/2.1}id").Value;
         else 
             id = node.Attribute("{http://www.omg.org/spec/XMI/20131001}id").Value;
-        MascaretApplication.Instance.VRComponentFactory.Log(" ID : " + id);
+        //MascaretApplication.Instance.VRComponentFactory.Log(" ID : " + id);
 
         string name = "";
         if (node.Attribute("name") != null)
             name = node.Attribute("name").Value;
         else name = id;
-        MascaretApplication.Instance.VRComponentFactory.Log(" Name : " + name);
+        //MascaretApplication.Instance.VRComponentFactory.Log(" Name : " + name);
 
 
 		string idPartition = "";
 		if (node.Attribute("inPartition") != null)
 			idPartition = node.Attribute("inPartition").Value;
 
-        MascaretApplication.Instance.VRComponentFactory.Log(id); 
-        MascaretApplication.Instance.VRComponentFactory.Log(type); 
-        MascaretApplication.Instance.VRComponentFactory.Log(name); 
-        MascaretApplication.Instance.VRComponentFactory.Log(idPartition); 
+        //MascaretApplication.Instance.VRComponentFactory.Log(id); 
+        //MascaretApplication.Instance.VRComponentFactory.Log(type); 
+        //MascaretApplication.Instance.VRComponentFactory.Log(name); 
+        //MascaretApplication.Instance.VRComponentFactory.Log(idPartition); 
 
 		ActivityNode actNode = null;
 		
@@ -2170,7 +2170,7 @@ namespace Mascaret
             if (isStereotypedPlayAnimation(node))
             {
                 string animationName = getAnimName(node);
-                MascaretApplication.Instance.VRComponentFactory.Log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEW PLAY ANIMATION : " + name + "    " + animationName);
+                //MascaretApplication.Instance.VRComponentFactory.Log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEW PLAY ANIMATION : " + name + "    " + animationName);
                
                 ActionNode an = new ActionNode(name, "action");
                 PlayAnimationAction ap = new PlayAnimationAction();
@@ -2263,7 +2263,7 @@ namespace Mascaret
 		} 
 		else if (type == "uml:SendSignalAction") 
 		{
-            MascaretApplication.Instance.VRComponentFactory.Log("SendSignalAction");
+            //MascaretApplication.Instance.VRComponentFactory.Log("SendSignalAction");
 			ActionNode an = new ActionNode(name,"action");
 			SendSignalAction act = new SendSignalAction();
 			XElement sigNode = node.Element("signal");
@@ -2309,18 +2309,18 @@ namespace Mascaret
                 targetNode = node.Element("target");
                 if (targetNode != null)
                 {
-                    MascaretApplication.Instance.VRComponentFactory.Log("SendSignal Target");
+                    //MascaretApplication.Instance.VRComponentFactory.Log("SendSignal Target");
                     string targetName = targetNode.Attribute("name").Value;
                     string classid = targetNode.Attribute("type").Value;
-                    MascaretApplication.Instance.VRComponentFactory.Log("name : " + targetName);
-                    MascaretApplication.Instance.VRComponentFactory.Log("name : " + targetName + " : " + _idClass[classid]);
+                    //MascaretApplication.Instance.VRComponentFactory.Log("name : " + targetName);
+                    //MascaretApplication.Instance.VRComponentFactory.Log("name : " + targetName + " : " + _idClass[classid]);
 
                     act.Target = new SendSignalTarget();
                     act.Target.targetName = targetName;
                     act.Target.targetClass = _idClass[classid];
 
                 }
-                else MascaretApplication.Instance.VRComponentFactory.Log("No target");
+                //else MascaretApplication.Instance.VRComponentFactory.Log("No target");
             }
 			an.Action = act;
 			addPins(an,node);
@@ -2364,17 +2364,17 @@ namespace Mascaret
 
 		} else if (type == "uml:AcceptEventAction") 
 		{
-            MascaretApplication.Instance.VRComponentFactory.Log("New uml:AcceptEventAction");
+            //MascaretApplication.Instance.VRComponentFactory.Log("New uml:AcceptEventAction");
 			ActionNode an = new ActionNode(name,"action");
 			AcceptEventAction act= new AcceptEventAction();
 
 			XElement triggerNode = node.Element("trigger");
 			if (triggerNode != null) 
 			{
-                MascaretApplication.Instance.VRComponentFactory.Log("trigger node found");
+                //MascaretApplication.Instance.VRComponentFactory.Log("trigger node found");
                 
 				Trigger trigger = new Trigger (name);
-                MascaretApplication.Instance.VRComponentFactory.Log("Debug : " + name);
+                //MascaretApplication.Instance.VRComponentFactory.Log("Debug : " + name);
                 string idT = "";
                 if (triggerNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id") != null)
                     idT = triggerNode.Attribute("{http://schema.omg.org/spec/XMI/2.1}id").Value;
@@ -2382,7 +2382,7 @@ namespace Mascaret
                     idT = triggerNode.Attribute("{http://www.omg.org/spec/XMI/20131001}id").Value;
 
 				trigger.Id = idT;
-                MascaretApplication.Instance.VRComponentFactory.Log(trigger.Id);
+                //MascaretApplication.Instance.VRComponentFactory.Log(trigger.Id);
 
 				if (triggerNode.Attribute("event") != null) 
 				{
@@ -2392,6 +2392,7 @@ namespace Mascaret
 					{
 						trigger.MEvent = _events[idEvent];
 						act.setTrigger(trigger);
+                        MascaretApplication.Instance.VRComponentFactory.Log("Found event : " + ((SignalEvent)(_events[idEvent])).SignalClass.name);
 					} else
 						MascaretApplication.Instance.VRComponentFactory.Log( "Could not find event : " + idEvent);
 				}
@@ -2400,7 +2401,7 @@ namespace Mascaret
 			addPins(an,node);
 			actNode = an;
 
-            MascaretApplication.Instance.VRComponentFactory.Log(" Fin AcceptEventAction");
+            //MascaretApplication.Instance.VRComponentFactory.Log(" Fin AcceptEventAction");
 			
 		}
 		// ...
@@ -2507,11 +2508,20 @@ namespace Mascaret
             name = node.Attribute("name").Value;
 		//Debug.Log(" ????????????????????????????????? " + type + " "+id);
 
+        string guard = "";
+        XElement guardNode = node.Element("guard");
+        if (guardNode != null)
+        {
+            
+            XElement bodyNode = guardNode.Element("body");
+            if (bodyNode != null) guard = bodyNode.Value;
+            MascaretApplication.Instance.VRComponentFactory.Log("GUARD : " + guard);
+        }
+
+        
 		
 		ActivityNode source = null;
 		ActivityNode target = null;
-
-
 
 		if (!_activityNodes.ContainsKey(sourceid))
 		{
@@ -2548,6 +2558,7 @@ namespace Mascaret
 		if (type == "uml:ControlFlow") edge = new ControlFlow(name);
 		else if (type == "uml:ObjectFlow") edge = new ObjectFlow (name);
 		else edge = new ActivityEdge(name);
+
 		
 		source.Outgoing.Add(edge);
 		target.Incoming.Add(edge);
@@ -2555,7 +2566,16 @@ namespace Mascaret
 		edge.Target = target;
 		
 		//Debug.Log("Source : " + source.name + " / Target : " + target.name);
-		
+
+        if (guard != "")
+        {
+
+            Expression exp = new Expression(guard, this.Model.BasicTypes["boolean"]);
+            edge.Guard = new Constraint();
+            edge.Guard.Specification = exp;
+            MascaretApplication.Instance.VRComponentFactory.Log("GUARD ADDED");
+
+        }
 		
 		activity.addEdge(edge);
 		

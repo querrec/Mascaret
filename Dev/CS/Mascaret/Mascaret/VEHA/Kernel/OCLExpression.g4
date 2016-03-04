@@ -29,7 +29,7 @@ using System.Collections.Generic;
 											 (('=' additiveexpression {double l = ((LiteralReal)lvalue).RValue; double r = ((LiteralReal)value).RValue; if (l == r) value = new LiteralBoolean(true); else value = new LiteralBoolean(false);})
 											|('<>' additiveexpression {double l = ((LiteralReal)lvalue).RValue; double r = ((LiteralReal)value).RValue; if (l != r) value = new LiteralBoolean(true); else value = new LiteralBoolean(false);})
 											|('<' additiveexpression {double l = ((LiteralReal)lvalue).RValue; double r = ((LiteralReal)value).RValue; if (l < r) value = new LiteralBoolean(true); else value = new LiteralBoolean(false);})
-											|('>' additiveexpression {double l = ((LiteralReal)lvalue).RValue; double r = ((LiteralReal)value).RValue; if (l > r) value = new LiteralBoolean(true); else value = new LiteralBoolean(false);})
+											|('>' additiveexpression {double l = ((LiteralReal)lvalue).RValue; double r = ((LiteralReal)value).RValue; MascaretApplication.Instance.VRComponentFactory.Log(""+l +">" +r); if (l > r) value = new LiteralBoolean(true); else value = new LiteralBoolean(false);})
 											|('>=' additiveexpression {double l = ((LiteralReal)lvalue).RValue; double r = ((LiteralReal)value).RValue; if (l >= r) value = new LiteralBoolean(true); else value = new LiteralBoolean(false);})
 											|('<=' additiveexpression {double l = ((LiteralReal)lvalue).RValue; double r = ((LiteralReal)value).RValue; if (l <= r) value = new LiteralBoolean(true); else value = new LiteralBoolean(false);})
 											)* ;
@@ -41,9 +41,9 @@ using System.Collections.Generic;
  unaryexpression : unaryoperator postfixexpression
 				 | postfixexpression;
 
- postfixexpression : primaryexpression (DOT propertycall {value = (((InstanceValue)value).SpecValue).Slots[$propertycall.text].getValue(); })* ;
+ postfixexpression : primaryexpression (DOT propertycall {MascaretApplication.Instance.VRComponentFactory.Log("Prop " + $propertycall.text);value = (((InstanceValue)value).SpecValue).Slots[$propertycall.text].getValue(); })* ;
 
- primaryexpression : STRING { value = context[$STRING.text];} | numericalconstant {value = new LiteralReal($numericalconstant.text);};
+ primaryexpression : STRING { MascaretApplication.Instance.VRComponentFactory.Log("PRIME" + $STRING.text); value = context[$STRING.text];} | numericalconstant {value = new LiteralReal($numericalconstant.text);};
 
  propertycall : attributecall ;
 
@@ -86,5 +86,5 @@ using System.Collections.Generic;
  float : DIGIT+'.'DIGIT+;
 
  DIGIT  : [0-9] ;
- STRING : [a-zA-Z_]([a-zA-Z]|[0-9])+;
+ STRING : [a-zA-Z_]([a-zA-Z]|[0-9])*;
  WS : [ \t\r\n]+ -> skip;
