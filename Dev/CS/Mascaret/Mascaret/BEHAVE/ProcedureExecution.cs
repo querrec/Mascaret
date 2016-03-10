@@ -316,7 +316,7 @@ namespace Mascaret
 
             //procedure.Activity.context = _buildOclContext(activityParams);
             _buildOclContext(activityParams);
-            MascaretApplication.Instance.VRComponentFactory.Log("#############################################ACTIVITY CONTEXT : " + procedure.Activity.Context.Count);
+            //MascaretApplication.Instance.VRComponentFactory.Log("#############################################ACTIVITY CONTEXT : " + procedure.Activity.Context.Count);
             List<ActivityNode> actnodes = procedure.Activity.Nodes; 
             foreach (ActivityNode actnode in actnodes)
             {
@@ -404,6 +404,7 @@ namespace Mascaret
             //this function simulates token advancement to provide the list of actions that can be executed
             //an action can be executed if it makes a difference in the procedure (if it enables a token to advance)
 
+
             //prepare output vector
             List<ActionNode> toExec = new List<ActionNode>();
             // StreamWriter file = MascaretApplication.Instance.logfile;
@@ -418,6 +419,8 @@ namespace Mascaret
 
 
             //now filter the list by creating dummy tokens and simulate their advancement
+            //MascaretApplication.Instance.VRComponentFactory.Log(" NB ACTIONS : " + allPossibleActionsToExecute.Count);
+
             for (int i=0; i<allPossibleActionsToExecute.Count; ++i)
             {
                 //create dummy list
@@ -436,7 +439,7 @@ namespace Mascaret
                 }
 
                 //test to see if this action is able to advance a token
-                //file.WriteLine(" NB ACTIVE TOKENS : " + activeTokens.Count); file.Flush();
+                //MascaretApplication.Instance.VRComponentFactory.Log(" NB ACTIVE TOKENS : " + activeTokens.Count);
 
                 for (int j = 0; j < activeTokens.Count; ++j)
                 {
@@ -713,7 +716,7 @@ namespace Mascaret
                 ActionNode aNode = (ActionNode)(token.currentLocation);
                 if (actionIsCurrentlyRunning(aNode))
                 {
-                    System.Console.WriteLine(" ACTION is RUNNING : " + aNode.Action.name);
+                   // MascaretApplication.Instance.VRComponentFactory.Log(" ACTION is RUNNING : " + aNode.Action.name);
                     //token busy...
                     return false;
                 }
@@ -989,6 +992,7 @@ namespace Mascaret
 	        {
 		        tryToAdvanceToken(nextTokens[i], doneAction, gotTicketToUseAction);
 	        }
+     
 	
 	        return true;
         }
@@ -1019,7 +1023,8 @@ namespace Mascaret
  	 
             foreach(KeyValuePair<string,InstanceSpecification> affect in affectations)
             {
-                procedure.Activity.Context.Add(affect.Key, new InstanceValue(affect.Value));
+                if (!procedure.Activity.Context.ContainsKey(affect.Key))
+                    procedure.Activity.Context.Add(affect.Key, new InstanceValue(affect.Value));
             }
             foreach (KeyValuePair<string, ValueSpecification> affect in parameters)
             {

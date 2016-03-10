@@ -98,6 +98,7 @@ namespace Mascaret
                                 MascaretApplication.Instance.VRComponentFactory.Log("Pas de Signal");
                         }
                     }
+                    
                     if (currentInstance.GetType().Name == "VirtualHuman")
                     {
                         ProceduralBehavior pb = (ProceduralBehavior)((VirtualHuman)currentInstance).getBehaviorExecutingByName("ProceduralBehavior");

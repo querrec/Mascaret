@@ -163,7 +163,7 @@ namespace Mascaret
                     }
                     else
                     {
-                        iP++;
+                        //iP++;
                     }
                     
                 }

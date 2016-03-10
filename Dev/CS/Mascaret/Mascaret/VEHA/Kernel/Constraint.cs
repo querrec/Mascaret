@@ -13,21 +13,29 @@ namespace Mascaret
             set { specification = value; }
         }
 
+        Expression expr = null;
+        bool result;
+
         public Constraint()
         {
         }
 
         public bool eval(Dictionary<string, ValueSpecification> context)
         {
-            MascaretApplication.Instance.VRComponentFactory.Log("Evaluate constraint : " + context.Count);
+           /* MascaretApplication.Instance.VRComponentFactory.Log("Evaluate constraint : " + context.Count);
             foreach(KeyValuePair<string,ValueSpecification> c in context)
                 MascaretApplication.Instance.VRComponentFactory.Log(c.Key);
+            * */
 
-            Expression expr = (Expression)(specification);
-            ValueSpecification resultVS = expr.evaluateExpression(context);
-            bool result = ((LiteralBoolean)(resultVS)).BValue;
-            MascaretApplication.Instance.VRComponentFactory.Log("Result " + result);
-            return result;
+            if (expr != null) return result;
+            else
+            {
+                expr = (Expression)(specification);
+                ValueSpecification resultVS = expr.evaluateExpression(context);
+                result = ((LiteralBoolean)(resultVS)).BValue;
+                // MascaretApplication.Instance.VRComponentFactory.Log("Result " + result);
+                return result;
+            }
         }
 
     }
