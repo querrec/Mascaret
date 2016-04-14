@@ -94,6 +94,13 @@ namespace Mascaret
             agentsToInform.Add(pair);
         }
 
+        public Agent getAgent(AID aid)
+        {
+            if (agents.ContainsKey(aid.toString()))
+                return agents[aid.toString()];
+            else return null;
+        }
+
         //non implémentée pour le moment
         public void sendMessage(ACLMessage message)
         {

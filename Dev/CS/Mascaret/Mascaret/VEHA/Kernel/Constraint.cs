@@ -38,6 +38,11 @@ namespace Mascaret
             }
         }
 
+        public void invalidate()
+        {
+            expr = null;
+        }
+
     }
 }
 

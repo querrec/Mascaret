@@ -379,7 +379,13 @@ namespace Mascaret
 
         public List<ActionNode> getActionToExecute()
         {
-            return getActionToExecuteFor(agent.Aid);
+            List<ActionNode> actions = getActionToExecuteFor(agent.Aid);
+
+            List<ActivityEdge> edges = this.procedure.Activity.Edges;
+            foreach (ActivityEdge edge in edges)
+                if (edge.Guard != null) edge.Guard.invalidate();
+
+            return actions;
         }
 
         public List<ActionNode> getActionToExecuteFor(AID agent)

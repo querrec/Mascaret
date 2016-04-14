@@ -33,7 +33,9 @@ namespace Mascaret
             else if (_action.getTrigger().MEvent.Type == "SignalEvent")
             {
                 ProceduralBehavior pb = (ProceduralBehavior)((VirtualHuman)Host).getBehaviorExecutingByName("ProceduralBehavior");
+                
                 SignalEvent se = (SignalEvent)_action.getTrigger().MEvent;
+
 
                 if (pb._signals.Count > 0)
                 {
@@ -48,6 +50,19 @@ namespace Mascaret
                 }
                 
                 pb._signals.Clear();
+                foreach(ProcedureExecution p in pb.runningProcedures)
+                {
+                    List<AID> agts = pb.runningProcedures[0].getOtherAgents();
+                    foreach(AID aid in agts)
+                    {
+                        Agent agt = MascaretApplication.Instance.AgentPlateform.getAgent(aid);
+                        if (agt != null)
+                        {
+                            ProceduralBehavior pba = (ProceduralBehavior)(agt.getBehaviorExecutingByName("ProceduralBehavior"));
+                            pba._signals.Clear();
+                        }
+                    }
+                }
 
             }
                 /*
