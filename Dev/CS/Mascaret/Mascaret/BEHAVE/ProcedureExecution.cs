@@ -363,11 +363,14 @@ namespace Mascaret
             for (int i = 0; i < allActionNodes.Count; ++i)
             {
                 //agentToPartition.getMap(agent.toString()).name;
-
-                if ((allActionNodes[i].Partitions[0].name == agentToPartition[agent.toString()].name) && (action == clean(allActionNodes[i].name)))
+               
+                if (agentToPartition.ContainsKey(agent.toString()))
                 {
-                    found = allActionNodes[i];
-                    break;
+                    if ((allActionNodes[i].Partitions[0].name == agentToPartition[agent.toString()].name) && (action == clean(allActionNodes[i].name)))
+                    {
+                        found = allActionNodes[i];
+                        break;
+                    }
                 }
             }
 
@@ -557,7 +560,7 @@ namespace Mascaret
             MascaretApplication.Instance.VRComponentFactory.Log("Start : " + actionName);
 
             ActionNode action = getActionByNameFor(agent, actionName);
-            informActionRunning(agent, action);
+            if (action != null) informActionRunning(agent, action);
         }
 
         public void informActionRunning(AID agent, ActionNode action)
@@ -628,16 +631,16 @@ namespace Mascaret
                         //add to "done" list
                         actionsDone.Add(doneAction);
 
-                        MascaretApplication.Instance.VRComponentFactory.Log("AllActionsDone : " + agent.toString());
+                        //MascaretApplication.Instance.VRComponentFactory.Log("AllActionsDone : " + agent.toString());
                         if (!allActionsDone.ContainsKey(agent.toString())) 
                             allActionsDone.Add(agent.toString(), new List<ActionNode>());
                         allActionsDone[agent.toString()].Add(doneAction);
 
-                        MascaretApplication.Instance.VRComponentFactory.Log("allActionsDoneTimestamps : " + agent.toString());
+                        //MascaretApplication.Instance.VRComponentFactory.Log("allActionsDoneTimestamps : " + agent.toString());
                         if (!allActionsDoneTimestamps.ContainsKey(agent.toString()))
                             allActionsDoneTimestamps.Add(agent.toString(),new List<TimeExpression>());
                         allActionsDoneTimestamps[agent.toString()].Add( doneAction.CurrentExecution.Finish);
-                        MascaretApplication.Instance.VRComponentFactory.Log("Done");
+                       // MascaretApplication.Instance.VRComponentFactory.Log("Done");
                     }
                     else
                     {
@@ -650,7 +653,7 @@ namespace Mascaret
         public void informActionDone(AID agent, string actionName)
         {
             ActionNode action = getActionByNameFor(agent, actionName);
-            informActionDone(agent, action);
+            if (action != null) informActionDone(agent, action);
         }
 
         public void informActionDone(AID agent, ActionNode action)
@@ -751,7 +754,7 @@ namespace Mascaret
                 for (int i = 0; i < outgoingNormal.Count; ++i)
                 {
                     //if <no guard> or <guard but evaluates ok>
-                    MascaretApplication.Instance.VRComponentFactory.Log("TRY TO ADVANCE : " + procedure.Activity.Context.Count);
+                    //MascaretApplication.Instance.VRComponentFactory.Log("TRY TO ADVANCE : " + procedure.Activity.Context.Count);
                     if ((outgoingNormal[i].Guard == null) || (outgoingNormal[i].Guard != null && (outgoingNormal[i].Guard.eval(procedure.Activity.Context))))
                     {
                         foundWayOut = true;
